@@ -14,8 +14,9 @@ namespace FSOSS.System.DAL
 {
     internal class FSOSSContext : DbContext
     {
-        public FSOSSContext(): base("FSOSSConnectionString") { }
+        public FSOSSContext() : base("FSOSSConnectionString") { }
 
         public virtual DbSet<Participant> Participants { get; set; }
+        public virtual DbSet<PotentialSurveyWord> PotentialSurveyWords { get; set; }
     }
 }
