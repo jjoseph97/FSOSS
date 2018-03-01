@@ -28,7 +28,7 @@
             <div class="card container">
                 <%-- ListView to be configured to survey word ODS... --%>
                 <asp:ListView runat="server" DataSourceID="SurveyWordODS"></asp:ListView>
-                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController"></asp:ObjectDataSource>
+                <%--<asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController"></asp:ObjectDataSource>--%>
             </div>
         </div>
     </div>
