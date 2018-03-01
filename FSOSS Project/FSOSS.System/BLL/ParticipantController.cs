@@ -24,8 +24,8 @@ namespace FSOSS.System.BLL
             {
                 Participant participant = new Participant();
                 participant = (from x in context.Participants
-                                           where x.participant_type_id == participantID
-                                           select x).FirstOrDefault();
+                               where x.participant_type_id == participantID
+                               select x).FirstOrDefault();
 
                 return participant;
             }
@@ -50,9 +50,9 @@ namespace FSOSS.System.BLL
                 {
                     return "Add Fail " + e.Message;
                 }
-                
 
-                
+
+
             }
         }
 
@@ -69,7 +69,7 @@ namespace FSOSS.System.BLL
                     participant = (from x in context.Participants
                                    where x.participant_type_id == participantID
                                    select x).FirstOrDefault();
-                    participant.participant_description = participantDescription;               
+                    participant.participant_description = participantDescription;
                     context.SaveChanges();
                     return "Update Success";
                 }
@@ -96,7 +96,7 @@ namespace FSOSS.System.BLL
                 {
                     return "Delete Fail " + e.Message;
                 }
-               
+
             }
         }
 
