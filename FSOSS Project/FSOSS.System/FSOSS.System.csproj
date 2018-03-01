@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\ParticipantController.cs" />
+    <Compile Include="BLL\PotentialSurveyWordController.cs" />
     <Compile Include="DAL\FSOSSContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
