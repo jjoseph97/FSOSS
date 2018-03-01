@@ -69,12 +69,14 @@
   <ItemGroup>
     <Compile Include="Entity\Participant.cs" />
     <Compile Include="Entity\ParticipantResponse.cs" />
+    <Compile Include="Entity\PotentialSurveyWord.cs" />
     <Compile Include="Entity\Question.cs" />
     <Compile Include="Entity\QuestionFormat.cs" />
     <Compile Include="Entity\QuestionSelection.cs" />
     <Compile Include="Entity\QuestionTopic.cs" />
     <Compile Include="Entity\SubmittedSurvey.cs" />
     <Compile Include="Entity\SurveyQuestion.cs" />
+    <Compile Include="Entity\SurveyVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
