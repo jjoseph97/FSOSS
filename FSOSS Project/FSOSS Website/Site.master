@@ -38,7 +38,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-	    <nav class="navbar navbar-expand-lg mb-4 navbar-light bg-light container">
+	    <div class="navbar navbar-expand-lg mb-4 navbar-light bg-light container">
             <a runat="server" class="navbar-brand" href="~/"><img runat="server" src="~/Content/images/covenant-health-logo.jpg" class="img-fluid" alt="Covenant Health Logo" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#fsoss-navbar" aria-controls="fsoss-navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -61,28 +61,13 @@
                         <a class="nav-link" href="#">View Reports</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav ml-auto">
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <form class="form-inline" action="#">
-                                <button class="btn btn-outline-primary" type="submit">Log In</button>
-                            </form>
-                        </AnonymousTemplate>
-
-                        <%-- for later use: --%>
-
- <%--                       <LoggedInTemplate>
-                            <ul class="nav navbar-nav ml-auto">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>.</a></li>
-                                <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                </li>
-                            </ul>
-                        </LoggedInTemplate>--%>
-                    </asp:LoginView>
-                </ul>
+                <div class="nav navbar-nav ml-auto">
+                    <div class="form-inline">
+                        <button class="btn btn-outline-primary" type="submit">Log In</button>
+                    </div>
+                </div>
             </div>
-        </nav>
+        </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

@@ -15,6 +15,7 @@ namespace FSOSS.System.Data.Entity
     [Table("potential_survey_word", Schema = "public")]
     public class PotentialSurveyWord
     {
+        [Key]
         public int survey_word_id { get; set; }
         public int user_id { get; set; }
         public string survey_access_word { get; set; }
