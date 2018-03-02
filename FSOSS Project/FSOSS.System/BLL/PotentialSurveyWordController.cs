@@ -88,6 +88,33 @@ namespace FSOSS.System.BLL
             }
         }
 
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public string DeleteWord(int surveyWordID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                string message = "";
+                try
+                {
+
+                    PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
+                    context.PotentialSurveyWords.Remove(potentialSurveyWord);
+                    context.SaveChanges();
+
+
+                    message = "Succesfully Remove Survey Word";
+                    return message;
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
+                }
+
+            }
+        }
+
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<PotentialSurveyWordPOCO> GetSurveyWord(string surveyWord)
         {
@@ -135,33 +162,6 @@ namespace FSOSS.System.BLL
                                                   };
 
                     return potentialSurveyWordList.ToList();
-
-
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Something went wrong. See " + e.Message);
-                }
-
-            }
-        }
-
-        [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DeleteWord(int surveyWordID)
-        {
-            using (var context = new FSOSSContext())
-            {
-                string message = "";
-                try
-                {
-
-                    PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
-                    context.PotentialSurveyWords.Remove(potentialSurveyWord);
-                    context.SaveChanges();
-
-
-                    message = "Succesfully Remove Survey Word";
-                    return message;
 
 
                 }

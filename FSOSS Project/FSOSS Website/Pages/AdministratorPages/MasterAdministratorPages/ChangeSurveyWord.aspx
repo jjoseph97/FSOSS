@@ -31,7 +31,7 @@
             </div>
             <div class="card container">
                 <%-- ListView to be configured to survey word ODS... --%>
-                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="SurveyWordODS">
+                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="SurveyWordODS" DataKeyNames="surveyWordID">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #FFFFFF; color: #284775;">
                             <td>
@@ -119,7 +119,7 @@
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DeleteWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
+                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DeleteWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
