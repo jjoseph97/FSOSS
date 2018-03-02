@@ -78,7 +78,7 @@ namespace FSOSS.System.BLL
                     wordToUpdate.date_modified = DateTime.Now;
                     context.SaveChanges();
 
-                    message = "Successfully Updated the Word!";
+                    message = "Successfully updated to survey word: " + surveyWord;
                 }
                 catch (Exception e)
                 {
@@ -102,7 +102,7 @@ namespace FSOSS.System.BLL
                     context.SaveChanges();
 
 
-                    message = "Succesfully Remove Survey Word";
+                    message = "Succesfully Removed survey word: "+ potentialSurveyWord;
                     return message;
 
 
