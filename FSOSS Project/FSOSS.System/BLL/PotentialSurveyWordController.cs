@@ -26,12 +26,33 @@ namespace FSOSS.System.BLL
                 string message = "";
                 try
                 {
-                    PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                    potentialSurveyWord.user_id = 1;
-                    potentialSurveyWord.survey_access_word = newWord;
-                    context.PotentialSurveyWords.Add(potentialSurveyWord);
-                    context.SaveChanges();
-                    message = "Successfully Added a New Word!";
+                    if (newWord == "" || newWord == null)
+                    {
+                        message = "Cannot be empty";
+                    }
+                    else
+                    {
+                        var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                      where x.survey_access_word.ToLower().Contains(newWord.ToLower())
+                                                      select new PotentialSurveyWordPOCO()
+                                                      {
+                                                          surveyWord = x.survey_access_word
+                                                      };
+
+                        if (potentialSurveyWordList.Count() > 0)
+                        {
+                            message = "The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.";
+                        }
+                        else
+                        {
+                            PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
+                            potentialSurveyWord.user_id = 1;
+                            potentialSurveyWord.survey_access_word = newWord;
+                            context.PotentialSurveyWords.Add(potentialSurveyWord);
+                            context.SaveChanges();
+                            message = "Successfully Added a New Word!";
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
@@ -43,19 +64,18 @@ namespace FSOSS.System.BLL
         } // end of method AddWord
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateWord(PotentialSurveyWord surveyWord)
+        public string UpdateWord(string surveyWord, int surveyWordID)
         {
             using (var context = new FSOSSContext())
             {
                 string message = "";
                 try
                 {
-                    PotentialSurveyWord potentialSurveyWord = (from x in context.PotentialSurveyWords
-                                                               where x.survey_word_id == surveyWord.survey_word_id
-                                                               select x).FirstOrDefault();
+                    var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
 
                     //Not sure if update works with default constraint. Subject for testing
-                    potentialSurveyWord.survey_access_word = surveyWord.survey_access_word;
+                    wordToUpdate.survey_access_word = surveyWord;
+                    wordToUpdate.date_modified = DateTime.Now;
                     context.SaveChanges();
 
                     message = "Successfully Updated the Word!";
@@ -78,6 +98,7 @@ namespace FSOSS.System.BLL
                 {
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  orderby x.survey_word_id
                                                   where x.survey_access_word.Contains("/" + surveyWord + "/")
                                                   select new PotentialSurveyWordPOCO()
                                                   {

@@ -119,10 +119,17 @@
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DataObjectTypeName="FSOSS.System.Data.Entity.PotentialSurveyWord" DeleteMethod="DeleteWord" UpdateMethod="UpdateWord">
+                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DeleteWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="newWord" Type="String"></asp:Parameter>
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
+                        <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
+                    </UpdateParameters>
                 </asp:ObjectDataSource>
             </div>
         </div>
