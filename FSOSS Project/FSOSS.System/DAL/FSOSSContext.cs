@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.DAL
 {
-    internal class FSOSSContext : DbContext
+    public class FSOSSContext : DbContext
     {
         public FSOSSContext() : base("FSOSSConnectionString") { }
 
