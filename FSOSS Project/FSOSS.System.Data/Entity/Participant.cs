@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
-    [Table("participant", Schema ="public")]
+    [Table("participant_type", Schema ="public")]
     public class Participant
     {
         [Key]

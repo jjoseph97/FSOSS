@@ -46,7 +46,7 @@ namespace FSOSS.System.BLL
                         else
                         {
                             PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                            potentialSurveyWord.user_id = 1;
+                            potentialSurveyWord.administrator_account_id = 1;
                             potentialSurveyWord.survey_access_word = newWord;
                             context.PotentialSurveyWords.Add(potentialSurveyWord);
                             context.SaveChanges();

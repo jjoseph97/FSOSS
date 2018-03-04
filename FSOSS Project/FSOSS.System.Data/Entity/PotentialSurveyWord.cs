@@ -17,7 +17,7 @@ namespace FSOSS.System.Data.Entity
     {
         [Key]
         public int survey_word_id { get; set; }
-        public int user_id { get; set; }
+        public int administrator_account_id { get; set; }
         public string survey_access_word { get; set; }
         public DateTime date_modified { get; set; }
     }
