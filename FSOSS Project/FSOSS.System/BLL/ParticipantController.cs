@@ -17,13 +17,13 @@ namespace FSOSS.System.BLL
     {
         //Read Data
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public Participant GetParticipant(int participantID)
+        public ParticipantType GetParticipant(int participantID)
         {
             // transaction start
             using (var context = new FSOSSContext())
             {
-                Participant participant = new Participant();
-                participant = (from x in context.Participants
+                ParticipantType participant = new ParticipantType();
+                participant = (from x in context.ParticipantTypes
                                where x.participant_type_id == participantID
                                select x).FirstOrDefault();
 
@@ -40,9 +40,9 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    Participant participant = new Participant();
+                    ParticipantType participant = new ParticipantType();
                     participant.participant_description = participantDescription;
-                    context.Participants.Add(participant);
+                    context.ParticipantTypes.Add(participant);
                     context.SaveChanges();
                     return "Add Success";
                 }
@@ -65,8 +65,8 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    Participant participant = new Participant();
-                    participant = (from x in context.Participants
+                    ParticipantType participant = new ParticipantType();
+                    participant = (from x in context.ParticipantTypes
                                    where x.participant_type_id == participantID
                                    select x).FirstOrDefault();
                     participant.participant_description = participantDescription;
@@ -87,8 +87,8 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var existing = context.Participants.Find(participantID);
-                    context.Participants.Remove(existing);
+                    var existing = context.ParticipantTypes.Find(participantID);
+                    context.ParticipantTypes.Remove(existing);
                     context.SaveChanges();
                     return "Delete Success";
                 }

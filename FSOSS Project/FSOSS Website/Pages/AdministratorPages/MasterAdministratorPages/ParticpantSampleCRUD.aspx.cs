@@ -21,7 +21,7 @@ public partial class Pages_ParticpantSampleCRUD : System.Web.UI.Page
     {
         ParticipantController sysmgr = new ParticipantController();
         int participantID = int.Parse(ParticipantTypeIDTextBox.Text);
-        Participant participant = new Participant();
+        ParticipantType participant = new ParticipantType();
         participant = sysmgr.GetParticipant(participantID);
         ParticipantTypeDescriptionTextBox.Text = participant.participant_description;
         UpdateParticipantIDLabel.Text = participant.participant_type_id.ToString();
@@ -30,7 +30,7 @@ public partial class Pages_ParticpantSampleCRUD : System.Web.UI.Page
     protected void AddButton_Click(object sender, EventArgs e)
     {
         ParticipantController sysmgr = new ParticipantController();
-        Participant participant = new Participant();
+        ParticipantType participant = new ParticipantType();
         Status.Text = sysmgr.AddParticipant(AddParticipantTypeDescriptionTextBox.Text);
     }
 
