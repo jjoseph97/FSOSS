@@ -15,8 +15,14 @@ namespace FSOSS.System.Data.Entity
     [Table("gender", Schema = "public")]
     public class Gender
     {
+
+        // Latest Update March 4, 2018. Ren
         [Key]
         public int gender_id { get; set; }
-        public int gender_description { get; set; }
+        [Required(ErrorMessage = "Gender description required")]
+        [StringLength(100, ErrorMessage = "Enter gender description cannot exceed 100 character")]
+        public String gender_description { get; set; }
+
+        public virtual ICollection<SubmittedSurvey> submittedsurvey { get; set; }
     }
 }

@@ -15,8 +15,13 @@ namespace FSOSS.System.Data.Entity
     [Table("security_role", Schema = "public")]
     public class SecurityRole
     {
+        // Latest Update March 4, 2018. Ren
         [Key]
-        public int security__role__id { get; set; }
+        public int security_role_id { get; set; }
+        [Required(ErrorMessage = "Security description required")]
+        [StringLength(100, ErrorMessage ="Security description cannot exceed 100 characters")]
         public string security_description { get; set; }
+
+        public virtual ICollection<AdministratorRole> administratorrole { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace FSOSS.System.DAL
     public class FSOSSContext : DbContext
     {
         public FSOSSContext() : base("FSOSSConnectionString") { }
-
+        // Latest Update March 4, 2018. Ren
         public virtual DbSet<ParticipantType> ParticipantTypes { get; set; }
         public virtual DbSet<PotentialSurveyWord> PotentialSurveyWords { get; set; }
         public virtual DbSet<AdministratorAccount> AdministratorAccounts { get; set; }

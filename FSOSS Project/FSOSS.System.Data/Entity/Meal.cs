@@ -15,8 +15,14 @@ namespace FSOSS.System.Data.Entity
     [Table("meal", Schema = "public")]
     public class Meal
     {
+
+        // Latest Update March 4, 2018. Ren
         [Key]
         public int meal_id { get; set; }
-        public int meal_description { get; set; }
+        [Required(ErrorMessage = "Meal description required")]
+        [StringLength(100, ErrorMessage = "Meal description cannot exceed 100 character")]
+        public string meal_description { get; set; }
+
+        public virtual ICollection<SubmittedSurvey> submittedsurvey { get; set; }
     }
 }

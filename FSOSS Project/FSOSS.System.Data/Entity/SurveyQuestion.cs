@@ -15,12 +15,18 @@ namespace FSOSS.System.Data.Entity
     [Table("survey_question",Schema="public")]
     public class SurveyQuestion
     {
-        [Key]
+        // Latest Update March 4, 2018. Ren
+        [Key, Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int survey_version_id { get; set; }
-        public virtual SurveyVersion survey_version { get; set; }
-        [Key]
+     
+        [Key, Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int question_id { get; set; }
+
+
         public virtual Question question { get; set; }
+        public virtual SurveyVersion survey_version { get; set; }
 
     }
 }

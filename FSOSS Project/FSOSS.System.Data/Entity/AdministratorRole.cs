@@ -15,9 +15,19 @@ namespace FSOSS.System.Data.Entity
     [Table("administrator_role", Schema = "public")]
     public class AdministratorRole
     {
-        [Key]
-        public int administrator_account__id { get; set; }
+        // Latest Update March 4, 2018. Ren
+        [Key, Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int administrator_account_id { get; set; }
+       
+        [Key, Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int security_role_id { get; set; }
+
+        [Required]
         public DateTime date_modified { get; set; }
+
+        public virtual AdministratorAccount administratoraccount { get; set; }
+        public virtual SecurityRole securityrole { get; set; }
     }
 }

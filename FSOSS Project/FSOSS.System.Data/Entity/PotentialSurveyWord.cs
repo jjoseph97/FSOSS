@@ -15,10 +15,18 @@ namespace FSOSS.System.Data.Entity
     [Table("potential_survey_word", Schema = "public")]
     public class PotentialSurveyWord
     {
+        // Latest Update March 4, 2018. Ren
         [Key]
         public int survey_word_id { get; set; }
+        [ForeignKey("AdministratorAccount")]
         public int administrator_account_id { get; set; }
+        [Required(ErrorMessage = "Survey access word required")]
+        [StringLength(6, ErrorMessage = "Survey access word cannot exceed 6 character")]
         public string survey_access_word { get; set; }
+        [Required]
         public DateTime date_modified { get; set; }
+
+        public virtual AdministratorAccount AdministratorAccount { get; set; }
+        public virtual ICollection<SurveyWord> surveyword { get; set; }
     }
 }

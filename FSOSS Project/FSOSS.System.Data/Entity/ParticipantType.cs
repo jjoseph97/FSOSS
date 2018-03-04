@@ -18,6 +18,10 @@ namespace FSOSS.System.Data.Entity
     {
         [Key]
         public int participant_type_id { get; set; }
+        [Required(ErrorMessage = "Participant description required")]
+        [StringLength(100, ErrorMessage = "Participant description cannot exceed 100 character")]
         public string participant_description { get; set; }
+
+        public virtual ICollection<SubmittedSurvey> submittedsurvey { get; set; }
     }
 }

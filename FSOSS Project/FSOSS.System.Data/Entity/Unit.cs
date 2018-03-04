@@ -15,11 +15,22 @@ namespace FSOSS.System.Data.Entity
     [Table("unit", Schema = "public")]
     public class Unit
     {
+        // Latest Update March 4, 2018. Ren
         [Key]
         public int unit_id { get; set; }
+
+        [ForeignKey("Site")]
         public int site_id { get; set; }
+        [Required(ErrorMessage = "Unit number required")]
+        [StringLength(100, ErrorMessage = "Unit number cannot exceed 100 characters")]
         public string unit_number { get; set; }
+        [Required (ErrorMessage = "Date modified required")]
         public DateTime date_modified { get; set; }
+        [ForeignKey("AdministratorAccount")]
         public int administrator_account_id { get; set; }
+
+        public virtual AdministratorAccount AdministratorAccount { get; set; }
+        public virtual Site Site { get; set; }
+        public virtual ICollection<Unit> unit { get; set; }
     }
 }

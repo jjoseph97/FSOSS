@@ -15,9 +15,18 @@ namespace FSOSS.System.Data.Entity
     [Table("survey_word", Schema = "public")]
     public class SurveyWord
     {
-        [Key]
+        // Latest Update March 4, 2018. Ren
+        [Key, Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int survey_word_id { get; set; }
+        [Key, Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int site_id { get; set; }
+
+        [Required (ErrorMessage = "Date used required")]
         public DateTime date_used { get; set; }
+
+        public virtual SurveyWord surveyword { get; set; }
+        public virtual Site site { get; set; }
     }
 }

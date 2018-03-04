@@ -15,14 +15,22 @@ namespace FSOSS.System.Data.Entity
     [Table("participant_response", Schema="public")]
     public class ParticipantResponse
     {
-        [Key]
-        //this should reference a submitted survey not a survey version
+        
+        [Key, Column(Order =1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int submitted_survey_id { get; set; }
-        [Key]
+
+       
+        [Key, Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int question_id { get; set; }
-        public virtual Question question { get; set; }
+        
+        [Required]
         [StringLength(100, ErrorMessage = "Survey response cannot exceed 100 characters")]
         public string participant_answer { get; set; }
-        
+
+        public virtual Question question { get; set; }
+        public virtual SubmittedSurvey submittedsurvey { get; set; }
+
     }
 }

@@ -15,15 +15,24 @@ namespace FSOSS.System.Data.Entity
     [Table("submitted_survey",Schema="public")]//update march 3: consistency-c
     public class SubmittedSurvey
     {
+        // Latest Update March 4, 2018. Ren
         [Key]
         public int submitted_survey_id { get; set; }
+        [ForeignKey("SurveyVersion")]
         public int survey_version_id { get; set; }
+        [ForeignKey("Unit")]
         public int unit_id { get; set; }
+        [ForeignKey("Meal")]
         public int meal_id { get; set; }
+        [ForeignKey("ParticipantType")]
         public int participant_type_id { get; set; }
+        [ForeignKey("AgeRange")]
         public int age_range_id { get; set; }
+        [ForeignKey("Gender")]
         public int gender_id { get; set; }
+        [Required (ErrorMessage = "Date entered required")]
         public DateTime date_entered { get; set; }
+        
         [StringLength(100, ErrorMessage = "Contact status cannot exceed 100 characters")]
         public string contact_status { get; set; }
         [StringLength(50, ErrorMessage = "Room number cannot exceed 50 characters")]
@@ -32,5 +41,11 @@ namespace FSOSS.System.Data.Entity
         public string contact_phone_number { get; set; }
 
         public virtual ICollection<ParticipantResponse> participant_responses { get; set; }
+        public virtual Unit Unit { get; set; }
+        public virtual Meal Meal { get; set; }
+        public virtual ParticipantType ParticipantType { get; set; }
+        public virtual AgeRange AgeRange { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual SurveyVersion SurveyVersion { get; set; }
     }
 }
