@@ -12,14 +12,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
-    [Table("question_selection", Schema ="public")]
+    [Table("question_selection", Schema ="public")]//updated march 3:consistency-c
     public class QuestionSelection
     {
         [Key]
-        public int qselection_id { get; set; }
+        public int question_selection_id { get; set; }
         public int question_id { get; set; }
         public virtual Question question { get; set; }
-        public string qselection_text { get; set; }
-        public string qselection_value { get; set; }
+        public string question_selection_text { get; set; }
+        public string question_selection_value { get; set; }
     }
 }

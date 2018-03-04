@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
-    [Table("submitted_survey",Schema="public")]
+    [Table("submitted_survey",Schema="public")]//update march 3: consistency-c
     public class SubmittedSurvey
     {
         [Key]
@@ -21,7 +21,7 @@ namespace FSOSS.System.Data.Entity
         public int unit_id { get; set; }
         public int meal_id { get; set; }
         public int participant_type_id { get; set; }
-        public int age_id { get; set; }
+        public int age_range_id { get; set; }
         public int gender_id { get; set; }
         public DateTime date_entered { get; set; }
         [StringLength(100, ErrorMessage = "Contact status cannot exceed 100 characters")]

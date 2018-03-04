@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
-    [Table("question_topic", Schema ="public")]
+    [Table("question_topic", Schema ="public")]//updated march 3:consistency-c
     public class QuestionTopic
     {
         [Key]
-        public int topic_id { get; set; }
-        public string topic_description { get; set; }
+        public int question_topic_id { get; set; }
+        public string question_topic_description { get; set; }
     }
 }

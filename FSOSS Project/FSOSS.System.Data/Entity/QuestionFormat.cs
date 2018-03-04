@@ -13,11 +13,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace FSOSS.System.Data.Entity
 {
     //created feb 28-c
-    [Table("question_format", Schema ="public")]
+    [Table("question_format", Schema ="public")]//updated march 3:consistency-c
     public class QuestionFormat
     {
         [Key]
-        public int format_id { get; set; }
-        public string format_name { get; set; }
+        public int question_format_id { get; set; }
+        public string question_format_name { get; set; }
     }
 }

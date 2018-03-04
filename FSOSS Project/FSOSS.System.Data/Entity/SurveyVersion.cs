@@ -12,14 +12,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
-    [Table("survey_version", Schema ="public")]
+    [Table("survey_version", Schema ="public")]//updated march 3: consistency-c
     public class SurveyVersion
     {
         [Key]
         public int version_id { get; set; }
         
         //'modified_by' commented out until administrator accounts are established and usable-c
-        //public int modified_by{get;set;}
+        //public int administrator_account_id{get;set;}
         //public virtual AdministratorAccount Admin { get; set; }
 
         public DateTime start_date { get; set; }
