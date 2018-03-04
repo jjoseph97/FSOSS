@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
+using FSOSS.System.Data.POCOs;
 #endregion
 
 namespace FSOSS.System.BLL
@@ -15,52 +16,15 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class ParticipantController
     {
-        //Read Data
+        /// <summary>
+        /// Method use to get one participant type object
+        /// </summary>
+        /// <param name="participantID"></param>
+        /// <returns>One participant object</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public ParticipantType GetParticipant(int participantID)
         {
-            // transaction start
-            using (var context = new FSOSSContext())
-            {
-                ParticipantType participant = new ParticipantType();
-                participant = (from x in context.ParticipantTypes
-                               where x.participant_type_id == participantID
-                               select x).FirstOrDefault();
-
-                return participant;
-            }
-        }
-
-        //Add Data
-        [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddParticipant(string participantDescription)
-        {
-            // transaction start
-            using (var context = new FSOSSContext())
-            {
-                try
-                {
-                    ParticipantType participant = new ParticipantType();
-                    participant.participant_description = participantDescription;
-                    context.ParticipantTypes.Add(participant);
-                    context.SaveChanges();
-                    return "Add Success";
-                }
-                catch (Exception e)
-                {
-                    return "Add Fail " + e.Message;
-                }
-
-
-
-            }
-        }
-
-        //Add Data
-        [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateParticipant(int participantID, string participantDescription)
-        {
-            // transaction start
+           
             using (var context = new FSOSSContext())
             {
                 try
@@ -69,37 +33,42 @@ namespace FSOSS.System.BLL
                     participant = (from x in context.ParticipantTypes
                                    where x.participant_type_id == participantID
                                    select x).FirstOrDefault();
-                    participant.participant_description = participantDescription;
-                    context.SaveChanges();
-                    return "Update Success";
+
+                    return participant;
                 }
                 catch (Exception e)
                 {
-                    return "Update Fail " + e.Message;
+                    throw new Exception(e.Message);
                 }
+                
             }
         }
 
-        [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string DeleteParticipant(int participantID)
+        /// <summary>
+        /// Method use to get the list of participant types
+        /// </summary>
+        /// <returns>List of participant types</returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<ParticipantTypePOCO> GetParticipantTypeList()
         {
             using (var context = new FSOSSContext())
             {
                 try
                 {
-                    var existing = context.ParticipantTypes.Find(participantID);
-                    context.ParticipantTypes.Remove(existing);
-                    context.SaveChanges();
-                    return "Delete Success";
+                    var participantTypeList = from x in context.ParticipantTypes
+                                              select new ParticipantTypePOCO()
+                                              {
+                                                  participantTypeID = x.participant_type_id,
+                                                  participantTypeDescription = x.participant_description
+                                              };
+
+                    return participantTypeList.ToList();
                 }
                 catch (Exception e)
                 {
-                    return "Delete Fail " + e.Message;
+                    throw new Exception(e.Message);
                 }
-
             }
         }
-
-
     }
 }

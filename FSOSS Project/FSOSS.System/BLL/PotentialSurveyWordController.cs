@@ -16,11 +16,14 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class PotentialSurveyWordController
     {
-        //Add new Potential Word
+        /// <summary>
+        /// Method use to add new potential survey word to the list
+        /// </summary>
+        /// <param name="newWord"></param>
+        /// <returns>returns confirmation from the list</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public string AddWord(string newWord)
         {
-            // transaction start
             using (var context = new FSOSSContext())
             {
                 string message = "";
@@ -46,6 +49,7 @@ namespace FSOSS.System.BLL
                         else
                         {
                             PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
+                            // to be set once the admin security is working
                             potentialSurveyWord.administrator_account_id = 1;
                             potentialSurveyWord.survey_access_word = newWord;
                             context.PotentialSurveyWords.Add(potentialSurveyWord);
@@ -60,9 +64,15 @@ namespace FSOSS.System.BLL
                 }
                 return message;
 
-            } //end of transaction
-        } // end of method AddWord
+            } 
+        } 
 
+        /// <summary>
+        /// Method use to update word from the list
+        /// </summary>
+        /// <param name="surveyWord"></param>
+        /// <param name="surveyWordID"></param>
+        /// <returns>returns confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public string UpdateWord(string surveyWord, int surveyWordID)
         {
@@ -72,8 +82,6 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-
-                    //Not sure if update works with default constraint. Subject for testing
                     wordToUpdate.survey_access_word = surveyWord;
                     wordToUpdate.date_modified = DateTime.Now;
                     context.SaveChanges();
@@ -82,12 +90,17 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    message = "Oops, something went wrong. Check " + e.Message;
+                    message = e.Message;
                 }
                 return message;
             }
         }
 
+        /// <summary>
+        /// Method use to delete words from the list that is use in the potential access words
+        /// </summary>
+        /// <param name="surveyWordID"></param>
+        /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
         public string DeleteWord(int surveyWordID)
         {
@@ -96,6 +109,26 @@ namespace FSOSS.System.BLL
                 string message = "";
                 try
                 {
+
+                   // Deletes all the data from the child SurveyWord entity
+                    var surveyWord = (from x in context.SurveyWords
+                                      where x.survey_word_id == surveyWordID
+                                      select new SurveyWordPOCO()
+                                      {
+                                          surveyWordID = x.survey_word_id,
+                                          siteID = x.site_id,
+                                          dateUsed = x.date_used
+                                     }).ToList();
+
+                    if(surveyWord.Count > 0)
+                    {
+                        foreach (SurveyWordPOCO surveyWordInstance in surveyWord)
+                        {
+                            SurveyWord wordForRemoval = context.SurveyWords.Find(surveyWordInstance.surveyWordID);
+                            context.SurveyWords.Remove(wordForRemoval);
+                            context.SaveChanges();
+                        }
+                    }
 
                     PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
                     context.PotentialSurveyWords.Remove(potentialSurveyWord);

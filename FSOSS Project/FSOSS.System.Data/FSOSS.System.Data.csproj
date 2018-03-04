@@ -86,7 +86,12 @@
     <Compile Include="Entity\SurveyVersion.cs" />
     <Compile Include="Entity\SurveyWord.cs" />
     <Compile Include="Entity\Unit.cs" />
+    <Compile Include="POCOs\AgeRangePOCO.cs" />
+    <Compile Include="POCOs\GenderPOCO.cs" />
+    <Compile Include="POCOs\MealPOCO.cs" />
+    <Compile Include="POCOs\ParticipantTypePOCO.cs" />
     <Compile Include="POCOs\PotentialSurveyWordPOCO.cs" />
+    <Compile Include="POCOs\SurveyWordPOCO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
