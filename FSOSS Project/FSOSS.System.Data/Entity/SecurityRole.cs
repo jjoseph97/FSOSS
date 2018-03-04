@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
-    [Table("participant_type", Schema ="public")]
-    public class Participant
+    [Table("security_role", Schema = "public")]
+    public class SecurityRole
     {
         [Key]
-        public int participant_type_id { get; set; }
-        public string participant_description { get; set; }
+        public int security__role__id { get; set; }
+        public string security_description { get; set; }
     }
 }

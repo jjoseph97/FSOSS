@@ -67,16 +67,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Participant.cs" />
+    <Compile Include="Entity\AdministratorAccount.cs" />
+    <Compile Include="Entity\AdministratorRole.cs" />
+    <Compile Include="Entity\AgeRange.cs" />
+    <Compile Include="Entity\Gender.cs" />
+    <Compile Include="Entity\Meal.cs" />
     <Compile Include="Entity\ParticipantResponse.cs" />
+    <Compile Include="Entity\ParticipantType.cs" />
     <Compile Include="Entity\PotentialSurveyWord.cs" />
     <Compile Include="Entity\Question.cs" />
     <Compile Include="Entity\QuestionFormat.cs" />
     <Compile Include="Entity\QuestionSelection.cs" />
     <Compile Include="Entity\QuestionTopic.cs" />
+    <Compile Include="Entity\SecurityRole.cs" />
+    <Compile Include="Entity\Site.cs" />
     <Compile Include="Entity\SubmittedSurvey.cs" />
     <Compile Include="Entity\SurveyQuestion.cs" />
     <Compile Include="Entity\SurveyVersion.cs" />
+    <Compile Include="Entity\SurveyWord.cs" />
+    <Compile Include="Entity\Unit.cs" />
     <Compile Include="POCOs\PotentialSurveyWordPOCO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
