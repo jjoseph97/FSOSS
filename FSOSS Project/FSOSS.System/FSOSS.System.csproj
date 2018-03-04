@@ -67,8 +67,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\AgeRangeController.cs" />
+    <Compile Include="BLL\GenderController.cs" />
+    <Compile Include="BLL\MealController.cs" />
     <Compile Include="BLL\ParticipantController.cs" />
     <Compile Include="BLL\PotentialSurveyWordController.cs" />
+    <Compile Include="BLL\QuestionFormatController.cs" />
+    <Compile Include="BLL\QuestionSelectionController.cs" />
+    <Compile Include="BLL\QuestionTopicController.cs" />
+    <Compile Include="BLL\SurveyVersionController.cs" />
     <Compile Include="DAL\FSOSSContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
