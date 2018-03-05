@@ -16,14 +16,21 @@
                 <b>Please enter the word of the day below to take the survey: </b>
             </div>
             <div class="col-sm-12 mb-2">
-                <asp:TextBox ID="WOTDTextBox" runat="server" CssClass="form-control col-md-6 mx-auto" placeholder="Enter word of the day here..." />
+                <asp:TextBox ID="WOTDTextBox" runat="server" CssClass="form-control col-md-6 mx-auto" placeholder="Enter word of the day here..." AutoFocus="true" />
             </div>
             <div class="col-sm-12 mb-3">
-                <asp:Button ID="SurveyButton" runat="server" CssClass="btn btn-primary btn-block col-md-6 mx-auto" Text="Begin Survey" />
+                <asp:Button ID="SurveyButton" runat="server" CssClass="btn btn-primary btn-block col-md-6 mx-auto" Text="Begin Survey" OnClick="SurveyButton_Click" />
             </div>
             <div class="col-sm-12 text-center mb-3">
                 <b>This survey will take approximately 5 minutes of your time.</b>
             </div>
         </div>
+    </div>
+
+    <%-- Delete below --%>
+    <hr />
+    <br />
+    <div class="col-sm-12 mx-auto text-center">
+        <asp:Label ID="message" runat="server" Visible="false" />
     </div>
 </asp:Content>
