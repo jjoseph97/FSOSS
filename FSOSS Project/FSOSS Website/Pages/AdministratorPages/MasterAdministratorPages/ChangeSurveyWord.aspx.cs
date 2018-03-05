@@ -16,7 +16,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     protected void Page_Load(object sender, EventArgs e)
     {
         Alert.Visible = false;
-        DeleteAlert.Visible = false;
+        ErrorAlert.Visible = false;
     }
 
     protected void SearchWordButton_Click(object sender, EventArgs e)
@@ -28,9 +28,22 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
         PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-        Alert.Visible = true;
-        Alert.Text = sysmgr.AddWord(AddWordTextBox.Text);
-        SurveyWordListView.DataBind();
+        if (AddWordTextBox.Text == "" || AddWordTextBox.Text == null)
+        {
+            ErrorAlert.Visible = true;
+            ErrorAlert.Text = "Error: You must type in a word to add. Field cannot be empty.";
+        }
+        else if (AddWordTextBox.Text.Length > 6)
+        {
+            ErrorAlert.Visible = true;
+            ErrorAlert.Text = "Error: New survey word must be 6 or less characters in length.";
+        }
+        else
+        {
+            Alert.Visible = true;
+            Alert.Text = sysmgr.AddWord(AddWordTextBox.Text);
+            SurveyWordListView.DataBind();
+        }
     }
 
     protected void SurveyWordListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -38,15 +51,23 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         if (e.CommandName == "Update")
         {
             TextBox surveyWord = (TextBox)e.Item.FindControl("surveyWordTextBox");
-            Alert.Visible = true;
-            Alert.Text = "The survey word has been updated to \"" + surveyWord.Text + "\".";
+            if (surveyWord.Text.Length > 6)
+            {
+                ErrorAlert.Visible = true;
+                ErrorAlert.Text = "Error: Updated survey word must be 6 or less characters in length.";
+            }
+            else
+            {
+                Alert.Visible = true;
+                Alert.Text = "The survey word has been updated to \"" + surveyWord.Text + "\".";
+            }
         }
 
         if (e.CommandName == "Delete")
         {
             Label surveyWord = (Label)e.Item.FindControl("surveyWordLabel");
-            DeleteAlert.Visible = true;
-            DeleteAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been removed.";
+            ErrorAlert.Visible = true;
+            ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been removed.";
         }
     }
 }

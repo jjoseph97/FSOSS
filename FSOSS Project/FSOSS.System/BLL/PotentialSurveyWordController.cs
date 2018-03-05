@@ -29,33 +29,26 @@ namespace FSOSS.System.BLL
                 string message = "";
                 try
                 {
-                    if (newWord == "" || newWord == null)
+                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                    where x.survey_access_word.ToLower().Contains(newWord.ToLower())
+                                                    select new PotentialSurveyWordPOCO()
+                                                    {
+                                                        surveyWord = x.survey_access_word
+                                                    };
+
+                    if (potentialSurveyWordList.Count() > 0)
                     {
-                        message = "Cannot be empty";
+                        message = "The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.";
                     }
                     else
                     {
-                        var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                      where x.survey_access_word.ToLower().Contains(newWord.ToLower())
-                                                      select new PotentialSurveyWordPOCO()
-                                                      {
-                                                          surveyWord = x.survey_access_word
-                                                      };
-
-                        if (potentialSurveyWordList.Count() > 0)
-                        {
-                            message = "The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.";
-                        }
-                        else
-                        {
-                            PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                            // to be set once the admin security is working
-                            potentialSurveyWord.administrator_account_id = 1;
-                            potentialSurveyWord.survey_access_word = newWord;
-                            context.PotentialSurveyWords.Add(potentialSurveyWord);
-                            context.SaveChanges();
-                            message = "Successfully added the new survey word: \"" + newWord + "\"";
-                        }
+                        PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
+                        // to be set once the admin security is working
+                        potentialSurveyWord.administrator_account_id = 1;
+                        potentialSurveyWord.survey_access_word = newWord;
+                        context.PotentialSurveyWords.Add(potentialSurveyWord);
+                        context.SaveChanges();
+                        message = "Successfully added the new survey word: \"" + newWord + "\"";
                     }
                 }
                 catch (Exception e)

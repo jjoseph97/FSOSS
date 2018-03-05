@@ -10,13 +10,13 @@
     <div class="row">
         <div class="col-md-12">
             <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
-             <asp:Label ID="DeleteAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
+            <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
         <div class="col-md-12">
-            <div class="card container">
+            <div class="card container mb-2">
                 <div class="row">
                     <asp:Label ID="HospitalLabel" class="col-md-3 my-2" style="font-weight:bold;font-size:large;" runat="server" Text="Hospital: " />
-                    <asp:Label ID="Label1" class="col-md-4 pl-0 my-2" style="font-weight:bold;font-size:large;" runat="server" Text="Misericordia Hospital" />
+                    <asp:Label ID="HospitalTitleLabel" class="col-md-4 pl-0 my-2" style="font-weight:bold;font-size:large;" runat="server" Text="Misericordia Hospital" />
                 </div>
                 <div class="row">
                     <asp:Label ID="SearchWordLabel" class="col-md-3 my-2" style="font-weight:bold;font-size:large;" runat="server" Text="Search Word: " />
@@ -37,11 +37,11 @@
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("surveyWordID") %>' runat="server" ID="surveyWordIDLabel" Visible="false" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" ID="surveyWordLabel" /></td>
+                                <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success ml-2" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success ml-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-2" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -49,11 +49,11 @@
                             <td style="display:none;">
                                 <asp:TextBox Text='<%# Bind("surveyWordID") %>' runat="server" ID="surveyWordIDTextBox" Visible="false" /></td>
                             <td>
-                                <asp:TextBox Text='<%# Bind("surveyWord") %>' runat="server" ID="surveyWordTextBox" /></td>
+                                <asp:TextBox Text='<%# Bind("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordTextBox" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success ml-2" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success ml-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-2" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-3 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
                         </tr>
                     </EditItemTemplate>
                     <EmptyDataTemplate>
@@ -68,22 +68,22 @@
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("surveyWordID") %>' runat="server" ID="surveyWordIDLabel" Visible="false" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" ID="surveyWordLabel" /></td>
+                                <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success ml-2" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success ml-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-2" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table runat="server" style="width: 85%; margin-top: 15px;">
+                        <table runat="server" style="width: 100%; margin-top: 15px;">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 85%;" border="1">
                                         <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
-                                            <th runat="server" class="col-md-6">Survey Word</th>
-                                            <th runat="server" class="col-md-3">Edit Word</th>
-                                            <th runat="server" class="col-md-3">Delete Word</th>
+                                            <th runat="server" class="col-md-6 py-2">Survey Word</th>
+                                            <th runat="server" class="col-md-3 py-2">Edit Word</th>
+                                            <th runat="server" class="col-md-3 py-2">Delete Word</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -96,11 +96,11 @@
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("surveyWordID") %>' runat="server" ID="surveyWordIDLabel" Visible="false" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" ID="surveyWordLabel" /></td>
+                                <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success ml-2" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success ml-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-2" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger ml-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
