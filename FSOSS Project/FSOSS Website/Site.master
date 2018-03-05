@@ -63,7 +63,7 @@
                 </ul>
                 <div class="nav navbar-nav ml-auto">
                     <div class="form-inline">
-                        <button class="btn btn-outline-primary" type="submit">Log In</button>
+                        <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-outline-primary" Text="Log In" PostBackUrl="~/Pages/AdministratorPages/Login.aspx"/>
                     </div>
                 </div>
             </div>
