@@ -54,7 +54,6 @@ namespace FSOSS.System.BLL
                             potentialSurveyWord.survey_access_word = newWord;
                             context.PotentialSurveyWords.Add(potentialSurveyWord);
                             context.SaveChanges();
-                            message = "Successfully Added a New Word!";
                         }
                     }
                 }
@@ -85,8 +84,6 @@ namespace FSOSS.System.BLL
                     wordToUpdate.survey_access_word = surveyWord;
                     wordToUpdate.date_modified = DateTime.Now;
                     context.SaveChanges();
-
-                    message = "Successfully updated to survey word: " + surveyWord;
                 }
                 catch (Exception e)
                 {
@@ -109,7 +106,6 @@ namespace FSOSS.System.BLL
                 string message = "";
                 try
                 {
-
                    // Deletes all the data from the child SurveyWord entity
                     var surveyWord = (from x in context.SurveyWords
                                       where x.survey_word_id == surveyWordID
@@ -129,22 +125,15 @@ namespace FSOSS.System.BLL
                             context.SaveChanges();
                         }
                     }
-
                     PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
                     context.PotentialSurveyWords.Remove(potentialSurveyWord);
                     context.SaveChanges();
-
-
-                    message = "Succesfully Removed survey word: "+ potentialSurveyWord;
-                    return message;
-
-
                 }
                 catch (Exception e)
                 {
                     throw new Exception("Something went wrong. See " + e.Message);
                 }
-
+                return message;
             }
         }
 

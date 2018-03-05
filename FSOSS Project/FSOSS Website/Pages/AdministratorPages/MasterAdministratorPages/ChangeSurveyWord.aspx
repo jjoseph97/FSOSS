@@ -31,7 +31,7 @@
             </div>
             <div class="card container">
                 <%-- ListView to be configured to survey word ODS... --%>
-                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="SurveyWordODS" DataKeyNames="surveyWordID">
+                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="SurveyWordODS" DataKeyNames="surveyWordID" OnItemCommand="SurveyWordListView_ItemCommand">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #FFFFFF; color: #284775;">
                             <td>
