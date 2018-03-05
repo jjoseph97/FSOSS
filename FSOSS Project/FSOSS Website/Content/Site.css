@@ -27,3 +27,7 @@ textarea {
         padding: 0;
     }
 }
+
+th, td {
+    padding: 5px;
+}

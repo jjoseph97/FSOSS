@@ -54,6 +54,7 @@ namespace FSOSS.System.BLL
                             potentialSurveyWord.survey_access_word = newWord;
                             context.PotentialSurveyWords.Add(potentialSurveyWord);
                             context.SaveChanges();
+                            message = "Successfully added the new survey word: \"" + newWord + "\"";
                         }
                     }
                 }
