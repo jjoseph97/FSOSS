@@ -31,14 +31,11 @@
     </div>
 
     <%-- Delete below --%>
-    <div class="col-sm-6 mx-auto text-center">
+    <div class="text-center">
         <hr />
         <p>this section is for testing purposes. will be deleted.</p>
         <div class="col-sm-12 text-center p-2">
             <asp:Label ID="message" runat="server" CssClass="text-white bg-danger p-2" Visible="false" />
-        </div>
-        <div class="col-sm-12 mx-auto">
-            <asp:Button ID="btnTest" runat="server" Text="Clear Cookies... Not the safest LOL" OnClick="btnTest_Click" />
         </div>
     </div>
 </asp:Content>

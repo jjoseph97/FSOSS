@@ -24,8 +24,6 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
             PendingRequestNumberLabel.Text = "16";
         }
 
-        message.Text = Session["username"].ToString();
-
     }
 
     protected void HospitalDDL_SelectedIndexChanged(object sender, EventArgs e)
