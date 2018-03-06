@@ -9,6 +9,7 @@ using System.ComponentModel;
 using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
+using System.Text.RegularExpressions;
 #endregion
 
 namespace FSOSS.System.BLL
@@ -46,6 +47,7 @@ namespace FSOSS.System.BLL
                         // to be set once the admin security is working
                         potentialSurveyWord.administrator_account_id = 1;
                         potentialSurveyWord.survey_access_word = newWord.Trim();
+                        potentialSurveyWord.date_modified = DateTime.Now;
                         context.PotentialSurveyWords.Add(potentialSurveyWord);
                         context.SaveChanges();
                         message = "Successfully added the new survey word: \"" + newWord + "\"";
@@ -71,13 +73,17 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
+                Regex validWord = new Regex("^[a-zA-Z]+$");
                 string message = "";
                 try
                 {
-                    var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                    wordToUpdate.survey_access_word = surveyWord.Trim();
-                    wordToUpdate.date_modified = DateTime.Now;
-                    context.SaveChanges();
+                    if (validWord.IsMatch(surveyWord))
+                    {
+                        var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
+                        wordToUpdate.survey_access_word = surveyWord.Trim();
+                        wordToUpdate.date_modified = DateTime.Now;
+                        context.SaveChanges();
+                    }
                 }
                 catch (Exception e)
                 {

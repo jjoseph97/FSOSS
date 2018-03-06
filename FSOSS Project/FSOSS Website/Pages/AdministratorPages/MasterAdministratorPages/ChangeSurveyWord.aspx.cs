@@ -18,15 +18,26 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         Alert.Visible = false;
         ErrorAlert.Visible = false;
+        SurveyWordListView.DataSourceID = "SurveyWordODS";
     }
 
     protected void SearchWordButton_Click(object sender, EventArgs e)
     {
-        //PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
-        //string searchWord = SearchWordTextBox.Text.Trim();
-        //Alert.Visible = true;
-        //SurveyWordODS.SelectMethod = sysmgr.GetSurveyWord(searchWord);
-        //SurveyWordListView.DataBind();
+        PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
+        string searchWord = SearchWordTextBox.Text.Trim();
+        Alert.Visible = true;
+        SurveyWordListView.DataSourceID = "";
+        SurveyWordListView.DataSource = sysmgr.GetSurveyWord(searchWord);
+        SurveyWordListView.DataBind();
+        if (searchWord == "")
+        {
+            Alert.Visible = false;
+        }
+        else
+        {
+            Alert.Text = "Found the following results for \"" + searchWord + "\"";
+        }
+        SearchWordTextBox.Text = "";
     }
 
     protected void AddWordButton_Click(object sender, EventArgs e)
@@ -56,6 +67,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             Alert.Visible = true;
             Alert.Text = sysmgr.AddWord(addWord);
             SurveyWordListView.DataBind();
+            AddWordTextBox.Text = "";
         }
     }
 
