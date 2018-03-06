@@ -10,18 +10,37 @@
     <div class="col-md-12">
 
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-3 form-control" runat="server"></asp:DropDownList><br />
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number"></asp:Label>
+            <asp:DropDownList CssClass="col-md-3 form-control" runat="server">
+                <asp:ListItem>Select Unit e.g.7W</asp:ListItem>
+                <asp:ListItem>8E</asp:ListItem>
+                <asp:ListItem>7E</asp:ListItem>
+                <asp:ListItem>7W</asp:ListItem>
+                <asp:ListItem>6E</asp:ListItem>
+                <asp:ListItem>6W</asp:ListItem>
+                <asp:ListItem>5E</asp:ListItem>
+                <asp:ListItem>5W</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-3 form-control" runat="server"></asp:DropDownList><br />
+            <asp:DropDownList CssClass="col-md-3 form-control" runat="server">
+                <asp:ListItem>Select Type</asp:ListItem>
+                <asp:ListItem>Patient</asp:ListItem>
+                <asp:ListItem>Non-Patient</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Meal Type"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-3 form-control" runat="server"></asp:DropDownList><br /><br />
+            <asp:DropDownList CssClass="col-md-3 form-control" runat="server">
+                <asp:ListItem>Select Meal</asp:ListItem>
+                <asp:ListItem>Breakfast</asp:ListItem>
+                <asp:ListItem>Lunch</asp:ListItem>
+                <asp:ListItem>Dinner</asp:ListItem>
+                <asp:ListItem>Snacks</asp:ListItem>
+            </asp:DropDownList><br /><br />
         </div>
         <br />
            
@@ -40,17 +59,35 @@
         </div>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The variety of food in your daily meals"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem>Select Meal</asp:ListItem>
+                <asp:ListItem>Breakfast</asp:ListItem>
+                <asp:ListItem>Lunch</asp:ListItem>
+                <asp:ListItem>Dinner</asp:ListItem>
+                <asp:ListItem>Snacks</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
             <asp:Label class="col-md-4 ml-5 my-2" runat="server" Text="The taste and flavor of your meals"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem>Select Meal</asp:ListItem>
+                <asp:ListItem>Breakfast</asp:ListItem>
+                <asp:ListItem>Lunch</asp:ListItem>
+                <asp:ListItem>Dinner</asp:ListItem>
+                <asp:ListItem>Snacks</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
             <asp:Label class="col-md-4 ml-5 my-2" runat="server" Text="The temperature of your hot food"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem>Select Meal</asp:ListItem>
+                <asp:ListItem>Breakfast</asp:ListItem>
+                <asp:ListItem>Lunch</asp:ListItem>
+                <asp:ListItem>Dinner</asp:ListItem>
+                <asp:ListItem>Snacks</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
@@ -105,7 +142,7 @@
             </div>
         </div>
 
-
+        <asp:Button ID="NextButton" runat="server" Text="Next" PostBackUrl="~/Pages/Survey/DemographicsPage.aspx" />
    </div>
 
 
