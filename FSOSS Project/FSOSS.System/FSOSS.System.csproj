@@ -75,6 +75,7 @@
     <Compile Include="BLL\QuestionFormatController.cs" />
     <Compile Include="BLL\QuestionSelectionController.cs" />
     <Compile Include="BLL\QuestionTopicController.cs" />
+    <Compile Include="BLL\ReportController.cs" />
     <Compile Include="BLL\SurveyVersionController.cs" />
     <Compile Include="DAL\FSOSSContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

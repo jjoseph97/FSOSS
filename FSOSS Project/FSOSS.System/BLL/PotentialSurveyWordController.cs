@@ -75,14 +75,37 @@ namespace FSOSS.System.BLL
             {
                 Regex validWord = new Regex("^[a-zA-Z]+$");
                 string message = "";
+                bool inUse = false;
                 try
                 {
-                    if (validWord.IsMatch(surveyWord))
+                    var surveyWordList = (from x in context.SurveyWords
+                                          select new SurveyWordPOCO
+                                          {
+                                               siteID = x.site_id,
+                                               dateUsed = x.date_used,
+                                               surveyWordID = x.survey_word_id
+                                          }).ToList();
+                    
+
+                    foreach (SurveyWordPOCO item in surveyWordList)
+                    {
+                        if (item.surveyWordID == surveyWordID && item.dateUsed == DateTime.Now)
+                        {
+                            inUse = true;
+                            break;
+                        }
+                    }
+
+                    if (validWord.IsMatch(surveyWord) && inUse == false) 
                     {
                         var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
                         wordToUpdate.survey_access_word = surveyWord.Trim();
                         wordToUpdate.date_modified = DateTime.Now;
                         context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Word is currently use. Update failed.");
                     }
                 }
                 catch (Exception e)
