@@ -66,11 +66,24 @@ public partial class SiteMaster : MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        LoginButton.Text = Session["username"] != null ? "Log out" : "Log in";
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
     {
         Context.GetOwinContext().Authentication.SignOut();
+    }
+
+    protected void LoginButton_Click(object sender, EventArgs e)
+    {
+        if (LoginButton.Text == "Log out")
+        {
+            Session.Abandon();
+            Response.Redirect("~/");
+        }
+        else
+        {
+            Response.Redirect("~/Pages/AdministratorPages/Login.aspx");
+        }
     }
 }
