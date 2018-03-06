@@ -30,7 +30,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                    where x.survey_access_word.ToLower().Contains(newWord.ToLower())
+                                                    where x.survey_access_word.ToLower().Equals(newWord.ToLower())
                                                     select new PotentialSurveyWordPOCO()
                                                     {
                                                         surveyWord = x.survey_access_word
@@ -45,7 +45,7 @@ namespace FSOSS.System.BLL
                         PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
                         // to be set once the admin security is working
                         potentialSurveyWord.administrator_account_id = 1;
-                        potentialSurveyWord.survey_access_word = newWord;
+                        potentialSurveyWord.survey_access_word = newWord.Trim();
                         context.PotentialSurveyWords.Add(potentialSurveyWord);
                         context.SaveChanges();
                         message = "Successfully added the new survey word: \"" + newWord + "\"";
@@ -75,7 +75,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                    wordToUpdate.survey_access_word = surveyWord;
+                    wordToUpdate.survey_access_word = surveyWord.Trim();
                     wordToUpdate.date_modified = DateTime.Now;
                     context.SaveChanges();
                 }
@@ -142,7 +142,7 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_word_id
-                                                  where x.survey_access_word.Contains("/" + surveyWord + "/")
+                                                  where x.survey_access_word.Contains(surveyWord.Trim())
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,

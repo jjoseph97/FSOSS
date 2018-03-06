@@ -22,13 +22,16 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 
     protected void SearchWordButton_Click(object sender, EventArgs e)
     {
-
+        //PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
+        //string searchWord = SearchWordTextBox.Text.Trim();
+        //Alert.Visible = true;
+        //SurveyWordODS.SelectMethod = sysmgr.GetSurveyWord(searchWord);
+        //SurveyWordListView.DataBind();
     }
 
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
-        PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
 
         string addWord = AddWordTextBox.Text.Trim();
         Regex validWord = new Regex("^[a-zA-Z]+$");
