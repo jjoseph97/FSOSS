@@ -66,7 +66,20 @@ public partial class SiteMaster : MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            if (Session["username"] != null)
+            {
+                LoginButton.Text = "Log out";
+                Session.Abandon();
+                LoginButton.PostBackUrl = "~/"; // replace with successful logout page
+            }
+            else
+            {
+                LoginButton.Text = "Log in";
+                LoginButton.PostBackUrl = "~/Pages/AdministratorPages/Login.aspx";
+            }
+        }
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
