@@ -11,7 +11,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -38,32 +38,35 @@
             </Scripts>
         </asp:ScriptManager>
 
-	    <div class="navbar navbar-expand-lg mb-4 navbar-light bg-light container">
-            <a runat="server" class="navbar-brand" href="~/"><img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" /></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#fsoss-navbar" aria-controls="fsoss-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="navbar navbar-expand-lg mb-4 navbar-light bg-light">
+            <div class="container">
+                <a runat="server" class="navbar-brand" href="~/">
+                    <img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#fsoss-navbar" aria-controls="fsoss-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="fsoss-navbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
-                        <div class="dropdown-menu">
-                            <a runat="server" class="dropdown-item" href="~/Pages/AdministratorPages/MasterAdministratorPages/ChangeSurveyWord.aspx">Change Survey Word</a>
-                            <a class="dropdown-item" href="#">Edit User</a>
-                            <a class="dropdown-item" href="#">New User</a>
+                <div class="collapse navbar-collapse" id="fsoss-navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
+                            <div class="dropdown-menu">
+                                <a runat="server" class="dropdown-item" href="~/Pages/AdministratorPages/MasterAdministratorPages/ChangeSurveyWord.aspx">Change Survey Word</a>
+                                <a class="dropdown-item" href="#">Edit User</a>
+                                <a class="dropdown-item" href="#">New User</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">View Surveys</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">View Reports</a>
+                        </li>
+                    </ul>
+                    <div class="nav navbar-nav ml-auto">
+                        <div class="form-inline">
+                            <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-outline-primary" OnClick="LoginButton_Click" />
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">View Surveys</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">View Reports</a>
-                    </li>
-                </ul>
-                <div class="nav navbar-nav ml-auto">
-                    <div class="form-inline">
-                        <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-outline-primary" OnClick="LoginButton_Click"/>
                     </div>
                 </div>
             </div>
