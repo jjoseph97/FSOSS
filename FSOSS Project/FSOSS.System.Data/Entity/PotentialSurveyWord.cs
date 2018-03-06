@@ -21,7 +21,7 @@ namespace FSOSS.System.Data.Entity
         [ForeignKey("AdministratorAccount")]
         public int administrator_account_id { get; set; }
         [Required(ErrorMessage = "Survey access word required")]
-        [StringLength(6, ErrorMessage = "Survey access word cannot exceed 6 character")]
+        [StringLength(8, ErrorMessage = "Survey access word cannot exceed 8 characters")]
         public string survey_access_word { get; set; }
         [Required]
         public DateTime date_modified { get; set; }

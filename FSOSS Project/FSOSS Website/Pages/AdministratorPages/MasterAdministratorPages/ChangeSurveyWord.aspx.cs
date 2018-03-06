@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -28,20 +29,29 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
         PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-        if (AddWordTextBox.Text == "" || AddWordTextBox.Text == null)
+
+        string addWord = AddWordTextBox.Text.Trim();
+        Regex validWord = new Regex("^[a-zA-Z]+$");
+
+        if (addWord == "" || addWord == null)
         {
             ErrorAlert.Visible = true;
             ErrorAlert.Text = "Error: You must type in a word to add. Field cannot be empty.";
         }
-        else if (AddWordTextBox.Text.Length > 6)
+        else if (!validWord.IsMatch(addWord))
         {
             ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: New survey word must be 6 or less characters in length.";
+            ErrorAlert.Text = "Error: Please enter only alphabetical letters and no spaces.";
+        }
+        else if (addWord.Length < 4 || addWord.Length > 8)
+        {
+            ErrorAlert.Visible = true;
+            ErrorAlert.Text = "Error: New survey word must be between 4 to 8 characters characters in length.";
         }
         else
         {
             Alert.Visible = true;
-            Alert.Text = sysmgr.AddWord(AddWordTextBox.Text);
+            Alert.Text = sysmgr.AddWord(addWord);
             SurveyWordListView.DataBind();
         }
     }
@@ -50,16 +60,24 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         if (e.CommandName == "Update")
         {
+            Regex validWord = new Regex("^[a-zA-Z]+$");
             TextBox surveyWord = (TextBox)e.Item.FindControl("surveyWordTextBox");
-            if (surveyWord.Text.Length > 6)
+            string updateWord = surveyWord.Text.Trim();
+
+            if (updateWord.Length < 4 || updateWord.Length > 8)
             {
                 ErrorAlert.Visible = true;
-                ErrorAlert.Text = "Error: Updated survey word must be 6 or less characters in length.";
+                ErrorAlert.Text = "Error: Updated survey word must be between 4 to 8 characters in length.";
+            }
+            else if (!validWord.IsMatch(updateWord))
+            {
+                ErrorAlert.Visible = true;
+                ErrorAlert.Text = "Error: Please enter only alphabetical letters and no spaces.";
             }
             else
             {
                 Alert.Visible = true;
-                Alert.Text = "The survey word has been updated to \"" + surveyWord.Text + "\".";
+                Alert.Text = "The survey word has been updated to \"" + updateWord + "\".";
             }
         }
 
