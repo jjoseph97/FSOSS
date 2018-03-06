@@ -66,24 +66,24 @@ public partial class SiteMaster : MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
-        {
-            if (Session["username"] != null)
-            {
-                LoginButton.Text = "Log out";
-                Session.Abandon();
-                LoginButton.PostBackUrl = "~/"; // replace with successful logout page
-            }
-            else
-            {
-                LoginButton.Text = "Log in";
-                LoginButton.PostBackUrl = "~/Pages/AdministratorPages/Login.aspx";
-            }
-        }
+        LoginButton.Text = Session["username"] != null ? "Log out" : "Log in";
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
     {
         Context.GetOwinContext().Authentication.SignOut();
+    }
+
+    protected void LoginButton_Click(object sender, EventArgs e)
+    {
+        if (LoginButton.Text == "Log out")
+        {
+            Session.Abandon();
+            Response.Redirect("~/");
+        }
+        else
+        {
+            Response.Redirect("~/Pages/AdministratorPages/Login.aspx");
+        }
     }
 }
