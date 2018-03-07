@@ -20,6 +20,9 @@
                 <asp:ListItem>6W</asp:ListItem>
                 <asp:ListItem>5E</asp:ListItem>
                 <asp:ListItem>5W</asp:ListItem>
+                <asp:ListItem>3E</asp:ListItem>
+                <asp:ListItem>3N</asp:ListItem>
+                <asp:ListItem>ED</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
@@ -60,44 +63,61 @@
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The variety of food in your daily meals"></asp:Label> 
             <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select Meal</asp:ListItem>
-                <asp:ListItem>Breakfast</asp:ListItem>
-                <asp:ListItem>Lunch</asp:ListItem>
-                <asp:ListItem>Dinner</asp:ListItem>
-                <asp:ListItem>Snacks</asp:ListItem>
+                <asp:ListItem>Select...</asp:ListItem>
+                <asp:ListItem>Very Good</asp:ListItem>
+                <asp:ListItem>Good</asp:ListItem>
+                <asp:ListItem>Fair</asp:ListItem>
+                <asp:ListItem>Poor</asp:ListItem>
+                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-4 ml-5 my-2" runat="server" Text="The taste and flavor of your meals"></asp:Label> 
+            <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The taste and flavor of your meals"></asp:Label> 
             <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select Meal</asp:ListItem>
-                <asp:ListItem>Breakfast</asp:ListItem>
-                <asp:ListItem>Lunch</asp:ListItem>
-                <asp:ListItem>Dinner</asp:ListItem>
-                <asp:ListItem>Snacks</asp:ListItem>
+                <asp:ListItem>Select...</asp:ListItem>
+                <asp:ListItem>Very Good</asp:ListItem>
+                <asp:ListItem>Good</asp:ListItem>
+                <asp:ListItem>Fair</asp:ListItem>
+                <asp:ListItem>Poor</asp:ListItem>
+                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-4 ml-5 my-2" runat="server" Text="The temperature of your hot food"></asp:Label> 
+            <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The temperature of your hot food"></asp:Label> 
             <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select Meal</asp:ListItem>
-                <asp:ListItem>Breakfast</asp:ListItem>
-                <asp:ListItem>Lunch</asp:ListItem>
-                <asp:ListItem>Dinner</asp:ListItem>
-                <asp:ListItem>Snacks</asp:ListItem>
+                <asp:ListItem>Select...</asp:ListItem>
+                <asp:ListItem>Very Good</asp:ListItem>
+                <asp:ListItem>Good</asp:ListItem>
+                <asp:ListItem>Fair</asp:ListItem>
+                <asp:ListItem>Poor</asp:ListItem>
+                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-4 ml-5 my-2" runat="server" Text="The overall appearance of your meal"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+            <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The overall appearance of your meal"></asp:Label> 
+            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem>Select...</asp:ListItem>
+                <asp:ListItem>Very Good</asp:ListItem>
+                <asp:ListItem>Good</asp:ListItem>
+                <asp:ListItem>Fair</asp:ListItem>
+                <asp:ListItem>Poor</asp:ListItem>
+                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-4 ml-5 my-2" runat="server" Text="The helpfulness of the staff who deliver your meals"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+            <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The helpfulness of the staff who deliver your meals"></asp:Label> 
+            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem>Select...</asp:ListItem>
+                <asp:ListItem>Very Good</asp:ListItem>
+                <asp:ListItem>Good</asp:ListItem>
+                <asp:ListItem>Fair</asp:ListItem>
+                <asp:ListItem>Poor</asp:ListItem>
+                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            </asp:DropDownList><br />
         </div>
         <br />
 
@@ -107,7 +127,12 @@
                 <p><b>2. How satisfied are you with the portion sizes of your meals?</b></p>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+                <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                    <asp:ListItem>Select...</asp:ListItem>
+                    <asp:ListItem>Portion sizes are too small</asp:ListItem>
+                    <asp:ListItem>Portion sizes are just right</asp:ListItem>
+                    <asp:ListItem>Portion sizes are too large</asp:ListItem>
+                </asp:DropDownList><br />
             </div>
         </div>
 
@@ -118,7 +143,14 @@
                 <p>(for example; food allergies, medical requirements, cultural preferences)</p>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+                <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                    <asp:ListItem>Select...</asp:ListItem>
+                    <asp:ListItem>Always</asp:ListItem>
+                    <asp:ListItem>Usually</asp:ListItem>
+                    <asp:ListItem>Occasionally</asp:ListItem>
+                    <asp:ListItem>Never</asp:ListItem>
+                    <asp:ListItem>I do not have any specific dietary requirements</asp:ListItem>
+                </asp:DropDownList><br />
             </div>
         </div>
 
@@ -128,7 +160,15 @@
                 <p><b>4. Overall, how would you rate your meal experience?</b></p>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList CssClass="col-md-4 form-control" runat="server"></asp:DropDownList><br />
+                <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
+                    <asp:ListItem>Select...</asp:ListItem>
+                    <asp:ListItem>0 (WORST POSSIBLE)</asp:ListItem>
+                    <asp:ListItem>1</asp:ListItem>
+                    <asp:ListItem>2</asp:ListItem>
+                    <asp:ListItem>3</asp:ListItem>
+                    <asp:ListItem>4</asp:ListItem>
+                    <asp:ListItem>5 (BEST POSSIBLE)</asp:ListItem>
+                </asp:DropDownList><br />
             </div>
         </div>
 
