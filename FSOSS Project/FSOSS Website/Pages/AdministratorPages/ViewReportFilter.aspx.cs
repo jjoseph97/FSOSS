@@ -16,4 +16,17 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
     {
        StartingPeriodTextBoxID.Text =  StartingPeriodCalendar.SelectedDate.ToString("MMMM dd, yyyy");
     }
+
+    protected void EndingPeriodCalendar_SelectionChanged(object sender, EventArgs e)
+    {
+        
+        EndingPeriodTexBoxID.Text = EndingPeriodCalendar.SelectedDate.ToString("MMMM dd, yyyy");
+    }
+
+
+
+    protected void ViewButtonID_Click(object sender, EventArgs e)
+    {
+        
+    }
 }
