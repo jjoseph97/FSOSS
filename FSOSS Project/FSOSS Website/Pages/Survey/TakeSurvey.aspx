@@ -11,38 +11,38 @@
 
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number"></asp:Label>
-            <asp:DropDownList CssClass="col-md-3 form-control" runat="server">
-                <asp:ListItem>Select Unit e.g.7W</asp:ListItem>
-                <asp:ListItem>8E</asp:ListItem>
-                <asp:ListItem>7E</asp:ListItem>
-                <asp:ListItem>7W</asp:ListItem>
-                <asp:ListItem>6E</asp:ListItem>
-                <asp:ListItem>6W</asp:ListItem>
-                <asp:ListItem>5E</asp:ListItem>
-                <asp:ListItem>5W</asp:ListItem>
-                <asp:ListItem>3E</asp:ListItem>
-                <asp:ListItem>3N</asp:ListItem>
-                <asp:ListItem>ED</asp:ListItem>
+            <asp:DropDownList ID="UnitNumber" CssClass="col-md-3 form-control" runat="server">
+                <asp:ListItem Value="">Select Unit e.g.7W</asp:ListItem>
+                <asp:ListItem Value="8E">8E</asp:ListItem>
+                <asp:ListItem Value="7E">7E</asp:ListItem>
+                <asp:ListItem Value="7W">7W</asp:ListItem>
+                <asp:ListItem Value="6E">6E</asp:ListItem>
+                <asp:ListItem Value="6W">6W</asp:ListItem>
+                <asp:ListItem Value="5E">5E</asp:ListItem>
+                <asp:ListItem Value="5W">5W</asp:ListItem>
+                <asp:ListItem Value="3E">3E</asp:ListItem>
+                <asp:ListItem Value="3N">3N</asp:ListItem>
+                <asp:ListItem Value="ED">ED</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-3 form-control" runat="server">
-                <asp:ListItem>Select Type</asp:ListItem>
-                <asp:ListItem>Patient</asp:ListItem>
-                <asp:ListItem>Non-Patient</asp:ListItem>
+            <asp:DropDownList ID="ParticipantType" CssClass="col-md-3 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="PT">Patient</asp:ListItem>
+                <asp:ListItem Value="NPT">Non-Patient</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Meal Type"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-3 form-control" runat="server">
-                <asp:ListItem>Select Meal</asp:ListItem>
-                <asp:ListItem>Breakfast</asp:ListItem>
-                <asp:ListItem>Lunch</asp:ListItem>
-                <asp:ListItem>Dinner</asp:ListItem>
-                <asp:ListItem>Snacks</asp:ListItem>
+            <asp:DropDownList ID="MealType" CssClass="col-md-3 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="BF">Breakfast</asp:ListItem>
+                <asp:ListItem Value="LN">Lunch</asp:ListItem>
+                <asp:ListItem Value="DN">Dinner</asp:ListItem>
+                <asp:ListItem Value="SN">Snacks</asp:ListItem>
             </asp:DropDownList><br /><br />
         </div>
         <br />
@@ -60,63 +60,73 @@
                 <p><b>1. During this hospital stay, how would you describe the following features of your meals?</b></p>
             </div>
         </div>
+        <%--Q1A--%>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The variety of food in your daily meals"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select...</asp:ListItem>
-                <asp:ListItem>Very Good</asp:ListItem>
-                <asp:ListItem>Good</asp:ListItem>
-                <asp:ListItem>Fair</asp:ListItem>
-                <asp:ListItem>Poor</asp:ListItem>
-                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            <asp:DropDownList ID="Q1A" CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="VG">Very Good</asp:ListItem>
+                <asp:ListItem Value="G">Good</asp:ListItem>
+                <asp:ListItem Value="F">Fair</asp:ListItem>
+                <asp:ListItem Value="P">Poor</asp:ListItem>
+                <asp:ListItem Value="DKNO">Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
+            <asp:Label ID="testMsg" runat="server" />
         </div>
         <br />
+
+        <%--Q1B--%>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The taste and flavor of your meals"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select...</asp:ListItem>
-                <asp:ListItem>Very Good</asp:ListItem>
-                <asp:ListItem>Good</asp:ListItem>
-                <asp:ListItem>Fair</asp:ListItem>
-                <asp:ListItem>Poor</asp:ListItem>
-                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            <asp:DropDownList ID="Q1B" CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="VG">Very Good</asp:ListItem>
+                <asp:ListItem Value="G">Good</asp:ListItem>
+                <asp:ListItem Value="F">Fair</asp:ListItem>
+                <asp:ListItem Value="P">Poor</asp:ListItem>
+                <asp:ListItem Value="DKNO">Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
+
+        <%--Q1C--%>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The temperature of your hot food"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select...</asp:ListItem>
-                <asp:ListItem>Very Good</asp:ListItem>
-                <asp:ListItem>Good</asp:ListItem>
-                <asp:ListItem>Fair</asp:ListItem>
-                <asp:ListItem>Poor</asp:ListItem>
-                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            <asp:DropDownList ID="Q1C" CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="VG">Very Good</asp:ListItem>
+                <asp:ListItem Value="G">Good</asp:ListItem>
+                <asp:ListItem Value="F">Fair</asp:ListItem>
+                <asp:ListItem Value="P">Poor</asp:ListItem>
+                <asp:ListItem Value="DKNO">Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
+
+        <%--Q1D--%>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The overall appearance of your meal"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select...</asp:ListItem>
-                <asp:ListItem>Very Good</asp:ListItem>
-                <asp:ListItem>Good</asp:ListItem>
-                <asp:ListItem>Fair</asp:ListItem>
-                <asp:ListItem>Poor</asp:ListItem>
-                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            <asp:DropDownList ID="Q1D" CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="VG">Very Good</asp:ListItem>
+                <asp:ListItem Value="G">Good</asp:ListItem>
+                <asp:ListItem Value="F">Fair</asp:ListItem>
+                <asp:ListItem Value="P">Poor</asp:ListItem>
+                <asp:ListItem Value="DKNO">Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
+
+        <%--Q1E--%>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The helpfulness of the staff who deliver your meals"></asp:Label> 
-            <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select...</asp:ListItem>
-                <asp:ListItem>Very Good</asp:ListItem>
-                <asp:ListItem>Good</asp:ListItem>
-                <asp:ListItem>Fair</asp:ListItem>
-                <asp:ListItem>Poor</asp:ListItem>
-                <asp:ListItem>Don't Know/No Opinion</asp:ListItem>
+            <asp:DropDownList ID="Q1E" CssClass="col-md-4 form-control" runat="server">
+                <asp:ListItem Value="">Select...</asp:ListItem>
+                <asp:ListItem Value="VG">Very Good</asp:ListItem>
+                <asp:ListItem Value="G">Good</asp:ListItem>
+                <asp:ListItem Value="F">Fair</asp:ListItem>
+                <asp:ListItem Value="P">Poor</asp:ListItem>
+                <asp:ListItem Value="DKNO">Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
         </div>
         <br />
@@ -159,16 +169,18 @@
             <div class="col-md-12">
                 <p><b>4. Overall, how would you rate your meal experience?</b></p>
             </div>
-            <div class="col-md-12">
-                <asp:DropDownList CssClass="col-md-4 form-control" runat="server">
-                    <asp:ListItem>Select...</asp:ListItem>
-                    <asp:ListItem>0 (WORST POSSIBLE)</asp:ListItem>
-                    <asp:ListItem>1</asp:ListItem>
-                    <asp:ListItem>2</asp:ListItem>
-                    <asp:ListItem>3</asp:ListItem>
-                    <asp:ListItem>4</asp:ListItem>
-                    <asp:ListItem>5 (BEST POSSIBLE)</asp:ListItem>
-                </asp:DropDownList><br />
+            <div class="col-md-12 form-inline">
+                <asp:DropDownList ID="Q4" CssClass="col-md-4 form-control" runat="server">
+                    <asp:ListItem Value="">Select...</asp:ListItem>
+                    <asp:ListItem Value="0">0 (WORST POSSIBLE)</asp:ListItem>
+                    <asp:ListItem Value="1">1</asp:ListItem>
+                    <asp:ListItem Value="2">2</asp:ListItem>
+                    <asp:ListItem Value="3">3</asp:ListItem>
+                    <asp:ListItem Value="4">4</asp:ListItem>
+                    <asp:ListItem Value="5">5 (BEST POSSIBLE)</asp:ListItem>
+                </asp:DropDownList>
+                <asp:Label ID="Message" runat="server" CssClass="col-md-6" />
+                <br />
             </div>
         </div>
 
@@ -182,7 +194,8 @@
             </div>
         </div>
 
-        <asp:Button ID="NextButton" runat="server" Text="Next" PostBackUrl="~/Pages/Survey/DemographicsPage.aspx" />
+        <asp:Button ID="NextButton" runat="server" Text="Next" OnClick="NextButton_Click"/>
+        <%--<asp:Button ID="Button1" runat="server" Text="Next" PostBackUrl="~/Pages/Survey/DemographicsPage.aspx" OnClick="NextButton_Click"/>--%>
    </div>
 
 
