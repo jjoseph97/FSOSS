@@ -101,6 +101,8 @@ namespace FSOSS.System.BLL
                         var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
                         wordToUpdate.survey_access_word = surveyWord.Trim();
                         wordToUpdate.date_modified = DateTime.Now;
+                        context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
+                        context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
                         context.SaveChanges();
                     }
                     else
@@ -129,28 +131,22 @@ namespace FSOSS.System.BLL
                 string message = "";
                 try
                 {
-                   // Deletes all the data from the child SurveyWord entity
-                    var surveyWord = (from x in context.SurveyWords
-                                      where x.survey_word_id == surveyWordID
-                                      select new SurveyWordPOCO()
-                                      {
-                                          surveyWordID = x.survey_word_id,
-                                          siteID = x.site_id,
-                                          dateUsed = x.date_used
-                                     }).ToList();
+                    // Check if the current word is in use
+                    var surveyWordAttachToHospital = (from x in context.SurveyWords
+                                                      where x.survey_word_id == surveyWordID
+                                                      select x).FirstOrDefault();
 
-                    if(surveyWord.Count > 0)
+                    if (surveyWordAttachToHospital == null)
                     {
-                        foreach (SurveyWordPOCO surveyWordInstance in surveyWord)
-                        {
-                            SurveyWord wordForRemoval = context.SurveyWords.Find(surveyWordInstance.surveyWordID);
-                            context.SurveyWords.Remove(wordForRemoval);
-                            context.SaveChanges();
-                        }
+                        PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
+                        potentialSurveyWord.archive_yn = true;
+                        context.Entry(potentialSurveyWord).Property(y => y.archive_yn).IsModified = true;
+                        context.SaveChanges();
                     }
-                    PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
-                    context.PotentialSurveyWords.Remove(potentialSurveyWord);
-                    context.SaveChanges();
+                    else
+                    {
+                        throw new Exception("Unable to archive selected word. Word is currently in use.");
+                    }                                                       
                 }
                 catch (Exception e)
                 {
@@ -200,6 +196,35 @@ namespace FSOSS.System.BLL
                 {
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  select new PotentialSurveyWordPOCO()
+                                                  {
+                                                      surveyWordID = x.survey_word_id,
+                                                      surveyWord = x.survey_access_word
+                                                  };
+
+                    return potentialSurveyWordList.ToList();
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
+                }
+
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<PotentialSurveyWordPOCO> GetActiveSurveyWord()
+        {
+            using (var context = new FSOSSContext())
+            {
+
+                try
+                {
+
+                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  where x.archive_yn == false
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,

@@ -25,6 +25,8 @@ namespace FSOSS.System.Data.Entity
         public string survey_access_word { get; set; }
         [Required]
         public DateTime date_modified { get; set; }
+        [Required]
+        public Boolean archive_yn { get; set; }
 
         public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual ICollection<SurveyWord> surveyword { get; set; }
