@@ -27,6 +27,7 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
+                newWord = newWord.ToLower();
                 string message = "";
                 try
                 {
@@ -73,6 +74,7 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
+                surveyWord = surveyWord.ToLower();
                 Regex validWord = new Regex("^[a-zA-Z]+$");
                 string message = "";
                 bool inUse = false;
@@ -166,7 +168,7 @@ namespace FSOSS.System.BLL
                 {
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                  orderby x.survey_word_id
+                                                  orderby x.survey_access_word
                                                   where x.survey_access_word.Contains(surveyWord.Trim())
                                                   select new PotentialSurveyWordPOCO()
                                                   {
@@ -196,6 +198,7 @@ namespace FSOSS.System.BLL
                 {
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  orderby x.survey_access_word
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,

@@ -36,6 +36,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         else
         {
             Alert.Text = "Found the following results for \"" + searchWord + "\"";
+            ClearSearchButton.Visible = true;
         }
         SearchWordTextBox.Text = "";
     }
@@ -69,6 +70,19 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             SurveyWordListView.DataBind();
             AddWordTextBox.Text = "";
         }
+    }
+
+    protected void ShowArchivedButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void ClearSearchButton_Click(object sender, EventArgs e)
+    {
+        SurveyWordListView.DataSourceID = "SurveyWordODS";
+        SurveyWordListView.DataBind();
+        ClearSearchButton.Visible = false;
+
     }
 
     protected void SurveyWordListView_ItemCommand(object sender, ListViewCommandEventArgs e)

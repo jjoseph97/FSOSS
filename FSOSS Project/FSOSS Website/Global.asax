@@ -13,7 +13,7 @@
         RouteConfig.RegisterRoutes(RouteTable.Routes);
         BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-        Database.SetInitializer<FSOSSContext>(new DropCreateDatabaseIfModelChanges<FSOSSContext>());
+        // Database.SetInitializer<FSOSSContext>(new DropCreateDatabaseIfModelChanges<FSOSSContext>());
     }
 
 </script>

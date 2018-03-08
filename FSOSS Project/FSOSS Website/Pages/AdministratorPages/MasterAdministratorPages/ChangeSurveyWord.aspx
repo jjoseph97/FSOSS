@@ -26,6 +26,10 @@
                 </div>
             </div>
             <div class="card container">
+                <div class="row container mx-auto px-0">
+                    <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
+                    <asp:Button ID="ClearSearchButton" class="col-sm-2 offset-sm-8 mt-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" Visible="false" />
+                </div>
                 <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="SurveyWordODS" DataKeyNames="surveyWordID" OnItemCommand="SurveyWordListView_ItemCommand">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
@@ -71,7 +75,7 @@
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table runat="server" style="width: 100%; margin-top: 5px; margin-bottom: 5px;">
+                        <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
