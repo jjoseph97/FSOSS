@@ -15,7 +15,8 @@ namespace FSOSS.System.Data.Entity
     [Table("unit", Schema = "public")]
     public class Unit
     {
-        // Latest Update March 4, 2018. Ren
+        // Latest Update March 9, 2018-c
+        // Updated March 4, 2018. Ren
         [Key]
         public int unit_id { get; set; }
 
@@ -28,6 +29,7 @@ namespace FSOSS.System.Data.Entity
         public DateTime date_modified { get; set; }
         [ForeignKey("AdministratorAccount")]
         public int administrator_account_id { get; set; }
+        public bool is_closed_yn { get; set; }
 
         public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual Site Site { get; set; }

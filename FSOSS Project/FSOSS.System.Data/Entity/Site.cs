@@ -15,7 +15,9 @@ namespace FSOSS.System.Data.Entity
     [Table("site", Schema = "public")]
     public class Site
     {
-        // Latest Update March 4, 2018. Ren
+        // Latest Update March 8 2018-c
+        //  Updated March 4, 2018. Ren
+        
         [Key]
         public int site_id { get; set; }
         [Required (ErrorMessage ="Site name required")]
@@ -25,6 +27,7 @@ namespace FSOSS.System.Data.Entity
         public DateTime date_modified { get; set; }
         [ForeignKey("AdministratorAccount")]
         public int administrator_account_id { get; set; }
+        public bool is_closed_yn { get; set; }
 
         public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual ICollection<SurveyWord> surveyword { get; set; }
