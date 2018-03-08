@@ -5,7 +5,7 @@
             <div class="jumbotron">
                 <h1 class="display-1">403</h1>
                 <hr />
-                <h3 class="display-4">Unauthorized</h3>
+                <h2>Unauthorized</h2>
                 <p>You are unauthorized to access this page.
                     <br />
                     Please go to the FSOSS home page by clicking the button below.</p>

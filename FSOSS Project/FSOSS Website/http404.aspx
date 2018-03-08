@@ -6,7 +6,7 @@
             <div class="jumbotron">
                 <h1 class="display-1">404</h1>
                 <hr />
-                <h3 class="display-4">Page Not Found</h3>
+                <h2>Page Not Found</h2>
                 <p>The requested page does not exist.
                     <br />
                     Please go to the FSOSS home page by clicking the button below.</p>
