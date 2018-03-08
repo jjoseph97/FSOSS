@@ -87,6 +87,7 @@
     <Compile Include="Entity\SurveyWord.cs" />
     <Compile Include="Entity\Unit.cs" />
     <Compile Include="POCOs\AgeRangePOCO.cs" />
+    <Compile Include="POCOs\ContactSubmittedSurveyPOCO.cs" />
     <Compile Include="POCOs\GenderPOCO.cs" />
     <Compile Include="POCOs\MealPOCO.cs" />
     <Compile Include="POCOs\ParticipantTypePOCO.cs" />
