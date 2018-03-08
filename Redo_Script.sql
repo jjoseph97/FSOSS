@@ -28,7 +28,7 @@ CREATE EXTENSION pgcrypto;
 CREATE TABLE SECURITY_ROLE
 (
 	SECURITY_ROLE_ID SERIAL PRIMARY KEY NOT NULL,
-	SERCUTIY_DESCRIPTION VARCHAR(100) NOT NULL
+	SECURITY_DESCRIPTION VARCHAR(100) NOT NULL
 );
 
 
@@ -227,6 +227,17 @@ CREATE TABLE SURVEY_QUESTION
 -- Create Webmaster
 INSERT INTO ADMINISTRATOR_ACCOUNT (USERNAME, ADMIN_PASSWORD, FIRST_NAME, LAST_NAME, DATE_CREATED, DATE_MODIFIED)
 VALUES ('webmaster', crypt('password', gen_salt('bf')), 'Web', 'Master', Now(), NOW());
+
+--Insert security roles
+INSERT INTO security_role (security_description)
+VALUES ('Standard Administrator');
+INSERT INTO security_role (security_description)
+VALUES ('Master Administrator');
+
+
+--assign webmaster to Master ADministrator role
+INSERT INTO ADMINISTRATOR_ROLE (ADMINISTRATOR_ACCOUNT_ID, SECURITY_ROLE_ID, DATE_MODIFIED)
+VALUES (1, 2, NOW());
 
 --create misericordia's site
 INSERT INTO SITE (SITE_NAME, DATE_MODIFIED, ADMINISTRATOR_ACCOUNT_ID)
