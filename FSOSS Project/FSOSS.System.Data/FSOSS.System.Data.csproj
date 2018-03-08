@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ReportDTO.cs" />
     <Compile Include="Entity\AdministratorAccount.cs" />
     <Compile Include="Entity\AdministratorRole.cs" />
     <Compile Include="Entity\AgeRange.cs" />
@@ -87,15 +88,14 @@
     <Compile Include="Entity\SurveyWord.cs" />
     <Compile Include="Entity\Unit.cs" />
     <Compile Include="POCOs\AgeRangePOCO.cs" />
+    <Compile Include="POCOs\AnswerPOCO.cs" />
     <Compile Include="POCOs\ContactSubmittedSurveyPOCO.cs" />
     <Compile Include="POCOs\GenderPOCO.cs" />
     <Compile Include="POCOs\MealPOCO.cs" />
     <Compile Include="POCOs\ParticipantTypePOCO.cs" />
     <Compile Include="POCOs\PotentialSurveyWordPOCO.cs" />
-    <Compile Include="POCOs\ReportPOCO.cs" />
     <Compile Include="POCOs\SitePOCO.cs" />
     <Compile Include="POCOs\SurveyWordPOCO.cs" />
-    <Compile Include="POCOs\UnitsPOCO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
