@@ -79,6 +79,7 @@
     <Compile Include="BLL\QuestionTopicController.cs" />
     <Compile Include="BLL\ReportController.cs" />
     <Compile Include="BLL\SurveyVersionController.cs" />
+    <Compile Include="BLL\UnitsController.cs" />
     <Compile Include="DAL\FSOSSContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
