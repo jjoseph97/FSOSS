@@ -16,7 +16,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {
-        string username = UsernameTextBox.Text;
+        string username = UsernameTextBox.Text.ToLower();
         string password = PasswordTextBox.Text;
 
         AdministratorAccountController sysmgr = new AdministratorAccountController();
@@ -24,8 +24,13 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
 
         if (isValid)
         {
-            Session["username"] = UsernameTextBox.Text;
-            Response.Redirect("~/Pages/AdministratorPages/MainPage.aspx?id=1");
+            // if valid store userID, username, and securityID in sessions
+            Session["username"] = username.ToLower();
+            int userID = sysmgr.GetUserID(username);
+            Session["userID"] = userID;
+            Session["securityID"] = sysmgr.GetSecurityID(userID);
+
+            Response.Redirect("~/Pages/AdministratorPages/MainPage");
         }
         else
         {

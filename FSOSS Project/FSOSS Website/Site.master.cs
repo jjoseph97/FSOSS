@@ -66,7 +66,7 @@ public partial class SiteMaster : MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        LoginButton.Text = Session["username"] != null ? "Log out" : "Log in";
+        LoginButton.Text = Session["userID"] != null ? "Log out" : "Log in";
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

@@ -30,5 +30,41 @@ namespace FSOSS.System.BLL
             }
             return isValid;
         }
+        public int GetUserID(string username)
+        {
+            int userID;
+            using (var connection = new NpgsqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                connection.Open();
+                var cmd = new NpgsqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "SELECT ADMINISTRATOR_ACCOUNT_ID" +
+                                    " FROM ADMINISTRATOR_ACCOUNT" +
+                                    " WHERE USERNAME = @p1";
+                cmd.Parameters.AddWithValue("p1", username);
+                userID = (int)cmd.ExecuteScalar();
+                connection.Close();
+            }
+            return userID;
+        }
+        public int GetSecurityID(int userID)
+        {
+            int securityID;
+            using (var connection = new NpgsqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                connection.Open();
+                var cmd = new NpgsqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "SELECT SECURITY_ROLE_ID" +
+                                    " FROM ADMINISTRATOR_ROLE" +
+                                    " WHERE ADMINISTRATOR_ACCOUNT_ID = @p1";
+                cmd.Parameters.AddWithValue("p1", userID);
+                securityID = (int)cmd.ExecuteScalar();
+                connection.Close();
+            }
+            return securityID;
+        }
     }
 }
