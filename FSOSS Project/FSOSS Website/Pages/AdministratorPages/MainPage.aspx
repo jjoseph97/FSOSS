@@ -4,9 +4,8 @@
     <div class="form-group row">
         <asp:Label ID="HospitalLabel" runat="server" AssociatedControlID="HospitalDDL" CssClass="col-sm-2 col-md-2 col-form-label" Text="Hospital: " />
         <div class="col-sm-10 col-md-4">
-            <asp:DropDownList ID="HospitalDDL" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="HospitalDDL_SelectedIndexChanged" AutoPostBack="true">
-                <asp:ListItem Text="Misericordia Hospital" Value="1" />
-                <asp:ListItem Text="Grey Nuns Hospital" Value="2" />
+            <asp:DropDownList ID="HospitalDDL" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="HospitalDDL_SelectedIndexChanged" AutoPostBack="true" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID">
+                
             </asp:DropDownList>
         </div>
     </div>
@@ -32,5 +31,6 @@
     <div class="row">
         <asp:Label ID="message" runat="server" />
     </div>
+    <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
 </asp:Content>
 
