@@ -42,11 +42,13 @@
             <div class="container">
                 <a runat="server" class="navbar-brand" href="~/">
                     <img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#fsoss-navbar" aria-controls="fsoss-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#FSOSSNavbar" aria-controls="FSOSSNavbar" aria-expanded="false" aria-label="Toggle navigation" runat="server" id="hamburger">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="fsoss-navbar">
+                <div class="collapse navbar-collapse" id="FSOSSNavbar" runat="server">
+
+                    <%--<asp:Panel ID="FSOSSNavbar" runat="server" CssClass="collapse navbar-collapse" Visible="true">--%>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
@@ -68,6 +70,7 @@
                             <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-outline-primary" OnClick="LoginButton_Click" />
                         </div>
                     </div>
+                    <%--</asp:Panel>--%>
                 </div>
             </div>
         </div>

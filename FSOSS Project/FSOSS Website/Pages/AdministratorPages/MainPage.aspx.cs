@@ -24,6 +24,10 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
             PendingRequestNumberLabel.Text = "16";
         }
 
+        if (Session["username"] == null || Session["username"].ToString() == "")
+        {
+            Context.Response.StatusCode = 403; // Unauthorized access
+        }
     }
 
     protected void HospitalDDL_SelectedIndexChanged(object sender, EventArgs e)
