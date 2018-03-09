@@ -96,6 +96,7 @@
     <Compile Include="POCOs\PotentialSurveyWordPOCO.cs" />
     <Compile Include="POCOs\SitePOCO.cs" />
     <Compile Include="POCOs\SurveyWordPOCO.cs" />
+    <Compile Include="POCOs\UnitsPOCO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
