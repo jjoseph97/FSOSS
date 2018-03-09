@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace FSOSS.System.Data.POCOs
 {
     public class UnitsPOCO
-    {
+    { 
+        
         public int unit_id { get; set; }
         public string unit_number { get; set; }
 

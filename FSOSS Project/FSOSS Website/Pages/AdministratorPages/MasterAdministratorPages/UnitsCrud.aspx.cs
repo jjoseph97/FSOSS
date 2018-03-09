@@ -16,4 +16,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     {
 
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        GridView1.Visible = true;
+    }
 }

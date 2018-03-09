@@ -15,85 +15,19 @@
         <div class="col-sm-12">
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
+                    <asp:Label ID="Label1" runat="server" Text="Site Name"></asp:Label>
                     <asp:DropDownList ID="SiteDropDownList" runat="server" DataSourceID="SiteList" DataTextField="siteName" DataValueField="siteID"></asp:DropDownList>
+                    <asp:Button ID="Button1" runat="server" Text="Search"  OnClick="Button1_Click"/>
                     </div>
             </div>      
             <div class="card container">
-                <asp:ListView ID="ListView1" runat="server" DataSourceID="UnitList">
-                    <AlternatingItemTemplate>
-                        <tr style="">
-                            <td>
-                                <asp:Label Text='<%# Eval("unit_id") %>' runat="server" ID="unit_idLabel" /></td>
-                            <td>
-                                <asp:Label Text='<%# Eval("unit_number") %>' runat="server" ID="unit_numberLabel" /></td>
-                        </tr>
-                    </AlternatingItemTemplate>
-                    <EditItemTemplate>
-                        <tr style="">
-                            <td>
-                                <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                                <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
-                            </td>
-                            <td>
-                                <asp:TextBox Text='<%# Bind("unit_id") %>' runat="server" ID="unit_idTextBox" /></td>
-                            <td>
-                                <asp:TextBox Text='<%# Bind("unit_number") %>' runat="server" ID="unit_numberTextBox" /></td>
-                        </tr>
-                    </EditItemTemplate>
-                    <EmptyDataTemplate>
-                        <table runat="server" style="">
-                            <tr>
-                                <td>No data was returned.</td>
-                            </tr>
-                        </table>
-                    </EmptyDataTemplate>
-                    <InsertItemTemplate>
-                        <tr style="">
-                            <td>
-                                <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
-                                <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
-                            </td>
-                            <td>
-                                <asp:TextBox Text='<%# Bind("unit_id") %>' runat="server" ID="unit_idTextBox" /></td>
-                            <td>
-                                <asp:TextBox Text='<%# Bind("unit_number") %>' runat="server" ID="unit_numberTextBox" /></td>
-                        </tr>
-                    </InsertItemTemplate>
-                    <ItemTemplate>
-                        <tr style="">
-                            <td>
-                                <asp:Label Text='<%# Eval("unit_id") %>' runat="server" ID="unit_idLabel" /></td>
-                            <td>
-                                <asp:Label Text='<%# Eval("unit_number") %>' runat="server" ID="unit_numberLabel" /></td>
-                        </tr>
-                    </ItemTemplate>
-                    <LayoutTemplate>
-                        <table runat="server">
-                            <tr runat="server">
-                                <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="" border="0">
-                                        <tr runat="server" style="">
-                                            <th runat="server">unit_id</th>
-                                            <th runat="server">unit_number</th>
-                                        </tr>
-                                        <tr runat="server" id="itemPlaceholder"></tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr runat="server">
-                                <td runat="server" style=""></td>
-                            </tr>
-                        </table>
-                    </LayoutTemplate>
-                    <SelectedItemTemplate>
-                        <tr style="">
-                            <td>
-                                <asp:Label Text='<%# Eval("unit_id") %>' runat="server" ID="unit_idLabel" /></td>
-                            <td>
-                                <asp:Label Text='<%# Eval("unit_number") %>' runat="server" ID="unit_numberLabel" /></td>
-                        </tr>
-                    </SelectedItemTemplate>
-                </asp:ListView>
+                <asp:GridView ID="GridView1" runat="server" DataSourceID="UnitsList" AutoGenerateColumns="False" Visible="false">
+                    <Columns>
+                        <asp:BoundField DataField="unit_id" HeaderText="Unit Id" SortExpression="unit_id"></asp:BoundField>
+                        <asp:BoundField DataField="unit_number" HeaderText="Unit Number" SortExpression="unit_number"></asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+                
             </div>
 
         </div>
@@ -103,8 +37,13 @@
             TypeName="FSOSS.System.BLL.SiteController">
 
         </asp:ObjectDataSource>
-        <asp:ObjectDataSource ID="UnitList" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitsController"></asp:ObjectDataSource>
+
+        <asp:ObjectDataSource ID="UnitsList" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitsController">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
+            </SelectParameters>
+        </asp:ObjectDataSource>
+       
    </div>
 </asp:Content>
 
