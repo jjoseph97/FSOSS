@@ -31,7 +31,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 Session["filter"] = filter;
-                Response.Redirect("~/Pages/AdministratorPages/ReportPage.aspx");
+                Response.Redirect("~/Admin/ReportPage.aspx");
             }
             else
             {

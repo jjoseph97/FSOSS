@@ -70,7 +70,7 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
             Session["Q1E"] = Q1A.SelectedValue;
             
         }
-        Response.Redirect("~/Pages/Survey/DemographicsPage.aspx", false);
+        Response.Redirect("~/DemographicsPage.aspx", false);
     }
     
 }

@@ -15,7 +15,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         
         if (Session["securityID"] == null || Session["securityID"].ToString() == "") // Redirect user to login if not logged in
         {
-            Response.Redirect("~/Pages/AdministratorPages/Login.aspx");
+            Response.Redirect("~/Admin/Login.aspx");
         }
         else if (Session["securityID"].ToString() != "2") // Return HTTP Code 403 if security ID is not 2 (Master Administrator)
         {

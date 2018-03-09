@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewReportFilter.aspx.cs" Inherits="Pages_AdministratorPages_ViewReportFilter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <link rel="stylesheet" href="../../Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="../Content/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.standalone.css" />
-    <script type="text/javascript" src="../../Scripts/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../../Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
     <div class="row">
         <div class="col-sm-12">

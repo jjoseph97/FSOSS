@@ -22,7 +22,7 @@ public partial class _Default : Page
         }
         else if (WOTDTextBox.Text == "sunshine")
         {
-            Response.Redirect("Pages/Survey/TakeSurvey.aspx");
+            Response.Redirect("~/TakeSurvey.aspx");
         }
         else
         {

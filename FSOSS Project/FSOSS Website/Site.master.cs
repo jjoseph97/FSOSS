@@ -68,15 +68,15 @@ public partial class SiteMaster : MasterPage
     {
         LoginButton.Text = Session["userID"] != null ? "Log out" : "Log in";
 
-        bool isAdminSection = HttpContext.Current.Request.RawUrl.StartsWith("/Pages/AdministratorPages");
-        if (isAdminSection)
+        if (HttpContext.Current.Request.RawUrl.StartsWith("/Admin") || HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
         {
-            logolink.HRef = "~/Pages/AdministratorPages/MainPage.aspx";
+            logolink.HRef = "~/Admin";
         }
         else
         {
             logolink.HRef = "~/";
             FSOSSNavbar.Visible = false;
+            hamburger.Visible = false;
         }
     }
 
@@ -90,11 +90,11 @@ public partial class SiteMaster : MasterPage
         if (LoginButton.Text == "Log out")
         {
             Session.Abandon();
-            Response.Redirect("~/");
+            Response.Redirect("~/Admin");
         }
         else
         {
-            Response.Redirect("~/Pages/AdministratorPages/Login.aspx");
+            Response.Redirect("~/Admin/Login.aspx");
         }
     }
 }

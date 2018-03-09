@@ -55,7 +55,7 @@
     </div>
 
     <%--Back to questions--%>
-    <asp:Button CssClass="" ID="BackButton" runat="server" Text="Back" PostBackUrl="~/Pages/Survey/TakeSurvey.aspx" />
+    <asp:Button CssClass="" ID="BackButton" runat="server" Text="Back" PostBackUrl="~/TakeSurvey.aspx" />
 
     <%--Submit Survey Button--%>
     <asp:Button CssClass="" ID="SubmitButton" runat="server" Text="Submit"/>

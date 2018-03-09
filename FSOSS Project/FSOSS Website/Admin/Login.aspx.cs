@@ -12,6 +12,10 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
     {
         Page.Form.DefaultButton = LoginButton.UniqueID; // Enables user to press enter button
 
+        var fsossnavbar = Master.FindControl("FSOSSNavbar");
+        var hamburger = Master.FindControl("hamburger");
+        fsossnavbar.Visible = false;
+        hamburger.Visible = false;
     }
 
     protected void LoginButton_Click(object sender, EventArgs e)
@@ -30,7 +34,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
             Session["userID"] = userID;
             Session["securityID"] = sysmgr.GetSecurityID(userID);
 
-            Response.Redirect("~/Pages/AdministratorPages/MainPage");
+            Response.Redirect("~/Admin");
         }
         else
         {
