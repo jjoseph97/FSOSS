@@ -22,11 +22,7 @@ public partial class _Default : Page
         }
         else if (WOTDTextBox.Text == "sunshine")
         {
-            message.Visible = true;
-            message.Text = "Correct";
-            message.CssClass = "bg-success text-white p-2";
-
-            //Response.Redirect("");
+            Response.Redirect("Pages/Survey/TakeSurvey.aspx");
         }
         else
         {

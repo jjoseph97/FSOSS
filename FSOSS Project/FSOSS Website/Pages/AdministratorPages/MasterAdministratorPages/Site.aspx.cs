@@ -9,6 +9,17 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Alert.Visible = false;
+        ErrorAlert.Visible = false;
+    }
+
+    protected void SearchSite_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void AddSite_Click(object sender, EventArgs e)
+    {
 
     }
 }
