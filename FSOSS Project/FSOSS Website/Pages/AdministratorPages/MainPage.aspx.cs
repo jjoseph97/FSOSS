@@ -26,7 +26,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         // TODO: Look up how to asynchronous pending requests
         if (!Page.IsPostBack)
         {
-            Placeholder.Text = "sunshine";
+            Placeholder.Text = "";
 
             SubmittedSurveyController ssc = new SubmittedSurveyController();
             HospitalDDL.DataBind();
@@ -37,7 +37,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                 //PendingRequestNumberLabel.Text = value;
                 int siteID = Convert.ToInt32(value);
                 int contactCount = ssc.GetContactRequestTotal(siteID);
-                PendingRequestNumberLabel.Text = contactCount.ToString();
+                PendingRequestNumberLabel.Text = "&nbsp;"+contactCount.ToString()+ " &nbsp;";
             }
         }
         
@@ -56,38 +56,26 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 
     protected void HospitalDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
+        //update the contact request count
         SubmittedSurveyController ssc = new SubmittedSurveyController();
         string value = HospitalDDL.SelectedValue;
         int siteID = Convert.ToInt32(value);
         int contactCount = ssc.GetContactRequestTotal(siteID);
-        PendingRequestNumberLabel.Text = contactCount.ToString();
-        // This will need to change
-        if (HospitalDDL.SelectedValue == "1")
-        {
-            Placeholder.Text = "sunshine";
+        PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
 
-            
-        }
-        else if (HospitalDDL.SelectedValue == "2")
-        {
-            Placeholder.Text = "dog";
-           
-        }
-        else
-        {
-            Placeholder.Text = "null";
-            
-        }
+        //TO ADD update the survey word of the day
+
+
     }
 
     protected void ViewButton_Click(object sender, EventArgs e)
     {
-        SubmittedSurveyController ssc = new SubmittedSurveyController();
+        
+        message.Text = "You clicked the \"View\" Button";
         string value = HospitalDDL.SelectedValue;
         int siteID = Convert.ToInt32(value);
-        int contactCount = ssc.GetContactRequestTotal(siteID);
-        PendingRequestNumberLabel.Text = contactCount.ToString();
-        message.Text = "You clicked the \"View\" Button";
+        string url = "ContactListPage.aspx?field=" + siteID.ToString();
+        Response.Redirect(url);
 
     }
 

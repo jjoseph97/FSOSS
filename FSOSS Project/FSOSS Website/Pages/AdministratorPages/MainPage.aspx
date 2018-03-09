@@ -15,20 +15,20 @@
             <asp:Label ID="Placeholder" runat="server" />
         </div>
     </div>
-    <div class="form-group row">
-        <asp:Label ID="PendingRequestsLabel" runat="server" Text="Pending Contact Requests" />
+    <div class="form-group row text-center">
+        <asp:Label ID="PendingRequestsLabel" runat="server" Text="Pending Contact Requests:   " CssClass="bg-dark text-white" />
         <asp:Label ID="PendingRequestNumberLabel" runat="server" CssClass="bg-dark text-white" />
         <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn btn-primary" OnClick="ViewButton_Click" />
     </div>
-    <div class="form-group row">
+    <div class="form-group row text-center">
         <asp:Button ID="RecentSurveysButton" runat="server" Text="View Recent Surveys" CssClass="btn btn-primary" OnClick="RecentSurveysButton_Click" />
     </div>
-    <div class="form-group row">
+    <div class="form-group row text-center">
         <asp:Button ID="RecentReportsButton" runat="server" Text="View Recent Reports" CssClass="btn btn-primary" OnClick="RecentReportsButton_Click" />
     </div>
 
     <%-- Delete below --%>
-    <div class="row">
+    <div class="row text-center">
         <asp:Label ID="message" runat="server" />
     </div>
     <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
