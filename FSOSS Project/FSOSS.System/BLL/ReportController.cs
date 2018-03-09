@@ -45,14 +45,34 @@ namespace FSOSS.System.BLL
                                      participant_type_id = x.participant_type_id,
                                      survey_version_id = x.survey_version_id,
                                      participantAnswerList = (from y in context.ParticipantResponses
-                                                              where x.participant_responses.Any(z => z.submitted_survey_id == y.submitted_survey_id)
+                                                              where (x.participant_responses.Any(z => z.submitted_survey_id == y.submitted_survey_id)) 
+                                                              && (y.question.question_id != 2 || y.question.question_id != 3 || y.question.question_id != 6 
+                                                              || y.question.question_id != 8 || y.question.question_id != 9 || y.question.question_id != 10 ||
+                                                              y.question.question_id != 11)
+                                                              group y by y.question_id into s
                                                               select new AnswerPOCO
                                                               {
-                                                                  answer = y.participant_answer,
-                                                                  question_id = y.question_id,
-                                                                  submitted_survey_id = y.submitted_survey_id
-                                                              }).ToList()
+                                                                  totalQuestionResponseCount = s.Count(),
+                                                                  //not sure if this syntax/logic is cor is correct
+                                                                  answer = s.Select(t => t.participant_answer).FirstOrDefault(),
+                                                                  question_id = s.Select(t => t.question_id).FirstOrDefault(),
+                                                                  submitted_survey_id = s.Select(t => t.submitted_survey_id).FirstOrDefault(),
+                                                                  answerCount = s.GroupBy(t => t.participant_answer).Count()
+                                                              }).ToList(),
+                                     reportQuestionList = (from z in context.Questions
+                                                           where z.question_id != 2 || z.question_id != 3 || z.question_id != 6 || z.question_id != 8 
+                                                           || z.question_id != 9 || z.question_id != 10 || z.question_id != 11                                                           
+                                                           select new ReportQuestionPOCO
+                                                           {
+                                                               question_id = z.question_id,
+                                                               question_text = z.question_text
+                                                           }).ToList()
                                  }).ToList();
+
+            
+
+            
+
                 return reportDTO;
             }
         }

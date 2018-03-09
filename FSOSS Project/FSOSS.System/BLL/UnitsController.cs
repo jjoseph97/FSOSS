@@ -17,7 +17,7 @@ namespace FSOSS.System.BLL
     public class UnitsController
     {
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<UnitsPOCO> GetUnitList()
+        public List<UnitsPOCO> GetUnitList(int site_id)
         {
             using (var context = new FSOSSContext())
             {

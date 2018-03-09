@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using FSOSS.System.Data.POCOs;
+
 namespace FSOSS.System.Data.DTO
 {
     public class ReportDTO
@@ -18,5 +19,6 @@ namespace FSOSS.System.Data.DTO
         public DateTime date_entered { get; set; }
 
         public List<AnswerPOCO> participantAnswerList { get; set; }
+        public List<ReportQuestionPOCO> reportQuestionList { get; set; }
     }
 }
