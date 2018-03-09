@@ -14,13 +14,13 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
 
     protected void StartingPeriodCalendar_SelectionChanged(object sender, EventArgs e)
     {
-       StartingPeriodTextBoxID.Text =  StartingPeriodCalendar.SelectedDate.ToString("MMMM dd, yyyy");
+       // StartingPeriodTextBoxID.Text =  StartingPeriodCalendar.SelectedDate.ToString("MMMM dd, yyyy");
     }
 
     protected void EndingPeriodCalendar_SelectionChanged(object sender, EventArgs e)
     {
         
-        EndingPeriodTexBoxID.Text = EndingPeriodCalendar.SelectedDate.ToString("MMMM dd, yyyy");
+        // EndingPeriodTexBoxID.Text = EndingPeriodCalendar.SelectedDate.ToString("MMMM dd, yyyy");
     }
 
 
