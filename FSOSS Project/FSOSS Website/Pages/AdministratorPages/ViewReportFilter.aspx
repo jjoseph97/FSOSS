@@ -20,11 +20,8 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="HospitalLabelReportLabelID" class="col-sm-4 my-2 text-center text-sm-left" runat="server" style="font-weight:bold;font-size:large; line-height:38px;" Text="Hospital:"></asp:Label>
-                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2" runat="server"
-                        DataSourceID="MealODS"
-                        DataTextField="mealName"
-                        DataValueField="mealID">
-                        <asp:ListItem Text="Select All" />
+                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2" runat="server">
+                        <asp:ListItem Text="Select All" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
@@ -48,7 +45,10 @@
                 <div class="row container mx-auto px-0">
 
                         <asp:Label ID="MealLabelID" class="col-sm-4 my-2 text-center text-sm-left" runat="server" style="font-weight:bold;font-size:large; line-height:38px;" Text="Meal:"></asp:Label>
-                        <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2" runat="server">
+                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2" runat="server" 
+                        DataSourceID="MealODS" 
+                        DataTextField="mealName" 
+                        DataValueField="mealID">
                             <asp:ListItem Text="No Meal" />
                         </asp:DropDownList>
                 </div>
