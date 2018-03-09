@@ -10,9 +10,14 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        message.Text = HttpContext.Current.Request.RawUrl.StartsWith("/Pages/AdministratorPages").ToString();
 
-        // Return HTTP Code 403 if security ID is not 2 (Master Administrator)
-        if (Session["securityID"] == null || Session["securityID"].ToString() == "" || Session["securityID"].ToString() != "2")
+        
+        if (Session["securityID"] == null || Session["securityID"].ToString() == "") // Redirect user to login if not logged in
+        {
+            Response.Redirect("~/Pages/AdministratorPages/Login.aspx");
+        }
+        else if (Session["securityID"].ToString() != "2") // Return HTTP Code 403 if security ID is not 2 (Master Administrator)
         {
             Context.Response.StatusCode = 403;
         }

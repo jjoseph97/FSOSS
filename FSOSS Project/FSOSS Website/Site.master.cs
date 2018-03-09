@@ -67,6 +67,17 @@ public partial class SiteMaster : MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         LoginButton.Text = Session["userID"] != null ? "Log out" : "Log in";
+
+        bool isAdminSection = HttpContext.Current.Request.RawUrl.StartsWith("/Pages/AdministratorPages");
+        if (isAdminSection)
+        {
+            logolink.HRef = "~/Pages/AdministratorPages/MainPage.aspx";
+        }
+        else
+        {
+            logolink.HRef = "~/";
+            FSOSSNavbar.Visible = false;
+        }
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
