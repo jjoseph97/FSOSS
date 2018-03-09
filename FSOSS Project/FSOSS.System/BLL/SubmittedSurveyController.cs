@@ -16,7 +16,12 @@ namespace FSOSS.System.BLL
     public class SubmittedSurveyController
     {
 
-        //obtain the total of contact requests for a site
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        /// <summary>
+        /// The method to obtain the total of contact requests for a given site.
+        /// </summary>
+        /// <param name="siteID">the id of the site for which we want to know the number of contact requests</param>
+        /// <returns></returns>
         public int GetContactRequestTotal(int siteID)
         {
             using (var context = new FSOSSContext())
@@ -32,9 +37,14 @@ namespace FSOSS.System.BLL
                 }
             }
         }
-        
 
-        //obtain a list of submitted survey contact requests for a site
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        /// <summary>
+        /// The method to obtain a list of submitted survey contact requests for a  given site
+        /// </summary>
+        /// <param name="siteID">The id of the site for which we want to know the list of contact requests</param>
+        /// <returns></returns>
         public List<ContactSubmittedSurveyPOCO> GetContactRequestList(int siteID)
         {
 

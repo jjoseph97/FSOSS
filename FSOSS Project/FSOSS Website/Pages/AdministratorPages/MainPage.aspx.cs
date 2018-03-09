@@ -27,9 +27,21 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             Placeholder.Text = "sunshine";
-            PendingRequestNumberLabel.Text = "16";
-        }
 
+            SubmittedSurveyController ssc = new SubmittedSurveyController();
+            HospitalDDL.DataBind();
+            HospitalDDL.SelectedValue = "1";
+
+            string value = HospitalDDL.SelectedValue;
+            if (value!=null) {
+                //PendingRequestNumberLabel.Text = value;
+                int siteID = Convert.ToInt32(value);
+                int contactCount = ssc.GetContactRequestTotal(siteID);
+                PendingRequestNumberLabel.Text = contactCount.ToString();
+            }
+        }
+        
+        
         // below is how to handle query strings from URL
         // example: website.ca?bob=123
         // ? starts query
@@ -44,26 +56,37 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 
     protected void HospitalDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
+        SubmittedSurveyController ssc = new SubmittedSurveyController();
+        string value = HospitalDDL.SelectedValue;
+        int siteID = Convert.ToInt32(value);
+        int contactCount = ssc.GetContactRequestTotal(siteID);
+        PendingRequestNumberLabel.Text = contactCount.ToString();
         // This will need to change
         if (HospitalDDL.SelectedValue == "1")
         {
             Placeholder.Text = "sunshine";
-            PendingRequestNumberLabel.Text = "16";
+
+            
         }
         else if (HospitalDDL.SelectedValue == "2")
         {
             Placeholder.Text = "dog";
-            PendingRequestNumberLabel.Text = "5";
+           
         }
         else
         {
             Placeholder.Text = "null";
-            PendingRequestNumberLabel.Text = "null";
+            
         }
     }
 
     protected void ViewButton_Click(object sender, EventArgs e)
     {
+        SubmittedSurveyController ssc = new SubmittedSurveyController();
+        string value = HospitalDDL.SelectedValue;
+        int siteID = Convert.ToInt32(value);
+        int contactCount = ssc.GetContactRequestTotal(siteID);
+        PendingRequestNumberLabel.Text = contactCount.ToString();
         message.Text = "You clicked the \"View\" Button";
 
     }
