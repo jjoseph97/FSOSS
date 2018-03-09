@@ -58,7 +58,7 @@ namespace FSOSS.System.BLL
                                    select new MealPOCO()
                                    {
                                        mealID = x.meal_id,
-                                       mealDescription = x.meal_description
+                                       mealName = x.meal_name
                                    };
 
                     return mealList.ToList();

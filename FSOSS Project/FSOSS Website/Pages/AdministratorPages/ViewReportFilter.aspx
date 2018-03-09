@@ -19,7 +19,7 @@
                     <div class="col-md-9">
                         <asp:DropDownList ID="HospitalDropDownList" runat="server" 
                             DataSourceID="MealODS" 
-                            DataTextField="mealDescription" 
+                            DataTextField="mealName" 
                             DataValueField="mealID">
                              <asp:ListItem Text="Select All"/>
                         </asp:DropDownList>
