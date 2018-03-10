@@ -19,15 +19,15 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         
     }
 
-    protected void ViewButtonID_Click(object sender, EventArgs e)
+    protected void ViewButton_Click(object sender, EventArgs e)
     {
         Filter filter = new Filter();
-        if(StartingPeriodTextBoxID.Value != null)
+        if(StartingPeriodTextBox.Value != null)
         {
-            filter.startingDate = DateTime.Parse(StartingPeriodTextBoxID.Value);
-            if(EndingPeriodTexBoxID.Value != null)
+            filter.startingDate = DateTime.Parse(StartingPeriodTextBox.Value);
+            if(EndingPeriodTexBox.Value != null)
             {
-                filter.endDate = DateTime.Parse(EndingPeriodTexBoxID.Value);
+                filter.endDate = DateTime.Parse(EndingPeriodTexBox.Value);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 Session["filter"] = filter;

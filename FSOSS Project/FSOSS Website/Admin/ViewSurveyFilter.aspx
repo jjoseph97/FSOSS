@@ -24,20 +24,16 @@
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="StartingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Starting Period:"></asp:Label>
-                    <div id="start-date-picker" class="col-sm-8 input-group date px-0 my-2" style="height: 38px;">
-                        <input id="StartingPeriodTextBox" class="col-sm-4" runat="server" text="" />
-                        <span class="input-group-addon">
-                            <i class="fas fa-calendar-alt p-1 " style="font-size:42px; border:1px solid;"></i>
-                        </span>
+                    <div id="start-date-picker" class="col-sm-3 input-group date px-0 my-2" style="height: 38px;">
+                        <input id="StartingPeriodTextBox" class="col-8 col-md-10" runat="server" text="" />
+                        <span class="input-group-addon col-4 col-md-2 fas fa-calendar-alt p-1" style="font-size:42px; border:1px solid;"></span>
                     </div>
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="EndingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Ending Period:"></asp:Label>
-                    <div id="end-date-picker" class="col-sm-8 input-group date px-0 my-2" style="height: 38px;">
-                        <input id="EndingPeriodTexBox" class="col-sm-4" runat="server" text="" />
-                        <span class="input-group-addon">
-                            <i class="fas fa-calendar-alt p-1 " style="font-size:42px; border:1px solid;"></i>
-                        </span>
+                    <div id="end-date-picker" class="col-sm-3 input-group date px-0 my-2" style="height: 38px;">
+                        <input id="EndingPeriodTexBox" class="col-8 col-md-10" runat="server" text="" />
+                        <span class="input-group-addon col-4 col-md-2 fas fa-calendar-alt p-1" style="font-size:42px; border:1px solid;"></span>
                     </div>
                 </div>
                 <div class="row container mx-auto px-0">
@@ -81,7 +77,7 @@
                 format: 'yyyy-mm-dd',
                 todayHighlight: true,
                 clearBtn: true,
-                orientation: 'bottom',
+                orientation: 'bottom'
             });
         });
     </script>

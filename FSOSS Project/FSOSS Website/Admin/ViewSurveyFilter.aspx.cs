@@ -14,6 +14,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
 
     protected void ViewButton_Click(object sender, EventArgs e)
     {
-
+        // just a placeholder link for now, will be changed later
+        Response.Redirect("SubmittedSurveyList.aspx");
     }
 }
