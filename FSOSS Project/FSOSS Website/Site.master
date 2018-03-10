@@ -59,10 +59,10 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="#">View Surveys</a>
+                            <a runat="server" class="nav-link" href="~/Admin/ViewSurveyFilter.aspx">View Surveys</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="#">View Reports</a>
+                            <a runat="server" class="nav-link" href="~/Admin/ViewReportFilter.aspx">View Reports</a>
                         </li>
                     </ul>
                     <div class="nav navbar-nav ml-auto">

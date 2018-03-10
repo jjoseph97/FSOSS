@@ -14,7 +14,7 @@ using FSOSS.System.Data.POCOs;
 namespace FSOSS.System.BLL
 {
     [DataObject]
-    public class UnitsController
+    public class UnitController
     {
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<UnitsPOCO> GetUnitList(int site_id)
@@ -29,8 +29,8 @@ namespace FSOSS.System.BLL
                                    & !y.is_closed_yn
                                    select new UnitsPOCO()
                                    {
-                                       unit_id = y.unit_id,
-                                       unit_number = y.unit_number
+                                       unitID = y.unit_id,
+                                       unitNumber = y.unit_number
                                    };
 
                     return unitList.ToList();

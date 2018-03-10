@@ -9,8 +9,8 @@ namespace FSOSS.System.Data.POCOs
     public class UnitsPOCO
     { 
         
-        public int unit_id { get; set; }
-        public string unit_number { get; set; }
+        public int unitID { get; set; }
+        public string unitNumber { get; set; }
 
     }
 }
