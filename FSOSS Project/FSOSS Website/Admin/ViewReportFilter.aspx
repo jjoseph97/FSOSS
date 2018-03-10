@@ -1,10 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewReportFilter.aspx.cs" Inherits="Pages_AdministratorPages_ViewReportFilter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <link rel="stylesheet" href="../Content/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.standalone.css" />
     <script type="text/javascript" src="../Scripts/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
     <div class="row">
         <div class="col-sm-12">
@@ -29,7 +27,7 @@
                     <div id="start-date-picker" class="col-sm-8 input-group date px-0 my-2" style="height:38px;">
                         <input id="StartingPeriodTextBoxID" class="col-sm-4" runat="server" text="" />
                         <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
+                            <i class="fas fa-calendar-alt p-1 " style="font-size:42px; border:1px solid;"></i>
                         </span>
                     </div>
                 </div>
@@ -37,9 +35,9 @@
                         <asp:Label ID="EndingPeriodLabelID" class="col-sm-4 my-2 text-center text-sm-left" runat="server" style="font-weight:bold;font-size:large;" Text="Ending Period:"></asp:Label>
                     <div id="end-date-picker" class="col-sm-8 input-group date px-0 my-2" style="height:38px;">
                         <input id="EndingPeriodTexBoxID" class="col-sm-4" runat="server" text="" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                        <div class="input-group-addon">
+                            <i class="fas fa-calendar-alt p-1 " style="font-size:42px; border:1px solid;"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="row container mx-auto px-0">
