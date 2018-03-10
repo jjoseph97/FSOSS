@@ -74,7 +74,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         message.Text = "You clicked the \"View\" Button";
         string value = HospitalDDL.SelectedValue;
         int siteID = Convert.ToInt32(value);
-        string url = "ContactListPage.aspx?field=" + siteID.ToString();
+        string url = "~/Admin/ContactListPage.aspx?field=" + siteID.ToString();
         Response.Redirect(url);
 
     }

@@ -19,11 +19,11 @@
                 <asp:Label ID="COntactLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests"></asp:Label><br />
                 <asp:Label ID="ContactCountLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server"></asp:Label>
             </div>
-            <asp:ListView ID="ContactRequestList" runat="server" DataKeyNames="submittedSurveyID" DataSourceID="ContactRequestODS">
+            <asp:ListView ID="ContactRequestList" runat="server" DataSourceID="ContactRequestODS" OnItemCommand="GoToSSView">
                 <AlternatingItemTemplate>
                     <tr style="background-color: #bbf2ff; color: #284775;">
-                        <td hidden>
-                            <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
+                        <td style="display:none">
+                            <asp:Label Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                         <td>
                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitIDLabel" /></td>
                         <td>
@@ -36,7 +36,8 @@
                         <td>
                             <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Update" Text="View" ID="ViewButton" />
+                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" />
+                            <asp:Button runat="server" CommandName="Update" Text="Contacted" ID="ContactButton" />
                         </td>
                     </tr>
                 </AlternatingItemTemplate>
@@ -91,8 +92,8 @@
                 </InsertItemTemplate>
                 <ItemTemplate>
                     <tr style="background-color: #FFFFFF; color: #333333;">
-                        <td hidden>
-                            <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
+                        <td style="display:none">
+                            <asp:Label Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                         <td>
                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitIDLabel" /></td>
                         <td>
@@ -105,7 +106,8 @@
                         <td>
                             <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Update" Text="View" ID="ViewButton" />
+                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" />
+                            <asp:Button runat="server" CommandName="Update" Text="Contacted" ID="ContactButton" />
                         </td>
                     </tr>
                 </ItemTemplate>

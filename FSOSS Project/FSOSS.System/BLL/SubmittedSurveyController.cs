@@ -8,6 +8,7 @@ using System.ComponentModel;
 using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
+using FSOSS.System.Data.DTO;
 
 //created March 8, 2018-c
 namespace FSOSS.System.BLL
@@ -101,9 +102,69 @@ namespace FSOSS.System.BLL
 
 
 
-            //obtain specific submitted survey results
 
         }
+
+        //obtain specific submitted survey results
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public SubmittedSurveyPOCO GetSubmittedSurvey(int subSurNum)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    var survey = from x in context.SubmittedSurveys
+                                 where x.submitted_survey_id == subSurNum
+                                 select new SubmittedSurveyPOCO
+                                 {
+                                     submittedSurveyID = x.submitted_survey_id,
+                                     unitNumber = x.Unit.unit_number,
+                                     mealName = x.Meal.meal_name,
+                                     participantType = x.ParticipantType.participant_description,
+                                     ageRange = x.AgeRange.age_range_description,
+                                     gender = x.Gender.gender_description,
+                                     dateEntered = x.date_entered,
+                                     contactStatus = x.contact_status,
+                                     contactRoomNumber = x.contact_room_number,
+                                     contactPhoneNumber = x.contact_phone_number
+                                     
+                                 };
+                    return (SubmittedSurveyPOCO)survey.FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+
+        }
+
+        //obtain specific submitted survey answers
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<ParticipantResponsePOCO> GetSubmittedSurveyAnswers(int subSurNum)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    var survey = from y in context.ParticipantResponses
+                                                where y.submitted_survey_id == subSurNum
+                                                select new ParticipantResponsePOCO
+                                                {
+                                                    question = y.question.question_text,
+                                                    questionTopic = y.question.QuestionTopic.question_topic_description,
+                                                    response = y.participant_answer
+                                                };
+                    return survey.ToList();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+
+        }
+
 
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
@@ -119,9 +180,9 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    SubmittedSurvey ss= context.SubmittedSurveys.Find(submittedSurveyID);
+                    SubmittedSurvey ss = context.SubmittedSurveys.Find(submittedSurveyID);
                     ss.contact_status = "contacted";
-                  
+
                     context.Entry(ss).Property(y => y.contact_status).IsModified = true;
                     context.SaveChanges();
 
@@ -138,6 +199,6 @@ namespace FSOSS.System.BLL
 
         }
 
-
     }
 }
+
