@@ -11,4 +11,9 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     {
 
     }
+
+    protected void SubmittedSurveyList_ItemCommand(object sender, ListViewCommandEventArgs e)
+    {
+
+    }
 }

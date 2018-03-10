@@ -84,15 +84,31 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of submitted surveys</param>
         /// <returns></returns>
-        public List<ContactSubmittedSurveyPOCO> GetSubmittedSurveyList(int siteID)
+        public List<SubmittedSurveyPOCO> GetSubmittedSurveyList(int siteID)
         {
 
             using (var context = new FSOSSContext())
             {
                 try
                 {
-                    List<ContactSubmittedSurveyPOCO> L = new List<ContactSubmittedSurveyPOCO>();
-                    return L.ToList();
+                    var submittedSurveyList = from x in context.SubmittedSurveys
+                                              orderby x.date_entered
+                                             // where x.site_id == siteID
+                                             select new SubmittedSurveyPOCO()
+                                             {
+                                                 submittedSurveyID = x.submitted_survey_id,
+                                                 unitNumber = x.Unit.unit_number,
+                                                 mealName = x.Meal.meal_name,
+                                                 participantType = x.ParticipantType.participant_description,
+                                                 ageRange = x.AgeRange.age_range_description,
+                                                 gender = x.Gender.gender_description,
+                                                 dateEntered = x.date_entered,
+                                                 contactStatus = x.contact_status,
+                                                 contactRoomNumber = x.contact_room_number,
+                                                 contactPhoneNumber = x.contact_phone_number
+                                             };
+
+                    return submittedSurveyList.ToList();
                 }
                 catch (Exception e)
                 {

@@ -63,7 +63,7 @@
                         </table>
                     </EmptyDataTemplate>
                     <ItemTemplate>
-                        <tr style="background-color: #FFFFFF; color: #333333;">
+                        <tr style="background-color: #E0FFFF; color: #333333;">
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("surveyWordID") %>' runat="server" ID="surveyWordIDLabel" Visible="false" /></td>
                             <td>
