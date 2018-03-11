@@ -20,7 +20,7 @@ namespace FSOSS.System.BLL
                 connection.Open();
                 var cmd = new NpgsqlCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = "SELECT (ADMIN_PASSWORD = crypt(@p1, ADMIN_PASSWORD)) as isValid" +
+                cmd.CommandText = "SELECT (ADMIN_PASSWORD = crypt(@p1, ADMIN_PASSWORD))" +
                                     " FROM ADMINISTRATOR_ACCOUNT" +
                                     " WHERE USERNAME = @p2";
                 cmd.Parameters.AddWithValue("p1", password);
@@ -30,41 +30,29 @@ namespace FSOSS.System.BLL
             }
             return isValid;
         }
+
         public int GetUserID(string username)
         {
-            int userID;
-            using (var connection = new NpgsqlConnection())
+            using (var context = new FSOSSContext())
             {
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
-                connection.Open();
-                var cmd = new NpgsqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT ADMINISTRATOR_ACCOUNT_ID" +
-                                    " FROM ADMINISTRATOR_ACCOUNT" +
-                                    " WHERE USERNAME = @p1";
-                cmd.Parameters.AddWithValue("p1", username);
-                userID = (int)cmd.ExecuteScalar();
-                connection.Close();
+                var result = (from x in context.AdministratorAccounts
+                              where x.username.Equals(username.ToLower())
+                              select x.administrator_account_id).FirstOrDefault();
+
+                return result;
             }
-            return userID;
         }
+
         public int GetSecurityID(int userID)
         {
-            int securityID;
-            using (var connection = new NpgsqlConnection())
+            using (var context = new FSOSSContext())
             {
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
-                connection.Open();
-                var cmd = new NpgsqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT SECURITY_ROLE_ID" +
-                                    " FROM ADMINISTRATOR_ROLE" +
-                                    " WHERE ADMINISTRATOR_ACCOUNT_ID = @p1";
-                cmd.Parameters.AddWithValue("p1", userID);
-                securityID = (int)cmd.ExecuteScalar();
-                connection.Close();
+                var result = (from x in context.AdministratorRoles
+                              where x.administrator_account_id.Equals(userID)
+                              select x.security_role_id).FirstOrDefault();
+
+                return result;
             }
-            return securityID;
         }
     }
 }
