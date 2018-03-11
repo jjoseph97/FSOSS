@@ -38,10 +38,8 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
         }
         else
         {
-            message.Visible = true;
-            message.Text = "Invalid";
-            //Session.Abandon(); // use this when logging out
-            //Response.Redirect(Request.RawUrl); // refreshes the page
+            Message.Visible = true;
+            Message.Text = "Invalid username or password";
         }
     }
 }

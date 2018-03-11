@@ -12,7 +12,7 @@
         }
     </style>
     <div class="form-signin card">
-        <h3 class="text-center mb-5 mt-3">Please Login</h3>
+        <div class="card-header h3 text-center mb-2">Please Login</div>
         <div class="form-group">
             <asp:Label ID="UsernameLabel" runat="server" AssociatedControlID="UsernameTextbox" CssClass="col-sm-12">Username: </asp:Label>
             <div class="col-sm-12">
@@ -25,17 +25,13 @@
                 <asp:TextBox ID="PasswordTextBox" runat="server" TextMode="Password" CssClass="form-control" AutoComplete="off" Placeholder="Enter password" AutoFocus="true" />
             </div>
         </div>
-        <div class="col-sm-12 mt-4 mb-5">
+        <div class="col-sm-12 mt-2 mb-2">
             <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-primary col-sm-12" Text="Log in" OnClick="LoginButton_Click" />
         </div>
     </div>
-
-    <%-- Delete below --%>
-    <div class="text-center">
-        <hr />
-        <p>this section is for testing purposes. will be deleted.</p>
-        <div class="col-sm-12 text-center p-2">
-            <asp:Label ID="message" runat="server" CssClass="text-white bg-danger p-2" Visible="false" />
+    <div class="text-center mt-3">
+        <div class="col-sm-12">
+            <asp:Label ID="Message" runat="server" CssClass="text-white bg-danger p-2 rounded" Visible="false" />
         </div>
     </div>
 </asp:Content>

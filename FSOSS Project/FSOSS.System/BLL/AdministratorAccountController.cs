@@ -18,11 +18,10 @@ namespace FSOSS.System.BLL
             {
                 connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
                 connection.Open();
-                var cmd = new NpgsqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT (ADMIN_PASSWORD = crypt(@p1, ADMIN_PASSWORD))" +
-                                    " FROM ADMINISTRATOR_ACCOUNT" +
-                                    " WHERE USERNAME = @p2";
+                var cmd = new NpgsqlCommand(
+                    "SELECT (ADMIN_PASSWORD = crypt(@p1, ADMIN_PASSWORD))" +
+                    " FROM ADMINISTRATOR_ACCOUNT" +
+                    " WHERE USERNAME = @p2", connection);
                 cmd.Parameters.AddWithValue("p1", password);
                 cmd.Parameters.AddWithValue("p2", username.ToLower());
                 isValid = cmd.ExecuteReader().Read();
