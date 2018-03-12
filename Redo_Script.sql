@@ -231,10 +231,14 @@ CREATE OR REPLACE FUNCTION password_is_valid (
 RETURNS BOOLEAN AS $$
 	DECLARE isValid BOOLEAN;
 BEGIN
-	SELECT INTO isValid
-	(admin_password = crypt(password_param, admin_password))
-	FROM administrator_account
-	WHERE username = username_param;
+	IF username_param = '' OR username_param IS NULL OR password_param = '' OR password_param IS NULL THEN
+		isValid = FALSE;
+	ELSE	
+		SELECT INTO isValid
+		(admin_password = crypt(password_param, admin_password))
+		FROM administrator_account
+		WHERE username = username_param;
+	END IF;
 	RETURN isValid;
 END; $$
 LANGUAGE PLPGSQL;
