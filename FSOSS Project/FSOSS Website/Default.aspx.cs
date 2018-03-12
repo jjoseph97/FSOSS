@@ -16,9 +16,9 @@ public partial class _Default : Page
     {
         if (WOTDTextBox.Text != "sunshine")
         {
-            message.Visible = true;
-            message.Text = "Wrong word";
-            message.CssClass = "text-white bg-danger p-2";
+            Message.Visible = true;
+            Message.Text = "You entered the wrong word";
+            Message.CssClass = "text-white bg-danger p-2 rounded";
         }
         else if (WOTDTextBox.Text == "sunshine")
         {
@@ -26,7 +26,7 @@ public partial class _Default : Page
         }
         else
         {
-            message.Visible = false;
+            Message.Visible = false;
         }
     }
 }

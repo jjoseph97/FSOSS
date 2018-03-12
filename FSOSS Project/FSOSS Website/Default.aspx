@@ -26,11 +26,7 @@
             </div>
         </div>
     </div>
-
-    <%-- Delete below --%>
-    <hr />
-    <br />
-    <div class="col-sm-12 mx-auto text-center">
-        <asp:Label ID="message" runat="server" Visible="false" />
+    <div class="col-sm-12 mt-3 text-center">
+        <asp:Label ID="Message" runat="server" />
     </div>
 </asp:Content>

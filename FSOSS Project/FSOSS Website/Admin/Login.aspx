@@ -11,8 +11,8 @@
             margin: 0 auto;
         }
     </style>
-    <div class="form-signin card">
-        <div class="card-header h3 text-center mb-2">Please Login</div>
+    <div class="form-signin card bg-light">
+        <div class="card-header h3 text-center mb-2 bg-light">Please Login</div>
         <div class="form-group">
             <asp:Label ID="UsernameLabel" runat="server" AssociatedControlID="UsernameTextbox" CssClass="col-sm-12">Username: </asp:Label>
             <div class="col-sm-12">
