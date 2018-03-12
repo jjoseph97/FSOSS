@@ -78,6 +78,18 @@ public partial class SiteMaster : MasterPage
             FSOSSNavbar.Visible = false;
             hamburger.Visible = false;
         }
+
+        if (Session["securityID"] != null)
+        {
+            if (Session["securityID"].ToString() != "2")
+            {
+                MasterAdminDropDown.Visible = false;
+            }
+            else
+            {
+                MasterAdminDropDown.Visible = true;
+            }
+        }
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

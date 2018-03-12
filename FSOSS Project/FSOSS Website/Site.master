@@ -49,7 +49,7 @@
 
                     <%--<asp:Panel ID="FSOSSNavbar" runat="server" CssClass="collapse navbar-collapse" Visible="true">--%>
                     <ul class="navbar-nav text-center">
-                        <li class="nav-item dropdown">
+                        <li id="MasterAdminDropDown" runat="server" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
                             <div class="dropdown-menu text-center text-sm-left">
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
