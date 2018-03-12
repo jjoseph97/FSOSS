@@ -54,5 +54,35 @@ namespace FSOSS.System.BLL
                 return result;
             }
         }
+
+        public string AddUser(string username, string password, string firstname, string lastname, int selectedRoleId)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = (from x in context.AdministratorAccounts
+                              where x.username.StartsWith(username)
+                              select x).Count();
+
+                if (result > 0)
+                    username = username + result;
+            }
+            using (var connection = new NpgsqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                connection.Open();
+                var cmd = new NpgsqlCommand("add_user", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("username_param", username);
+                cmd.Parameters.AddWithValue("password_param", password);
+                cmd.Parameters.AddWithValue("firstname_param", firstname);
+                cmd.Parameters.AddWithValue("lastname_param", lastname);
+                cmd.Parameters.AddWithValue("securityid_param", selectedRoleId);
+                string newUsername = cmd.ExecuteScalar().ToString();
+                connection.Close();
+                return newUsername;
+            }
+        }
     }
 }

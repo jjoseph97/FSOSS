@@ -9,6 +9,14 @@
 
     <div class="row">
         <div class="col-sm-12">
+            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 text-white bg-success" Visible="false" />
+            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 text-white bg-danger" Visible="false" Text="Failed to create user" />
+            <asp:Label ID="concatUsername" runat="server" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
             <div class="card container">
                 <div class="col-sm-8">
 
@@ -36,20 +44,14 @@
                     <div class="form-group row">
                         <asp:Label ID="SecurityLevelLabel" runat="server" AssociatedControlID="SecurityLevelDDL" CssClass="col-sm-4 col-form-label font-weight-bold text-md-right" Text="Security Level:" />
                         <div class="col-sm-8">
-                            <asp:DropDownList ID="SecurityLevelDDL" runat="server" CssClass="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <asp:Label ID="SiteLabel" runat="server" AssociatedControlID="SiteDDL" CssClass="col-sm-4 col-form-label font-weight-bold text-md-right" Text="Site:" />
-                        <div class="col-sm-8">
-                            <asp:DropDownList ID="SiteDDL" runat="server" CssClass="form-control" />
+                            <asp:DropDownList ID="SecurityLevelDDL" runat="server" CssClass="form-control" DataSourceID="SecurityRoleODS" DataTextField="securityDescription" DataValueField="securityID" />
+                            <asp:ObjectDataSource ID="SecurityRoleODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSecurityRoleList" TypeName="FSOSS.System.BLL.SecurityRoleController"></asp:ObjectDataSource>
                         </div>
                     </div>
 
                     <div class="form-group row float-md-right">
                         <div class="col-sm-12">
-                            <asp:Button ID="CreateButton" runat="server" CssClass="btn btn-primary btn-block" Text="Create User" />
+                            <asp:Button ID="CreateButton" runat="server" CssClass="btn btn-primary btn-block" Text="Create User" OnClick="CreateButton_Click" />
                         </div>
                     </div>
 

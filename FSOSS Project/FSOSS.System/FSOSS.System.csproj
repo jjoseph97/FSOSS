@@ -79,6 +79,7 @@
     <Compile Include="BLL\QuestionTextController.cs" />
     <Compile Include="BLL\QuestionTopicController.cs" />
     <Compile Include="BLL\ReportController.cs" />
+    <Compile Include="BLL\SecurityRoleController.cs" />
     <Compile Include="BLL\SiteController.cs" />
     <Compile Include="BLL\SubmittedSurveyController.cs" />
     <Compile Include="BLL\SurveyVersionController.cs" />

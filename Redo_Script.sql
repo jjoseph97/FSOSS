@@ -243,6 +243,36 @@ BEGIN
 END; $$
 LANGUAGE PLPGSQL;
 
+-- Create add_user function
+CREATE OR REPLACE FUNCTION add_user (
+	username_param VARCHAR(50), 
+	password_param VARCHAR(60),
+	firstname_param VARCHAR(50),
+	lastname_param VARCHAR(50),
+	securityid_param INTEGER)
+RETURNS VARCHAR(50) AS $$
+DECLARE
+	userID INTEGER;
+	createdUsername VARCHAR(50);
+BEGIN
+	INSERT INTO administrator_account (username, admin_password, first_name, last_name, date_created)
+	VALUES (username_param, crypt(password_param,gen_salt('bf')), firstname_param, lastname_param, NOW());
+	
+	SELECT administrator_account_id INTO userID
+	FROM administrator_account
+	WHERE username = username_param;
+	
+	INSERT INTO administrator_role (administrator_account_id, security_role_id, date_modified)
+	VALUES (userID, securityid_param, NOW());
+	
+	SELECT username INTO createdUsername
+	FROM administrator_account
+	WHERE administrator_account_id = userID;
+	
+	RETURN createdUsername;
+END; $$
+LANGUAGE PLPGSQL;
+
 -- Create Webmaster
 INSERT INTO ADMINISTRATOR_ACCOUNT (USERNAME, ADMIN_PASSWORD, FIRST_NAME, LAST_NAME, DATE_CREATED, DATE_MODIFIED)
 VALUES ('webmaster', crypt('password', gen_salt('bf')), 'Web', 'Master', Now(), NOW());
