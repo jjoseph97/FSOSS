@@ -56,6 +56,8 @@
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUser.aspx">Edit User</a>
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions</a>
+                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/Site.aspx">Manage Sites</a>
+                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/UnitsCrud.aspx">Manage Units</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -80,6 +82,7 @@
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - FSOSS</p>
+                <asp:Button runat="server" CssClass="btn btn mx-3 my-1" Text="!! TEMP ADMIN BUTTON FOR QUICK NAVIGATION !!" />
             </footer>
         </div>
     </form>

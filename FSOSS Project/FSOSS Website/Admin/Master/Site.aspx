@@ -30,16 +30,20 @@
                         <tr style="background-color: #FFFFFF; color: #284775;">
                             <td>
                                 <asp:Label Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                                 <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
                         <tr style="background-color: #999999;">
                             <td>
-                                <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                                <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
-                            </td>
-                            <td>
                                 <asp:TextBox Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
+                            <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
+                            <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
                         </tr>
                     </EditItemTemplate>
                     <EmptyDataTemplate>
@@ -49,35 +53,32 @@
                             </tr>
                         </table>
                     </EmptyDataTemplate>
-                    <InsertItemTemplate>
-                        <tr style="">
-                            <td>
-                                <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
-                                <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
-                            </td>
-                            <td>
-                                <asp:TextBox Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
-                        </tr>
-                    </InsertItemTemplate>
                     <ItemTemplate>
                         <tr style="background-color: #E0FFFF; color: #333333;">
                             <td>
-                                <asp:Label Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                             <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                            <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table runat="server">
+                        <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
-                                            <th runat="server">Site</th>
+                                            <th runat="server" class="col-sm-6 py-2">Site</th>
+                                            <th runat="server" class="col-sm-3 py-2">Edit</th>
+                                            <th runat="server" class="col-sm-3 py-2">Delete</th>
+
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
                                 </td>
                             </tr>
-                            <tr runat="server">
+                           <%-- <tr runat="server">
                                 <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
                                     <asp:DataPager runat="server" ID="DataPager1">
                                         <Fields>
@@ -87,13 +88,17 @@
                                         </Fields>
                                     </asp:DataPager>
                                 </td>
-                            </tr>
+                            </tr>--%>
                         </table>
                     </LayoutTemplate>
                     <SelectedItemTemplate>
                         <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
                             <td>
-                                <asp:Label Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                             <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                            <td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
