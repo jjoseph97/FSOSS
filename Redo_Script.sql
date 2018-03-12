@@ -224,11 +224,26 @@ CREATE TABLE SURVEY_QUESTION
 	PRIMARY KEY (SURVEY_VERSION_ID, QUESTION_ID)
 );
 
+-- Create password_is_valid function
+CREATE OR REPLACE FUNCTION password_is_valid (
+	username_param VARCHAR(50), 
+	password_param VARCHAR(60))
+RETURNS BOOLEAN AS $$
+	DECLARE isValid BOOLEAN;
+BEGIN
+	SELECT INTO isValid
+	(admin_password = crypt(password_param, admin_password))
+	FROM administrator_account
+	WHERE username = username_param;
+	RETURN isValid;
+END; $$
+LANGUAGE PLPGSQL;
+
 -- Create Webmaster
 INSERT INTO ADMINISTRATOR_ACCOUNT (USERNAME, ADMIN_PASSWORD, FIRST_NAME, LAST_NAME, DATE_CREATED, DATE_MODIFIED)
 VALUES ('webmaster', crypt('password', gen_salt('bf')), 'Web', 'Master', Now(), NOW());
 INSERT INTO ADMINISTRATOR_ACCOUNT (USERNAME, ADMIN_PASSWORD, FIRST_NAME, LAST_NAME, DATE_CREATED, DATE_MODIFIED)
-VALUES ('GarryG', crypt('password', gen_salt('bf')), 'Garry', 'Gerry', Now(), NOW());
+VALUES ('ggerry', crypt('SecretPassword123', gen_salt('bf')), 'Garry', 'Gerry', Now(), NOW());
 
 
 --Insert security roles
