@@ -53,8 +53,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
                             <div class="dropdown-menu text-center text-sm-left">
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
-                                <a runat="server" class="dropdown-item" href="#">Edit User</a>
-                                <a runat="server" class="dropdown-item" href="#">New User</a>
+                                <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUser.aspx">Edit User</a>
+                                <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions</a>
                             </div>
                         </li>
