@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card container">
-                <asp:ListView ID="SubmittedSurveyList" runat="server" DataSourceID="SubmittedSurveyODS" OnItemCommand="SubmittedSurveyList_ItemCommand">
+                <asp:ListView ID="SubmittedSurveyList" runat="server" DataSourceID="SubmittedSurveyODS">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
                             <td style="display:none;">
@@ -21,7 +21,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" /></td>
+                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl="~/Admin/SubmittedSurveyViewerPage.aspx" /></td>
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display:none;">
@@ -48,7 +48,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" /></td>
+                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>'/></td>
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display:none;">
@@ -83,26 +83,6 @@
                             </tr>
                         </table>
                     </LayoutTemplate>
-                    <SelectedItemTemplate>
-                        <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
-                            <td style="display:none;">
-                                <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
-                            <td>
-                                <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" CssClass="pl-3" ID="unitNumberLabel" /></td>
-                            <td>
-                                <asp:Label Text='<%# Eval("participantType") %>' runat="server" CssClass="pl-3" ID="participantTypeLabel" /></td>
-                            <td>
-                                <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
-                            <td>
-                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" /></td>
-                            <td style="display:none;">
-                                <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
-                            <td style="display:none;">
-                                <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
-                            <td style="display:none;">
-                                <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
-                        </tr>
-                    </SelectedItemTemplate>
                 </asp:ListView>
                 <asp:ObjectDataSource ID="SubmittedSurveyODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSubmittedSurveyList" TypeName="FSOSS.System.BLL.SubmittedSurveyController">
                     <SelectParameters>
