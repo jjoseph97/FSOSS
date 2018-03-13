@@ -21,16 +21,18 @@
                     </div>
             </div>      
             <div class="card container">
-                <asp:GridView ID="GridView1" runat="server" DataSourceID="UnitsList" AutoGenerateColumns="False" Visible="false">
+                <asp:GridView ID="UnitsGridView" runat="server" Visible="false" AutoGenerateColumns="False" DataSourceID="UnitListCRUD" AllowPaging="True">
                     <Columns>
-                        <asp:BoundField DataField="unit_id" HeaderText="Unit Id" SortExpression="unit_id"></asp:BoundField>
-                        <asp:BoundField DataField="unit_number" HeaderText="Unit Number" SortExpression="unit_number"></asp:BoundField>
+                        <asp:CommandField ShowDeleteButton="True" ShowSelectButton="True"></asp:CommandField>
+                        <asp:BoundField DataField="unitID" HeaderText="unitID" SortExpression="unitID"></asp:BoundField>
+                        <asp:BoundField DataField="unitNumber" HeaderText="unitNumber" SortExpression="unitNumber"></asp:BoundField>
                     </Columns>
                 </asp:GridView>
-                
             </div>
 
         </div>
+
+
         <asp:ObjectDataSource ID="SiteList" runat="server" 
             OldValuesParameterFormatString="original_{0}" 
             SelectMethod="GetSiteList" 
@@ -38,7 +40,13 @@
 
         </asp:ObjectDataSource>
 
-        <asp:ObjectDataSource ID="UnitsList" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitsController">
+        <asp:ObjectDataSource ID="UnitListCRUD" runat="server" DeleteMethod="DeleteUnit" InsertMethod="AddUnit" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController">
+            <DeleteParameters>
+                <asp:Parameter Name="unit_id" Type="Int32"></asp:Parameter>
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="unit_number" Type="String"></asp:Parameter>
+            </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
