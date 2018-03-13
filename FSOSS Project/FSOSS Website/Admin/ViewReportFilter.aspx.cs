@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSOSS.System.Data.POCOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,11 +22,12 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
 
     protected void ViewButton_Click(object sender, EventArgs e)
     {
-        Filter filter = new Filter();
-        if(StartingPeriodTextBox.Value != null)
+        FilterPOCO filter = new FilterPOCO();
+        if(StartingPeriodTextBox.Value != "")
         {
+            
             filter.startingDate = DateTime.Parse(StartingPeriodTextBox.Value);
-            if(EndingPeriodTexBox.Value != null)
+            if(EndingPeriodTexBox.Value != "")
             {
                 filter.endDate = DateTime.Parse(EndingPeriodTexBox.Value);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
@@ -35,12 +37,14 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             }
             else
             {
-                Alert.Text = "Please select starting period";
+                Alert.Text = "Please select ending period";
+                Alert.Visible = true;
             }           
         }
         else
         {
-            Alert.Text = "Please select ending period";
+            Alert.Text = "Please select starting period";
+            Alert.Visible = true;
         }
      
      
@@ -48,12 +52,4 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         
     }
 
-     
-    protected class Filter
-    {
-         public DateTime startingDate { get; set; }
-         public DateTime endDate { get; set; }
-         public int siteID { get; set; }
-         public int mealID { get; set; }
-    }
 }

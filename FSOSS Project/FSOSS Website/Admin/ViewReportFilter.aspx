@@ -18,7 +18,8 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="HospitalLabelReportLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" style="font-weight:bold;font-size:large; line-height:38px;" Text="Hospital:"></asp:Label>
-                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2" runat="server">
+                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2" runat="server" 
+                        DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID">
                         <asp:ListItem Text="Select All" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
@@ -42,7 +43,7 @@
                         DataSourceID="MealODS" 
                         DataTextField="mealName" 
                         DataValueField="mealID">
-                        <asp:ListItem Text="No Meal" />
+                        <asp:ListItem Text="No Meal" Selected="True" Value="0" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
@@ -54,7 +55,10 @@
             OldValuesParameterFormatString="original_{0}"
             SelectMethod="GetMealList"
             TypeName="FSOSS.System.BLL.MealController"></asp:ObjectDataSource>
-        <asp:ObjectDataSource ID="SiteODS" runat="server"></asp:ObjectDataSource>
+        <asp:ObjectDataSource ID="SiteODS" runat="server" 
+            OldValuesParameterFormatString="original_{0}" 
+            SelectMethod="GetSiteList" 
+            TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
     </div>
     <script>
         $(document).ready(function () {
