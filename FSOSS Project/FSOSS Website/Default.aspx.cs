@@ -22,6 +22,7 @@ public partial class _Default : Page
         }
         else if (WOTDTextBox.Text == "sunshine")
         {
+            Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
         }
         else
