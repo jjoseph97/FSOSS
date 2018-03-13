@@ -15,10 +15,10 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         {
           Response.Redirect("~/Admin/ViewReportFilter.aspx");
         }
+        else
+        {
+           
+        }
         
-    }
-
-
-
-   
+    }  
 }

@@ -1,4 +1,5 @@
 ﻿using FSOSS.System.Data.POCOs;
+using FSOSS.System.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,21 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         // get id for verification here
         if(!IsPostBack)
         {
+            MealController mealController = new MealController();
             Alert.Visible = false;
             ErrorAlert.Visible = false;
+            List<MealPOCO> mealList = mealController.GetMealList();
+            MealDropDownList.DataSource = mealList;
+            MealDropDownList.DataValueField = "mealID";
+            MealDropDownList.DataTextField = "mealName";
+            MealDropDownList.DataBind();
+            SiteController siteController = new SiteController();
+            List<SitePOCO> siteList = siteController.GetSiteList();
+            HospitalDropDownList.DataSource = siteList;
+            HospitalDropDownList.DataValueField = "siteID";
+            HospitalDropDownList.DataValueField = "siteName";
+            HospitalDropDownList.DataBind();
+           
         }
         
     }
