@@ -17,16 +17,23 @@ namespace FSOSS.System.BLL
             bool isValid;
             using (var connection = new NpgsqlConnection())
             {
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
-                connection.Open();
-                var cmd = new NpgsqlCommand("password_is_valid", connection)
+                try
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.AddWithValue("username_param", username);
-                cmd.Parameters.AddWithValue("password_param", password);
-                isValid = (Boolean)cmd.ExecuteScalar();
-                connection.Close();
+                    connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                    connection.Open();
+                    var cmd = new NpgsqlCommand("password_is_valid", connection)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    cmd.Parameters.AddWithValue("username_param", username);
+                    cmd.Parameters.AddWithValue("password_param", password);
+                    isValid = (Boolean)cmd.ExecuteScalar();
+                    connection.Close();
+                }
+                catch
+                {
+                    isValid = false;
+                }
             }
             return isValid;
         }
