@@ -172,12 +172,12 @@
             <div class="col-md-12 form-inline">
                 <asp:DropDownList ID="Q4" CssClass="col-md-4 form-control" runat="server">
                     <asp:ListItem Value="">Select...</asp:ListItem>
-                    <asp:ListItem Value="0">0 (WORST POSSIBLE)</asp:ListItem>
-                    <asp:ListItem Value="1">1</asp:ListItem>
-                    <asp:ListItem Value="2">2</asp:ListItem>
-                    <asp:ListItem Value="3">3</asp:ListItem>
-                    <asp:ListItem Value="4">4</asp:ListItem>
-                    <asp:ListItem Value="5">5 (BEST POSSIBLE)</asp:ListItem>
+                    <asp:ListItem Value="5">Very Good</asp:ListItem>
+                    <asp:ListItem Value="4">Good</asp:ListItem>
+                    <asp:ListItem Value="3">Fair</asp:ListItem>
+                    <asp:ListItem Value="2">Poor</asp:ListItem>
+                    <asp:ListItem Value="1">Very Poor</asp:ListItem>
+                    <asp:ListItem Value="0">Terrible</asp:ListItem>
                 </asp:DropDownList>
                 <asp:Label ID="Message" runat="server" CssClass="col-md-6" />
                 <br />
