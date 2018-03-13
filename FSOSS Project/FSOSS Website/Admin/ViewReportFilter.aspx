@@ -1,9 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewReportFilter.aspx.cs" Inherits="Pages_AdministratorPages_ViewReportFilter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.standalone.css" />
-    <script type="text/javascript" src="../Scripts/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
     <div class="row">
         <div class="col-sm-12">
             <h1 class="card container py-2 page-header" style="font-weight: bold;">View Report</h1>
@@ -17,59 +14,44 @@
         <div class="col-sm-12">
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
-                    <asp:Label ID="HospitalLabelReportLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" style="font-weight:bold;font-size:large; line-height:38px;" Text="Hospital:"></asp:Label>
-                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2" runat="server" AppendDataBoundItems="true">
+                    <asp:Label ID="HospitalLabelReportLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Hospital:"></asp:Label>
+                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
                         <asp:ListItem Text="Select All" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="StartingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Starting Period:"></asp:Label>
-                    <div id="start-date-picker" class="col-sm-3 input-group date px-0 my-2" style="height: 38px;">
-                        <input id="StartingPeriodTextBox" class="col-8 col-md-10" runat="server" text="" />
-                        <span class="input-group-addon col-4 col-md-2 fas fa-calendar-alt p-1" style="font-size:42px; border:1px solid;"></span>
+                    <div id="StartDatePicker" class="col-sm-3 input-group date px-0 my-2">
+                        <asp:TextBox id="StartingPeriodTextBox" type="date" class="col-8 col-md-10 form-control" runat="server"/>
+                        <span class="input-group-btn border">
+                            <label for="<%= StartingPeriodTextBox.ClientID %>" class="btn btn-default p-1 m-0">
+                                <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
+                            </label>
+                        </span>
                     </div>
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="EndingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Ending Period:"></asp:Label>
-                    <div id="end-date-picker" class="col-sm-3 input-group date px-0 my-2" style="height: 38px;">
-                        <input id="EndingPeriodTexBox" class="col-8 col-md-10" runat="server" text="" />
-                        <span class="input-group-addon col-4 col-md-2 fas fa-calendar-alt p-1" style="font-size:42px; border:1px solid;"></span>
+                    <div id="EndDatePicker" class="col-sm-3 input-group date px-0 my-2">
+                        <asp:TextBox id="EndingPeriodTextBox" type="date" class="col-8 col-md-10 form-control" runat="server"/>
+                        <span class="input-group-btn border">
+                            <label for="<%= EndingPeriodTextBox.ClientID %>" class="btn btn-default p-1 m-0">
+                                <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
+                            </label>
+                        </span>
                     </div>
                 </div>
                 <div class="row container mx-auto px-0">
-                    <asp:Label ID="MealLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" style="font-weight:bold;font-size:large; line-height:38px;" Text="Meal:"></asp:Label>
-                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2" runat="server">
+                    <asp:Label ID="MealLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Meal:"></asp:Label>
+                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2 form-control" runat="server">
                         <asp:ListItem Text="No Meal" Selected="True" Value="0" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
-                    <asp:Button ID="ViewButton" class="offset-sm-4 col-sm-2 btn btn-info mb-2" runat="server" Text="View" OnClick="ViewButton_Click" />
+                    <asp:Button ID="ViewButton" class="offset-sm-5 col-sm-1 btn btn-info mb-2" runat="server" Text="View" OnClick="ViewButton_Click" />
                 </div>
             </div>
         </div>
-      
     </div>
-    <script>
-        $(document).ready(function () {
-            $("#start-date-picker").datepicker({
-                autoclose: true,
-                format: 'yyyy-mm-dd',
-                todayHighlight: true,
-                clearBtn: true,
-                orientation: 'bottom'
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $("#end-date-picker").datepicker({
-                autoclose: true,
-                format: 'yyyy-mm-dd',
-                todayHighlight: true,
-                clearBtn: true,
-                orientation: 'bottom'
-            });
-        });
-    </script>
 </asp:Content>
 

@@ -37,13 +37,13 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         FilterPOCO filter = new FilterPOCO();
-        if(StartingPeriodTextBox.Value != "")
+        if(StartingPeriodTextBox.Text != "")
         {
             
-            filter.startingDate = DateTime.Parse(StartingPeriodTextBox.Value);
-            if(EndingPeriodTexBox.Value != "")
+            filter.startingDate = DateTime.Parse(StartingPeriodTextBox.Text);
+            if(EndingPeriodTextBox.Text != "")
             {
-                filter.endDate = DateTime.Parse(EndingPeriodTexBox.Value);
+                filter.endDate = DateTime.Parse(EndingPeriodTextBox.Text);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 Session["filter"] = filter;
