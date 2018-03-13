@@ -10,18 +10,39 @@
         </div>
     </div>
     <div class="row">
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-
+        <div id="questionOneAChart" style="height: 370px; width: 100%;"></div>
     </div>
+    <div class="row">
+        <div id="questionOneBChart" style="height: 370px; width: 100%;"></div>
+    </div>
+    <div class="row">
+        <div id="questionOneCChart" style="height: 370px; width: 100%;"></div>
+    </div>
+    <div class ="row">
+        <div id="questionOneDChart" style="height: 370px; width: 100%;"></div>
+    </div>
+    <div class="row" >
+        <div id="questionOneEChart" style="height: 370px; width: 100%;"></div>
+    </div>
+     <div class="row" >
+        <div id="questionTwoChart" style="height: 370px; width: 100%;"></div>
+    </div>
+     <div class="row" >
+        <div id="questionThreeChart" style="height: 370px; width: 100%;"></div>
+    </div>
+     <div class="row" >
+        <div id="questionFourChart" style="height: 370px; width: 100%;"></div>
+    </div>
+    
 <script>
 window.onload = function () {
 
 var options = {
 	title: {
-		text: "Desktop OS Market Share in 2017"
+		text: "Report For "
 	},
 	subtitles: [{
-		text: "As of November, 2017"
+		text: "For "
 	}],
 	animationEnabled: true,
 	data: [{
@@ -43,8 +64,8 @@ var options = {
 			{ y: 4.03, label: "Others" }
 		]
 	}]
-};
-$("#chartContainer").CanvasJSChart(options);
+    };
+$("#questionOneAChart").CanvasJSChart(options);
 
 }
 </script>
