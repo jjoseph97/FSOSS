@@ -22,7 +22,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         {
             if (!Page.IsPostBack)
             {
-                WOTDLabel.Text += "abc"; // Replace with proper Word of the day
+                WOTDLabel.Text += "flower"; // Replace with proper Word of the day
 
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
