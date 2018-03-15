@@ -8,7 +8,17 @@
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
     </div>
-   
+     <div class="container">
+           <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#questionOne">Question One</a></li>
+            <li><a data-toggle="tab" href="#questionTwo">Question Two</a></li>
+            <li><a data-toggle="tab" href="#questionThree">Question Three</a></li>
+            <li><a data-toggle="tab" href="#questionFour">Question Four</a></li>
+
+        </ul>
+    
+          <div id="questionOne" class="tab-pane fade in active">
+
         <div id="questionOneAChart" style="height: 370px; width: 100%;"></div>
         
         <div id="questionOneBChart" style="height: 370px; width: 100%;"></div>
@@ -18,12 +28,23 @@
         <div id="questionOneDChart" style="height: 370px; width: 100%"></div>
         
         <div id="questionOneEChart" style="height: 370px; width: 100%;"></div>
+              </div>
+
+          <div id="questionTwo" class="tab-pane fade">
 
         <div id="questionTwoChart" style="height: 370px; width: 100%;"></div>
+              </div>
 
+
+         
+          <div id="questionThree" class="tab-pane fade">
         <div id="questionThreeChart" style="height: 370px; width: 100%;"></div>
+              </div>
+             
 
+         <div id="questionFour" class="tab-pane fade">
         <div id="questionFourChart" style="height: 370px; width: 100%;"></div>
+             </div>
 
     
 <script>
@@ -276,5 +297,7 @@ window.onload = function () {
 
 
 </script>
+             </div>
+         </div>
 </asp:Content>
 
