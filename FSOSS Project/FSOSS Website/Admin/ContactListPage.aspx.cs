@@ -17,19 +17,14 @@ public partial class Pages_AdministratorPages_ContactListPage : System.Web.UI.Pa
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if (Session["securityID"].ToString() != "2") // Return HTTP Code 403 if security ID is not 2 (Master Administrator)
-        {
-            Context.Response.StatusCode = 403;
-        }
-
-
+        
         if (!Page.IsPostBack)
         {
            
 
             SubmittedSurveyController ssc = new SubmittedSurveyController();
             SiteDDL.DataBind();
-            string broughtSite= Request.QueryString["field"];
+            string broughtSite= Request.QueryString["sid"];
             
             //add check to ensure the passed siteid is a vaild site id
 
