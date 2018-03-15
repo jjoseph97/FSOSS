@@ -121,12 +121,12 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Method use to delete words from the list that is use in the potential access words
+        /// Method use to disable words from the list that is use in the potential access words
         /// </summary>
         /// <param name="surveyWordID"></param>
         /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DeleteWord(int surveyWordID)
+        public string DisableWord(int surveyWordID)
         {
             using (var context = new FSOSSContext())
             {

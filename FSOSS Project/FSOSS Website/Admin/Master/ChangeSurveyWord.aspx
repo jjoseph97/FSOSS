@@ -40,7 +40,7 @@
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Disable" Text="Disable" ID="DisableButton" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -71,7 +71,7 @@
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Disable" Text="Disable" ID="DisableButton" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
@@ -82,7 +82,7 @@
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-6 py-2">Survey Word</th>
                                             <th runat="server" class="col-sm-3 py-2">Edit Word</th>
-                                            <th runat="server" class="col-sm-3 py-2">Delete Word</th>
+                                            <th runat="server" class="col-sm-3 py-2">Disable Word</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -99,11 +99,11 @@
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Disable" Text="Disable" ID="DisableButton" /></td>
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DeleteWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
+                <asp:ObjectDataSource ID="SurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetAllSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DisableWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
