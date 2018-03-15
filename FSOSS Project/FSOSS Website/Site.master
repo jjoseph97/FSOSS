@@ -82,7 +82,6 @@
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - FSOSS</p>
-                <asp:Button runat="server" CssClass="btn btn mx-3 my-1" Text="!! TEMP ADMIN BUTTON FOR QUICK NAVIGATION !!" />
             </footer>
         </div>
     </form>
