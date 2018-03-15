@@ -848,7 +848,7 @@ The temperature was a mind and body-numbing –37 C with the wind chill and yet Mi
 
 Maybe these people, having been cooped up with relatives too long during the holidays, needed a change of scenery.
 
-Maybe they couldn't stomach the thought of one more turkey-based meal. Or, maybe, being winter-hardy Edmontonians, they just figured there was no better time to venture out for some crispy eel and a pint of Innis & Gunn. 
+Maybe they could not stomach the thought of one more turkey-based meal. Or, maybe, being winter-hardy Edmontonians, they just figured there was no better time to venture out for some crispy eel and a pint of Innis & Gunn. 
 
 Whatever the reason, the cozy hospital located at 16940 87 Ave NW had a lovely, lively, post-Christmas vibe.');
 INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
