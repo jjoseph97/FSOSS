@@ -31,7 +31,7 @@ window.onload = function () {
 
     var options = new CanvasJS.Chart("questionOneAChart", {
 	title: {
-        text: "The variety of food in your daily meals"
+        text: "1A. The variety of food in your daily meals"
 	},
 	subtitles: [{
 		text: "For "
@@ -63,7 +63,7 @@ window.onload = function () {
     var ChartB = new CanvasJS.Chart("questionOneBChart", 
         {
         title: {
-            text: "The taste and flavor of your meals"
+            text: "1B. The taste and flavor of your meals"
         },
         subtitles: [{
             text: "For "
@@ -93,7 +93,7 @@ window.onload = function () {
     var ChartC = new CanvasJS.Chart("questionOneCChart",
         {
             title: {
-                text: "The temperature of your hot food"
+                text: "1C. The temperature of your hot food"
             },
             subtitles: [{
                 text: "For "
@@ -108,11 +108,11 @@ window.onload = function () {
                 indexLabelFontSize: 16,
                 indexLabel: "{label} - {y}%",
                 dataPoints: [
-                    { y: 48.00, label: "Very good" },
-                    { y: 22.00, label: "Good" },
-                    { y: 15.37, label: "Fair" },
+                    { y: 20.00, label: "Very good" },
+                    { y: 50.00, label: "Good" },
+                    { y: 12.37, label: "Fair" },
                     { y: 5.63, label: "Poor" },
-                    { y: 5.63, label: "Don't Know/No Opinion" },
+                    { y: 4.00, label: "Don't Know/No Opinion" },
 
                 ]
             }]
@@ -124,7 +124,7 @@ window.onload = function () {
     var ChartD = new CanvasJS.Chart("questionOneDChart",
         {
             title: {
-                text: "The overall appearance of your meal"
+                text: "1D. The overall appearance of your meal"
             },
             subtitles: [{
                 text: "For "
@@ -139,11 +139,11 @@ window.onload = function () {
                 indexLabelFontSize: 16,
                 indexLabel: "{label} - {y}%",
                 dataPoints: [
-                    { y: 48.00, label: "Very good" },
-                    { y: 22.00, label: "Good" },
-                    { y: 15.37, label: "Fair" },
-                    { y: 5.63, label: "Poor" },
-                    { y: 5.63, label: "Don't Know/No Opinion" },
+                    { y: 50.70, label: "Very good" },
+                    { y: 20.00, label: "Good" },
+                    { y: 13.50, label: "Fair" },
+                    { y: 13.50, label: "Poor" },
+                    { y: 2.30, label: "Don't Know/No Opinion" },
 
                 ]
             }]
@@ -153,7 +153,7 @@ window.onload = function () {
     var ChartE = new CanvasJS.Chart("questionOneEChart",
         {
             title: {
-                text: "The helpfulness of the staff who deliver your meals"
+                text: "1E. The helpfulness of the staff who deliver your meals"
             },
             subtitles: [{
                 text: "For "
@@ -168,16 +168,109 @@ window.onload = function () {
                 indexLabelFontSize: 16,
                 indexLabel: "{label} - {y}%",
                 dataPoints: [
-                    { y: 48.00, label: "Very good" },
-                    { y: 22.00, label: "Good" },
-                    { y: 15.37, label: "Fair" },
-                    { y: 5.63, label: "Poor" },
-                    { y: 5.63, label: "Don't Know/No Opinion" },
+                    { y: 70.25, label: "Very good" },
+                    { y: 10.25, label: "Good" },
+                    { y: 14.5, label: "Fair" },
+                    { y: 3.40, label: "Poor" },
+                    { y: 1.60, label: "Don't Know/No Opinion" },
 
                 ]
             }]
         });
     ChartE.render();
+
+
+
+
+    var chartTwo = new CanvasJS.Chart("questionTwoChart",
+        {
+            title: {
+                text: "2. How satisfied are you with the portion sizes of your meals?"
+            },
+            subtitles: [{
+                text: "For "
+            }],
+            animationEnabled: true,
+            data: [{
+                type: "pie",
+                startAngle: 40,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: 20.00, label: "Portion sizes are too small" },
+                    { y: 60.00, label: "Portion sizes are just right" },
+                    { y: 40.00, label: "Portion sizes are too large" },
+                 
+
+                ]
+            }]
+        });
+    chartTwo.render();
+
+
+
+    var chartThree = new CanvasJS.Chart("questionThreeChart",
+        {
+            title: {
+                text: "3 .Do your meals take into account your specific diet requirements?"
+            },
+            subtitles: [{
+                text: "For "
+            }],
+            animationEnabled: true,
+            data: [{
+                type: "pie",
+                startAngle: 40,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: 90.00, label: "Always" },
+                    { y: 7.50, label: "Usually" },
+                    { y: 1.63, label: "Occasionally" },
+                    { y: 0.62, label: "Never" },
+                    { y: 0.25, label: "I do not have any specific dietary requirements" },
+
+
+                ]
+            }]
+        });
+    chartThree.render();
+
+    var chartFour = new CanvasJS.Chart("questionFourChart",
+        {
+            title: {
+                text: "4. Overall, how would you rate your meal experience?"
+            },
+            subtitles: [{
+                text: "For "
+            }],
+            animationEnabled: true,
+            data: [{
+                type: "pie",
+                startAngle: 40,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: 35.00, label: "Very Good" },
+                    { y: 35.00, label: "Good" },
+                    { y: 11.11, label: "Fair" },
+                    { y: 10.50, label: "Poor" },
+                    { y: 8.40, label: "Very Poor" },
+
+
+                ]
+            }]
+        });
+    chartFour.render();
 
  }
 
