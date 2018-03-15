@@ -97,6 +97,7 @@
     <Compile Include="POCOs\MealPOCO.cs" />
     <Compile Include="POCOs\ParticipantTypePOCO.cs" />
     <Compile Include="POCOs\PotentialSurveyWordPOCO.cs" />
+    <Compile Include="POCOs\ResponsePOCO.cs" />
     <Compile Include="POCOs\SecurityRolePOCO.cs" />
     <Compile Include="POCOs\SitePOCO.cs" />
     <Compile Include="POCOs\SubmittedSurveyPOCO.cs" />

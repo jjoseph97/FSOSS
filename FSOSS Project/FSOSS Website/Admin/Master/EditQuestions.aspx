@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="card container py-2 page-header">Edit Questions</h1>
+            <h1 class="card container py-2 page-header">Edit Survey Questions</h1>
             <br />
         </div>
     </div>
@@ -11,9 +11,9 @@
     <div class="col-md-12">
 
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Survey Questions"></asp:Label>
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Select a Survey Question"></asp:Label>
             <asp:DropDownList ID="QuestionDDL" CssClass="col-md-3 form-control" runat="server">
-                <asp:ListItem Value="">Select Question</asp:ListItem>
+                <asp:ListItem Value="">Select...</asp:ListItem>
                 <asp:ListItem Value="1">Question 1</asp:ListItem>
                 <asp:ListItem Value="2">Question 1A</asp:ListItem>
                 <asp:ListItem Value="3">Question 1B</asp:ListItem>
@@ -39,7 +39,27 @@
                 <h1 id="headerText" runat="server"></h1>
                 <p>Description:</p>
                 <asp:HiddenField ID="QuestionID" runat="server" />
-                <asp:TextBox ID="DescriptionTextBox" Height="200px" Width="100%" TextMode="MultiLine" runat="server" />
+                <asp:TextBox ID="DescriptionTextBox" Width="100%" TextMode="MultiLine" runat="server" />
+                <asp:Button ID="UpdateButton" runat="server" Text="Update" />
+            </div>
+        </div>
+
+        <div id="Div1" runat="server" class="row">
+            <div class="col-md-12">
+                <h1 id="h1" runat="server"></h1>
+                <p>Response Options:</p>
+                <asp:HiddenField ID="ResponseID" runat="server" />
+                <asp:GridView ID="ResponseGridView" runat="server" AutoGenerateColumns="False" DataSourceID="ResponseObjectDataSource">
+                    <Columns>
+                        <asp:BoundField DataField="Text" HeaderText="Text" SortExpression="Text"></asp:BoundField>
+                        <asp:BoundField DataField="Value" HeaderText="Value" SortExpression="Value"></asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+                <asp:ObjectDataSource runat="server" ID="ResponseObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetQuestionReponse" TypeName="FSOSS.System.BLL.QuestionSelectionController">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="QuestionID" PropertyName="Value" Name="question_id" Type="Int32"></asp:ControlParameter>
+                    </SelectParameters>
+                </asp:ObjectDataSource>
             </div>
         </div>
     </div>
