@@ -9,37 +9,30 @@
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
     </div>
-    <div class="row">
+    
         <div id="questionOneAChart" style="height: 370px; width: 100%;"></div>
-    </div>
-    <div class="row">
+    
         <div id="questionOneBChart" style="height: 370px; width: 100%;"></div>
-    </div>
-    <div class="row">
+
         <div id="questionOneCChart" style="height: 370px; width: 100%;"></div>
-    </div>
-    <div class ="row">
+    
         <div id="questionOneDChart" style="height: 370px; width: 100%;"></div>
-    </div>
-    <div class="row" >
+   
         <div id="questionOneEChart" style="height: 370px; width: 100%;"></div>
-    </div>
-     <div class="row" >
+  
         <div id="questionTwoChart" style="height: 370px; width: 100%;"></div>
-    </div>
-     <div class="row" >
+   
         <div id="questionThreeChart" style="height: 370px; width: 100%;"></div>
-    </div>
-     <div class="row" >
+    
         <div id="questionFourChart" style="height: 370px; width: 100%;"></div>
-    </div>
+    
     
 <script>
 window.onload = function () {
 
 var options = {
 	title: {
-		text: "Report For "
+        text: "The variety of food in your daily meals"
 	},
 	subtitles: [{
 		text: "For "
@@ -54,20 +47,20 @@ var options = {
 		indexLabelFontSize: 16,
 		indexLabel: "{label} - {y}%",
 		dataPoints: [
-			{ y: 48.36, label: "Windows 7" },
-			{ y: 26.85, label: "Windows 10" },
-			{ y: 1.49, label: "Windows 8" },
-			{ y: 6.98, label: "Windows XP" },
-			{ y: 6.53, label: "Windows 8.1" },
-			{ y: 2.45, label: "Linux" },
-			{ y: 3.32, label: "Mac OS X 10.12" },
-			{ y: 4.03, label: "Others" }
+			{ y: 48.00, label: "Very good" },
+			{ y: 22.00, label: "Good" },
+			{ y: 15.37, label: "Fair" },
+			{ y: 5.63, label: "Poor" },
+			
 		]
 	}]
     };
 $("#questionOneAChart").CanvasJSChart(options);
 
-}
+    }
+
+
+
 </script>
 </asp:Content>
 
