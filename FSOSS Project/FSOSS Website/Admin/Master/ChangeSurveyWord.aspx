@@ -40,7 +40,7 @@
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Disable" Text="Disable" ID="DisableButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -71,7 +71,7 @@
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Disable" Text="Disable" ID="DisableButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
@@ -99,7 +99,7 @@
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Disable" Text="Disable" ID="DisableButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" /></td>
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>

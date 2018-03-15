@@ -110,7 +110,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             }
         }
 
-        if (e.CommandName == "Disable")
+        if (e.CommandName == "Delete")
         {
             Label surveyWord = (Label)e.Item.FindControl("surveyWordLabel");
             ErrorAlert.Visible = true;
