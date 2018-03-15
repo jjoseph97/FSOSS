@@ -39,8 +39,8 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     {
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
                         PendingRequestNumberLabel.Font.Bold = true;
-                        PendingRequestNumberLabel.Attributes["style"] += "color: #223f88 ";
-                        PendingContactSection.Attributes["class"] += " card col-md-12 mx-auto";
+                        PendingRequestNumberLabel.Attributes["style"] += " color: #223f88 ";
+                        PendingContactSection.Attributes["class"] += " col-md-12 mx-auto";
                         PendingContactSection.Attributes["style"] += " background-color: #a6ebf7";
                     }
                     else

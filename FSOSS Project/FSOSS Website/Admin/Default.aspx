@@ -22,7 +22,7 @@
                 <asp:Label ID="PendingRequestNumberLabel" runat="server" CssClass="h4" />
                 <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn " OnClick="ViewButton_Click"  />
             </div>
-        </div> <hr />
+        </div>
 
         <div class="form-group mx-auto">
             <asp:Button ID="RecentSurveysButton" runat="server" Text="View Recent Surveys" CssClass="btn" OnClick="RecentSurveysButton_Click" BackColor="#223F88" Forecolor="white" />
