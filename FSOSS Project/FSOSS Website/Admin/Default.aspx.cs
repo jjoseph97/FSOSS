@@ -22,7 +22,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         {
             if (!Page.IsPostBack)
             {
-                WOTDLabel.Text += "flower"; // Replace with proper Word of the day
+                WOTDLabel.Text += "sunshine"; // Replace with proper Word of the day
 
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
@@ -39,9 +39,9 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     {
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
                         PendingRequestNumberLabel.Font.Bold = true;
-                        PendingRequestNumberLabel.CssClass += " text-danger";
-                        PendingContactSection.Attributes["class"] += " card border-none";
-                        PendingContactSection.Attributes["style"] += " background-colour: #eeeeee";
+                        PendingRequestNumberLabel.Attributes["style"] += "color: #223f88 ";
+                        PendingContactSection.Attributes["class"] += " card col-md-12 mx-auto";
+                        PendingContactSection.Attributes["style"] += " background-color: #a6ebf7";
                     }
                     else
                     {
