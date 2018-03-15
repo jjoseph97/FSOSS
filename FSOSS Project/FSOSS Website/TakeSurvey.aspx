@@ -194,7 +194,7 @@
             </div>
         </div>
 
-        <asp:Button ID="NextButton" runat="server" Text="Next" OnClick="NextButton_Click"/>
+        <asp:Button CssClass="btn col-md-2" ID="NextButton" runat="server" Text="Next" OnClick="NextButton_Click" BackColor="#A6EBF7" />
         <%--<asp:Button ID="Button1" runat="server" Text="Next" PostBackUrl="~/Pages/Survey/DemographicsPage.aspx" OnClick="NextButton_Click"/>--%>
    </div>
 

@@ -2,7 +2,7 @@
 
 <asp:Content ID="AdminMainPage" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="card">
-        <div class="col-sm-12 text-center mt-3">
+        <div class="col-sm-12 ml-12 mt-3">
             <asp:Label ID="WelcomeMessage" runat="server" Text="Welcome, " CssClass="h4" />
         </div>
 
@@ -20,17 +20,18 @@
             <div class="form-inline mx-auto my-3">
                 <asp:Label ID="PendingRequestsLabel" runat="server" Text="Pending Contact Requests:" />
                 <asp:Label ID="PendingRequestNumberLabel" runat="server" />
-                <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn btn-primary" OnClick="ViewButton_Click" />
+                <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn " OnClick="ViewButton_Click" BackColor="#a6ebf7" />
             </div>
         </div>
 
+        <hr />
 
         <div class="form-group mx-auto">
-            <asp:Button ID="RecentSurveysButton" runat="server" Text="View Recent Surveys" CssClass="btn btn-primary" OnClick="RecentSurveysButton_Click" />
+            <asp:Button ID="RecentSurveysButton" runat="server" Text="View Recent Surveys" CssClass="btn" OnClick="RecentSurveysButton_Click" BackColor="#223F88" Forecolor="white" />
         </div>
 
         <div class="form-group mx-auto">
-            <asp:Button ID="RecentReportsButton" runat="server" Text="View Recent Reports" CssClass="btn btn-primary" OnClick="RecentReportsButton_Click" />
+            <asp:Button ID="RecentReportsButton" runat="server" Text="View Recent Reports" CssClass="btn" OnClick="RecentReportsButton_Click" BackColor="#223F88" Forecolor="white"/>
         </div>
 
 

@@ -27,7 +27,7 @@
             <div class="card container"> <%--site show section--%>
                 <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS">
                     <AlternatingItemTemplate>
-                        <tr style="background-color: #FFFFFF; color: #284775;">
+                        <tr style="background-color: #bdfeff; color: #284775;">
                             <td>
                                 <asp:Label Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
                                  <td>
@@ -37,9 +37,9 @@
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
-                        <tr style="background-color: #999999;">
+                        <tr style="background-color: #bdfeff;">
                             <td>
-                                <asp:TextBox Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
+                                <asp:TextBox CssClass="mx-3" Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
                             <td>
@@ -68,7 +68,7 @@
                             <tr runat="server">
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                        <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
+                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-6 py-2">Site</th>
                                             <th runat="server" class="col-sm-3 py-2">Edit</th>
                                             <th runat="server" class="col-sm-3 py-2">Delete</th>

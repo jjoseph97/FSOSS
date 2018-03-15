@@ -40,7 +40,8 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
                         PendingRequestNumberLabel.Font.Bold = true;
                         PendingRequestNumberLabel.CssClass += " text-danger";
-                        PendingContactSection.Attributes["class"] += " card border-dark bg-warning";
+                        PendingContactSection.Attributes["class"] += " card border-none";
+                        PendingContactSection.Attributes["style"] += " background-colour: #eeeeee";
                     }
                     else
                     {
