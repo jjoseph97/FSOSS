@@ -66,7 +66,7 @@ public partial class Pages_AdministratorPages_ContactListPage : System.Web.UI.Pa
         if (e.CommandName== "look"){
             Label l = (Label)e.Item.FindControl("submittedSurveyIDLabel");
 
-            string url = "~/Admin/SubmittedSurveyViewerPage.aspx?field=" + l.Text;
+            string url = "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + l.Text;
             Response.Redirect(url); }
 
     }
