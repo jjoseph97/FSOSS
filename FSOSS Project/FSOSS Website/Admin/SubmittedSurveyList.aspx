@@ -12,21 +12,23 @@
                 <asp:ListView ID="SubmittedSurveyList" runat="server" DataSourceID="SubmittedSurveyODS">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" CssClass="pl-3" ID="unitNumberLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("participantType") %>' runat="server" CssClass="pl-3" ID="participantTypeLabel" /></td>
                             <td>
+                                <asp:Label Text='<%# Eval("mealName") %>' runat="server" CssClass="pl-3" ID="Label2" /></td>
+                            <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
                                 <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl="~/Admin/SubmittedSurveyViewerPage.aspx" /></td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
                         </tr>
                     </AlternatingItemTemplate>
@@ -39,21 +41,23 @@
                     </EmptyDataTemplate>
                     <ItemTemplate>
                         <tr style="background-color: #FFFFFF; color: #333333;">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" CssClass="pl-3" ID="unitNumberLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("participantType") %>' runat="server" CssClass="pl-3" ID="participantTypeLabel" /></td>
                             <td>
+                                <asp:Label Text='<%# Eval("mealName") %>' runat="server" CssClass="pl-3" ID="Label1" /></td>
+                            <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>'/></td>
-                            <td style="display:none;">
+                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
                         </tr>
                     </ItemTemplate>
@@ -64,7 +68,8 @@
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-2 py-2">Unit Number</th>
-                                            <th runat="server" class="col-sm-4 py-2">Participant Type</th>
+                                            <th runat="server" class="col-sm-2 py-2">Participant Type</th>
+                                            <th runat="server" class="col-sm-2 py-2">Meal Name</th>
                                             <th runat="server" class="col-sm-4 py-2">Date Submitted</th>
                                             <th runat="server" class="col-sm-2 py-2">View Survey</th>
                                         </tr>
