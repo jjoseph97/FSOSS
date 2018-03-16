@@ -27,7 +27,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             List<SitePOCO> siteList = siteController.GetSiteList();
             HospitalDropDownList.DataSource = siteList;
             HospitalDropDownList.DataValueField = "siteID";
-            HospitalDropDownList.DataValueField = "siteName";
+            HospitalDropDownList.DataTextField = "siteName";
             HospitalDropDownList.DataBind();
            
         }

@@ -43,7 +43,7 @@
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="MealLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Meal:"></asp:Label>
-                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2 form-control" runat="server">
+                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
                         <asp:ListItem Text="No Meal" Selected="True" Value="0" />
                     </asp:DropDownList>
                 </div>
