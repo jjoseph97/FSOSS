@@ -614,7 +614,7 @@ VALUES ('Prefer not to Answer');
 --create dummy submitted surveys
 INSERT INTO SUBMITTED_SURVEY(SURVEY_VERSION_ID, UNIT_ID, MEAL_ID, PARTICIPANT_TYPE_ID, AGE_RANGE_ID, GENDER_ID, DATE_ENTERED,
 							CONTACT_STATUS, CONTACT_ROOM_NUMBER, CONTACT_PHONE_NUMBER)
-VALUES (1, 1, 1, 1, 3,3,Now(), 'no', '', '');
+VALUES (1, 1, 1, 1, 3,3,Now(), 'Yes', '101', '7805551234');
 INSERT INTO SUBMITTED_SURVEY(SURVEY_VERSION_ID, UNIT_ID, MEAL_ID, PARTICIPANT_TYPE_ID, AGE_RANGE_ID, GENDER_ID, DATE_ENTERED,
 							CONTACT_STATUS, CONTACT_ROOM_NUMBER, CONTACT_PHONE_NUMBER)
 VALUES (1, 2, 3, 1, 1,1,Now(), 'contact', '222', '8883333');
@@ -663,7 +663,7 @@ VALUES (1,9,'Never');
 INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
 VALUES (1,10,'5');
 INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
-VALUES (1,11,'I Ate');
+VALUES (1,11,'The meal was great and everything tasted excellent. Loved the coffee.');
 --INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
 --VALUES (1,12,'3');
 --INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
@@ -849,7 +849,7 @@ VALUES (9,10,'3');
 INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
 VALUES (9,11,'I visited Misericordia Community Hospital the day Edmonton made headlines for being colder than both the North and the South Pole.
 
-The temperature was a mind and body-numbing –37 C with the wind chill and yet Misericordia was doing a booming business. 
+The temperature was a mind and body-numbing Â–37 C with the wind chill and yet Misericordia was doing a booming business. 
 
 Maybe these people, having been cooped up with relatives too long during the holidays, needed a change of scenery.
 
