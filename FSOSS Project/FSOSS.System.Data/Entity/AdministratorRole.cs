@@ -16,11 +16,11 @@ namespace FSOSS.System.Data.Entity
     public class AdministratorRole
     {
         // Latest Update March 4, 2018. Ren
-        [Key, Column(Order = 1)]
+        [Key, Column("administrator_account_id", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int administrator_account_id { get; set; }
        
-        [Key, Column(Order = 2)]
+        [Key, Column("security_role_id", Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int security_role_id { get; set; }
 

@@ -16,12 +16,12 @@ namespace FSOSS.System.Data.Entity
     public class ParticipantResponse
     {
         
-        [Key, Column(Order =1)]
+        [Key, Column("submitted_survey_id", Order =1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int submitted_survey_id { get; set; }
 
        
-        [Key, Column(Order = 2)]
+        [Key, Column("question_id", Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int question_id { get; set; }
         
