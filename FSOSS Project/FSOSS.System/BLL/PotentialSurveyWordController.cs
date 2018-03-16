@@ -136,7 +136,13 @@ namespace FSOSS.System.BLL
                     // Check if the current word is in use
                     var surveyWordAttachToHospital = (from x in context.SurveyWords
                                                       where x.survey_word_id == surveyWordID
-                                                      select x).FirstOrDefault();
+                                                      select new SurveyWordPOCO()
+                                                      {
+                                                             siteID = x.site_id,
+                                                             surveyWordID = x.survey_word_id,
+                                                           dateUsed = x.date_used
+                                                         
+                                                      }).FirstOrDefault();
 
                     if (surveyWordAttachToHospital == null)
                     {

@@ -16,10 +16,10 @@ namespace FSOSS.System.Data.Entity
     public class SurveyWord
     {
         // Latest Update March 4, 2018. Ren
-        [Key, Column(Order = 1)]
+        [Key, Column("survey_word_id",Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int survey_word_id { get; set; }
-        [Key, Column(Order = 2)]
+        [Key, Column("site_id",Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int site_id { get; set; }
 
