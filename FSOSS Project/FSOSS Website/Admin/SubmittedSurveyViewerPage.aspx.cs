@@ -16,4 +16,19 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
 
 
     }
+
+    protected void ResolveButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void UnresolveButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void BackToSurveyListButton_Click(object sender, EventArgs e)
+    {
+
+    }
 }

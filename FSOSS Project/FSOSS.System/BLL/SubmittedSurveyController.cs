@@ -163,14 +163,13 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var survey = from y in context.ParticipantResponses
+                    var survey = (from y in context.ParticipantResponses
                                                 where y.submitted_survey_id == subSurNum
                                                 select new ParticipantResponsePOCO
                                                 {
                                                     question = y.question.question_text,
-                                                    questionTopic = y.question.QuestionTopic.question_topic_description,
                                                     response = y.participant_answer
-                                                };
+                                                }).Take(9);
                     return survey.ToList();
                 }
                 catch (Exception e)
