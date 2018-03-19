@@ -90,19 +90,49 @@ namespace FSOSS.System.BLL
             }
         }//eom
 
-   
+        /// <summary>
+        /// Method use to disable words from the list that is use in the potential access words
+        /// </summary>
+        /// <param name="unit_id"></param>
+        /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public void DeleteUnit(int unit_id)
+        public string DisableUnit(int unit_id)
         {
             using (var context = new FSOSSContext())
             {
-                var existingUnit_ID = context.Units.Find(unit_id);
-                context.Units.Remove(existingUnit_ID);
-                context.SaveChanges();
+                string message = "";
+                try
+                {
+                    // Check if the unit exists
+                    var unitInHospital = (from x in context.Units
+                                                      where x.unit_id== unit_id
+                                                     select new UnitsPOCO()
+                                                      {
+                                                          unitID = x.unit_id,
+                                                          unitNumber=x.unit_number
 
+                                                      }).FirstOrDefault();
+
+                    if (unitInHospital == null)
+                    {
+                        Unit unit = context.Units.Find(unit_id);
+                        unit.is_closed_yn = true;
+                        context.Entry(unit).Property(y => y.is_closed_yn).IsModified = true;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Unable to archive selected Unit. Unit is currently active.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
+                }
+                return message;
             }
-        }//eom
+        }
 
     }
 }
