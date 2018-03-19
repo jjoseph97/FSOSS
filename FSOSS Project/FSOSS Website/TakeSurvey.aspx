@@ -24,8 +24,20 @@
                 <asp:ListItem Value="3N">3N</asp:ListItem>
                 <asp:ListItem Value="ED">ED</asp:ListItem>
             </asp:DropDownList><br />
+
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number"></asp:Label>
+            <asp:DropDownList ID="UnitDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="UnitsObjectDataSource" DataTextField="unitNumber" DataValueField="unitID">
+            </asp:DropDownList>
+
+            <asp:ObjectDataSource runat="server" ID="UnitsObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="UnitDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
+                </SelectParameters>
+            </asp:ObjectDataSource>
         </div>
+
         <br />
+
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type"></asp:Label> 
             <asp:DropDownList ID="ParticipantType" CssClass="col-md-3 form-control" runat="server">
@@ -33,6 +45,9 @@
                 <asp:ListItem Value="PT">Patient</asp:ListItem>
                 <asp:ListItem Value="NPT">Non-Patient</asp:ListItem>
             </asp:DropDownList><br />
+
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type"></asp:Label> 
+            <asp:DropDownList ID="ParticipantDropDownList" runat="server"></asp:DropDownList>
         </div>
         <br />
         <div class="row">
