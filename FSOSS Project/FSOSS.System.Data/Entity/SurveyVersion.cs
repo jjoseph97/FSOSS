@@ -17,7 +17,7 @@ namespace FSOSS.System.Data.Entity
     {
         // Latest Update March 4, 2018. Ren
         [Key]
-        public int version_id { get; set; }
+        public int survey_version_id { get; set; }
         
         [ForeignKey("AdministratorAccount")]
         public int administrator_account_id{get;set;}

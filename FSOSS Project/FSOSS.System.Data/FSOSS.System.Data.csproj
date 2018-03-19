@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\FinalReportDTO.cs" />
     <Compile Include="DTO\ReportDTO.cs" />
     <Compile Include="Entity\AdministratorAccount.cs" />
     <Compile Include="Entity\AdministratorRole.cs" />
