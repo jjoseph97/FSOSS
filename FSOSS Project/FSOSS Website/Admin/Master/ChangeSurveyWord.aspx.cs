@@ -15,50 +15,65 @@ using FSOSS.System.Data.Entity;
 public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads, the Alert and ErrorAlert labels (messages for the user to see) are turned off.
+    /// When the page loads, the SuccessAlert and ErrorAlert labels (messages for the user to see) are turned off.
     /// The DataSoruceID on the SurveyWordListView is set to the SurveyWordODS Object Data Source.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        Alert.Visible = false;
+        SuccessAlert.Visible = false;
         ErrorAlert.Visible = false;
 
-        if (SearchWordTextBox.Text == "")
-        {
-            SurveyWordListView.DataSourceID = "SurveyWordODS";
-        }
-        else
-        {
-            PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
-            string searchWord = SearchWordTextBox.Text.Trim();
-            Alert.Visible = false;
-            SurveyWordListView.DataSourceID = "";
-            SurveyWordListView.DataSource = sysmgr.GetSurveyWord(searchWord);
-            SurveyWordListView.DataBind();
-        }
+        SurveyWordListView.DataSourceID = "SurveyWordODS";
+
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void SearchWordButton_Click(object sender, EventArgs e)
     {
-        PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
         string searchWord = SearchWordTextBox.Text.Trim();
-        Alert.Visible = true;
-        SurveyWordListView.DataSourceID = "";
-        SurveyWordListView.DataSource = sysmgr.GetSurveyWord(searchWord);
+        SuccessAlert.Visible = true;
+        
+        SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+
         SurveyWordListView.DataBind();
         if (searchWord == "")
         {
-            Alert.Visible = false;
+            SuccessAlert.Visible = false;
         }
         else
         {
-            Alert.Text = "Found the following results for \"" + searchWord + "\"";
+            SuccessAlert.Text = "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.";
+            SearchWordTextBox.ReadOnly = true;
+            SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
             ClearSearchButton.Visible = true;
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void ClearSearchButton_Click(object sender, EventArgs e)
+    {
+        SurveyWordListView.DataSourceID = "SurveyWordODS";
+        SurveyWordListView.DataBind();
+        SearchWordTextBox.ReadOnly = false;
+        SearchWordTextBox.BackColor = System.Drawing.Color.White;
+        ClearSearchButton.Visible = false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
@@ -83,30 +98,54 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         }
         else
         {
-            Alert.Visible = true;
-            Alert.Text = sysmgr.AddWord(addWord);
+            SuccessAlert.Visible = true;
+            SuccessAlert.Text = sysmgr.AddWord(addWord);
             SurveyWordListView.DataBind();
             AddWordTextBox.Text = "";
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ShowArchivedButton_Click(object sender, EventArgs e)
     {
 
     }
 
-    protected void ClearSearchButton_Click(object sender, EventArgs e)
-    {
-        SurveyWordListView.DataSourceID = "SurveyWordODS";
-        SurveyWordListView.DataBind();
-        ClearSearchButton.Visible = false;
-
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void SurveyWordListView_ItemCommand(object sender, ListViewCommandEventArgs e)
     {
+        if (e.CommandName == "Edit")
+        {
+            // assign the appropriate ODS if a search term has been entered
+            if (SearchWordTextBox.Text == "")
+            {
+                SurveyWordListView.DataSourceID = "SurveyWordODS";
+            }
+            else
+            {
+                SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+            }
+        }
+
         if (e.CommandName == "Update")
         {
+            // assign the appropriate ODS if a search term has been entered
+            if (SearchWordTextBox.Text == "")
+            {
+                SurveyWordListView.DataSourceID = "SurveyWordODS";
+            }
+            else
+            {
+                SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+            }
             Regex validWord = new Regex("^[a-zA-Z]+$");
             TextBox surveyWord = (TextBox)e.Item.FindControl("surveyWordTextBox");
             string updateWord = surveyWord.Text.Trim();
@@ -123,16 +162,26 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             }
             else
             {
-                Alert.Visible = true;
-                Alert.Text = "The survey word has been updated to \"" + updateWord + "\".";
+                SuccessAlert.Visible = true;
+                SuccessAlert.Text = "The survey word has been updated to \"" + updateWord + "\".";
             }
         }
 
         if (e.CommandName == "Delete")
         {
+            // assign the appropriate ODS if a search term has been entered
+            if (SearchWordTextBox.Text == "")
+            {
+                SurveyWordListView.DataSourceID = "SurveyWordODS";
+            }
+            else
+            {
+                SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+            }
             Label surveyWord = (Label)e.Item.FindControl("surveyWordLabel");
             ErrorAlert.Visible = true;
             ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
         }
     }
+
 }

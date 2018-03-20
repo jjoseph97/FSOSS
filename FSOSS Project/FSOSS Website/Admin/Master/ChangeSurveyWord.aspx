@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
+            <asp:Label ID="SuccessAlert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
         <div class="col-sm-12">
@@ -107,6 +107,18 @@
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
+                        <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
+                    </UpdateParameters>
+                </asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="SearchSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DisableWord" UpdateMethod="UpdateWord">
+                    <DeleteParameters>
+                        <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
+                    </DeleteParameters>
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="SearchWordTextBox" PropertyName="Text" Name="surveyWord" Type="String"></asp:ControlParameter>
+                    </SelectParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>

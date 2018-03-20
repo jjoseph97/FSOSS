@@ -18,7 +18,7 @@ namespace FSOSS.System.BLL
     public class PotentialSurveyWordController
     {
         /// <summary>
-        /// Method use to add new potential survey word to the list
+        /// Method used to add a new potential survey word to the list
         /// </summary>
         /// <param name="newWord"></param>
         /// <returns>returns confirmation from the list</returns>
@@ -64,7 +64,7 @@ namespace FSOSS.System.BLL
         } 
 
         /// <summary>
-        /// Method use to update word from the list
+        /// Method used to update a survey word from the list
         /// </summary>
         /// <param name="surveyWord"></param>
         /// <param name="surveyWordID"></param>
@@ -121,7 +121,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Method use to disable words from the list that is use in the potential access words
+        /// Method used to disable words from the list that is used in the potential access words
         /// </summary>
         /// <param name="surveyWordID"></param>
         /// <returns>return confirmation message</returns>
@@ -164,6 +164,11 @@ namespace FSOSS.System.BLL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surveyWord"></param>
+        /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<PotentialSurveyWordPOCO> GetSurveyWord(string surveyWord)
         {
@@ -194,6 +199,10 @@ namespace FSOSS.System.BLL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<PotentialSurveyWordPOCO> GetAllSurveyWord()
         {
@@ -223,6 +232,10 @@ namespace FSOSS.System.BLL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<PotentialSurveyWordPOCO> GetActiveSurveyWord()
         {
