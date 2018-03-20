@@ -25,7 +25,7 @@
                 <asp:ListItem Value="ED">ED</asp:ListItem>
             </asp:DropDownList><br />
 
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number"></asp:Label>
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number:"></asp:Label>
             <asp:DropDownList ID="UnitDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="UnitsObjectDataSource" DataTextField="unitNumber" DataValueField="unitID">
             </asp:DropDownList>
 
@@ -46,10 +46,15 @@
                 <asp:ListItem Value="NPT">Non-Patient</asp:ListItem>
             </asp:DropDownList><br />
 
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type"></asp:Label> 
-            <asp:DropDownList ID="ParticipantDropDownList" runat="server"></asp:DropDownList>
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type:"></asp:Label> 
+            <asp:DropDownList ID="ParticipantTypeDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="ParticipantTypeObjectDataSource" DataTextField="participantTypeDescription" DataValueField="participantTypeID"></asp:DropDownList>
+            <asp:ObjectDataSource runat="server" ID="ParticipantTypeObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController"></asp:ObjectDataSource>
         </div>
+
+
         <br />
+
+
         <div class="row">
             <asp:Label class="col-md-3 my-2" runat="server" Text="Meal Type"></asp:Label> 
             <asp:DropDownList ID="MealType" CssClass="col-md-3 form-control" runat="server">
@@ -59,6 +64,10 @@
                 <asp:ListItem Value="DN">Dinner</asp:ListItem>
                 <asp:ListItem Value="SN">Snacks</asp:ListItem>
             </asp:DropDownList><br /><br />
+
+            <asp:Label class="col-md-3 my-2" runat="server" Text="Meal Type:"></asp:Label> 
+            <asp:DropDownList ID="MealTypeDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="MealTypeObjectDataSource" DataTextField="mealName" DataValueField="mealID"></asp:DropDownList>
+            <asp:ObjectDataSource runat="server" ID="MealTypeObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetMealList" TypeName="FSOSS.System.BLL.MealController"></asp:ObjectDataSource>
         </div>
         <br />
            
@@ -78,7 +87,7 @@
         <%--Q1A--%>
         <div class="row">
             <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The variety of food in your daily meals"></asp:Label> 
-            <asp:DropDownList ID="Q1A" CssClass="col-md-4 form-control" runat="server">
+            <asp:DropDownList ID="Q1ADropDown" CssClass="col-md-4 form-control" runat="server">
                 <asp:ListItem Value="">Select...</asp:ListItem>
                 <asp:ListItem Value="VG">Very Good</asp:ListItem>
                 <asp:ListItem Value="G">Good</asp:ListItem>
@@ -87,6 +96,15 @@
                 <asp:ListItem Value="DKNO">Don't Know/No Opinion</asp:ListItem>
             </asp:DropDownList><br />
             <asp:Label ID="testMsg" runat="server" />
+
+            <asp:Label class="col-md-4 ml-md-5 my-2" runat="server" Text="The variety of food in your daily meals"></asp:Label> 
+            <asp:DropDownList ID="Q1A" runat="server" DataSourceID="Q1AObjectDataSource" DataTextField="Text" DataValueField="Value"></asp:DropDownList>
+
+            <asp:ObjectDataSource runat="server" ID="Q1AObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetQuestionReponse" TypeName="FSOSS.System.BLL.QuestionSelectionController">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="Q1A" PropertyName="SelectedValue" Name="question_id" Type="Int32"></asp:ControlParameter>
+                </SelectParameters>
+            </asp:ObjectDataSource>
         </div>
         <br />
 
