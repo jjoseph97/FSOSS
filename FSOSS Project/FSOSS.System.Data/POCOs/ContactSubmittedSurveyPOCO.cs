@@ -14,7 +14,8 @@ namespace FSOSS.System.Data.POCOs
         public string unitNumber { get; set; }
         public string participantType { get; set; }
         public DateTime dateEntered { get; set; }
-        public string contactStatus { get; set; }
+        public bool contactRequest { get; set; }
+        public bool contacted { get; set; }
         public string contactRoomNumber { get; set; }
         public string contactPhoneNumber { get; set; }
 
