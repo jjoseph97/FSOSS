@@ -10,5 +10,8 @@ namespace FSOSS.System.Data.POCOs
     {
         public int ageRangeID { get; set; }
         public string ageRangeDescription { get; set; }
+        public DateTime dateModified { get; set; }
+        public int administratorAccountId { get; set; }
+        public bool archivedYn { get; set; }
     }
 }
