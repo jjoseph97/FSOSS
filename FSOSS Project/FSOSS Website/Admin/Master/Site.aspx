@@ -29,11 +29,11 @@
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bdfeff; color: #284775;">
                             <td>
-                                <asp:Label Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
                                  <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                                 <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Close" ID="DeleteButton" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -60,7 +60,7 @@
                              <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Close" ID="DeleteButton" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
@@ -71,7 +71,7 @@
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-6 py-2">Site</th>
                                             <th runat="server" class="col-sm-3 py-2">Edit</th>
-                                            <th runat="server" class="col-sm-3 py-2">Delete</th>
+                                            <th runat="server" class="col-sm-3 py-2">Close Site</th>
 
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
@@ -98,7 +98,7 @@
                              <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Close" ID="DeleteButton" /></td>
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>

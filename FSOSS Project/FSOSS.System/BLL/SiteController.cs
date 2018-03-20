@@ -86,6 +86,10 @@ namespace FSOSS.System.BLL
                         newSite.administrator_account_id = employee;
                         newSite.site_name = newSiteName.Trim();
                         newSite.date_modified = DateTime.Now;
+                        newSite.is_closed_yn = false;
+                        context.Sites.Add(newSite);
+                        context.SaveChanges();
+                        message = "Successfully added the new site: \"" + newSiteName + "\"";
 
                     }
                 }

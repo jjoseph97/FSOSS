@@ -37,7 +37,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         SiteController sysmgr = new SiteController();
 
         string siteName = AddSiteTextBox.Text.Trim();
-        Regex validWord = new Regex("^[a-zA-Z]+$");
+        Regex validWord = new Regex("^[a-zA-Z ]+$");
         int employee = int.Parse(Session["userid"].ToString());
 
         if (siteName == "" || siteName == null)
@@ -48,7 +48,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         else if (!validWord.IsMatch(siteName))
         {
             ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: Please enter only alphabetical letters and no spaces.";
+            ErrorAlert.Text = "Error: Please enter only alphabetical letters.";
         }
         else
         {
