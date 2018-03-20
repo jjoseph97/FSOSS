@@ -79,7 +79,7 @@ namespace FSOSS.System.BLL
                         newUnit.date_modified = DateTime.Now;
                         context.Units.Add(newUnit);
                         context.SaveChanges();
-                        message = "Successfully added the new survey word: \"" + newUnit + "\"";
+                        message = "Successfully added the new unit: \"" + newUnit + "\"";
                     }
                 }
                 catch (Exception e)
@@ -91,7 +91,7 @@ namespace FSOSS.System.BLL
         }//eom
 
         /// <summary>
-        /// Method use to disable words from the list that is use in the potential access words
+        /// Method use to disable  Unit from the list that is use in a site
         /// </summary>
         /// <param name="unit_id"></param>
         /// <returns>return confirmation message</returns>
@@ -129,6 +129,63 @@ namespace FSOSS.System.BLL
                 catch (Exception e)
                 {
                     throw new Exception("Something went wrong. See " + e.Message);
+                }
+                return message;
+            }
+        }
+
+        /// <summary>
+        /// Method use to Update unit from the list that is use in the Site
+        /// </summary>
+        /// <param name="unit_id" name,"string unit_number"></param>
+        /// <returns>return confirmation message</returns>
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public string UpdateUnit(int unit_id ,string unit_number)
+        {
+            using (var context = new FSOSSContext())
+            {
+                unit_number = unit_number.ToUpper();
+                Regex validUnit = new Regex("^[0-9][a-zA-Z]+$");
+                string message = "";
+                bool inUse = false;
+                try
+                {
+                    var unitList = (from x in context.Units
+                                          select new UnitsPOCO()
+                                          {
+                                              unitID = x.unit_id,
+                                              dateModified = x.date_modified,
+                                              unitNumber = x.unit_number
+                                          }).ToList();
+
+
+                    foreach (UnitsPOCO item in unitList)
+                    {
+                        if (item.unitID == unit_id && item.dateModified == DateTime.Now)
+                        {
+                            inUse = true;
+                            break;
+                        }
+                    }
+
+                    if (validUnit.IsMatch(unit_number) && inUse == false)
+                    {
+                        var unitToUpdate = context.Units.Find(unit_id);
+                        unitToUpdate.is_closed_yn = true;
+                        unitToUpdate.date_modified = DateTime.Now;
+                        context.Entry(unitToUpdate).Property(y => y.is_closed_yn).IsModified = true;
+                        context.Entry(unitToUpdate).Property(y => y.date_modified).IsModified = true;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Unit is currently use. Update failed.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    message = e.Message;
                 }
                 return message;
             }
