@@ -14,11 +14,30 @@ using FSOSS.System.Data.Entity;
 
 public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord : System.Web.UI.Page
 {
+    /// <summary>
+    /// When the page loads, the Alert and ErrorAlert labels (messages for the user to see) are turned off.
+    /// The DataSoruceID on the SurveyWordListView is set to the SurveyWordODS Object Data Source.
+    /// </summary>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         Alert.Visible = false;
         ErrorAlert.Visible = false;
-        SurveyWordListView.DataSourceID = "SurveyWordODS";
+
+        if (SearchWordTextBox.Text == "")
+        {
+            SurveyWordListView.DataSourceID = "SurveyWordODS";
+        }
+        else
+        {
+            PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
+            string searchWord = SearchWordTextBox.Text.Trim();
+            Alert.Visible = false;
+            SurveyWordListView.DataSourceID = "";
+            SurveyWordListView.DataSource = sysmgr.GetSurveyWord(searchWord);
+            SurveyWordListView.DataBind();
+        }
     }
 
     protected void SearchWordButton_Click(object sender, EventArgs e)
@@ -38,7 +57,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             Alert.Text = "Found the following results for \"" + searchWord + "\"";
             ClearSearchButton.Visible = true;
         }
-        SearchWordTextBox.Text = "";
     }
 
     protected void AddWordButton_Click(object sender, EventArgs e)
