@@ -60,5 +60,24 @@ namespace FSOSS.System.BLL
                 }
             }
         }
+
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public List<SitePOCO> AddSite(string siteName, int employee)
+        {
+            using (var context = new FSOSSContext())
+            {
+                string message = "";
+
+                try
+                {
+
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+                return GetSiteList();
+        }
     }
 }
