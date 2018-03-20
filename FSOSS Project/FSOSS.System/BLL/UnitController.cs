@@ -27,7 +27,7 @@ namespace FSOSS.System.BLL
                     var unitList = from x in context.Sites
                                    from y in context.Units
                                    where x.site_id == y.site_id
-                                   & !y.is_closed_yn
+                                   & !y.is_closed_yn & y.site_id != 11
                                    select new UnitsPOCO()
                                    {
                                        unitID = y.unit_id,
@@ -107,7 +107,7 @@ namespace FSOSS.System.BLL
                     // Check if the unit exists
                     var unitInHospital = (from x in context.Units
                                                       where x.unit_id== unit_id
-                                                     select new UnitsPOCO()
+                                                      select new UnitsPOCO()
                                                       {
                                                           unitID = x.unit_id,
                                                           unitNumber=x.unit_number
@@ -146,7 +146,7 @@ namespace FSOSS.System.BLL
             using (var context = new FSOSSContext())
             {
                 unit_number = unit_number.ToUpper();
-                Regex validUnit = new Regex("^[0-9][a-zA-Z]+$");
+                Regex validUnit = new Regex("^[0-9]{1,3}\\s{0,1}[a-zA-Z]*$");
                 string message = "";
                 bool inUse = false;
                 try
