@@ -13,6 +13,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FSOSS.System.Data.Entity
 {
+
+    //updated March 20, Chris: CRUD Monitoring
     [Table("participant_type", Schema = "public")]
     public class ParticipantType
     {
@@ -27,7 +29,7 @@ namespace FSOSS.System.Data.Entity
         public int administrator_account_id { get; set; }
         public bool archived_yn { get; set; }
 
-        public virtual AdministratorAccount administrator { get; set; }
+        public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual ICollection<SubmittedSurvey> submittedsurvey { get; set; }
     }
 }

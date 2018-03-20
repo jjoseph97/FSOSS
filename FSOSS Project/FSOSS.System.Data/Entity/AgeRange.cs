@@ -16,7 +16,7 @@ namespace FSOSS.System.Data.Entity
     public class AgeRange
     {
 
-        // Latest Update March 4, 2018. Ren
+        // Latest Update March 4, 2018. Ren//updated March 20, Chris: CRUD Monitoring
         [Key]
         public int age_range_id { get; set; }
         [Required(ErrorMessage = "Age range description required")]
@@ -28,7 +28,7 @@ namespace FSOSS.System.Data.Entity
         public int administrator_account_id { get; set; }
         public bool archived_yn { get; set; }
 
-        public virtual AdministratorAccount administrator { get; set; }
+        public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual ICollection<SubmittedSurvey> submittedsurvey { get; set; }
     }
 }

@@ -47,9 +47,11 @@
                                 <span>No data was returned.</span>
                             </EmptyDataTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="ContactLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Status:"></asp:Label>
-                                <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="ContactStatusLabel" /><br />
-                                <asp:Label ID="ContactRoomLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Room Number:"></asp:Label>
+                                <asp:Label ID="ContactLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requested?:"></asp:Label>
+                                <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="ContactStatusLabel" /><br />
+                                <asp:Label ID="ContactedLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Status:"></asp:Label>
+                                <asp:Label Text='<%# Eval("contacted") %>' runat="server" ID="Label2" /><br />
+                               <asp:Label ID="ContactRoomLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Room Number:"></asp:Label>
                                 <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="ContactRoomNumberLabel" /><br />
                                 <asp:Label ID="ContactPhoneLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Phone Number:"></asp:Label>
                                 <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="ContactPhoneNumberLabel" />

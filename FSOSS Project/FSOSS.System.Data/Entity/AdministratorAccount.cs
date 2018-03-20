@@ -15,7 +15,7 @@ namespace FSOSS.System.Data.Entity
     [Table("administrator_account", Schema = "public")]
     public class AdministratorAccount
     {
-        // Latest Update March 4, 2018. Ren
+        // Latest Update March 4, 2018. Ren //updated march 20, 2018. Chris: Demographic CRUD
 
         [Key]
         public int administrator_account_id { get; set; }
@@ -35,8 +35,12 @@ namespace FSOSS.System.Data.Entity
         public DateTime date_modified { get; set; }
 
         public virtual ICollection<AdministratorRole> administratorrole { get; set; }
-        public virtual ICollection<Question> question { get; set; }
-        public virtual ICollection<Unit> unit { get; set; }
-        public virtual ICollection<Site> site { get; set; }
+        public virtual ICollection<Question> questions { get; set; }
+        public virtual ICollection<Unit> units { get; set; }
+        public virtual ICollection<Site> sites { get; set; }
+        public virtual ICollection<Meal> meals { get; set; }
+        public virtual ICollection<Gender> genders { get; set; }
+        public virtual ICollection<ParticipantType> participant_types { get; set; }
+        public virtual ICollection<AgeRange> age_ranges { get; set; }
     }
 }
