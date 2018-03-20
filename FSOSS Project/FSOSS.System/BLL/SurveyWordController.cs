@@ -21,7 +21,7 @@ namespace FSOSS.System.BLL
                                                    select x).ToList();
                 //Get the list of potential survey word which is currently active
                 List<PotentialSurveyWord> potentialSurveyWordList = (from x in context.PotentialSurveyWords
-                                                                     where x.archive_yn == true
+                                                                     where x.archive_yn == false
                                                                      select x).ToList();
                 //Get the list of all site to be added
                 List<Site> siteList = (from x in context.Sites
@@ -29,7 +29,7 @@ namespace FSOSS.System.BLL
                 // Check if theres enough active Potential Survey Word on the list
                 if (siteList.Count > potentialSurveyWordList.Count())
                 {
-                    throw new Exception("Please add more potential survey word. Not enough potential survey word available to be assign on the hospital.");
+                    throw new Exception("Please add more potential survey word. Not enough potential survey word available to be assign on the hospitals.");
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace FSOSS.System.BLL
                                 }
                             }
                             //If the Word doesn't exists after the loop on Survey Word List. Exit on the loop else start the process all over again.
-                        } while (wordIsUsed == false);
+                        } while (wordIsUsed == true);
 
                         //Add SurveyWord after the check
                         SurveyWord newSurveyWord = new SurveyWord()

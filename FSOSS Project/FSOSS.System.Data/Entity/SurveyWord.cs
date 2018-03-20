@@ -27,7 +27,7 @@ namespace FSOSS.System.Data.Entity
         public DateTime date_used { get; set; }
 
 
-        public virtual SurveyWord surveyword { get; set; }
-        public virtual Site site { get; set; }
+        public virtual PotentialSurveyWord PotentialSurveyWord { get; set; }
+        public virtual Site Site { get; set; }
     }
 }

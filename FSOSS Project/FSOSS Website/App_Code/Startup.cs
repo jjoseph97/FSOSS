@@ -15,8 +15,8 @@ namespace FSOSS_Website
             app.UseHangfireDashboard();
             SurveyWordController sysmgr = new SurveyWordController();
             RecurringJob.AddOrUpdate(() => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Daily);
-            // Check if recurring works
-            //RecurringJob.AddOrUpdate(() => sysmgr.Sample(), Cron.Minutely);
+            // Check if recurring works. Take note this will occur every minute!
+            //RecurringJob.AddOrUpdate(() => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Minutely);
         }
     }
 }
