@@ -215,9 +215,48 @@ namespace FSOSS.System.BLL
 
 
 
+            
+
+        }
+        
+        /// <summary>
+        /// Returns if the participant of the submitted survey 
+        /// wants/wanted contact
+        /// </summary>
+        /// <param name="submittedSurveyID">the submitted survey id of the survey 
+        /// which we want to know if they want contact</param>
+        /// <returns>true, wants contact. false, no contact wanted/needed</returns>
+        public bool wantsContact(int submittedSurveyID)
+        {
+
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    SubmittedSurvey ss = context.SubmittedSurveys.Find(submittedSurveyID);
+                    if (ss.contacted==false && ss.contact_request==true)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+
+
+
             //obtain specific submitted survey results
 
         }
+
+
 
     }
 }
