@@ -22,7 +22,13 @@ namespace FSOSS.System.Data.Entity
         [Required(ErrorMessage = "Gender description required")]
         [StringLength(100, ErrorMessage = "Enter gender description cannot exceed 100 character")]
         public String gender_description { get; set; }
+        [Required(ErrorMessage = "Date modified required")]
+        public DateTime date_modified { get; set; }
+        [ForeignKey("AdministratorAccount")]
+        public int administrator_account_id { get; set; }
+        public bool archived_yn { get; set; }
 
+        public virtual AdministratorAccount administrator { get; set; }
         public virtual ICollection<SubmittedSurvey> submittedsurvey { get; set; }
     }
 }
