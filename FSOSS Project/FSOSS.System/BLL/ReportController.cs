@@ -18,23 +18,14 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                // get all version
-                var allSurveyVersions = (from x in context.SurveyVersions
-                                         select x).AsQueryable();
-
-                // get latest version
-                var surveyVersion = (from x in context.SurveyVersions
-                                     where x.start_date == allSurveyVersions.Where(finalDate => finalDate.end_date.Equals(null))
-                                                                            .Max(latestDate => latestDate.start_date)
-                                     select x).ToList().FirstOrDefault();
+                
 
                 // get the submitted survey with matching criteria
                 var reportDTO = (from x in context.SubmittedSurveys
                                  where x.date_entered >= startDate
                                  && x.date_entered <= endDate
                                  && x.Unit.site_id == siteID
-                                 && x.meal_id == mealID
-                                 && x.survey_version_id == surveyVersion.survey_version_id
+                                 && x.meal_id == mealID                             
                                  select new ReportDTO
                                  {
                                      age_range_id = x.age_range_id,
@@ -71,9 +62,6 @@ namespace FSOSS.System.BLL
 
 
                 FinalReportDTO finalReportDTO = new FinalReportDTO(){ submittedSurveyList = reportDTO }; 
-
-
-
                 return finalReportDTO;
             }
         }

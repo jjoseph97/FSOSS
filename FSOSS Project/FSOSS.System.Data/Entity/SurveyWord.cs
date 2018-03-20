@@ -26,6 +26,7 @@ namespace FSOSS.System.Data.Entity
         [Required (ErrorMessage = "Date used required")]
         public DateTime date_used { get; set; }
 
+
         public virtual SurveyWord surveyword { get; set; }
         public virtual Site site { get; set; }
     }
