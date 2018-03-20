@@ -33,8 +33,9 @@ namespace FSOSS.System.Data.Entity
         [Required (ErrorMessage = "Date entered required")]
         public DateTime date_entered { get; set; }
         
-        [StringLength(100, ErrorMessage = "Contact status cannot exceed 100 characters")]
-        public string contact_status { get; set; }
+        [Required (ErrorMessage ="Contact Request is required")]
+        public bool contact_request { get; set; }
+        public bool contacted { get; set; }
         [StringLength(50, ErrorMessage = "Room number cannot exceed 50 characters")]
         public string contact_room_number { get; set; }
         [StringLength(20, ErrorMessage = "Phone number cannot exceed 20 characters")]
