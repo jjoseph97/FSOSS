@@ -29,7 +29,7 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_status == "contact");
+                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted==false);
                     return contactCount;
                 }
                 catch (Exception e)
@@ -55,14 +55,16 @@ namespace FSOSS.System.BLL
                 {
                     var contactList = from x in context.SubmittedSurveys
                                       where x.Unit.site_id == siteID &&
-                                        x.contact_status == "contact"
+                                        x.contact_request == true &&
+                                        x.contacted==false
                                       select new ContactSubmittedSurveyPOCO
                                       {
                                           submittedSurveyID = x.submitted_survey_id,
                                           unitNumber = x.Unit.unit_number,
                                           participantType = x.ParticipantType.participant_description,
                                           dateEntered = x.date_entered,
-                                          contactStatus = x.contact_status,
+                                          contactRequest = x.contact_request,
+                                          contacted=x.contacted,
                                           contactRoomNumber = x.contact_room_number,
                                           contactPhoneNumber = x.contact_phone_number
                                       };
@@ -103,7 +105,8 @@ namespace FSOSS.System.BLL
                                                  ageRange = x.AgeRange.age_range_description,
                                                  gender = x.Gender.gender_description,
                                                  dateEntered = x.date_entered,
-                                                 contactStatus = x.contact_status,
+                                                 contactRequest = x.contact_request,
+                                                 contacted=x.contacted,
                                                  contactRoomNumber = x.contact_room_number,
                                                  contactPhoneNumber = x.contact_phone_number
                                              };
@@ -140,7 +143,8 @@ namespace FSOSS.System.BLL
                                      ageRange = x.AgeRange.age_range_description,
                                      gender = x.Gender.gender_description,
                                      dateEntered = x.date_entered,
-                                     contactStatus = x.contact_status,
+                                     contactRequest = x.contact_request,
+                                     contacted=x.contacted,
                                      contactRoomNumber = x.contact_room_number,
                                      contactPhoneNumber = x.contact_phone_number
                                      
@@ -196,9 +200,9 @@ namespace FSOSS.System.BLL
                 try
                 {
                     SubmittedSurvey ss = context.SubmittedSurveys.Find(submittedSurveyID);
-                    ss.contact_status = "contacted";
+                    ss.contacted = true;
 
-                    context.Entry(ss).Property(y => y.contact_status).IsModified = true;
+                    context.Entry(ss).Property(y => y.contacted).IsModified = true;
                     context.SaveChanges();
 
                 }
