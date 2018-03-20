@@ -16,7 +16,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 {
     /// <summary>
     /// When the page loads, the SuccessAlert and ErrorAlert labels (messages for the user to see) are turned off.
-    /// The DataSoruceID on the SurveyWordListView is set to the SurveyWordODS Object Data Source.
+    /// The DataSoruceID on the SurveyWordListView is set to the ActiveSurveyWordODS Object Data Source.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -25,7 +25,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         SuccessAlert.Visible = false;
         ErrorAlert.Visible = false;
 
-        SurveyWordListView.DataSourceID = "SurveyWordODS";
+        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
 
     }
 
@@ -51,6 +51,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             SuccessAlert.Text = "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.";
             SearchWordTextBox.ReadOnly = true;
             SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
+            SearchWordButton.Visible = false;
             ClearSearchButton.Visible = true;
         }
     }
@@ -62,10 +63,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void ClearSearchButton_Click(object sender, EventArgs e)
     {
-        SurveyWordListView.DataSourceID = "SurveyWordODS";
+        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
         SearchWordTextBox.BackColor = System.Drawing.Color.White;
+        SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
     }
 
@@ -112,7 +114,24 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void ShowArchivedButton_Click(object sender, EventArgs e)
     {
+        SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+        SurveyWordListView.DataBind();
+        ShowActiveButton.Visible = true;
+        ShowArchivedButton.Visible = false;
 
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void ShowActiveButton_Click(object sender, EventArgs e)
+    {
+        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+        SurveyWordListView.DataBind();
+        ShowActiveButton.Visible = false;
+        ShowArchivedButton.Visible = true;
     }
 
     /// <summary>
@@ -127,7 +146,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             // assign the appropriate ODS if a search term has been entered
             if (SearchWordTextBox.Text == "")
             {
-                SurveyWordListView.DataSourceID = "SurveyWordODS";
+                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
             }
             else
             {
@@ -140,7 +159,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             // assign the appropriate ODS if a search term has been entered
             if (SearchWordTextBox.Text == "")
             {
-                SurveyWordListView.DataSourceID = "SurveyWordODS";
+                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
             }
             else
             {
@@ -172,7 +191,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             // assign the appropriate ODS if a search term has been entered
             if (SearchWordTextBox.Text == "")
             {
-                SurveyWordListView.DataSourceID = "SurveyWordODS";
+                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
             }
             else
             {
@@ -183,5 +202,4 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
         }
     }
-
 }

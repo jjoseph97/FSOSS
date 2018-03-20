@@ -204,7 +204,7 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<PotentialSurveyWordPOCO> GetAllSurveyWord()
+        public List<PotentialSurveyWordPOCO> GetActiveSurveyWord()
         {
             using (var context = new FSOSSContext())
             {
@@ -214,6 +214,7 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_access_word
+                                                  where x.archive_yn == false
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
@@ -237,7 +238,7 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<PotentialSurveyWordPOCO> GetActiveSurveyWord()
+        public List<PotentialSurveyWordPOCO> GetArchivedSurveyWord()
         {
             using (var context = new FSOSSContext())
             {
@@ -246,7 +247,8 @@ namespace FSOSS.System.BLL
                 {
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                  where x.archive_yn == false
+                                                  orderby x.survey_access_word
+                                                  where x.archive_yn == true
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
