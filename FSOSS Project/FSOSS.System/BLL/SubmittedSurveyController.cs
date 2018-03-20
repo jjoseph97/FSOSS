@@ -62,6 +62,7 @@ namespace FSOSS.System.BLL
                                           submittedSurveyID = x.submitted_survey_id,
                                           unitNumber = x.Unit.unit_number,
                                           participantType = x.ParticipantType.participant_description,
+                                          mealName = x.Meal.meal_name,
                                           dateEntered = x.date_entered,
                                           contactRequest = x.contact_request,
                                           contacted=x.contacted,

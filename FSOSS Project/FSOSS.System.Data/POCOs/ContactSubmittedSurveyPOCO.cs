@@ -13,6 +13,7 @@ namespace FSOSS.System.Data.POCOs
         public int submittedSurveyID { get; set; }
         public string unitNumber { get; set; }
         public string participantType { get; set; }
+        public string mealName { get; set; }
         public DateTime dateEntered { get; set; }
         public bool contactRequest { get; set; }
         public bool contacted { get; set; }

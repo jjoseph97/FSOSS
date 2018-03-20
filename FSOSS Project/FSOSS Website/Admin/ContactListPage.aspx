@@ -22,107 +22,71 @@
             <asp:ListView ID="ContactRequestList" runat="server" DataSourceID="ContactRequestODS" OnItemCommand="GoToSSView">
                 <AlternatingItemTemplate>
                     <tr style="background-color: #bbf2ff; color: #284775;">
-                        <td style="display:none">
+                        <td style="display: none">
                             <asp:Label Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitIDLabel" /></td>
+                            <asp:Label Text='<%# Eval("unitNumber") %>' CssClass="pl-3" runat="server" ID="unitIDLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("participantType") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                            <asp:Label Text='<%# Eval("participantType") %>' CssClass="pl-3" runat="server" ID="participantTypeIDLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" ID="dateEnteredLabel" /></td>
+                            <asp:Label Text='<%# Eval("mealName") %>' runat="server" CssClass="pl-3" ID="Label2" /></td>
+                        <td>
+                            <asp:Label Text='<%# Eval("dateEntered") %>' CssClass="pl-3" runat="server" ID="dateEnteredLabel" /></td>
 
                         <td>
-                            <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
+                            <asp:Label Text='<%# Eval("contactRoomNumber") %>' CssClass="pl-3" runat="server" ID="contactRoomNumberLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
+                            <asp:Label Text='<%# Eval("contactPhoneNumber") %>' CssClass="pl-3" runat="server" ID="contactPhoneNumberLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" />
-                            <asp:Button runat="server" CommandName="Update" Text="Contacted" ID="ContactButton" />
+                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" class="btn btn btn-info mx-3 my-1" />
                         </td>
                     </tr>
                 </AlternatingItemTemplate>
-                <EditItemTemplate>
-                    <tr style="">
-                        <td>
-                            <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                            <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
-                        </td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("dateEntered") %>' runat="server" ID="dateEnteredTextBox" /></td>
-
-                        <td>
-                            <asp:TextBox Text='<%# Bind("contactRoomNumber") %>' runat="server" ID="contactRoomNumberTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberTextBox" /></td>
-                    </tr>
-                </EditItemTemplate>
                 <EmptyDataTemplate>
                     <table runat="server" style="">
                         <tr>
-                            <td>There are no more Contact Requests.</td>
+                            <td>There are no more Contact Requests for this site.</td>
                         </tr>
                     </table>
                 </EmptyDataTemplate>
-                <InsertItemTemplate>
-                    <tr style="">
-                        <td>
-                            <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
-                            <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
-                        </td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitIDTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("participantType") %>' runat="server" ID="participantTypeIDTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("dateEntered") %>' runat="server" ID="dateEnteredTextBox" /></td>
 
-                        <td>
-                            <asp:TextBox Text='<%# Bind("contactRoomNumber") %>' runat="server" ID="contactRoomNumberTextBox" /></td>
-                        <td>
-                            <asp:TextBox Text='<%# Bind("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberTextBox" /></td>
-                    </tr>
-                </InsertItemTemplate>
                 <ItemTemplate>
                     <tr style="background-color: #FFFFFF; color: #333333;">
-                        <td style="display:none">
+                        <td style="display: none">
                             <asp:Label Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitIDLabel" /></td>
+                            <asp:Label Text='<%# Eval("unitNumber") %>' CssClass="pl-3" runat="server" ID="unitIDLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("participantType") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                            <asp:Label Text='<%# Eval("participantType") %>' CssClass="pl-3" runat="server" ID="participantTypeIDLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" ID="dateEnteredLabel" /></td>
+                            <asp:Label Text='<%# Eval("mealName") %>' runat="server" CssClass="pl-3" ID="Label2" /></td>
+                        <td>
+                            <asp:Label Text='<%# Eval("dateEntered") %>' CssClass="pl-3" runat="server" ID="dateEnteredLabel" /></td>
 
                         <td>
-                            <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
+                            <asp:Label Text='<%# Eval("contactRoomNumber") %>' CssClass="pl-3" runat="server" ID="contactRoomNumberLabel" /></td>
                         <td>
-                            <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
+                            <asp:Label Text='<%# Eval("contactPhoneNumber") %>' CssClass="pl-3" runat="server" ID="contactPhoneNumberLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" />
-                            <asp:Button runat="server" CommandName="Update" Text="Contacted" ID="ContactButton" />
+                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" class="btn btn btn-info mx-3 my-1" />
                         </td>
                     </tr>
                 </ItemTemplate>
                 <LayoutTemplate>
-                    <table runat="server">
+                    <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                         <tr runat="server">
                             <td runat="server">
                                 <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                     <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                         <th hidden runat="server">submittedSurveyID</th>
-                                        <th runat="server">Unit</th>
-                                        <th runat="server">Participant Type</th>
-                                        <th runat="server">Date Entered</th>
-                                        <th runat="server">Room Number</th>
-                                        <th runat="server">Phone Number</th>
+                                        <th runat="server" class="col-sm-2 py-2">Unit Number</th>
+                                        <th runat="server" class="col-sm-2 py-2">Participant Type</th>
+                                        <th runat="server" class="col-sm-2 py-2">Meal Name</th>
+                                        <th runat="server" class="col-sm-4 py-2">Date Submitted</th>
+                                        <th runat="server" class="col-sm-2 py-2">Room Number</th>
+                                        <th runat="server" class="col-sm-2 py-2">Phone Number</th>
+                                        <th runat="server" class="col-sm-2 py-2">View Survey</th>
+
                                     </tr>
                                     <tr runat="server" id="itemPlaceholder"></tr>
                                 </table>

@@ -25,8 +25,10 @@
                             <td>
                                 <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl="~/Admin/SubmittedSurveyViewerPage.aspx" /></td>
                             <td style="display: none;">
-                                <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
+                                <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display: none;">
+                                <asp:Label Text='<%# Eval("contacted") %>' runat="server" ID="Label3" /></td>
+                           <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
@@ -35,7 +37,7 @@
                     <EmptyDataTemplate>
                         <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                             <tr>
-                                <td>No data was returned.</td>
+                                <td>No Submitted Surveys Found.</td>
                             </tr>
                         </table>
                     </EmptyDataTemplate>
@@ -54,7 +56,9 @@
                             <td>
                                 <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
                             <td style="display: none;">
-                                <asp:Label Text='<%# Eval("contactStatus") %>' runat="server" ID="contactStatusLabel" /></td>
+                                <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
+                            <td style="display: none;">
+                                <asp:Label Text='<%# Eval("contacted") %>' runat="server" ID="contactedLabel" /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
                             <td style="display: none;">
