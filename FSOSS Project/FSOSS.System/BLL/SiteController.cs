@@ -62,7 +62,7 @@ namespace FSOSS.System.BLL
         }
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public List<SitePOCO> AddSite(string siteName, int employee)
+        public string AddSite(string newSiteName, int employee)
         {
             using (var context = new FSOSSContext())
             {
@@ -70,14 +70,32 @@ namespace FSOSS.System.BLL
 
                 try
                 {
+                    var siteList = from x in context.Sites
+                                   where x.site_name.ToLower().Equals(newSiteName.ToLower())
+                                   select new SitePOCO()
+                                   {
+                                       siteName = x.site_name
+                                   };
+                    if (siteList.Count() > 0)
+                    {
+                        message = "The site \"" + newSiteName.ToLower() + "\" already exists. Please enter a new site.";
+                    }
+                    else
+                    {
+                        Site newSite = new Site();
+                        newSite.administrator_account_id = employee;
+                        newSite.site_name = newSiteName.Trim();
+                        newSite.date_modified = DateTime.Now;
 
+                    }
                 }
                 catch (Exception e)
                 {
-
+                    message = "Oops, something went wrong. Check " + e.Message;
                 }
+                return message;
             }
-                return GetSiteList();
+                
         }
     }
 }

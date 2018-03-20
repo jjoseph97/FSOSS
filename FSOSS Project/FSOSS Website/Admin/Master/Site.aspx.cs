@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSOSS.System.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -33,9 +34,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
 
     protected void AddSite_Click(object sender, EventArgs e)
     {
+        SiteController sysmgr = new SiteController();
+
         string siteName = AddSiteTextBox.Text.Trim();
         Regex validWord = new Regex("^[a-zA-Z]+$");
-        string employee = User.Identity.Name;
+        int employee = int.Parse(Session["userid"].ToString());
 
         if (siteName == "" || siteName == null)
         {
@@ -50,7 +53,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         else
         {
             Alert.Visible = true;
-            Alert.Text = sysmgr.AddSite(siteName, );
+            Alert.Text = sysmgr.AddSite(siteName, employee);
             ListView1.DataBind();
             AddSiteTextBox.Text = "";
         }
