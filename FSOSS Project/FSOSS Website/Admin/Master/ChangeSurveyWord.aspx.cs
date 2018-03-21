@@ -25,8 +25,14 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         SuccessAlert.Visible = false;
         ErrorAlert.Visible = false;
 
-        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
-
+        if (!this.IsPostBack)
+        {
+            // This is the initial load of the page...
+            if (SearchWordTextBox.Text == "")
+            {
+                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+            }
+        }
     }
 
     /// <summary>
@@ -36,23 +42,39 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void SearchWordButton_Click(object sender, EventArgs e)
     {
-        string searchWord = SearchWordTextBox.Text.Trim();
-        SuccessAlert.Visible = true;
-        
-        SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
-
-        SurveyWordListView.DataBind();
-        if (searchWord == "")
+        if(SearchWordTextBox.Text.Trim() == "")
         {
-            SuccessAlert.Visible = false;
+            ErrorAlert.Visible = true;
+            ErrorAlert.Text = "Search cannot be empty.";
         }
         else
         {
-            SuccessAlert.Text = "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.";
-            SearchWordTextBox.ReadOnly = true;
-            SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
-            SearchWordButton.Visible = false;
-            ClearSearchButton.Visible = true;
+            string searchWord = SearchWordTextBox.Text.Trim();
+            SuccessAlert.Visible = true;
+
+            // this check is to determine whether to search for active or archived words depending on the current ODS
+            if(SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+            {
+                SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+            }
+            else if(SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+            {
+                SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
+            }
+
+            SurveyWordListView.DataBind();
+            if (searchWord == "")
+            {
+                SuccessAlert.Visible = false;
+            }
+            else
+            {
+                SuccessAlert.Text = "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.";
+                SearchWordTextBox.ReadOnly = true;
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
+                SearchWordButton.Visible = false;
+                ClearSearchButton.Visible = true;
+            }
         }
     }
 
@@ -63,10 +85,18 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void ClearSearchButton_Click(object sender, EventArgs e)
     {
-        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+        if (SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS")
+        {
+            SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+        }
+        else if (SurveyWordListView.DataSourceID == "SearchArchivedSurveyWordODS")
+        {
+            SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+        }
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
         SearchWordTextBox.BackColor = System.Drawing.Color.White;
+        SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
     }
@@ -135,6 +165,35 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
+    /// This method is in order to change the "Disabled" button to "Enabled", and vice versa depending on the current ODS
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+
+        /*** commenting out for now until fixed ***/
+
+    //protected void SurveyWordListView_ItemDataBound(object sender, ListViewItemEventArgs e)
+    //{
+    //    if (e.Item.ItemType == ListViewItemType.DataItem)
+    //    {
+    //        if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+    //        {
+    //            Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
+    //            disabledBtn.Visible = true;
+    //            Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
+    //            enabledBtn.Visible = false;
+    //        }
+    //        else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+    //        {
+    //            Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
+    //            disabledBtn.Visible = false;
+    //            Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
+    //            enabledBtn.Visible = true;
+    //        }
+    //    }
+    //}
+
+    /// <summary>
     /// 
     /// </summary>
     /// <param name="sender"></param>
@@ -143,27 +202,59 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         if (e.CommandName == "Edit")
         {
-            // assign the appropriate ODS if a search term has been entered
-            if (SearchWordTextBox.Text == "")
+            // check if currently in archived words, or in active words
+            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+                }
+                else if (SearchWordTextBox.Text != "")
+                {
+                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
+                }
             }
-            else
+            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                }
+                else
+                {
+                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                }
             }
         }
 
         if (e.CommandName == "Update")
         {
-            // assign the appropriate ODS if a search term has been entered
-            if (SearchWordTextBox.Text == "")
+            // check if currently in archived words, or in active words
+            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+                }
+                else if (SearchWordTextBox.Text != "")
+                {
+                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
+                }
             }
-            else
+            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                }
+                else
+                {
+                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                }
             }
             Regex validWord = new Regex("^[a-zA-Z]+$");
             TextBox surveyWord = (TextBox)e.Item.FindControl("surveyWordTextBox");
@@ -195,7 +286,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             }
             else
             {
-                SurveyWordListView.DataSourceID = "SearchSurveyWordODS";
+                SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
             }
             Label surveyWord = (Label)e.Item.FindControl("surveyWordLabel");
             ErrorAlert.Visible = true;

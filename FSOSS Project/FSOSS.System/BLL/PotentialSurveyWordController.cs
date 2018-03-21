@@ -170,7 +170,7 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<PotentialSurveyWordPOCO> GetSurveyWord(string surveyWord)
+        public List<PotentialSurveyWordPOCO> GetActiveSurveyWord(string surveyWord)
         {
             using (var context = new FSOSSContext())
             {
@@ -180,7 +180,42 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_access_word
-                                                  where x.survey_access_word.Contains(surveyWord.Trim())
+                                                  where x.survey_access_word.Contains(surveyWord.Trim()) && x.archive_yn == false
+                                                  select new PotentialSurveyWordPOCO()
+                                                  {
+                                                      surveyWordID = x.survey_word_id,
+                                                      surveyWord = x.survey_access_word
+                                                  };
+
+                    return potentialSurveyWordList.ToList();
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surveyWord"></param>
+        /// <returns>potentialSurveyWordList</returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<PotentialSurveyWordPOCO> GetArchivedSurveyWord(string surveyWord)
+        {
+            using (var context = new FSOSSContext())
+            {
+
+                try
+                {
+
+                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  orderby x.survey_access_word
+                                                  where x.survey_access_word.Contains(surveyWord.Trim()) && x.archive_yn == true
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
