@@ -12,7 +12,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        // get id for verification here
+        
         if(!IsPostBack)
         {
             MealController mealController = new MealController();
@@ -29,7 +29,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             HospitalDropDownList.DataValueField = "siteID";
             HospitalDropDownList.DataTextField = "siteName";
             HospitalDropDownList.DataBind();
-           
+            int userID = int.Parse(Session["userID"].ToString());
         }
         
     }
