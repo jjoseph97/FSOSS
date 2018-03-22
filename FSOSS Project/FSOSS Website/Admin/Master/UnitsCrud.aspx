@@ -29,14 +29,28 @@
 
 
          <div class="card container mb-2">
-             <asp:GridView ID="unitsCrudGridview" runat="server" AutoGenerateColumns="False" DataSourceID="UnitsODS" AllowPaging="True" Visible="false">
+             <asp:GridView ID="unitsCrudGridview" runat="server" AutoGenerateColumns="False"
+                 DataSourceID="UnitsODS" DataKeyNames="unitID"
+                 AllowPaging="True" Visible="False" OnLoad="unitsCrudGridview_Load">
                  <Columns>  
-                     <asp:BoundField DataField="unitID" HeaderText="unitID" SortExpression="unitID"></asp:BoundField>
-                     <asp:BoundField DataField="unitNumber" HeaderText="unitNumber" SortExpression="unitNumber"></asp:BoundField>
-                     <asp:BoundField DataField="dateModified" HeaderText="dateModified" SortExpression="dateModified"></asp:BoundField>
-                     <asp:BoundField DataField="administratorAccountId" HeaderText="administratorAccountId" SortExpression="administratorAccountId"></asp:BoundField>
-                     <asp:CheckBoxField DataField="isClosedyn" HeaderText="isClosedyn" SortExpression="isClosedyn"></asp:CheckBoxField>
-                     <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" ShowSelectButton="True"></asp:CommandField>
+                     <asp:BoundField DataField="unitID" HeaderText="Unit ID" SortExpression="unitID" ReadOnly="True"></asp:BoundField>
+                     <asp:TemplateField HeaderText="Unit Number" SortExpression="unitNumber">
+                         <EditItemTemplate>
+                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("unitNumber") %>'></asp:TextBox>
+                         </EditItemTemplate>
+                         <ItemTemplate>
+                             <asp:Label ID="Label1" runat="server" Text='<%# Bind("unitNumber") %>'></asp:Label>
+                         </ItemTemplate>
+                     </asp:TemplateField>
+                     <asp:BoundField DataField="dateModified" HeaderText="Date Modified" SortExpression="dateModified"></asp:BoundField>
+                     <asp:BoundField DataField="administratorAccountId" HeaderText="Administrator Account Id" SortExpression="administratorAccountId"></asp:BoundField>
+
+                     <asp:TemplateField HeaderText="Status" SortExpression="isClosedyn">
+                         <ItemTemplate>
+                             <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("isClosedyn") %>' Enabled="false" />
+                         </ItemTemplate>
+                     </asp:TemplateField>
+                     <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" ></asp:CommandField>
                  </Columns>
              </asp:GridView>
 
@@ -49,9 +63,9 @@
             SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
         
 
-        <asp:ObjectDataSource ID="UnitsODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController" DeleteMethod="DisableUnit" InsertMethod="AddUnit" UpdateMethod="UpdateUnit">
+        <asp:ObjectDataSource ID="UnitsODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController" DeleteMethod="DisableUnit" InsertMethod="AddUnit" UpdateMethod="UpdateUnit">
             <DeleteParameters>
-                <asp:Parameter Name="unit_id" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="unit_number" Type="String"></asp:Parameter>
@@ -60,7 +74,7 @@
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
             <UpdateParameters>
-                <asp:Parameter Name="unit_id" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
                 <asp:Parameter Name="unit_number" Type="String"></asp:Parameter>
             </UpdateParameters>
         </asp:ObjectDataSource>
