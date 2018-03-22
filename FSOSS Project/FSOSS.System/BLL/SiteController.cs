@@ -62,7 +62,7 @@ namespace FSOSS.System.BLL
         }
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddSite(string newSiteName, int employee)
+        public string AddSite(string newSiteName, int employee) // add a new site to the database.
         {
             using (var context = new FSOSSContext())
             {
@@ -70,17 +70,18 @@ namespace FSOSS.System.BLL
 
                 try
                 {
+                    //check to see if the site already exists in the database
                     var siteList = from x in context.Sites
                                    where x.site_name.ToLower().Equals(newSiteName.ToLower())
                                    select new SitePOCO()
                                    {
                                        siteName = x.site_name
                                    };
-                    if (siteList.Count() > 0)
+                    if (siteList.Count() > 0) //if so, return an error message
                     {
                         message = "The site \"" + newSiteName.ToLower() + "\" already exists. Please enter a new site.";
                     }
-                    else
+                    else //otherwise enter new site into the database
                     {
                         Site newSite = new Site();
                         newSite.administrator_account_id = employee;
@@ -89,6 +90,7 @@ namespace FSOSS.System.BLL
                         newSite.is_closed_yn = false;
                         context.Sites.Add(newSite);
                         context.SaveChanges();
+
                         message = "Successfully added the new site: \"" + newSiteName + "\"";
 
                     }
@@ -98,8 +100,8 @@ namespace FSOSS.System.BLL
                     message = "Oops, something went wrong. Check " + e.Message;
                 }
                 return message;
-            }
+            } //end of using var context
                 
-        }
+        } // end of Addsite
     }
 }

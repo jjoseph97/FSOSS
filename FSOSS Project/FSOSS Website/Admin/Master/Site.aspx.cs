@@ -35,6 +35,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
     protected void AddSite_Click(object sender, EventArgs e)
     {
         SiteController sysmgr = new SiteController();
+        //SurveyWordController swControl = new SurveyWordController();
 
         string siteName = AddSiteTextBox.Text.Trim();
         Regex validWord = new Regex("^[a-zA-Z ]+$");
@@ -53,7 +54,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         else
         {
             Alert.Visible = true;
-            Alert.Text = sysmgr.AddSite(siteName, employee);
+            Alert.Text = sysmgr.AddSite(siteName, employee); // adds the site to the database
+           // swControl.AssignNewWord(siteName);
+
             ListView1.DataBind();
             AddSiteTextBox.Text = "";
         }
