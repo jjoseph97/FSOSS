@@ -29,9 +29,13 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         {
             if (!Page.IsPostBack)
             {
+<<<<<<< HEAD
         
                 
              
+=======
+                WOTDLabel.Text += "pigeon"; // Replace with proper Word of the day
+>>>>>>> origin/master
 
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
@@ -62,7 +66,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                 }
             }
 
-            WelcomeMessage.Text += Session["username"].ToString();
+            WelcomeMessage.Text = "Welcome, " + Session["username"].ToString();
         }
     }
 
@@ -91,7 +95,8 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 
     protected void RecentSurveysButton_Click(object sender, EventArgs e)
     {
-
+        string url = "~/Admin/SubmittedSurveyList.aspx";
+        Response.Redirect(url);
     }
 
     protected void RecentReportsButton_Click(object sender, EventArgs e)

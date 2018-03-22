@@ -95,7 +95,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         }
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
-        SearchWordTextBox.BackColor = System.Drawing.Color.White;
         SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
@@ -146,6 +145,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
         SurveyWordListView.DataBind();
+        // this is to clear the search when switching from active to archived words
+        ClearSearchButton_Click(null, EventArgs.Empty);
         ShowActiveButton.Visible = true;
         ShowArchivedButton.Visible = false;
 
@@ -160,6 +161,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
         SurveyWordListView.DataBind();
+        // this is to clear the search when switching from active to archived words
+        ClearSearchButton_Click(null, EventArgs.Empty);
         ShowActiveButton.Visible = false;
         ShowArchivedButton.Visible = true;
     }
