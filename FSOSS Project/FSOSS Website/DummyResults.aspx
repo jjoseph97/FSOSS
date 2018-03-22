@@ -24,7 +24,7 @@
             <asp:Label Text="Participant Type: " runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedParticipantType" runat="server" />
+            <asp:Label ID="SelectedParticipantTypeLabel" runat="server" />
         </div>
     </div>
 
@@ -33,7 +33,7 @@
             <asp:Label Text="Meal Type: " runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedMealType" runat="server" />
+            <asp:Label ID="SelectedMealTypeLabel" runat="server" />
         </div>
     </div>
 
@@ -48,7 +48,7 @@
             <asp:Label Text="The variety of food in your daily meals " runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedQ1A" runat="server" />
+            <asp:Label ID="SelectedQ1ALabel" runat="server" />
         </div>
     </div>
 
@@ -57,7 +57,7 @@
             <asp:Label Text="The taste and flavour of your meals" runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedQ1B" runat="server" />
+            <asp:Label ID="SelectedQ1BLabel" runat="server" />
         </div>
     </div>
 
@@ -66,7 +66,7 @@
             <asp:Label Text="The temperature of your hot food" runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedQ1C" runat="server" />
+            <asp:Label ID="SelectedQ1CLabel" runat="server" />
         </div>
     </div>
 
@@ -75,7 +75,7 @@
             <asp:Label Text="The overall appearance of your meal" runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedQ1D" runat="server" />
+            <asp:Label ID="SelectedQ1DLabel" runat="server" />
         </div>
     </div>
 
@@ -84,7 +84,16 @@
             <asp:Label Text="The helpfulness of the staff who deliver your meals" runat="server" />
         </div>
         <div class="col-sm-8">
-            <asp:Label ID="SelectedQ1E" runat="server" />
+            <asp:Label ID="SelectedQ1ELabel" runat="server" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <asp:Label Text="The helpfulness of the staff who deliver your meals" runat="server" />
+        </div>
+        <div class="col-sm-8">
+            <asp:Label ID="Label1" runat="server" />
         </div>
     </div>
 
