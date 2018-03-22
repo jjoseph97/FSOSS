@@ -15,13 +15,13 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
     {
         
         AdministratorRoleController sysmgr = new AdministratorRoleController();
-        AdministratorRole administratorRole = sysmgr.GetAdministratorRole((int)Session["userID"]);
+        //AdministratorRole administratorRole = sysmgr.GetAdministratorRole((int)Session["userID"]);
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
 
-        else if (administratorRole == null) // Return HTTP Code 403
+        else if (sysmgr.GetAdministratorRole((int)Session["userID"]) == null) // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
         }
