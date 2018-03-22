@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSOSS.System.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,20 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            QuestionTextController sysmgr = new QuestionTextController();
+            Q1.Text = "1. " + sysmgr.GetQuestion1();
+            Q1A.Text = sysmgr.GetQuestion1A();
+            Q1B.Text = sysmgr.GetQuestion1B();
+            Q1C.Text = sysmgr.GetQuestion1C();
+            Q1D.Text = sysmgr.GetQuestion1D();
+            Q1E.Text = sysmgr.GetQuestion1E();
+
+            Q2.Text = "2. " + sysmgr.GetQuestion2();
+            Q3.Text = "3. " + sysmgr.GetQuestion3();
+            Q4.Text = "4. " + sysmgr.GetQuestion4();
+            Q5.Text = "5. " + sysmgr.GetQuestion5();
+
+
             if (Session["Unit"] != null)
             {
                 UnitDropDownList.SelectedValue = Session["Unit"].ToString();
