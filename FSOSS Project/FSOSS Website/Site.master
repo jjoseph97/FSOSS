@@ -49,49 +49,48 @@
 
                     <ul class="navbar-nav text-center">
                         <li id="MasterAdminDropDown" runat="server" class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
-                            <div class="dropdown-menu text-center text-sm-left">
-                                <a runat="server" class="dropdown-item" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
-                                <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUser.aspx">Edit User</a>
-                                <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
-                                <a runat="server" class="dropdown-item" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions</a>
-                                <a runat="server" class="dropdown-item" href="~/Admin/Master/Site.aspx">Manage Sites</a>
-                                <a runat="server" class="dropdown-item" href="~/Admin/Master/UnitsCrud.aspx">Manage Units</a>
-                            </div>
-                        </li>
-
-                        <%-- Submenu demo below --%>
-                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">Admin
+                                aria-expanded="false">Administrator
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="#">User</a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="#">Submenu action</a>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">Another submenu action</a>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUser.aspx">Edit User</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Misc</a>
+                                    <a class="dropdown-item dropdown-toggle" href="#">Survey</a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="#">Submenu action</a>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">Another submenu action</a>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions</a>
+                                        </li>
+                                        <li>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/ManageCustomerProfile.aspx">Manage Customer Profile</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                 <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">Sites</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/Site.aspx">Manage Sites</a>
+                                        </li>
+                                        <li>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/Units.aspx">Manage Units</a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <%-- Submenu demo above --%>
-
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Admin/ViewSurveyFilter.aspx">View Surveys</a>
                         </li>
