@@ -29,7 +29,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             HospitalDropDownList.DataValueField = "siteID";
             HospitalDropDownList.DataTextField = "siteName";
             HospitalDropDownList.DataBind();
-            int userID = int.Parse(Session["userID"].ToString());
+           // int userID = int.Parse(Session["userID"].ToString());
         }
         
     }
@@ -40,10 +40,10 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         if(StartingPeriodTextBox.Text != "")
         {
             
-            filter.startingDate = DateTime.ParseExact(StartingPeriodTextBox.Text,"yyyy-MM-dd HH:mm:ss:ffffff",null);
+            filter.startingDate = DateTime.ParseExact(StartingPeriodTextBox.Text + " 00:00:00:000000","yyyy-MM-dd HH:mm:ss:ffffff",null);
             if(EndingPeriodTextBox.Text != "")
             {
-                filter.endDate = DateTime.ParseExact(EndingPeriodTextBox.Text, "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                filter.endDate = DateTime.ParseExact(EndingPeriodTextBox.Text + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 Session["filter"] = filter;
