@@ -47,7 +47,6 @@
 
                 <div class="collapse navbar-collapse" id="FSOSSNavbar" runat="server">
 
-                    <%--<asp:Panel ID="FSOSSNavbar" runat="server" CssClass="collapse navbar-collapse" Visible="true">--%>
                     <ul class="navbar-nav text-center">
                         <li id="MasterAdminDropDown" runat="server" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administrator</a>
@@ -56,10 +55,43 @@
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUser.aspx">Edit User</a>
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions</a>
-                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/Site.aspx">Manage Sites</a>
-                                 <a runat="server" class="dropdown-item" href="~/Admin/Master/UnitsCrud.aspx">Manage Units</a>
+                                <a runat="server" class="dropdown-item" href="~/Admin/Master/Site.aspx">Manage Sites</a>
+                                <a runat="server" class="dropdown-item" href="~/Admin/Master/UnitsCrud.aspx">Manage Units</a>
                             </div>
                         </li>
+
+                        <%-- Submenu demo below --%>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Admin
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">User</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#">Submenu action</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">Another submenu action</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">Misc</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#">Submenu action</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">Another submenu action</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <%-- Submenu demo above --%>
+
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Admin/ViewSurveyFilter.aspx">View Surveys</a>
                         </li>
@@ -72,7 +104,6 @@
                             <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-outline-primary" OnClick="LoginButton_Click" />
                         </div>
                     </div>
-                    <%--</asp:Panel>--%>
                 </div>
             </div>
         </div>
@@ -85,5 +116,24 @@
             </footer>
         </div>
     </form>
+
+    <%-- TODO: Put navbar submenu scripts into a script file --%>
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+
+
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-submenu .show').removeClass("show");
+            });
+
+
+            return false;
+        });
+    </script>
 </body>
 </html>
