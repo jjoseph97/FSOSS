@@ -11,25 +11,25 @@
 
     <div id="CustomerProfileContent" runat="server">
         <div class="row">
-            <asp:Label class="col-md-2 ml-md-5 my-2" runat="server" Text="Gender:"></asp:Label>
-            <asp:DropDownList ID="GenderDDL" CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem Value="">Select Gender</asp:ListItem>
-                <asp:ListItem>Male</asp:ListItem>
-                <asp:ListItem>Female</asp:ListItem>
-                <asp:ListItem>Other</asp:ListItem>
-            </asp:DropDownList><br />
+            <asp:Label ID="GenderLabel" class="col-md-2 ml-md-5 my-2" runat="server" />
+            <asp:DropDownList ID="GenderDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="GenderObjectDataSource" DataTextField="genderDescription" 
+                DataValueField="genderID" AppendDataBoundItems="true" >
+                <asp:ListItem Value="" Text="Select Gender"/>
+            </asp:DropDownList>
+            <asp:ObjectDataSource runat="server" ID="GenderObjectDataSource" OldValuesParameterFormatString="original_{0}" 
+                SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController"></asp:ObjectDataSource>
+            <br />
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-2 ml-md-5 my-2" runat="server" Text="Age Range:"></asp:Label>
-            <asp:DropDownList ID="AgeDDL" CssClass="col-md-4 form-control" runat="server">
-                <asp:ListItem>Select Age Range</asp:ListItem>
-                <asp:ListItem>Under 18 years</asp:ListItem>
-                <asp:ListItem>18 to 34 years</asp:ListItem>
-                <asp:ListItem>35 to 54 years</asp:ListItem>
-                <asp:ListItem>55 to 74 years</asp:ListItem>
-                <asp:ListItem>Age 75 or older</asp:ListItem>
-            </asp:DropDownList><br />
+            <asp:Label ID="AgeRangeLabel" class="col-md-2 ml-md-5 my-2" runat="server" />
+            <asp:DropDownList ID="AgeDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="AgeRangeObjectDataSource" DataTextField="ageRangeDescription" 
+                DataValueField="ageRangeID"  AppendDataBoundItems="true">
+                <asp:ListItem Value="" Text="Select Age Range" />
+            </asp:DropDownList>
+            <asp:ObjectDataSource runat="server" ID="AgeRangeObjectDataSource" OldValuesParameterFormatString="original_{0}" 
+                SelectMethod="GetAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController"></asp:ObjectDataSource>
+            <br />
         </div>
     </div>
 
