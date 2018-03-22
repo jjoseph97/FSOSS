@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <asp:Label ID="SiteLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
-            <asp:DropDownList ID="SiteDDL" runat="server" class="col-sm-4 my-2" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID"></asp:DropDownList>
+            <asp:DropDownList ID="SiteDDL" runat="server" class="col-sm-4 my-2" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         </div>
     </div>
     <div>

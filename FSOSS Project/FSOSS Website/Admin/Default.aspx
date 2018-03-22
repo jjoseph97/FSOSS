@@ -7,7 +7,7 @@
         </div>
 
         <div class="row col-md-8 mx-auto my-3">
-            <asp:Label ID="HospitalLabel" runat="server" AssociatedControlID="HospitalDDL" CssClass="my-auto pl-0 col-sm-4 col-md-3" Text="Hospital: " />
+            <asp:Label ID="HospitalLabel" runat="server" AssociatedControlID="HospitalDDL" CssClass="my-auto pl-0 col-sm-4 col-md-3" Text="Site: " />
             <asp:DropDownList ID="HospitalDDL" runat="server" CssClass="form-control col-sm-8 col-md-5 pl-0" OnSelectedIndexChanged="HospitalDDL_SelectedIndexChanged" AutoPostBack="true" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" />
         </div>
 
