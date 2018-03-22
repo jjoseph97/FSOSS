@@ -16,13 +16,13 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="SearchWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Search Word: " />
-                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to search for..." />
+                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to search for..." style="background-color: #FFFFFF;" />
                     <asp:Button ID="SearchWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchWordButton_Click" />
                     <asp:Button ID="ClearSearchButton" class="col-sm-2 offset-sm-2 my-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" Visible="false" />
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="AddWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Add Word: " />
-                    <asp:TextBox ID="AddWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to add..." />
+                    <asp:TextBox ID="AddWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to add..." style="background-color: #FFFFFF;" />
                     <asp:Button ID="AddWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add" OnClick="AddWordButton_Click" />
                 </div>
             </div>

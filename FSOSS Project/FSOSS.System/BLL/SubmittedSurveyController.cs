@@ -20,6 +20,8 @@ namespace FSOSS.System.BLL
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
         /// The method to obtain the total of contact requests for a given site.
+        /// Updated March 22, 2018. Fixed so it returns the count for the site only.- Chris
+
         /// </summary>
         /// <param name="siteID">the id of the site for which we want to know the number of contact requests</param>
         /// <returns></returns>
@@ -29,7 +31,7 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted==false);
+                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted==false && x.Unit.site_id==siteID);
                     return contactCount;
                 }
                 catch (Exception e)
@@ -125,7 +127,12 @@ namespace FSOSS.System.BLL
 
         }
 
-        //obtain specific submitted survey results
+        //
+        /// <summary>
+        /// obtain specific submitted survey results
+        /// </summary>
+        /// <param name="subSurNum"></param>
+        /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public SubmittedSurveyPOCO GetSubmittedSurvey(int subSurNum)
         {
