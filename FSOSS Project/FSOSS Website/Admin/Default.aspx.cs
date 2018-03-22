@@ -13,14 +13,15 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         AdministratorRoleController sysmgr = new AdministratorRoleController();
-        //AdministratorRole administratorRole = sysmgr.GetAdministratorRole();
+        AdministratorRole administratorRole = sysmgr.GetAdministratorRole((int)Session["userID"]);
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
 
-        else if (Session["securityID"].ToString() != "2" && Session["securityID"].ToString() != "1") // Return HTTP Code 403
+        else if (administratorRole == null) // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
         }
@@ -28,7 +29,13 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         {
             if (!Page.IsPostBack)
             {
+<<<<<<< HEAD
+        
+                
+             
+=======
                 WOTDLabel.Text += "pigeon"; // Replace with proper Word of the day
+>>>>>>> origin/master
 
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
@@ -40,7 +47,9 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     //PendingRequestNumberLabel.Text = value;
                     int siteID = Convert.ToInt32(value);
                     int contactCount = ssc.GetContactRequestTotal(siteID);
-
+                    SurveyWordController surveyWordManager = new SurveyWordController();
+                    SurveyWord currentSurveyWord = surveyWordManager.GetSurveyWord(siteID);
+                    WOTDLabel.Text = currentSurveyWord.PotentialSurveyWord.survey_access_word;
                     if (contactCount > 0)
                     {
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
