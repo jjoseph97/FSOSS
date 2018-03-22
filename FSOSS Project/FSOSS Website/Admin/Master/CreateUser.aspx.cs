@@ -47,7 +47,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
             int selectedRoleId = Convert.ToInt32(SecurityLevelDDL.SelectedItem.Value);
 
             // Replace any last name that has a '-' with an empty string ('') -- March 20, 2018
-            string concatName = FirstNameTextBox.Text[0] + lastName.Replace("-", "");
+            string concatName = FirstNameTextBox.Text[0] + lastName.Replace("-", "").Replace(" ", "").Replace("'", "");
 
             AdministratorAccountController sysmgr = new AdministratorAccountController();
             string newUser = sysmgr.AddUser(concatName.ToLower(), password, firstName, lastName, selectedRoleId);
