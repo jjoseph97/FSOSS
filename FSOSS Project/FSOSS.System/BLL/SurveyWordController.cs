@@ -48,7 +48,7 @@ namespace FSOSS.System.BLL
                             context.SaveChanges();
                             //Check if the there are enough Potential Survey word available from the List in the database to be used for all the hospital
                             //Repeat the step above until theres enough potentail word to lookupon
-                        } while (surveyWordList.Count < potentialSurveyWordList.Count() - siteList.Count());
+                        } while (surveyWordList.Count() < potentialSurveyWordList.Count() - siteList.Count());
                     }
                     //Create an instance of Random Object
                     Random random = new Random();
