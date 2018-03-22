@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\AdministratorAccountController.cs" />
+    <Compile Include="BLL\AdministratorRoleController.cs" />
     <Compile Include="BLL\AgeRangeController.cs" />
     <Compile Include="BLL\GenderController.cs" />
     <Compile Include="BLL\MealController.cs" />
