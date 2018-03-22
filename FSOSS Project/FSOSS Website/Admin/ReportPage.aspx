@@ -9,7 +9,19 @@
         </div>
     </div>
      <div class="container">
-           <ul class="nav nav-tabs">
+         <asp:Label ID="ReportCountDummy" runat="server" Text=""></asp:Label>
+          <asp:Label ID="ReportValues" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Questions" runat="server" Text=""></asp:Label>
+          <asp:Label ID="QuestionsCountTotal" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1a" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1aCount" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1b" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1bCount" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1c" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1cCount" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1d" runat="server" Text=""></asp:Label>
+          <asp:Label ID="Q1dCount" runat="server" Text=""></asp:Label>
+         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#questionOne">Question One</a></li>
             <li><a data-toggle="tab" href="#questionTwo">Question Two</a></li>
             <li><a data-toggle="tab" href="#questionThree">Question Three</a></li>
