@@ -31,7 +31,11 @@ namespace FSOSS.System.BLL
                                    select new UnitsPOCO()
                                    {
                                        unitID = y.unit_id,
-                                       unitNumber = y.unit_number
+                                       unitNumber = y.unit_number,
+                                       dateModified=y.date_modified,
+                                       administratorAccountId=y.administrator_account_id,
+                                       isClosedyn=y.is_closed_yn
+
                                    };
 
                     return unitList.ToList();

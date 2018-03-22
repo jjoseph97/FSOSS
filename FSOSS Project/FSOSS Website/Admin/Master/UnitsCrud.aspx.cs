@@ -22,6 +22,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     protected void SearchUnitButton_Click(object sender, EventArgs e)
     {
-        UnitsListView.Visible = true;
+        unitsCrudGridview.Visible = true;
+
     }
 }
