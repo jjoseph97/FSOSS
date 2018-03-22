@@ -172,29 +172,26 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-
-        /*** commenting out for now until fixed ***/
-
-    //protected void SurveyWordListView_ItemDataBound(object sender, ListViewItemEventArgs e)
-    //{
-    //    if (e.Item.ItemType == ListViewItemType.DataItem)
-    //    {
-    //        if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
-    //        {
-    //            Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
-    //            disabledBtn.Visible = true;
-    //            Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
-    //            enabledBtn.Visible = false;
-    //        }
-    //        else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
-    //        {
-    //            Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
-    //            disabledBtn.Visible = false;
-    //            Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
-    //            enabledBtn.Visible = true;
-    //        }
-    //    }
-    //}
+    protected void SurveyWordListView_ItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListViewItemType.DataItem)
+        {
+            if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+            {
+                Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
+                disabledBtn.Visible = true;
+                Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
+                enabledBtn.Visible = false;
+            }
+            else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+            {
+                Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
+                disabledBtn.Visible = false;
+                Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
+                enabledBtn.Visible = true;
+            }
+        }
+    }
 
     /// <summary>
     /// 
@@ -292,8 +289,21 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
             }
             Label surveyWord = (Label)e.Item.FindControl("surveyWordLabel");
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
+            if (e.Item.ItemType == ListViewItemType.DataItem)
+            {
+                Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
+                Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
+                if (disabledBtn.Visible == true)
+                {
+                    ErrorAlert.Visible = true;
+                    ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
+                }
+                else if (enabledBtn.Visible == true)
+                {
+                    SuccessAlert.Visible = true;
+                    SuccessAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been enabled.";
+                }
+            }
         }
     }
 }

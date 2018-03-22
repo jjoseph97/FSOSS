@@ -31,8 +31,7 @@
                     <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
                     <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
                 </div>
-                <%-- ADD: OnItemDataBound="SurveyWordListView_ItemDataBound" when method is fixed on code behind --%>
-                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemCommand="SurveyWordListView_ItemCommand">
+                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound" OnItemCommand="SurveyWordListView_ItemCommand">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
                             <td style="display:none;">
@@ -86,7 +85,7 @@
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-6 py-2">Survey Word</th>
                                             <th runat="server" class="col-sm-3 py-2">Edit Word</th>
-                                            <th runat="server" class="col-sm-3 py-2">Toggle State</th>
+                                            <th runat="server" class="col-sm-3 py-2">Change Availability</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -108,7 +107,7 @@
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DisableWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
+                <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
@@ -117,7 +116,7 @@
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DisableWord" UpdateMethod="UpdateWord" InsertMethod="AddWord">
+                <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
@@ -126,7 +125,7 @@
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DisableWord" UpdateMethod="UpdateWord">
+                <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
@@ -138,7 +137,7 @@
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="SearchArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="DisableWord" UpdateMethod="UpdateWord">
+                <asp:ObjectDataSource ID="SearchArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
