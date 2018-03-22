@@ -31,7 +31,7 @@
     </div>
     <div class="text-center mt-3">
         <div class="col-sm-12">
-            <asp:Label ID="Message" runat="server" CssClass="text-white bg-danger p-2 rounded" Visible="false" />
+            <asp:Label ID="Message" runat="server" CssClass="alert alert-danger p-2 rounded" Visible="false" />
         </div>
     </div>
 </asp:Content>
