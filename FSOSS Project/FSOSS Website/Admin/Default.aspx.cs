@@ -29,14 +29,6 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         {
             if (!Page.IsPostBack)
             {
-<<<<<<< HEAD
-        
-                
-             
-=======
-                WOTDLabel.Text += "pigeon"; // Replace with proper Word of the day
->>>>>>> origin/master
-
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
                 HospitalDDL.SelectedValue = "1";
