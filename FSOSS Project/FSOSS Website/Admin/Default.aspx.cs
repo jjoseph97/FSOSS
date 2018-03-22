@@ -57,7 +57,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                 }
             }
 
-            WelcomeMessage.Text += Session["username"].ToString();
+            WelcomeMessage.Text = "Welcome, " + Session["username"].ToString();
         }
     }
 

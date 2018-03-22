@@ -3,7 +3,7 @@
 <asp:Content ID="AdminMainPage" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="card">
         <div class="col-sm-12 col-md-8 mx-auto mt-3">
-            <asp:Label ID="WelcomeMessage" runat="server" Text="Welcome, " CssClass="h2" />
+            <asp:Label ID="WelcomeMessage" runat="server" CssClass="h2" />
         </div>
 
         <div class="row col-md-8 mx-auto my-3">
