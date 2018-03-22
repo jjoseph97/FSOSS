@@ -11,7 +11,7 @@
         <div class="col-sm-12">
             <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success p-2" />
             <asp:ValidationSummary runat="server" ID="ValidationSummary"
-                HeaderText="Failed to create user due to the following:"
+                HeaderText="Failed to create the user due to the following:"
                 CssClass="card container h5 alert alert-danger p-2" />
         </div>
     </div>
