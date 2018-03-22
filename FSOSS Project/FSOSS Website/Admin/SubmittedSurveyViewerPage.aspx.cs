@@ -31,13 +31,11 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     protected void ResolveButton_Click(object sender, EventArgs e)
     {
         
-
         string ssn = Request.QueryString["sid"];
         SubSurveyNumLabel.Text = ssn;
         int surveyNum = Convert.ToInt32(ssn);
         SubmittedSurveyController ssc = new SubmittedSurveyController();
         ssc.contactSurvey(surveyNum);
-        
         ContactResolve.Visible = false;
         SubSurveyList.DataBind();
     }

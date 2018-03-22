@@ -9,6 +9,7 @@ namespace FSOSS.System.Data.POCOs
     public class SubmittedSurveyPOCO
     {
         public int submittedSurveyID { get; set; }
+        public string site { get; set; }
         public string unitNumber { get; set; }
         public string mealName { get; set; }
         public string participantType { get; set; }

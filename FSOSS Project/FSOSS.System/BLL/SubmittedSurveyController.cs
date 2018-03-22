@@ -102,6 +102,7 @@ namespace FSOSS.System.BLL
                                              select new SubmittedSurveyPOCO()
                                              {
                                                  submittedSurveyID = x.submitted_survey_id,
+                                                
                                                  unitNumber = x.Unit.unit_number,
                                                  mealName = x.Meal.meal_name,
                                                  participantType = x.ParticipantType.participant_description,
@@ -145,6 +146,7 @@ namespace FSOSS.System.BLL
                                  select new SubmittedSurveyPOCO
                                  {
                                      submittedSurveyID = x.submitted_survey_id,
+                                     site = x.Unit.Site.site_name,
                                      unitNumber = x.Unit.unit_number,
                                      mealName = x.Meal.meal_name,
                                      participantType = x.ParticipantType.participant_description,
@@ -258,8 +260,7 @@ namespace FSOSS.System.BLL
             }
 
 
-
-            //obtain specific submitted survey results
+            
 
         }
 
