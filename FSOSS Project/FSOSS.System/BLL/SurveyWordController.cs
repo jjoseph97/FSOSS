@@ -84,13 +84,13 @@ namespace FSOSS.System.BLL
             }//End of Transaction
         }
 
-        public SurveyWord GetSurveyWord(int siteID)
+        public string GetSurveyWord(int siteID)
         {
             using (var context = new FSOSSContext())
             {
-               SurveyWord currentSurveyWord = (from x in context.SurveyWords
-                                                  where x.site_id == siteID && x.date_used == DateTime.Now
-                                                  select x).FirstOrDefault();
+               string currentSurveyWord = (from x in context.SurveyWords
+                                                  where x.site_id == siteID && x.date_used.Day == DateTime.Now.Day
+                                                  select x.PotentialSurveyWord.survey_access_word).FirstOrDefault();
                 return currentSurveyWord;
             }         
         }

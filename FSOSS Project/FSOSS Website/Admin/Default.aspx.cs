@@ -40,8 +40,8 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     int siteID = Convert.ToInt32(value);
                     int contactCount = ssc.GetContactRequestTotal(siteID);
                     SurveyWordController surveyWordManager = new SurveyWordController();
-                    SurveyWord currentSurveyWord = surveyWordManager.GetSurveyWord(siteID);
-                    WOTDLabel.Text = currentSurveyWord.PotentialSurveyWord.survey_access_word;
+                     
+                    WOTDLabel.Text =surveyWordManager.GetSurveyWord(siteID); 
                     if (contactCount > 0)
                     {
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
@@ -70,7 +70,9 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         int siteID = Convert.ToInt32(value);
         int contactCount = ssc.GetContactRequestTotal(siteID);
         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
+        SurveyWordController surveyWordManager = new SurveyWordController();
 
+        WOTDLabel.Text = surveyWordManager.GetSurveyWord(siteID);
         //TO ADD update the survey word of the day
 
 
