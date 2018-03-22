@@ -17,12 +17,14 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     }
 
-
-
-
     protected void SearchUnitButton_Click(object sender, EventArgs e)
     {
         unitsCrudGridview.Visible = true;
 
+    }
+
+    protected void unitsCrudGridview_Load(object sender, EventArgs e)
+    {
+       
     }
 }

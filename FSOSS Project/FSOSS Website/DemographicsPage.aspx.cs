@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSOSS.System.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,15 +14,23 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         {
             Response.Redirect("~/");
         }
-        if (CustomerProfileCheckBox.Checked)
-            CustomerProfileContent.Visible = true;
-        else
-            CustomerProfileContent.Visible = false;
 
-        if (ContactRequestsCheckBox.Checked)
-            ContactRequestsContent.Visible = true;
-        else
-            ContactRequestsContent.Visible = false;
+        if (!IsPostBack)
+        {
+            QuestionTextController sysmgr = new QuestionTextController();
+            GenderLabel.Text = sysmgr.GetQuestionGender();
+            AgeRangeLabel.Text = sysmgr.GetQuestionAgeRange();
+
+            if (CustomerProfileCheckBox.Checked)
+                CustomerProfileContent.Visible = true;
+            else
+                CustomerProfileContent.Visible = false;
+
+            if (ContactRequestsCheckBox.Checked)
+                ContactRequestsContent.Visible = true;
+            else
+                ContactRequestsContent.Visible = false;
+        }
     }
 
     protected void CustomerProfileCheckBox_CheckedChanged(object sender, EventArgs e)

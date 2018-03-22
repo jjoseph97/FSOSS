@@ -121,12 +121,12 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Method used to disable words from the list that is used in the potential access words
+        /// Method used to disable or enable words from the list that is used in the potential access words
         /// </summary>
         /// <param name="surveyWordID"></param>
         /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DisableWord(int surveyWordID)
+        public string ChangeAvailability(int surveyWordID)
         {
             using (var context = new FSOSSContext())
             {
@@ -138,16 +138,22 @@ namespace FSOSS.System.BLL
                                                       where x.survey_word_id == surveyWordID
                                                       select new SurveyWordPOCO()
                                                       {
-                                                             siteID = x.site_id,
-                                                             surveyWordID = x.survey_word_id,
-                                                           dateUsed = x.date_used
+                                                            siteID = x.site_id,
+                                                            surveyWordID = x.survey_word_id,
+                                                            dateUsed = x.date_used
                                                          
                                                       }).FirstOrDefault();
 
                     if (surveyWordAttachToHospital == null)
                     {
                         PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
-                        potentialSurveyWord.archive_yn = true;
+                        if (potentialSurveyWord.archive_yn == true)
+                        {
+                            potentialSurveyWord.archive_yn = false;
+                        } else if (potentialSurveyWord.archive_yn == false)
+                        {
+                            potentialSurveyWord.archive_yn = true;
+                        }
                         context.Entry(potentialSurveyWord).Property(y => y.archive_yn).IsModified = true;
                         context.SaveChanges();
                     }

@@ -40,10 +40,10 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         if(StartingPeriodTextBox.Text != "")
         {
             
-            filter.startingDate = DateTime.Parse(StartingPeriodTextBox.Text);
+            filter.startingDate = DateTime.ParseExact(StartingPeriodTextBox.Text,"yyyy-MM-dd HH:mm:ss:ffffff",null);
             if(EndingPeriodTextBox.Text != "")
             {
-                filter.endDate = DateTime.Parse(EndingPeriodTextBox.Text);
+                filter.endDate = DateTime.ParseExact(EndingPeriodTextBox.Text, "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 Session["filter"] = filter;

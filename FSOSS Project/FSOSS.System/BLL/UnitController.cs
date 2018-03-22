@@ -97,11 +97,11 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to disable  Unit from the list that is use in a site
         /// </summary>
-        /// <param name="unit_id"></param>
+        /// <param name="unitID"></param>
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DisableUnit(int unit_id)
+        public string DisableUnit(int unitID)
         {
             using (var context = new FSOSSContext())
             {
@@ -110,17 +110,16 @@ namespace FSOSS.System.BLL
                 {
                     // Check if the unit exists
                     var unitInHospital = (from x in context.Units
-                                                      where x.unit_id== unit_id
-                                                      select new UnitsPOCO()
+                                          where x.unit_id == unitID
+                                          select new UnitsPOCO()
                                                       {
                                                           unitID = x.unit_id,
-                                                          unitNumber=x.unit_number
 
                                                       }).FirstOrDefault();
 
-                    if (unitInHospital == null)
+                    if (unitInHospital != null)
                     {
-                        Unit unit = context.Units.Find(unit_id);
+                        Unit unit = context.Units.Find(unitID);
                         unit.is_closed_yn = true;
                         context.Entry(unit).Property(y => y.is_closed_yn).IsModified = true;
                         context.SaveChanges();
@@ -145,7 +144,7 @@ namespace FSOSS.System.BLL
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateUnit(int unit_id ,string unit_number)
+        public string UpdateUnit(int unitID, string unit_number)
         {
             using (var context = new FSOSSContext())
             {
@@ -166,7 +165,7 @@ namespace FSOSS.System.BLL
 
                     foreach (UnitsPOCO item in unitList)
                     {
-                        if (item.unitID == unit_id && item.dateModified == DateTime.Now)
+                        if (item.unitID == unitID && item.dateModified == DateTime.Now)
                         {
                             inUse = true;
                             break;
@@ -175,7 +174,7 @@ namespace FSOSS.System.BLL
 
                     if (validUnit.IsMatch(unit_number) && inUse == false)
                     {
-                        var unitToUpdate = context.Units.Find(unit_id);
+                        var unitToUpdate = context.Units.Find(unitID);
                         unitToUpdate.is_closed_yn = true;
                         unitToUpdate.date_modified = DateTime.Now;
                         context.Entry(unitToUpdate).Property(y => y.is_closed_yn).IsModified = true;
