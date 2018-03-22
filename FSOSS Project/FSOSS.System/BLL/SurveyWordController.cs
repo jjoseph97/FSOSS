@@ -40,7 +40,7 @@ namespace FSOSS.System.BLL
                         {
                             //Get the last Survey Word by date
                             SurveyWord surveyWord = (from x in context.SurveyWords
-                                                     where x.date_used == surveyWordList.Select(y => y.date_used).First()
+                                                     orderby x.date_used
                                                      select x).FirstOrDefault();
                             //Remove the last Survey Word 
                             context.SurveyWords.Remove(surveyWord);
@@ -65,22 +65,8 @@ namespace FSOSS.System.BLL
                             int randomIndex = random.Next(0, potentialSurveyWordList.Count());
                             //Get the PotentialSurveyWord to be added based on the index
                             surveyWordToAdd = potentialSurveyWordList.ElementAt(randomIndex);
-                            //Loop through the List of current SurveyWord 
-                            foreach (SurveyWord surveyWord in surveyWordList)
-                            {
-                                //If the random PotentialSurveyWord to be added exists on the Survey Word List
-                                if (surveyWord.survey_word_id == surveyWordToAdd.survey_word_id)
-                                {
-                                    //Mark that the word is currently use and leave the loop for the Survey Word check 
-                                    wordIsUsed = true;
-                                    break;
-                                }
-                                else
-                                {
-                                    //Mark that the current word is not use. Still has to go through the loop to check if the word exists at all.
-                                    wordIsUsed = false;
-                                }
-                            }
+                            //Loop through the List of current SurveyWord and check if the word has been used by the current site.
+                            wordIsUsed = surveyWordList.Any(word => word.survey_word_id == surveyWordToAdd.survey_word_id);                            
                             //If the Word doesn't exists after the loop on Survey Word List. Exit on the loop else start the process all over again.
                         } while (wordIsUsed == true);
 
@@ -96,6 +82,17 @@ namespace FSOSS.System.BLL
                     }//End of loop in Site denoting that the site has a new potential survey word.                               
                 }//End of check statement to see if theres enough active potential survey word to choose from the list.
             }//End of Transaction
+        }
+
+        public SurveyWord GetSurveyWord(int siteID)
+        {
+            using (var context = new FSOSSContext())
+            {
+               SurveyWord currentSurveyWord = (from x in context.SurveyWords
+                                                  where x.site_id == siteID && x.date_used == DateTime.Now
+                                                  select x).FirstOrDefault();
+                return currentSurveyWord;
+            }         
         }
     }
 }
