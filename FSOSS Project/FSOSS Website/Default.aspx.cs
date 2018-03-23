@@ -14,13 +14,13 @@ public partial class _Default : Page
 
     protected void SurveyButton_Click(object sender, EventArgs e)
     {
-        if (WOTDTextBox.Text != "sunshine")
+        if (WOTDTextBox.Text != "spring")
         {
             Message.Visible = true;
             Message.Text = "You entered the wrong word";
             Message.CssClass = "text-white bg-danger p-2 rounded";
         }
-        else if (WOTDTextBox.Text == "sunshine")
+        else if (WOTDTextBox.Text == "spring")
         {
             Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
