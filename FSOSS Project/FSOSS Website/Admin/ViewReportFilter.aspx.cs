@@ -37,27 +37,37 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         FilterPOCO filter = new FilterPOCO();
-        if(StartingPeriodTextBox.Text != "")
+        DateTime dateToParse;
+        if (StartingPeriodTextBox.Text != "" || DateTime.TryParseExact(StartingPeriodTextBox.Text, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
         {
             
             filter.startingDate = DateTime.ParseExact(StartingPeriodTextBox.Text + " 00:00:00:000000","yyyy-MM-dd HH:mm:ss:ffffff",null);
-            if(EndingPeriodTextBox.Text != "")
+            if(EndingPeriodTextBox.Text != "" || DateTime.TryParseExact(EndingPeriodTextBox.Text, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
             {
                 filter.endDate = DateTime.ParseExact(EndingPeriodTextBox.Text + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
-                filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                Session["filter"] = filter;
-                Response.Redirect("~/Admin/ReportPage.aspx");
+                if (filter.startingDate <= filter.endDate)
+                {                  
+                    filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
+                    filter.mealID = int.Parse(MealDropDownList.SelectedValue);
+                    Session["filter"] = filter;
+                    Response.Redirect("~/Admin/ReportPage.aspx");
+                }
+                else
+                {
+                    Alert.Text = String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate, filter.endDate);
+                    Alert.Visible = true;
+                }
+               
             }
             else
             {
-                Alert.Text = "Please select ending period";
+                Alert.Text = "Please select a valid ending period";
                 Alert.Visible = true;
             }           
         }
         else
         {
-            Alert.Text = "Please select starting period";
+            Alert.Text = "Please select a valid starting period";
             Alert.Visible = true;
         }
      
