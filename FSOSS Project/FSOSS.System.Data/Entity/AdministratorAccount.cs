@@ -28,7 +28,7 @@ namespace FSOSS.System.Data.Entity
         [Required]
         public string last_name { get; set; }
         [Required]
-        public bool active_yn {get; set;}
+        public bool archived_yn {get; set;}
         [Required]
         public DateTime date_created { get; set; }
         [Required]

@@ -29,7 +29,7 @@ namespace FSOSS.System.Data.Entity
         public DateTime date_modified { get; set; }
         [ForeignKey("AdministratorAccount")]
         public int administrator_account_id { get; set; }
-        public bool is_closed_yn { get; set; }
+        public bool archived_yn { get; set; }
 
         public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual Site Site { get; set; }
