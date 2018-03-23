@@ -40,12 +40,14 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         FilterPOCO filter = new FilterPOCO();
-        if (StartingPeriodTextBox.Text != "")
+        string startingPeriodInput = Request.Form["StartingPeriodInput"];
+        if (startingPeriodInput != "")
         {
-            filter.startingDate = DateTime.ParseExact(StartingPeriodTextBox.Text + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-            if (EndingPeriodTextBox.Text != "")
+            filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+            string endingPeriodInput = Request.Form["EndingPeriodInput"];
+            if (endingPeriodInput != "")
             {
-                filter.endDate = DateTime.ParseExact(EndingPeriodTextBox.Text + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 filter.unitID = int.Parse(UnitDropDownList.SelectedValue);

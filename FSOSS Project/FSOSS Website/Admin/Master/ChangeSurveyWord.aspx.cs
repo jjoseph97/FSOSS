@@ -85,6 +85,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void ClearSearchButton_Click(object sender, EventArgs e)
     {
+        // this check is to determine whether to clear the search for active or archived words depending on the current ODS
         if (SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS")
         {
             SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";

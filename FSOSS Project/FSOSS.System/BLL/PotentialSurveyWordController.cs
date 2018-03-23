@@ -147,14 +147,14 @@ namespace FSOSS.System.BLL
                     if (surveyWordAttachToHospital == null)
                     {
                         PotentialSurveyWord potentialSurveyWord = context.PotentialSurveyWords.Find(surveyWordID);
-                        if (potentialSurveyWord.archive_yn == true)
+                        if (potentialSurveyWord.archived_yn == true)
                         {
-                            potentialSurveyWord.archive_yn = false;
-                        } else if (potentialSurveyWord.archive_yn == false)
+                            potentialSurveyWord.archived_yn = false;
+                        } else if (potentialSurveyWord.archived_yn == false)
                         {
-                            potentialSurveyWord.archive_yn = true;
+                            potentialSurveyWord.archived_yn = true;
                         }
-                        context.Entry(potentialSurveyWord).Property(y => y.archive_yn).IsModified = true;
+                        context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
                         context.SaveChanges();
                     }
                     else
@@ -186,7 +186,7 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_access_word
-                                                  where x.survey_access_word.Contains(surveyWord.Trim()) && x.archive_yn == false
+                                                  where x.survey_access_word.Contains(surveyWord.Trim()) && x.archived_yn == false
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
@@ -221,7 +221,7 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_access_word
-                                                  where x.survey_access_word.Contains(surveyWord.Trim()) && x.archive_yn == true
+                                                  where x.survey_access_word.Contains(surveyWord.Trim()) && x.archived_yn == true
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
@@ -255,7 +255,7 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_access_word
-                                                  where x.archive_yn == false
+                                                  where x.archived_yn == false
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
@@ -289,7 +289,7 @@ namespace FSOSS.System.BLL
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
                                                   orderby x.survey_access_word
-                                                  where x.archive_yn == true
+                                                  where x.archived_yn == true
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
