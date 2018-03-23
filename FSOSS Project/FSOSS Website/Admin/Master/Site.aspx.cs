@@ -1,4 +1,5 @@
 ﻿using FSOSS.System.BLL;
+using FSOSS.System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,4 +62,28 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             AddSiteTextBox.Text = "";
         }
     }
+
+    protected void UpdateButton_Click(object sender, EventArgs e)
+    {
+        
+    }
+    //protected void ListView1_ItemCommand(object sender,
+    //    ListViewCommandEventArgs e)
+    //{
+
+    //    Regex valid = new Regex("^[a-zA-Z]+$");
+    //    TextBox siteName = (TextBox)e.Item.FindControl("siteNameTextBox");
+    //    string updateSite = siteName.Text.Trim();
+
+    // if (!valid.IsMatch(updateSite))
+    //    {
+    //        ErrorAlert.Visible = true;
+    //        ErrorAlert.Text = "Error: Please enter only alphabetical letters.";
+    //    }
+    //    else
+    //    {
+    //        Alert.Visible = true;
+    //        Alert.Text = "The survey word has been updated to \"" + updateSite + "\".";
+    //    }
+    //}
 }

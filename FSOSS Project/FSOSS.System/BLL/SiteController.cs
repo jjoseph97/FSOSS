@@ -8,6 +8,8 @@ using System.ComponentModel;
 using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
+using System.Text.RegularExpressions;
+using System.Data.Entity;
 
 //created March 8 2018-c
 namespace FSOSS.System.BLL
@@ -26,7 +28,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var siteList = from x in context.Sites
-                                   where !x.is_closed_yn
+                                   where !x.archived_yn
                                    select new SitePOCO()
                                    {
                                        siteID = x.site_id,
@@ -87,7 +89,7 @@ namespace FSOSS.System.BLL
                         newSite.administrator_account_id = employee;
                         newSite.site_name = newSiteName.Trim();
                         newSite.date_modified = DateTime.Now;
-                        newSite.is_closed_yn = false;
+                        newSite.archived_yn = false;
                         context.Sites.Add(newSite);
                         context.SaveChanges();
 
@@ -103,5 +105,62 @@ namespace FSOSS.System.BLL
             } //end of using var context
                 
         } // end of Addsite
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public string UpdateSite(Site item) //currently for active sites only
+        {
+            using (var context = new FSOSSContext())
+            {
+                Regex valid = new Regex("^[a-zA-Z ]+$");
+                string message = "";
+                try
+                {
+                    //context.Entry(item).State = EntityState.Modified;
+                    //context.SaveChanges();
+                    //return message;
+                
+                //var siteList = (from x in context.Sites
+                //                where x.is_closed_yn == false && x.site_id == item.site_id
+                //                      select new Site
+                //                      {
+                //                          siteID = x.site_id,
+                //                          siteName = x.site_name,
+                //                          administrator_account_id = x.administrator_account_id,
+                //                          date_modified = x.date_modified
+
+                //                      }).FirstOrDefault();
+
+                    if (valid.IsMatch(item.site_name))
+                    {
+                        var exists = (from x in context.Sites
+                                      where x.archived_yn == false && x.site_id == item.site_id
+                                      select x);
+                        if (exists == null)
+                        {
+                            throw new Exception("This hospital is not open.");
+                        }
+                        else
+                        {
+                            Site updateSite = context.Sites.Find(item.site_id);
+                            updateSite.site_name = item.site_name.Trim();
+                            updateSite.date_modified = DateTime.Now;
+
+                            context.Entry(updateSite).State = EntityState.Modified;
+                        }
+
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Update failed.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    message = e.Message;
+                }
+                return message;
+            }
+        }
     }
 }
