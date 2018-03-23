@@ -114,13 +114,18 @@ namespace FSOSS.System.BLL
                                           select new UnitsPOCO()
                                                       {
                                                           unitID = x.unit_id,
+                                                          unitNumber=x.unit_number,
+                                                          dateModified=x.date_modified
 
                                                       }).FirstOrDefault();
 
-                    if (unitInHospital != null)
+                    if (unitInHospital == null)
                     {
                         Unit unit = context.Units.Find(unitID);
-                        unit.archived_yn = true;
+                        if (unit.archived_yn == false)
+                        {
+                            unit.archived_yn = true;
+                        }
                         context.Entry(unit).Property(y => y.archived_yn).IsModified = true;
                         context.SaveChanges();
                     }
