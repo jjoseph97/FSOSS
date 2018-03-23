@@ -8,15 +8,15 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
+            <asp:Label ID="SuccessAlert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
         <div class="col-sm-12">
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="HospitalLabelReportLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Hospital:"></asp:Label>
-                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2 form-control" runat="server" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID">
-                        <asp:ListItem Text="Select All" Value="0" Selected="True" />
+                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
+                        <asp:ListItem Text="All Hospitals" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
@@ -43,20 +43,14 @@
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="MealLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Filter by Meal:"></asp:Label>
-                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2 form-control" runat="server"
-                        DataSourceID="MealODS"
-                        DataTextField="mealName"
-                        DataValueField="mealID">
-                        <asp:ListItem Text="All Meals" />
+                    <asp:DropDownList ID="MealDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
+                        <asp:ListItem Text="All Meals" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="UnitLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Filter by Unit:"></asp:Label>
-                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-3 my-2 form-control" runat="server"
-                        DataSourceID="UnitODS"
-                        DataTextField="unitNumber"
-                        DataValueField="unitID">
-                        <asp:ListItem Text="All Units" />
+                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
+                        <asp:ListItem Text="All Units" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
@@ -64,16 +58,6 @@
                 </div>
             </div>
         </div>
-        <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
-        <asp:ObjectDataSource ID="MealODS" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetMealList" TypeName="FSOSS.System.BLL.MealController"></asp:ObjectDataSource>
-        <asp:ObjectDataSource ID="UnitODS" runat="server" OldValuesParameterFormatString="original_{0}"
-            SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController">
-            <SelectParameters>
-                <asp:Parameter Name="site_id" Type="Int32"></asp:Parameter>
-            </SelectParameters>
-        </asp:ObjectDataSource>
     </div>
 </asp:Content>
 

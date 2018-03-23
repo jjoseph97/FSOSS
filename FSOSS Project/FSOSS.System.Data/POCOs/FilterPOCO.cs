@@ -12,5 +12,6 @@ namespace FSOSS.System.Data.POCOs
         public DateTime endDate { get; set; }
         public int siteID { get; set; }
         public int mealID { get; set; }
+        public int unitID { get; set; }
     }
 }
