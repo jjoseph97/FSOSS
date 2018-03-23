@@ -21,7 +21,7 @@ namespace FSOSS.System.BLL
                                                    select x).ToList();
                 //Get the list of potential survey word which is currently active
                 List<PotentialSurveyWord> potentialSurveyWordList = (from x in context.PotentialSurveyWords
-                                                                     where x.archive_yn == false
+                                                                     where x.archived_yn == false
                                                                      select x).ToList();
                 //Get the list of all site to be added
                 List<Site> siteList = (from x in context.Sites
