@@ -26,7 +26,7 @@ namespace FSOSS.System.Data.Entity
         [Required]
         public DateTime date_modified { get; set; }
         [Required]
-        public Boolean archive_yn { get; set; }
+        public Boolean archived_yn { get; set; }
 
         public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual ICollection<SurveyWord> surveyword { get; set; }
