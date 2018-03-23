@@ -18,6 +18,6 @@ namespace FSOSS.System.Data.DTO
         public int gender_id { get; set; }
         public DateTime date_entered { get; set; }
         public List<AnswerPOCO> participantAnswerList { get; set; }
-        public List<ReportQuestionPOCO> reportQuestionList { get; set; }
+        public List<FinalReportPOCO> reportQuestionList { get; set; }
     }
 }

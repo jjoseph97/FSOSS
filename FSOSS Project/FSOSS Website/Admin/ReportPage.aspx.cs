@@ -33,14 +33,13 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     {
         base.OnLoad(e);
         ReportController sysmgr = new ReportController();
-        List<SubmittedSurvey> finalReportDTO = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
+        FinalReportPOCO finalReport = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         // Test if theres any data
-        if (finalReportDTO != null)
+        if (finalReport != null)
         {
             Alert.Visible = true;
             Alert.Text = "Theres a value";
-            ReportCountDummy.Text = finalReportDTO.Count().ToString();
-            ReportValues.Text = finalReportDTO.Select(a => a.meal_id).FirstOrDefault().ToString();
+            ReportCountDummy.Text = finalReport.submittedSurveyList.Count.ToString();
         }
         else
         {

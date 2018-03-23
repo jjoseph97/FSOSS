@@ -44,7 +44,6 @@ namespace FSOSS.System.BLL
                                                      select x).FirstOrDefault();
                             //Remove the last Survey Word 
                             context.SurveyWords.Remove(surveyWord);
-                            //Save to the database
                             context.SaveChanges();
                             //Check if the there are enough Potential Survey word available from the List in the database to be used for all the hospital
                             //Repeat the step above until theres enough potentail word to lookupon
@@ -79,6 +78,7 @@ namespace FSOSS.System.BLL
                         };
                         context.SurveyWords.Add(newSurveyWord);
                         context.SaveChanges();
+                        newSurveyWord = null;
                     }//End of loop in Site denoting that the site has a new potential survey word.                               
                 }//End of check statement to see if theres enough active potential survey word to choose from the list.
             }//End of Transaction
