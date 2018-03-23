@@ -42,14 +42,6 @@
                              <asp:Label ID="Label1" runat="server" Text='<%# Bind("unitNumber") %>'></asp:Label>
                          </ItemTemplate>
                      </asp:TemplateField>
-                     <asp:BoundField DataField="dateModified" HeaderText="Date Modified" SortExpression="dateModified"></asp:BoundField>
-                     <asp:BoundField DataField="administratorAccountId" HeaderText="Administrator Account Id" SortExpression="administratorAccountId"></asp:BoundField>
-
-                     <asp:TemplateField HeaderText="Status" SortExpression="isClosedyn">
-                         <ItemTemplate>
-                             <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("isClosedyn") %>' Enabled="false" />
-                         </ItemTemplate>
-                     </asp:TemplateField>
                      <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" ></asp:CommandField>
                  </Columns>
              </asp:GridView>

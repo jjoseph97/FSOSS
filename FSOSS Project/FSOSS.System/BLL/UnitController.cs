@@ -27,14 +27,14 @@ namespace FSOSS.System.BLL
                     var unitList = from x in context.Sites
                                    from y in context.Units
                                    where x.site_id == y.site_id
-                                   & !y.is_closed_yn & y.site_id != 11
+                                   & !y.archived_yn
                                    select new UnitsPOCO()
                                    {
                                        unitID = y.unit_id,
                                        unitNumber = y.unit_number,
                                        dateModified=y.date_modified,
                                        administratorAccountId=y.administrator_account_id,
-                                       isClosedyn=y.is_closed_yn
+                                       isArchived = y.archived_yn
 
                                    };
 
@@ -120,8 +120,8 @@ namespace FSOSS.System.BLL
                     if (unitInHospital != null)
                     {
                         Unit unit = context.Units.Find(unitID);
-                        unit.is_closed_yn = true;
-                        context.Entry(unit).Property(y => y.is_closed_yn).IsModified = true;
+                        unit.archived_yn = true;
+                        context.Entry(unit).Property(y => y.archived_yn).IsModified = true;
                         context.SaveChanges();
                     }
                     else
@@ -175,9 +175,9 @@ namespace FSOSS.System.BLL
                     if (validUnit.IsMatch(unit_number) && inUse == false)
                     {
                         var unitToUpdate = context.Units.Find(unitID);
-                        unitToUpdate.is_closed_yn = true;
+                        unitToUpdate.archived_yn = true;
                         unitToUpdate.date_modified = DateTime.Now;
-                        context.Entry(unitToUpdate).Property(y => y.is_closed_yn).IsModified = true;
+                        context.Entry(unitToUpdate).Property(y => y.archived_yn).IsModified = true;
                         context.Entry(unitToUpdate).Property(y => y.date_modified).IsModified = true;
                         context.SaveChanges();
                     }
