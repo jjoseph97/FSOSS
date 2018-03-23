@@ -1,4 +1,4 @@
-﻿
+
 DROP TABLE SECURITY_ROLE CASCADE;
 DROP TABLE ADMINISTRATOR_ACCOUNT CASCADE;
 DROP TABLE SITE CASCADE;
@@ -244,55 +244,6 @@ CREATE TABLE SURVEY_QUESTION
 	
 	PRIMARY KEY (SURVEY_VERSION_ID, QUESTION_ID)
 );
-
--- Create password_is_valid function
-CREATE OR REPLACE FUNCTION password_is_valid (
-	username_param VARCHAR(50), 
-	password_param VARCHAR(60))
-RETURNS BOOLEAN AS $$
-	DECLARE isValid BOOLEAN;
-BEGIN
-	IF username_param = '' OR username_param IS NULL OR password_param = '' OR password_param IS NULL THEN
-		isValid = FALSE;
-	ELSE	
-		SELECT INTO isValid
-		(admin_password = crypt(password_param, admin_password))
-		FROM administrator_account
-		WHERE username = username_param;
-	END IF;
-	RETURN isValid;
-END; $$
-LANGUAGE PLPGSQL;
-
--- Create add_user function
-CREATE OR REPLACE FUNCTION add_user (
-	username_param VARCHAR(50), 
-	password_param VARCHAR(60),
-	firstname_param VARCHAR(50),
-	lastname_param VARCHAR(50),
-	securityid_param INTEGER)
-RETURNS VARCHAR(50) AS $$
-DECLARE
-	userID INTEGER;
-	createdUsername VARCHAR(50);
-BEGIN
-	INSERT INTO administrator_account (username, admin_password, first_name, last_name, date_created)
-	VALUES (username_param, crypt(password_param,gen_salt('bf')), firstname_param, lastname_param, NOW());
-	
-	SELECT administrator_account_id INTO userID
-	FROM administrator_account
-	WHERE username = username_param;
-	
-	INSERT INTO administrator_role (administrator_account_id, security_role_id, date_modified)
-	VALUES (userID, securityid_param, NOW());
-	
-	SELECT username INTO createdUsername
-	FROM administrator_account
-	WHERE administrator_account_id = userID;
-	
-	RETURN createdUsername;
-END; $$
-LANGUAGE PLPGSQL;
 
 -- Create Webmaster
 INSERT INTO ADMINISTRATOR_ACCOUNT (USERNAME, ADMIN_PASSWORD, FIRST_NAME, LAST_NAME, DATE_CREATED, DATE_MODIFIED)
@@ -902,3 +853,123 @@ VALUES (10,11,'Wooohoo');
 --VALUES (10,12,'1');
 --INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
 --VALUES (10,13,'1');
+
+
+---Add functions below
+
+--create submit_survey function 
+CREATE or REPLACE FUNCTION submit_survey (
+    survey_version_id_param INTEGER,
+    unit_id_param INTEGER,
+    meal_id_param INTEGER, 
+    participant_type_id_param INTEGER,
+    age_range_id_param INTEGER,
+    gender_id_param INTEGER,
+    contact_request_param BOOL,
+    contact_room_number_param VARCHAR(50),
+    contact_phone_number_param VARCHAR(20),
+    Q1AResponse_param TEXT,
+    Q1BResponse_param TEXT,
+    Q1CResponse_param TEXT,
+    Q1DResponse_param TEXT,
+    Q1EResponse_param TEXT,
+    Q2Response_param TEXT,
+    Q3Response_param TEXT,
+    Q4Response_param TEXT,
+    Q5Response_param TEXT
+)
+RETURNS
+    VOID AS $$
+DECLARE
+    newSubmittedSurveyID INTEGER;
+BEGIN
+
+    INSERT INTO SUBMITTED_SURVEY(SURVEY_VERSION_ID, UNIT_ID, MEAL_ID, PARTICIPANT_TYPE_ID, AGE_RANGE_ID, GENDER_ID, DATE_ENTERED, CONTACT_REQUEST, CONTACT_ROOM_NUMBER, CONTACT_PHONE_NUMBER)
+    VALUES (survey_version_id_param, unit_id_param, meal_id_param, participant_type_id_param, age_range_id_param, gender_id_param, NOW(), contact_request_param, contact_room_number_param, contact_phone_number_param);
+
+    SELECT INTO newSubmittedSurveyID
+        MAX(submitted_survey_id)
+    FROM
+        submitted_survey;
+
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 2, Q1AResponse_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 3, Q1BResponse_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 4, Q1CResponse_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 5, Q1DResponse_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 6, Q1EResponse_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 8, Q2Response_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 9, Q3Response_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 10, Q4Response_param);
+
+    INSERT INTO PARTICIPANT_RESPONSE(SUBMITTED_SURVEY_ID,QUESTION_ID,PARTICIPANT_ANSWER)
+    VALUES (newSubmittedSurveyID, 11, Q5Response_param);
+
+END; $$
+LANGUAGE PLPGSQL;
+
+-- Create password_is_valid function
+CREATE OR REPLACE FUNCTION password_is_valid (
+	username_param VARCHAR(50), 
+	password_param VARCHAR(60))
+RETURNS BOOLEAN AS $$
+	DECLARE isValid BOOLEAN;
+BEGIN
+	IF username_param = '' OR username_param IS NULL OR password_param = '' OR password_param IS NULL THEN
+		isValid = FALSE;
+	ELSE	
+		SELECT INTO isValid
+		(admin_password = crypt(password_param, admin_password))
+		FROM administrator_account
+		WHERE username = username_param;
+	END IF;
+	RETURN isValid;
+END; $$
+LANGUAGE PLPGSQL;
+
+-- Create add_user function
+CREATE OR REPLACE FUNCTION add_user (
+	username_param VARCHAR(50), 
+	password_param VARCHAR(60),
+	firstname_param VARCHAR(50),
+	lastname_param VARCHAR(50),
+	securityid_param INTEGER)
+RETURNS VARCHAR(50) AS $$
+DECLARE
+	userID INTEGER;
+	createdUsername VARCHAR(50);
+BEGIN
+	INSERT INTO administrator_account (username, admin_password, first_name, last_name, date_created)
+	VALUES (username_param, crypt(password_param,gen_salt('bf')), firstname_param, lastname_param, NOW());
+	
+	SELECT administrator_account_id INTO userID
+	FROM administrator_account
+	WHERE username = username_param;
+	
+	INSERT INTO administrator_role (administrator_account_id, security_role_id, date_modified)
+	VALUES (userID, securityid_param, NOW());
+	
+	SELECT username INTO createdUsername
+	FROM administrator_account
+	WHERE administrator_account_id = userID;
+	
+	RETURN createdUsername;
+END; $$
+LANGUAGE PLPGSQL;
+
+
