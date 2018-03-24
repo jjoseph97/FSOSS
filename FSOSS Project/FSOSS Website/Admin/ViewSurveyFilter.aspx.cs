@@ -40,7 +40,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         FilterPOCO filter = new FilterPOCO();
-        string startingPeriodInput = Request.Form["StartingPeriodInput"];
+        string startingPeriodInput = String.Format("{0}", Request.Form["StartingPeriodInput"]); 
         if (startingPeriodInput != "")
         {
             filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);

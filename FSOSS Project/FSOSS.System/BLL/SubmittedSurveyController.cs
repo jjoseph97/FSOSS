@@ -89,20 +89,19 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of submitted surveys</param>
         /// <returns></returns>
-        public List<SubmittedSurveyPOCO> GetSubmittedSurveyList(int siteID)
+        public List<SubmittedSurveyPOCO> GetSubmittedSurveyList(int siteID, DateTime startDate, DateTime endDate, int mealID, int unitID)
         {
 
             using (var context = new FSOSSContext())
             {
                 try
                 {
-                    var submittedSurveyList = from x in context.SubmittedSurveys
-                                              orderby x.date_entered
-                                             // where x.site_id == siteID
+                   var submittedSurveyList = from x in context.SubmittedSurveys
+                                             orderby x.date_entered
+                                             where x.date_entered >= startDate && x.date_entered <= endDate && x.meal_id == mealID && x.unit_id == unitID
                                              select new SubmittedSurveyPOCO()
                                              {
                                                  submittedSurveyID = x.submitted_survey_id,
-                                                
                                                  unitNumber = x.Unit.unit_number,
                                                  mealName = x.Meal.meal_name,
                                                  participantType = x.ParticipantType.participant_description,

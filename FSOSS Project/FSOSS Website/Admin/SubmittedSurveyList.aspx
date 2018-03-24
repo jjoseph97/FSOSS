@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card container">
-                <asp:ListView ID="SubmittedSurveyList" runat="server" DataSourceID="SubmittedSurveyODS">
+                <asp:ListView ID="SubmittedSurveyList" runat="server" >
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
                             <td style="display: none;">
@@ -93,11 +93,6 @@
                         </table>
                     </LayoutTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource ID="SubmittedSurveyODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSubmittedSurveyList" TypeName="FSOSS.System.BLL.SubmittedSurveyController">
-                    <SelectParameters>
-                        <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
-                    </SelectParameters>
-                </asp:ObjectDataSource>
             </div>
         </div>
     </div>
