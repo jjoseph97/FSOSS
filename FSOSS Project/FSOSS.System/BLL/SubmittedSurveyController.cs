@@ -9,6 +9,9 @@ using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
 using FSOSS.System.Data.DTO;
+using Npgsql;
+using System.Configuration;
+using System.Data;
 
 //created March 8, 2018-c
 namespace FSOSS.System.BLL
@@ -257,10 +260,42 @@ namespace FSOSS.System.BLL
                     throw new Exception(e.Message);
                 }
             }
+        }
 
-
-            
-
+        public void SubmitSurvey(int survey_version_id_param, int unit_id_param, int meal_id_param, int participant_type_id_param, int age_range_id_param, 
+            int gender_id_param, bool contact_request_param, string contact_room_number_param, string contact_phone_number_param, string Q1AResponse_param,
+            string Q1BResponse_param, string Q1CResponse_param, string Q1DResponse_param, string Q1EResponse_param, string Q2Response_param, string Q3Response_param, 
+            string Q4Response_param, string Q5Response_param)
+        { 
+            using (var connection = new NpgsqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                connection.Open();
+                var cmd = new NpgsqlCommand("submit_survey", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("survey_version_id_param", survey_version_id_param);
+                cmd.Parameters.AddWithValue("unit_id_param", unit_id_param);
+                cmd.Parameters.AddWithValue("meal_id_param", meal_id_param);
+                cmd.Parameters.AddWithValue("participant_type_id_param", participant_type_id_param);
+                cmd.Parameters.AddWithValue("age_range_id_param", age_range_id_param);
+                cmd.Parameters.AddWithValue("gender_id_param", gender_id_param);
+                cmd.Parameters.AddWithValue("contact_request_param", contact_request_param);
+                cmd.Parameters.AddWithValue("contact_room_number_param", contact_room_number_param);
+                cmd.Parameters.AddWithValue("contact_phone_number_param", participant_type_id_param);
+                cmd.Parameters.AddWithValue("q1aresponse_param", Q1AResponse_param);
+                cmd.Parameters.AddWithValue("q1bresponse_param", Q1BResponse_param);
+                cmd.Parameters.AddWithValue("q1cresponse_param", Q1CResponse_param);
+                cmd.Parameters.AddWithValue("q1dresponse_param", Q1DResponse_param);
+                cmd.Parameters.AddWithValue("q1eresponse_param", Q1EResponse_param);
+                cmd.Parameters.AddWithValue("q2response_param", Q2Response_param);
+                cmd.Parameters.AddWithValue("q3response_param", Q3Response_param);
+                cmd.Parameters.AddWithValue("q4response_param", Q4Response_param);
+                cmd.Parameters.AddWithValue("q5response_param", Q5Response_param);
+                //cmd.ExecuteReader();
+                connection.Close();
+            }
         }
 
 

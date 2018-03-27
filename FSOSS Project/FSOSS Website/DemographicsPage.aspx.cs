@@ -49,7 +49,9 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/DummyResults");
+        //Response.Redirect("~/DummyResults");
+        SubmittedSurveyController sysmgr = new SubmittedSurveyController();
+        sysmgr.SubmitSurvey(1, 1, 1, 1, 1, 1, true, "1234", "7801231234", "Good", "Good", "Good", "Good", "Good", "Good", "Good", "Good", "Good");
     }
 
     protected void ContactRequestsCheckBox_CheckedChanged(object sender, EventArgs e)
