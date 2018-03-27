@@ -9,10 +9,6 @@
         </div>
     </div>
      <div class="container">
-         <asp:Label ID="ReportCountDummy" runat="server" Text=""></asp:Label>
-          <asp:Label ID="ReportValues" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Questions" runat="server" Text=""></asp:Label>
-          <asp:Label ID="QuestionsCountTotal" runat="server" Text=""></asp:Label>
           <asp:Label ID="Q1a" runat="server" Text=""></asp:Label>
           <asp:Label ID="Q1aCount" runat="server" Text=""></asp:Label>
           <asp:Label ID="Q1b" runat="server" Text=""></asp:Label>
@@ -29,7 +25,7 @@
 
         </ul>
     
-          <div id="questionOne" class="tab-pane fade in active">
+        <div id="questionOne" class="tab-pane fade in active">
 
         <div id="questionOneAChart" style="height: 370px; width: 100%;"></div>
         
@@ -62,7 +58,8 @@
 <script>
 window.onload = function () {
 
-    var options = new CanvasJS.Chart("questionOneAChart", {
+    var options = new CanvasJS.Chart("questionOneAChart",
+    {
 	title: {
         text: "1A. The variety of food in your daily meals"
 	},

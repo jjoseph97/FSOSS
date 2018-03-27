@@ -28,7 +28,7 @@ namespace FSOSS.System.BLL
                                              && x.submittedsurvey.date_entered <= endDate
                                              && x.submittedsurvey.meal_id == mealID
                                              select x).ToList();
-              
+                           
                 List<string> QuestionTwoValueList = new List<string>();
                 List<int> QuestionTwoValueCount = new List<int>();
                 List<string> QuestionThreeValueList = new List<string>();
@@ -47,7 +47,7 @@ namespace FSOSS.System.BLL
                 int index = 0;
                 foreach (ParticipantResponse responses in participantResponseList)
                 {
-                    if(responses.question_id == 2)
+                    if (responses.question_id == 2)
                     {
                         if (QuestionTwoValueList.Count < 1 || !QuestionTwoValueList.Contains(responses.participant_answer))
                         {
@@ -58,13 +58,13 @@ namespace FSOSS.System.BLL
                         }
                         else
                         {
-                            index =  QuestionTwoValueList.IndexOf(responses.participant_answer);
+                            index = QuestionTwoValueList.IndexOf(responses.participant_answer);
                             valueCounter = QuestionTwoValueCount[index];
                             valueCounter++;
                             QuestionTwoValueCount[index] = valueCounter;
                         }
                         valueCounter = 0;
-                        
+
                     }
                     else if (responses.question_id == 3)
                     {
@@ -186,7 +186,7 @@ namespace FSOSS.System.BLL
                     QuestionFiveValueList = QuestionFiveValueList,
                     QuestionFiveValueCount = QuestionFiveValueCount,
                     QuestionSixValueList = QuestionSixValueList,
-                    QuestionSixValueCount = QuestionSixValueCount, 
+                    QuestionSixValueCount = QuestionSixValueCount,
                     QuestionNineValueList = QuestionNineValueList,
                     QuestionNineValueCount = QuestionNineValueCount,
                     QuestionTenValueList = QuestionTenValueList,
