@@ -24,11 +24,11 @@
                     <div class="form-group mt-3 row">
                         <asp:Label ID="FirstNameLabel" runat="server" AssociatedControlID="FirstNameTextBox" CssClass="col-md-4 col-form-label font-weight-bold text-md-right" Text="First Name:" />
                         <div class="col-sm-8">
-                            <asp:TextBox ID="FirstNameTextBox" runat="server" CssClass="form-control" AutoComplete="off" AutoFocus="true" />
+                            <asp:TextBox ID="FirstNameTextBox" runat="server" CssClass="form-control" AutoComplete="off" />
                             <asp:RequiredFieldValidator ErrorMessage="First Name is required" ControlToValidate="FirstNameTextBox" runat="server" 
                                 Display="None" SetFocusOnError="true" />
                             <asp:RegularExpressionValidator ErrorMessage="First Name must start with a capital letter and will only contain letters" ControlToValidate="FirstNameTextBox" runat="server"
-                                ValidationExpression="^[A-Z][a-z]*\s{0,1}[A-Za-z]*$" Display="None" SetFocusOnError="true" />
+                                ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true" />
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                             <asp:RequiredFieldValidator ErrorMessage="Last Name is required" ControlToValidate="LastNameTextBox" runat="server" 
                                 Display="None" SetFocusOnError="true" />
                             <asp:RegularExpressionValidator ErrorMessage="Last Name must start with a capital letter and will only contain letters" ControlToValidate="LastNameTextBox" runat="server" 
-                                ValidationExpression="^[A-Z][a-z]*[-{0,1}\s{0,1}\'{0,1}][a-zA-Z]*$" Display="None" SetFocusOnError="true"/>
+                                ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true"/>
                         </div>
                     </div>
 
@@ -59,7 +59,7 @@
                             <asp:TextBox ID="ConfirmPasswordTextBox" runat="server" TextMode="Password" CssClass="form-control" AutoComplete="off" />
                             <asp:RequiredFieldValidator ErrorMessage="Please confirm the password" ControlToValidate="ConfirmPasswordTextBox" runat="server" 
                                 Display="None"/>
-                            <asp:CompareValidator ErrorMessage="Please confirm the password" ControlToValidate="ConfirmPasswordTextBox" runat="server"
+                            <asp:CompareValidator ErrorMessage="Invalid password confirmation" ControlToValidate="ConfirmPasswordTextBox" runat="server"
                                 Display="None" ControlToCompare="PasswordTextBox" />
                         </div>
                     </div>
