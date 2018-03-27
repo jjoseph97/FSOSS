@@ -8,7 +8,8 @@ namespace FSOSS.System.Data.POCOs
 {
     public class FinalReportPOCO
     {
-        public List <SubmittedSurvey> submittedSurveyList { get; set; }
+        public List <SubmittedSurvey> SubmittedSurveyList { get; set; }
+        public List<string> Question { get; set; } 
         public List<string> QuestionTwoValueList { get; set; }
         public List<int> QuestionTwoValueCount { get; set; }
         public List<string> QuestionThreeValueList { get; set; }

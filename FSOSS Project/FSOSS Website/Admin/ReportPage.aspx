@@ -58,10 +58,10 @@
 <script>
 window.onload = function () {
 
-    var options = new CanvasJS.Chart("questionOneAChart",
+    var questionOneOption = new CanvasJS.Chart("questionOneAChart",
     {
 	title: {
-        text: "1A. The variety of food in your daily meals"
+        text: "<% = finalReport.QuestionTwoValueList[0] %>"
 	},
 	subtitles: [{
 		text: "For "
@@ -85,10 +85,13 @@ window.onload = function () {
 			
 		]
 	}]
-    });
-    options.render();
+        });
+    questionOneOption.render();
 
     
+
+
+
 
     var ChartB = new CanvasJS.Chart("questionOneBChart", 
         {

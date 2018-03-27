@@ -28,7 +28,7 @@ namespace FSOSS.System.BLL
                                              && x.submittedsurvey.date_entered <= endDate
                                              && x.submittedsurvey.meal_id == mealID
                                              select x).ToList();
-                           
+                List<string> Questions = new List<string>();           
                 List<string> QuestionTwoValueList = new List<string>();
                 List<int> QuestionTwoValueCount = new List<int>();
                 List<string> QuestionThreeValueList = new List<string>();
@@ -51,7 +51,7 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionTwoValueList.Count < 1 || !QuestionTwoValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionTwoValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionTwoValueCount.Add(valueCounter);
@@ -70,7 +70,7 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionThreeValueList.Count < 1 || !QuestionThreeValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionThreeValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionThreeValueCount.Add(valueCounter);
@@ -88,13 +88,13 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionFourValueList.Count < 1 || !QuestionFourValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionFourValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionFourValueCount.Add(valueCounter);
                         }
                         else
-                        {
+                        { 
                             index = QuestionFourValueList.IndexOf(responses.participant_answer);
                             valueCounter = QuestionFourValueCount[index];
                             valueCounter++;
@@ -106,7 +106,7 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionFiveValueList.Count < 1 || !QuestionFiveValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionFiveValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionFiveValueCount.Add(valueCounter);
@@ -124,13 +124,13 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionSixValueList.Count < 1 || !QuestionSixValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionSixValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionSixValueCount.Add(valueCounter);
                         }
                         else
-                        {
+                        {                          
                             index = QuestionSixValueList.IndexOf(responses.participant_answer);
                             valueCounter = QuestionSixValueCount[index];
                             valueCounter++;
@@ -142,7 +142,7 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionNineValueList.Count < 1 || !QuestionNineValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionNineValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionNineValueCount.Add(valueCounter);
@@ -160,7 +160,7 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionTenValueList.Count < 1 || !QuestionTenValueList.Contains(responses.participant_answer))
                         {
-
+                            Questions.Add(responses.question_id.ToString());
                             QuestionTenValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionTenValueCount.Add(valueCounter);
@@ -191,7 +191,8 @@ namespace FSOSS.System.BLL
                     QuestionNineValueCount = QuestionNineValueCount,
                     QuestionTenValueList = QuestionTenValueList,
                     QuestionTenValueCount = QuestionTenValueCount,
-                    submittedSurveyList = submittedSurveyList
+                    SubmittedSurveyList = submittedSurveyList,
+                    Question = Questions                    
                 };
                 return finalReport;
             }

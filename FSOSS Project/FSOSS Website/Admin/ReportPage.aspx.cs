@@ -10,13 +10,14 @@ using FSOSS.System.Data.POCOs;
 using FSOSS.System.Data.DTO;
 using FSOSS.System.BLL;
 using FSOSS.System.Data.Entity;
+using System.Web.Services;
 #endregion
 
 public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
 {
 
     public FilterPOCO filter = new FilterPOCO();
-
+    public FinalReportPOCO finalReport = new FinalReportPOCO();
     protected void Page_Load(object sender, EventArgs e)
     {
         Alert.Visible = false;
@@ -24,6 +25,12 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         if(filter == null)
         {
           Response.Redirect("~/Admin/ViewReportFilter.aspx");
+        }
+        else
+        {
+            ReportController sysmgr = new ReportController();
+            finalReport = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
+            Page.ClientScript.RegisterStartupScript(Page.GetType(), "PieGraphFunction", "DrawChart", true);
         }
         
         
@@ -33,11 +40,11 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     {
         base.OnLoad(e);
         ReportController sysmgr = new ReportController();
-        FinalReportPOCO finalReport = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
+        finalReport = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         // Test if theres any data
         if (finalReport != null)
         {
-            Alert.Visible = true;
+           
           
         }
         else
