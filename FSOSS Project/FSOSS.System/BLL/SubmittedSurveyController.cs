@@ -34,7 +34,7 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted==false && x.Unit.site_id==siteID);
+                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted == false && x.Unit.site_id == siteID);
                     return contactCount;
                 }
                 catch (Exception e)
@@ -88,7 +88,7 @@ namespace FSOSS.System.BLL
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
-        /// The method to obtain a list of submitted surveys for a  given site
+        /// The method is used to obtain a list of submitted surveys for a given site
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of submitted surveys</param>
         /// <returns></returns>
@@ -99,25 +99,90 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                   var submittedSurveyList = from x in context.SubmittedSurveys
-                                             orderby x.date_entered
-                                             where x.date_entered >= startDate && x.date_entered <= endDate && x.meal_id == mealID && x.unit_id == unitID
-                                             select new SubmittedSurveyPOCO()
-                                             {
-                                                 submittedSurveyID = x.submitted_survey_id,
-                                                 unitNumber = x.Unit.unit_number,
-                                                 mealName = x.Meal.meal_name,
-                                                 participantType = x.ParticipantType.participant_description,
-                                                 ageRange = x.AgeRange.age_range_description,
-                                                 gender = x.Gender.gender_description,
-                                                 dateEntered = x.date_entered,
-                                                 contactRequest = x.contact_request,
-                                                 contacted=x.contacted,
-                                                 contactRoomNumber = x.contact_room_number,
-                                                 contactPhoneNumber = x.contact_phone_number
-                                             };
-
-                    return submittedSurveyList.ToList();
+                    if (siteID == 0 && mealID != 0)
+                    {
+                        var submittedSurveyList = from x in context.SubmittedSurveys
+                                                  orderby x.date_entered
+                                                  where x.date_entered >= startDate && x.date_entered <= endDate && x.meal_id == mealID
+                                                  select new SubmittedSurveyPOCO()
+                                                  {
+                                                      submittedSurveyID = x.submitted_survey_id,
+                                                      unitNumber = x.Unit.unit_number,
+                                                      mealName = x.Meal.meal_name,
+                                                      participantType = x.ParticipantType.participant_description,
+                                                      ageRange = x.AgeRange.age_range_description,
+                                                      gender = x.Gender.gender_description,
+                                                      dateEntered = x.date_entered,
+                                                      contactRequest = x.contact_request,
+                                                      contacted = x.contacted,
+                                                      contactRoomNumber = x.contact_room_number,
+                                                      contactPhoneNumber = x.contact_phone_number
+                                                  };
+                        return submittedSurveyList.ToList();
+                    }
+                    else if (siteID != 0 && mealID != 0)
+                    {
+                        var submittedSurveyList = from x in context.SubmittedSurveys
+                                                  orderby x.date_entered
+                                                  where x.Unit.site_id == siteID && x.date_entered >= startDate && x.date_entered <= endDate && x.meal_id == mealID
+                                                  select new SubmittedSurveyPOCO()
+                                                  {
+                                                      submittedSurveyID = x.submitted_survey_id,
+                                                      unitNumber = x.Unit.unit_number,
+                                                      mealName = x.Meal.meal_name,
+                                                      participantType = x.ParticipantType.participant_description,
+                                                      ageRange = x.AgeRange.age_range_description,
+                                                      gender = x.Gender.gender_description,
+                                                      dateEntered = x.date_entered,
+                                                      contactRequest = x.contact_request,
+                                                      contacted = x.contacted,
+                                                      contactRoomNumber = x.contact_room_number,
+                                                      contactPhoneNumber = x.contact_phone_number
+                                                  };
+                        return submittedSurveyList.ToList();
+                    }
+                    else if (mealID == 0 && unitID != 0)
+                    {
+                        var submittedSurveyList = from x in context.SubmittedSurveys
+                                                  orderby x.date_entered
+                                                  where x.date_entered >= startDate && x.date_entered <= endDate && x.unit_id == unitID
+                                                  select new SubmittedSurveyPOCO()
+                                                  {
+                                                      submittedSurveyID = x.submitted_survey_id,
+                                                      unitNumber = x.Unit.unit_number,
+                                                      mealName = x.Meal.meal_name,
+                                                      participantType = x.ParticipantType.participant_description,
+                                                      ageRange = x.AgeRange.age_range_description,
+                                                      gender = x.Gender.gender_description,
+                                                      dateEntered = x.date_entered,
+                                                      contactRequest = x.contact_request,
+                                                      contacted = x.contacted,
+                                                      contactRoomNumber = x.contact_room_number,
+                                                      contactPhoneNumber = x.contact_phone_number
+                                                  };
+                        return submittedSurveyList.ToList();
+                    }
+                    else
+                    {
+                        var submittedSurveyList = from x in context.SubmittedSurveys
+                                                  orderby x.date_entered
+                                                  where x.date_entered >= startDate && x.date_entered <= endDate
+                                                  select new SubmittedSurveyPOCO()
+                                                  {
+                                                      submittedSurveyID = x.submitted_survey_id,
+                                                      unitNumber = x.Unit.unit_number,
+                                                      mealName = x.Meal.meal_name,
+                                                      participantType = x.ParticipantType.participant_description,
+                                                      ageRange = x.AgeRange.age_range_description,
+                                                      gender = x.Gender.gender_description,
+                                                      dateEntered = x.date_entered,
+                                                      contactRequest = x.contact_request,
+                                                      contacted = x.contacted,
+                                                      contactRoomNumber = x.contact_room_number,
+                                                      contactPhoneNumber = x.contact_phone_number
+                                                  };
+                        return submittedSurveyList.ToList();
+                    }
                 }
                 catch (Exception e)
                 {
@@ -132,7 +197,7 @@ namespace FSOSS.System.BLL
 
         //
         /// <summary>
-        /// obtain specific submitted survey results
+        /// This method obtains specific submitted survey results
         /// </summary>
         /// <param name="subSurNum"></param>
         /// <returns></returns>
@@ -171,7 +236,11 @@ namespace FSOSS.System.BLL
 
         }
 
-        //obtain specific submitted survey answers
+        /// <summary>
+        /// This method obtains specific submitted survey answers
+        /// </summary>
+        /// <param name="subSurNum"></param>
+        /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ParticipantResponsePOCO> GetSubmittedSurveyAnswers(int subSurNum)
         {

@@ -27,13 +27,6 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             MealDropDownList.DataValueField = "mealID";
             MealDropDownList.DataTextField = "mealName";
             MealDropDownList.DataBind();
-            UnitController unitController = new UnitController();
-            int selectedSiteID = int.Parse(HospitalDropDownList.SelectedValue);
-            List<UnitsPOCO> unitList = unitController.GetUnitList(selectedSiteID);
-            UnitDropDownList.DataSource = unitList;
-            UnitDropDownList.DataValueField = "unitID";
-            UnitDropDownList.DataTextField = "unitNumber";
-            UnitDropDownList.DataBind();
         }
     }
 
@@ -50,7 +43,14 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                 filter.endDate = DateTime.ParseExact(endingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
+                if (UnitDropDownList.SelectedIndex == 0)
+                {
+                    filter.unitID = 0;
+                }
+                else
+                {
+                    filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
+                }
                 Session["filter"] = filter;
                 Response.Redirect("SubmittedSurveyList.aspx");
             }
@@ -65,5 +65,33 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             SuccessAlert.Text = "Please select a starting period";
             SuccessAlert.Visible = true;
         }     
+    }
+
+    protected void HospitalDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (HospitalDropDownList.SelectedIndex != 0)
+        {
+            UnitLabel.Visible = true;
+            UnitDropDownList.Visible = true;
+            UnitDropDownList.Enabled = true;
+            UnitDropDownList.AppendDataBoundItems = true;
+            UnitDropDownList.Items.Insert(0, "All Units");
+            UnitController unitController = new UnitController();
+            int selectedSiteID = int.Parse(HospitalDropDownList.SelectedValue);
+            List<UnitsPOCO> unitList = unitController.GetUnitList(selectedSiteID);
+            UnitDropDownList.DataSource = unitList;
+            UnitDropDownList.DataValueField = "unitID";
+            UnitDropDownList.DataTextField = "unitNumber";
+            UnitDropDownList.DataBind();
+        }
+        else
+        {
+            UnitDropDownList.AppendDataBoundItems = false;
+            UnitDropDownList.DataSource = "";
+            UnitDropDownList.DataBind();
+            UnitLabel.Visible = false;
+            UnitDropDownList.Visible = false;
+            UnitDropDownList.Enabled = false;
+        }
     }
 }

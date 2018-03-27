@@ -26,7 +26,7 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="HospitalLabelReportLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Hospital:"></asp:Label>
-                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
+                    <asp:DropDownList ID="HospitalDropDownList" class="col-sm-3 my-2 form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="HospitalDropDownList_SelectedIndexChanged" AppendDataBoundItems="true">
                         <asp:ListItem Text="All Hospitals" Value="0" Selected="True" />
                     </asp:DropDownList>
                 </div>
@@ -59,10 +59,8 @@
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
-                    <asp:Label ID="UnitLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Filter by Unit:"></asp:Label>
-                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true">
-                        <asp:ListItem Text="All Units" Value="0" Selected="True" />
-                    </asp:DropDownList>
+                    <asp:Label ID="UnitLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Filter by Unit:" Visible="false"></asp:Label>
+                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="false" Visible="false" Enabled="false"></asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Button ID="ViewButton" class="offset-sm-5 col-sm-1 btn btn-info mb-2" runat="server" Text="View" OnClick="ViewButton_Click" />

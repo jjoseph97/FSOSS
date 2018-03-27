@@ -25,7 +25,7 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
 
         base.OnLoad(e);
         SubmittedSurveyController sysmgr = new SubmittedSurveyController();
-        List<SubmittedSurveyPOCO> submittedSurveyData = sysmgr.GetSubmittedSurveyList(1, filter.startingDate, filter.endDate, filter.mealID, filter.unitID);
+        List<SubmittedSurveyPOCO> submittedSurveyData = sysmgr.GetSubmittedSurveyList(filter.siteID, filter.startingDate, filter.endDate, filter.mealID, filter.unitID);
         SubmittedSurveyList.DataSource = submittedSurveyData;
         SubmittedSurveyList.DataBind();
     }
