@@ -116,6 +116,7 @@
     <Compile Include="Entity\SurveyVersion.cs" />
     <Compile Include="Entity\SurveyWord.cs" />
     <Compile Include="Entity\Unit.cs" />
+    <Compile Include="POCOs\AdministratorAccountPOCO.cs" />
     <Compile Include="POCOs\AgeRangePOCO.cs" />
     <Compile Include="POCOs\AnswerPOCO.cs" />
     <Compile Include="POCOs\ContactSubmittedSurveyPOCO.cs" />

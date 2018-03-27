@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FSOSS.System.DAL;
+using FSOSS.System.Data.POCOs;
 using Npgsql;
 
 namespace FSOSS.System.BLL
 {
+    [DataObject]
     public class AdministratorAccountController
     {
         public bool VerifyLogin(string username, string password)
@@ -89,6 +92,25 @@ namespace FSOSS.System.BLL
                 string newUsername = cmd.ExecuteScalar().ToString();
                 connection.Close();
                 return newUsername;
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<AdministratorAccountPOCO> GetAllUserList()
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = from x in context.AdministratorAccounts
+                             select new AdministratorAccountPOCO
+                             {
+                                 id = x.administrator_account_id,
+                                 username = x.username,
+                                 firstName = x.first_name,
+                                 lastName = x.last_name,
+                                 archived = x.archived_yn == true ? "Disabled" : "Enabled"
+                             };
+
+                return result.ToList();
             }
         }
     }
