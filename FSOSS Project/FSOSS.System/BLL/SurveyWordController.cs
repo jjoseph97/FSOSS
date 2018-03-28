@@ -36,8 +36,12 @@ namespace FSOSS.System.BLL
                     //Check if all potential survey word is used
                     if (surveyWordList.Count >= potentialSurveyWordList.Count)
                     {
+                        List<SurveyWord> newSurveyListForCheck = null;
                         do
                         {
+                            newSurveyListForCheck = (from x in context.SurveyWords
+                                                                  select x).ToList();
+                            
                             //Get the last Survey Word by date
                             SurveyWord surveyWord = (from x in context.SurveyWords
                                                      orderby x.date_used
@@ -45,9 +49,10 @@ namespace FSOSS.System.BLL
                             //Remove the last Survey Word 
                             context.SurveyWords.Remove(surveyWord);
                             context.SaveChanges();
+                           
                             //Check if the there are enough Potential Survey word available from the List in the database to be used for all the hospital
                             //Repeat the step above until theres enough potentail word to lookupon
-                        } while (surveyWordList.Count() < potentialSurveyWordList.Count() - siteList.Count());
+                        } while (newSurveyListForCheck.Count() < potentialSurveyWordList.Count() - siteList.Count());
                     }
                     //Create an instance of Random Object
                     Random random = new Random();
@@ -60,12 +65,14 @@ namespace FSOSS.System.BLL
                         //Loop that will run until a random word is choosen that doesn't exists on the current Survey Word Table
                         do
                         {
+                            List<SurveyWord> newSurveyWordList = (from x in context.SurveyWords
+                                                                  select x).ToList();
                             //Generate Random Number
                             int randomIndex = random.Next(0, potentialSurveyWordList.Count());
                             //Get the PotentialSurveyWord to be added based on the index
                             surveyWordToAdd = potentialSurveyWordList.ElementAt(randomIndex);
                             //Loop through the List of current SurveyWord and check if the word has been used by the current site.
-                            wordIsUsed = surveyWordList.Any(word => word.survey_word_id == surveyWordToAdd.survey_word_id);                            
+                            wordIsUsed = newSurveyWordList.Any(word => word.survey_word_id == surveyWordToAdd.survey_word_id);                            
                             //If the Word doesn't exists after the loop on Survey Word List. Exit on the loop else start the process all over again.
                         } while (wordIsUsed == true);
 

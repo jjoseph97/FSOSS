@@ -38,8 +38,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         if (finalReport != null)
         {
             Alert.Visible = true;
-            Alert.Text = "Theres a value";
-            ReportCountDummy.Text = finalReport.submittedSurveyList.Count.ToString();
+          
         }
         else
         {
