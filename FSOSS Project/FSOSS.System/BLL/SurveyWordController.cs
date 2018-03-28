@@ -91,6 +91,14 @@ namespace FSOSS.System.BLL
             }//End of Transaction
         }
 
+        public bool ValidateAccessWord(string enteredWord)
+        {
+            using (var context = new FSOSSContext())
+            {
+                return context.SurveyWords.Any(x => x.PotentialSurveyWord.survey_access_word.Equals(enteredWord) && x.date_used.Day == DateTime.Now.Day);
+            }
+        }
+
         public string GetSurveyWord(int siteID)
         {
             using (var context = new FSOSSContext())

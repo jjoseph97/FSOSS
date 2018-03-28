@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSOSS.System.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,20 +15,27 @@ public partial class _Default : Page
 
     protected void SurveyButton_Click(object sender, EventArgs e)
     {
-        if (WOTDTextBox.Text != "spring")
+        SurveyWordController controller = new SurveyWordController();
+        bool isValid = controller.ValidateAccessWord(WOTDTextBox.Text.ToLower());
+
+        //if (WOTDTextBox.Text != "spring")
+        if (!isValid)
         {
             Message.Visible = true;
             Message.Text = "You entered the wrong word";
-            Message.CssClass = "text-white bg-danger p-2 rounded";
+
+            WOTDTextBox.Focus();
+            WOTDTextBox.BorderColor = System.Drawing.Color.Red;
+            WOTDTextBox.BackColor = System.Drawing.ColorTranslator.FromHtml("#f8d7da");
+            WOTDTextBox.ForeColor = System.Drawing.ColorTranslator.FromHtml("#721c24");
+
+            // have a Session to capture latest survey id and site id
         }
-        else if (WOTDTextBox.Text == "spring")
+        //else if (WOTDTextBox.Text == "spring")
+        else
         {
             Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
-        }
-        else
-        {
-            Message.Visible = false;
         }
     }
 }
