@@ -27,7 +27,7 @@ namespace FSOSS.System.BLL
                     var unitList = from x in context.Sites
                                    from y in context.Units
                                    where x.site_id == y.site_id
-                                   & !y.archived_yn
+                                   && y.archived_yn == false
                                    select new UnitsPOCO()
                                    {
                                        unitID = y.unit_id,
@@ -47,7 +47,7 @@ namespace FSOSS.System.BLL
         }
 
 
-
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<UnitsPOCO> GetArchivedUnits(int unitID)
         {
             using (var context = new FSOSSContext())
@@ -83,28 +83,28 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to add new unit to the Site
         /// </summary>
-        /// <param name="unit_number"></param>
+        /// <param Entity="Unit"></param>
         /// <returns>returns confirmation from the Site</returns>
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddUnit(string unit_number)
+        public void AddUnit(Unit newunitNumber, string unitNumber)
         {
             using (var context = new FSOSSContext())
             {
-                unit_number = unit_number.ToUpper();
+               
                 string message = "";
                 try
                 {
                     var UnitList = from x in context.Units
-                                                  where x.unit_number.ToUpper().Equals(unit_number.ToUpper())
-                                                  select new UnitsPOCO()
+                                                  where x.unit_number.ToUpper().Equals(unitNumber)
+                                                  select new Unit()
                                                   {
-                                                      unitNumber = x.unit_number
+                                                      unit_number = x.unit_number
                                                   };
 
                     if (UnitList.Count() > 0)
                     {
-                        message = "The Unit number \"" + unit_number.ToUpper() + "\" already exists. Please Add a new unit number .";
+                        message = "The Unit number \"" + unitNumber + "\" already exists. Please Add a new unit number .";
                     }
 
                     else
@@ -112,7 +112,6 @@ namespace FSOSS.System.BLL
                         Unit newUnit = new Unit();
                         // to be set once the admin security is working
                         newUnit.administrator_account_id = 1;
-                        newUnit.unit_number = unit_number;
                         newUnit.date_modified = DateTime.Now;
                         context.Units.Add(newUnit);
                         context.SaveChanges();
@@ -128,13 +127,18 @@ namespace FSOSS.System.BLL
         }//eom
 
         /// <summary>
-        /// Method use to disable  Unit from the list that is use in a site
+        /// Method use to disable or enable Unit from the list that is use in a site
         /// </summary>
-        /// <param name="unitID"></param>
+        /// <param Entity="Unit"></param>
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DisableUnit(int unitID)
+        public void SwitchUnitSatus(Unit unit)
+        {
+            SwitchUnitSatus(unit.unit_id);
+        }
+
+        public string SwitchUnitSatus(int unitID)
         {
             using (var context = new FSOSSContext())
             {
@@ -152,19 +156,24 @@ namespace FSOSS.System.BLL
 
                                                       }).FirstOrDefault();
 
-                    if (unitInHospital == null)
+                    if (unitInHospital != null)
                     {
                         Unit unit = context.Units.Find(unitID);
                         if (unit.archived_yn == false)
                         {
                             unit.archived_yn = true;
                         }
+                        else if (unit.archived_yn == true)
+                        {
+                            unit.archived_yn = false;
+                        }
+
                         context.Entry(unit).Property(y => y.archived_yn).IsModified = true;
                         context.SaveChanges();
                     }
                     else
                     {
-                        throw new Exception("Unable to archive selected Unit. Unit is currently active.");
+                        throw new Exception("Unable to archive selected Unit.");
                     }
                 }
                 catch (Exception e)
@@ -178,16 +187,16 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to Update unit from the list that is use in the Site
         /// </summary>
-        /// <param name="unit_id" name,"string unit_number"></param>
+        /// <param name="unit_id" name="string unitNumber"></param>
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateUnit(int unitID, string unit_number)
+        public string UpdateUnit(int unitID, string unitNumber, DateTime dateModified)
         {
             using (var context = new FSOSSContext())
             {
-                unit_number = unit_number.ToUpper();
-                Regex validUnit = new Regex("^[0-9]{1,3}\\s{0,1}[a-zA-Z]*$");
+                unitNumber = unitNumber.ToUpper();
+                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z]*$");
                 string message = "";
                 bool inUse = false;
                 try
@@ -196,8 +205,8 @@ namespace FSOSS.System.BLL
                                           select new UnitsPOCO()
                                           {
                                               unitID = x.unit_id,
-                                              dateModified = x.date_modified,
-                                              unitNumber = x.unit_number
+                                              unitNumber = x.unit_number,
+                                              dateModified = x.date_modified
                                           }).ToList();
 
 
@@ -210,7 +219,7 @@ namespace FSOSS.System.BLL
                         }
                     }
 
-                    if (validUnit.IsMatch(unit_number) && inUse == false)
+                    if (validUnit.IsMatch(unitNumber) && inUse == false)
                     {
                         var unitToUpdate = context.Units.Find(unitID);
                         unitToUpdate.archived_yn = true;
