@@ -60,7 +60,7 @@
                                             <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
                                         </li>
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUser.aspx">Edit User</a>
+                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUserFilter.aspx">Edit User</a>
                                         </li>
                                     </ul>
                                 </li>
