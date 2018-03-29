@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ChangeSurveyWord.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord" %>
 
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
 
     <div class="row">
@@ -9,6 +11,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
+            <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
             <asp:Label ID="SuccessAlert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
@@ -107,7 +110,8 @@
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord">
+                <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" OnSelected="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
@@ -116,7 +120,8 @@
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord">
+                <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" OnSelected="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
@@ -125,7 +130,8 @@
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord">
+                <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" OnSelected="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>
@@ -137,7 +143,8 @@
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="SearchArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord">
+                <asp:ObjectDataSource ID="SearchArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" OnSelected="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                     </DeleteParameters>

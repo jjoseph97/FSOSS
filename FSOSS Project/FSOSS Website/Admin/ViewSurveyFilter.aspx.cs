@@ -40,7 +40,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
             if (endingPeriodInput != "")
             {
-                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                 filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                 if (UnitDropDownList.SelectedIndex == 0)

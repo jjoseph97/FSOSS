@@ -36,6 +36,16 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
+    /// This method is required to use the MessageUserControl on the ListView in order to handle thrown exceptions from the controller.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        MessageUserControl.HandleDataBoundException(e);
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     /// <param name="sender"></param>
@@ -177,19 +187,30 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         if (e.Item.ItemType == ListViewItemType.DataItem)
         {
-            if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+            Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
+            Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
+            if (disabledBtn != null || enabledBtn != null)
             {
-                Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
-                disabledBtn.Visible = true;
-                Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
-                enabledBtn.Visible = false;
-            }
-            else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
-            {
-                Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
-                disabledBtn.Visible = false;
-                Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
-                enabledBtn.Visible = true;
+                if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+                {
+                    disabledBtn.Visible = true;
+                    enabledBtn.Visible = false;
+                }
+                else if (SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS")
+                {
+                    disabledBtn.Visible = true;
+                    enabledBtn.Visible = false;
+                }
+                else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+                {
+                    disabledBtn.Visible = false;
+                    enabledBtn.Visible = true;
+                }
+                else if (SurveyWordListView.DataSourceID == "SearchArchivedSurveyWordODS")
+                {
+                    disabledBtn.Visible = false;
+                    enabledBtn.Visible = true;
+                }
             }
         }
     }
@@ -257,25 +278,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                     SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
                 }
             }
-            Regex validWord = new Regex("^[a-zA-Z]+$");
-            TextBox surveyWord = (TextBox)e.Item.FindControl("surveyWordTextBox");
-            string updateWord = surveyWord.Text.Trim();
-
-            if (updateWord.Length < 4 || updateWord.Length > 8)
-            {
-                ErrorAlert.Visible = true;
-                ErrorAlert.Text = "Error: Updated survey word must be between 4 to 8 characters in length.";
-            }
-            else if (!validWord.IsMatch(updateWord))
-            {
-                ErrorAlert.Visible = true;
-                ErrorAlert.Text = "Error: Please enter only alphabetical letters and no spaces.";
-            }
-            else
-            {
-                SuccessAlert.Visible = true;
-                SuccessAlert.Text = "The survey word has been updated to \"" + updateWord + "\".";
-            }
         }
 
         if (e.CommandName == "Delete")
@@ -296,8 +298,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
                 if (disabledBtn.Visible == true)
                 {
-                    ErrorAlert.Visible = true;
-                    ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
+                    //ErrorAlert.Visible = true;
+                    //ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
                 }
                 else if (enabledBtn.Visible == true)
                 {

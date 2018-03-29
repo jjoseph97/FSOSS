@@ -74,47 +74,62 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                surveyWord = surveyWord.ToLower();
+                surveyWord = surveyWord.ToLower().Trim();
                 Regex validWord = new Regex("^[a-zA-Z]+$");
                 string message = "";
-                bool inUse = false;
-                try
+                if (surveyWord.Length < 4 || surveyWord.Length > 8)
                 {
-                    var surveyWordList = (from x in context.SurveyWords
-                                          select new SurveyWordPOCO
-                                          {
-                                               siteID = x.site_id,
-                                               dateUsed = x.date_used,
-                                               surveyWordID = x.survey_word_id
-                                          }).ToList();
-                    
-
-                    foreach (SurveyWordPOCO item in surveyWordList)
+                    throw new Exception("Error: Updated survey word must be between 4 to 8 characters in length.");
+                }
+                else if (!validWord.IsMatch(surveyWord))
+                {
+                    throw new Exception("Error: Please enter only alphabetical letters and no spaces.");
+                }
+                else
+                {
+                    bool inUse = false;
+                    try
                     {
-                        if (item.surveyWordID == surveyWordID && item.dateUsed == DateTime.Now)
+                        var surveyWordList = (from x in context.SurveyWords
+                                              select new SurveyWordPOCO
+                                              {
+                                                  siteID = x.site_id,
+                                                  dateUsed = x.date_used,
+                                                  surveyWordID = x.survey_word_id
+                                              }).ToList();
+
+
+                        foreach (SurveyWordPOCO item in surveyWordList)
                         {
-                            inUse = true;
-                            break;
+                            if (item.surveyWordID == surveyWordID && item.dateUsed == DateTime.Now)
+                            {
+                                inUse = true;
+                                break;
+                            }
+                        }
+
+                        if (validWord.IsMatch(surveyWord) && inUse == false)
+                        {
+                            var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
+                            wordToUpdate.survey_access_word = surveyWord.Trim();
+                            wordToUpdate.date_modified = DateTime.Now;
+                            context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
+                            context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
+                            context.SaveChanges();
+
+                            // NEED WAY TO HANDLE SUCCESS MESSAGES FROM LISTVIEW
+
+                            //throw new Exception("The survey word has been updated to \"" + surveyWord + "\".");
+                        }
+                        else
+                        {
+                            throw new Exception("Word is currently use. Update failed.");
                         }
                     }
-
-                    if (validWord.IsMatch(surveyWord) && inUse == false) 
+                    catch (Exception e)
                     {
-                        var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                        wordToUpdate.survey_access_word = surveyWord.Trim();
-                        wordToUpdate.date_modified = DateTime.Now;
-                        context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
-                        context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
-                        context.SaveChanges();
+                        message = e.Message;
                     }
-                    else
-                    {
-                        throw new Exception("Word is currently use. Update failed.");
-                    }
-                }
-                catch (Exception e)
-                {
-                    message = e.Message;
                 }
                 return message;
             }
