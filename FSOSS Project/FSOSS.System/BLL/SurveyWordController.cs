@@ -128,6 +128,7 @@ namespace FSOSS.System.BLL
             {
                string currentSurveyWord = (from x in context.SurveyWords
                                                   where x.site_id == siteID && x.date_used.Day == DateTime.Now.Day
+                                                  orderby x.date_used descending
                                                   select x.PotentialSurveyWord.survey_access_word).FirstOrDefault();
                 return currentSurveyWord;
             }         

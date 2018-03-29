@@ -27,9 +27,9 @@ namespace FSOSS.System.Data.Entity
         [ForeignKey("ParticipantType")]
         public int participant_type_id { get; set; }
         [ForeignKey("AgeRange")]
-        public int age_range_id { get; set; }
+        public int? age_range_id { get; set; }
         [ForeignKey("Gender")]
-        public int gender_id { get; set; }
+        public int? gender_id { get; set; }
         [Required (ErrorMessage = "Date entered required")]
         public DateTime date_entered { get; set; }
         
