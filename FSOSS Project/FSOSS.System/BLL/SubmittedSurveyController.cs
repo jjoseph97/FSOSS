@@ -335,40 +335,91 @@ namespace FSOSS.System.BLL
             int gender_id_param, bool contact_request_param, string contact_room_number_param, string contact_phone_number_param, string Q1AResponse_param,
             string Q1BResponse_param, string Q1CResponse_param, string Q1DResponse_param, string Q1EResponse_param, string Q2Response_param, string Q3Response_param, 
             string Q4Response_param, string Q5Response_param)
-        { 
-            using (var connection = new NpgsqlConnection())
+        {
+            using (var context = new FSOSSContext())
             {
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
-                connection.Open();
-                var cmd = new NpgsqlCommand("submit_survey", connection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.AddWithValue("survey_version_id_param", survey_version_id_param);
-                cmd.Parameters.AddWithValue("unit_id_param", unit_id_param);
-                cmd.Parameters.AddWithValue("meal_id_param", meal_id_param);
-                cmd.Parameters.AddWithValue("participant_type_id_param", participant_type_id_param);
-                cmd.Parameters.AddWithValue("age_range_id_param", age_range_id_param);
-                cmd.Parameters.AddWithValue("gender_id_param", gender_id_param);
-                cmd.Parameters.AddWithValue("contact_request_param", contact_request_param);
-                cmd.Parameters.AddWithValue("contact_room_number_param", contact_room_number_param);
-                cmd.Parameters.AddWithValue("contact_phone_number_param", participant_type_id_param);
-                cmd.Parameters.AddWithValue("q1aresponse_param", Q1AResponse_param);
-                cmd.Parameters.AddWithValue("q1bresponse_param", Q1BResponse_param);
-                cmd.Parameters.AddWithValue("q1cresponse_param", Q1CResponse_param);
-                cmd.Parameters.AddWithValue("q1dresponse_param", Q1DResponse_param);
-                cmd.Parameters.AddWithValue("q1eresponse_param", Q1EResponse_param);
-                cmd.Parameters.AddWithValue("q2response_param", Q2Response_param);
-                cmd.Parameters.AddWithValue("q3response_param", Q3Response_param);
-                cmd.Parameters.AddWithValue("q4response_param", Q4Response_param);
-                cmd.Parameters.AddWithValue("q5response_param", Q5Response_param);
-                //cmd.ExecuteReader();
-                connection.Close();
+                SubmittedSurvey newSurvey = new SubmittedSurvey();
+                newSurvey.survey_version_id = survey_version_id_param;
+                newSurvey.date_entered = DateTime.Now;
+                newSurvey.unit_id = unit_id_param;
+                newSurvey.meal_id = meal_id_param;
+                newSurvey.participant_type_id = participant_type_id_param;
+                newSurvey.age_range_id = age_range_id_param;
+                newSurvey.gender_id = gender_id_param;
+                newSurvey.contact_request = contact_request_param;
+                newSurvey.contact_room_number = contact_room_number_param;
+                newSurvey.contact_phone_number = contact_phone_number_param;
+                context.SubmittedSurveys.Add(newSurvey);
+                context.SaveChanges();
+
+                var newSurveyId = (from x in context.SubmittedSurveys
+                                   select x.submitted_survey_id).Max();
+
+                ParticipantResponse q1AResponse = new ParticipantResponse();
+                q1AResponse.submitted_survey_id = newSurveyId;
+                q1AResponse.question_id = 2;
+                q1AResponse.participant_answer = Q1AResponse_param;
+                context.ParticipantResponses.Add(q1AResponse);
+                context.SaveChanges();
+
+                ParticipantResponse q1BResponse = new ParticipantResponse();
+                q1BResponse.submitted_survey_id = newSurveyId;
+                q1BResponse.question_id = 3;
+                q1BResponse.participant_answer = Q1BResponse_param;
+                context.ParticipantResponses.Add(q1BResponse);
+                context.SaveChanges();
+
+                ParticipantResponse q1CResponse = new ParticipantResponse();
+                q1CResponse.submitted_survey_id = newSurveyId;
+                q1CResponse.question_id = 4;
+                q1CResponse.participant_answer = Q1CResponse_param;
+                context.ParticipantResponses.Add(q1CResponse);
+                context.SaveChanges();
+
+                ParticipantResponse q1DResponse = new ParticipantResponse();
+                q1DResponse.submitted_survey_id = newSurveyId;
+                q1DResponse.question_id = 5;
+                q1DResponse.participant_answer = Q1DResponse_param;
+                context.ParticipantResponses.Add(q1DResponse);
+                context.SaveChanges();
+
+                ParticipantResponse q1EResponse = new ParticipantResponse();
+                q1EResponse.submitted_survey_id = newSurveyId;
+                q1EResponse.question_id = 6;
+                q1EResponse.participant_answer = Q1EResponse_param;
+                context.ParticipantResponses.Add(q1EResponse);
+                context.SaveChanges();
+
+                ParticipantResponse q2Response = new ParticipantResponse();
+                q2Response.submitted_survey_id = newSurveyId;
+                q2Response.question_id = 8;
+                q2Response.participant_answer = Q2Response_param;
+                context.ParticipantResponses.Add(q2Response);
+                context.SaveChanges();
+
+                ParticipantResponse q3Response = new ParticipantResponse();
+                q3Response.submitted_survey_id = newSurveyId;
+                q3Response.question_id = 9;
+                q3Response.participant_answer = Q3Response_param;
+                context.ParticipantResponses.Add(q3Response);
+                context.SaveChanges();
+
+                ParticipantResponse q4Response = new ParticipantResponse();
+                q4Response.submitted_survey_id = newSurveyId;
+                q4Response.question_id = 10;
+                q4Response.participant_answer = Q4Response_param;
+                context.ParticipantResponses.Add(q4Response);
+                context.SaveChanges();
+
+                ParticipantResponse q5Response = new ParticipantResponse();
+                q5Response.submitted_survey_id = newSurveyId;
+                q5Response.question_id = 11;
+                q5Response.participant_answer = Q5Response_param;
+                context.ParticipantResponses.Add(q5Response);
+                context.SaveChanges();
+
             }
         }
-
-
-
     }
 }
 
