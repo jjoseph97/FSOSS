@@ -12,8 +12,7 @@ namespace FSOSS.System.Data.POCOs
         public int unitID { get; set; }
         public string unitNumber { get; set; }
         public DateTime dateModified { get; set; }
-        public int administratorAccountId { get; set; }
-        public bool isArchived { get; set; }
+    
 
 
     }

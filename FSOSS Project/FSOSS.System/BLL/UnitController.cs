@@ -33,8 +33,7 @@ namespace FSOSS.System.BLL
                                        unitID = y.unit_id,
                                        unitNumber = y.unit_number,
                                        dateModified=y.date_modified,
-                                       administratorAccountId=y.administrator_account_id,
-                                       isArchived = y.archived_yn
+                                      
 
                                    };
 
@@ -46,6 +45,40 @@ namespace FSOSS.System.BLL
                 }
             }
         }
+
+
+
+        public List<UnitsPOCO> GetArchivedUnits(int unitID)
+        {
+            using (var context = new FSOSSContext())
+            {
+
+                try
+                {
+
+                    var archivedUnitList = from x in context.Units
+                                    where x.archived_yn == true
+                                     select new UnitsPOCO()
+                                      {
+                                                      unitID = x.unit_id,
+                                                      unitNumber = x.unit_number,
+                                                      dateModified=x.date_modified
+                                      };
+
+                    return archivedUnitList.ToList();
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
+                }
+
+            }
+        }
+
+
+
 
         /// <summary>
         /// Method use to add new unit to the Site

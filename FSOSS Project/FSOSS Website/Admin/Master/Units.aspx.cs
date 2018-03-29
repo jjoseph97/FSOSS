@@ -14,17 +14,25 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        SuccessAlert.Visible = false;
+        ErrorAlert.Visible = false;
     }
 
     protected void SearchUnitButton_Click(object sender, EventArgs e)
     {
-        unitsCrudGridview.Visible = true;
+        UnitsListView.Visible = true;
 
     }
 
-    protected void unitsCrudGridview_Load(object sender, EventArgs e)
+
+
+    protected void DisplayActiveButton_Click(object sender, EventArgs e)
     {
-      
+
+    }
+
+    protected void DisplayArchivedButton_Click(object sender, EventArgs e)
+    {
+
     }
 }
