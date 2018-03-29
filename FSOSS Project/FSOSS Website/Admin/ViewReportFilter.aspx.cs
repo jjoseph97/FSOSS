@@ -38,13 +38,14 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
     {
         FilterPOCO filter = new FilterPOCO();
         DateTime dateToParse;
-        if (StartingPeriodTextBox.Text != "" || DateTime.TryParseExact(StartingPeriodTextBox.Text, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
+        string startingPeriodInput = String.Format("{0}", Request.Form["StartingPeriodInput"]);
+        if (startingPeriodInput != "" || DateTime.TryParseExact(startingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
         {
-            
-            filter.startingDate = DateTime.ParseExact(StartingPeriodTextBox.Text + " 00:00:00:000000","yyyy-MM-dd HH:mm:ss:ffffff",null);
-            if(EndingPeriodTextBox.Text != "" || DateTime.TryParseExact(EndingPeriodTextBox.Text, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
+            string endingPeriodInput = Request.Form["EndingPeriodInput"];
+            filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000","yyyy-MM-dd HH:mm:ss:ffffff",null);
+            if(endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
             {
-                filter.endDate = DateTime.ParseExact(EndingPeriodTextBox.Text + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 if (filter.startingDate <= filter.endDate)
                 {                  
                     filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);

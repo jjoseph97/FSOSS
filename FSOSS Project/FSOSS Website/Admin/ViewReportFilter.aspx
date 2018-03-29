@@ -1,6 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewReportFilter.aspx.cs" Inherits="Pages_AdministratorPages_ViewReportFilter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+            $(function () {
+                $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            });
+            $(function () {
+                $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            });
+    </script>
     <div class="row">
         <div class="col-sm-12">
             <h1 class="card container py-2 page-header" style="font-weight: bold;">View Report</h1>
@@ -22,9 +33,9 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="StartingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Starting Period:"></asp:Label>
                     <div id="StartDatePicker" class="col-sm-3 input-group date px-0 my-2">
-                        <asp:TextBox id="StartingPeriodTextBox" type="date" class="col-8 col-md-10 form-control" runat="server"/>
+                        <input id="StartingPeriodInput" name="StartingPeriodInput" type="text" class="col-8 col-md-10 form-control" />
                         <span class="input-group-btn border">
-                            <label for="<%= StartingPeriodTextBox.ClientID %>" class="btn btn-default p-1 m-0">
+                            <label for="StartingPeriodInput" class="btn btn-default p-1 m-0">
                                 <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
                             </label>
                         </span>
@@ -33,9 +44,9 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="EndingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Ending Period:"></asp:Label>
                     <div id="EndDatePicker" class="col-sm-3 input-group date px-0 my-2">
-                        <asp:TextBox id="EndingPeriodTextBox" type="date" class="col-8 col-md-10 form-control" runat="server"/>
+                        <input id="EndingPeriodInput" name="EndingPeriodInput" type="text" class="col-8 col-md-10 form-control" />
                         <span class="input-group-btn border">
-                            <label for="<%= EndingPeriodTextBox.ClientID %>" class="btn btn-default p-1 m-0">
+                            <label for="EndingPeriodInput" class="btn btn-default p-1 m-0">
                                 <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
                             </label>
                         </span>

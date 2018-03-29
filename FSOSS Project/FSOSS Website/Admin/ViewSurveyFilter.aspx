@@ -1,17 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewSurveyFilter.aspx.cs" Inherits="Admin_Master_ViewSurveyFilter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-          $(function () {
-              $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-          });
-          $(function () {
-              $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-          });
-  </script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+            $(function () {
+                $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            });
+            $(function () {
+                $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            });
+    </script>
     <div class="row">
         <div class="col-sm-12">
             <h1 class="card container py-2 page-header" style="font-weight: bold;">View Surveys</h1>
