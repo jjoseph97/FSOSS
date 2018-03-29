@@ -28,7 +28,7 @@
             <div class="card container">
                 <%--site show section--%>
                 <%--The gender list--%>
-                <div ID="Genders" runat="server">
+                <div id="Genders" runat="server">
                     <asp:ListView ID="DemographicListview" runat="server" DataSourceID="SiteODS">
                         <AlternatingItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
@@ -116,24 +116,20 @@
                 </div>
 
                 <%-- The participant type list--%>
-                <div ID="ParticipantTypes" runat="server">
+                <div id="ParticipantTypes" runat="server">
                     <asp:ListView ID="PTListview" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #E0FFFF; color: #333333;">
+
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+
                                 <td>
                                     <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
                                     <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
                                 </td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
 
 
 
@@ -141,20 +137,15 @@
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
                             <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                                    <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
-                                </td>
-                                <td>
+
+                                <td style="display: none">
                                     <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
                                 <td>
                                     <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
-                                <td>
-                                    <asp:TextBox Text='<%# Bind("administratorAccountId") %>' runat="server" ID="administratorAccountIdTextBox" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Bind("archivedYn") %>' runat="server" ID="archivedYnCheckBox" /></td>
+                                    <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
+                                    <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                                </td>
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
@@ -166,39 +157,28 @@
                         </EmptyDataTemplate>
                         <InsertItemTemplate>
                             <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
-                                    <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
-                                </td>
-                                <td>
+
+                                <td style="display: none">
                                     <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
                                 <td>
                                     <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
-                                <td>
-                                    <asp:TextBox Text='<%# Bind("administratorAccountId") %>' runat="server" ID="administratorAccountIdTextBox" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Bind("archivedYn") %>' runat="server" ID="archivedYnCheckBox" /></td>
+                                    <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
+                                    <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
+                                </td>
                             </tr>
                         </InsertItemTemplate>
                         <ItemTemplate>
                             <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                                </td>
-                                <td>
+
+                                <td style="display: none">
                                     <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
-
+                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
+                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                </td>
 
 
 
@@ -209,13 +189,8 @@
                                     <td runat="server">
                                         <table runat="server" id="itemPlaceholderContainer" style="" border="0">
                                             <tr runat="server" style="">
+                                                <th runat="server">Participant Type</th>
                                                 <th runat="server"></th>
-                                                <th runat="server">participantTypeID</th>
-                                                <th runat="server">participantTypeDescription</th>
-
-                                                <th runat="server">dateModified</th>
-                                                <th runat="server">administratorAccountId</th>
-                                                <th runat="server">archivedYn</th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
@@ -234,27 +209,22 @@
                         </LayoutTemplate>
                         <SelectedItemTemplate>
                             <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                                </td>
-                                <td>
+
+                                <td style="display: none">
                                     <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
+                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                </td>
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
                 </div>
 
                 <%--the meal list--%>
-               <div ID="Meals" runat="server">
+                <div id="Meals" runat="server">
                     <asp:ListView ID="ListView1" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="">
@@ -393,7 +363,7 @@
 
 
                 <%--the age range list--%>
-                <div ID="AgeRanges" runat="server">
+                <div id="AgeRanges" runat="server">
                     <asp:ListView ID="ListView2" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="">

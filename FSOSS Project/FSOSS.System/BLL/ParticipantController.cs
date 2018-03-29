@@ -61,7 +61,8 @@ namespace FSOSS.System.BLL
                                               {
                                                   participantTypeID = x.participant_type_id,
                                                   participantTypeDescription = x.participant_description
-                                                  ,archivedYn=x.archived_yn
+                                                  ,
+                                                  archivedYn = x.archived_yn
                                               };
 
                     return participantTypeList.ToList();
@@ -123,16 +124,36 @@ namespace FSOSS.System.BLL
                 {
 
                     //add check for pre-use
-
-
-
-                     ParticipantType pt2 = new ParticipantType();
-                     pt2.participant_description = pt.participantTypeDescription;
-                    pt2.administrator_account_id = 1;
-                    pt2.date_modified = DateTime.Now;
-                    pt2.archived_yn = false;
-                    context.ParticipantTypes.Add(pt2);
-                    context.SaveChanges();
+                    var participantTypeList = from x in context.ParticipantTypes
+                                              where x.participant_description.ToLower().Equals(pt.participantTypeDescription.ToLower()) && !x.archived_yn
+                                              select new ParticipantTypePOCO()
+                                              {
+                                                  participantTypeDescription = x.participant_description
+                                              };
+                    var GoneparticipantTypeList = from x in context.ParticipantTypes
+                                              where x.participant_description.ToLower().Equals(pt.participantTypeDescription.ToLower()) && x.archived_yn
+                                              select new ParticipantTypePOCO()
+                                              {
+                                                  participantTypeDescription = x.participant_description
+                                              };
+                    if (participantTypeList.Count() > 0) //if so, return an error message
+                    {
+                        throw new Exception("The participant type \"" + pt.participantTypeDescription.ToLower() + "\" already exists. Please enter a new participant type.");
+                    }
+                    else if (GoneparticipantTypeList.Count() > 0) //if so, return an error message
+                    {
+                        throw new Exception("The participant type \"" + pt.participantTypeDescription.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
+                    }
+                    else
+                    {
+                        ParticipantType pt2 = new ParticipantType();
+                        pt2.participant_description = pt.participantTypeDescription;
+                        pt2.administrator_account_id = 1;
+                        pt2.date_modified = DateTime.Now;
+                        pt2.archived_yn = false;
+                        context.ParticipantTypes.Add(pt2);
+                        context.SaveChanges();
+                    }
 
                 }
                 catch (Exception e)
@@ -174,7 +195,7 @@ namespace FSOSS.System.BLL
                     throw new Exception(e.Message);
                 }
             }
-                      
+
         }
 
         /// <summary>

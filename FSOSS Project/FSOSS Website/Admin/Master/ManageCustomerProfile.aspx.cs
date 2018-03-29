@@ -83,17 +83,17 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         //1 is Age Range
         if (selection == "1")
         {
-            AgeRanges.Visible = false;
+            AgeRanges.Visible = true;
             Meals.Visible = false;
             ParticipantTypes.Visible = false;
-            Genders.Visible = true;
+            Genders.Visible = false;
         }
         //2 is Participant Type
         else if (selection == "2")
         {
-            AgeRanges.Visible = true;
+            AgeRanges.Visible = false;
             Meals.Visible = false;
-            ParticipantTypes.Visible = false;
+            ParticipantTypes.Visible = true;
             Genders.Visible = false;
         }
         //3 is Meal
