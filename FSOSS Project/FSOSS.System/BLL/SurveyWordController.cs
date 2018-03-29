@@ -49,6 +49,7 @@ namespace FSOSS.System.BLL
                             //Remove the last Survey Word 
                             context.SurveyWords.Remove(surveyWord);
                             context.SaveChanges();
+                            surveyWord = null;
                            
                             //Check if the there are enough Potential Survey word available from the List in the database to be used for all the hospital
                             //Repeat the step above until theres enough potentail word to lookupon
