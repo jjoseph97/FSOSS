@@ -13,9 +13,7 @@
         <div class="row">
             <asp:Label ID="GenderLabel" class="col-md-2 ml-md-5 my-2" runat="server" />
             <asp:DropDownList ID="GenderDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="GenderObjectDataSource" DataTextField="genderDescription" 
-                DataValueField="genderID" AppendDataBoundItems="true" >
-                <asp:ListItem Value="" Text="Select Gender"/>
-            </asp:DropDownList>
+                DataValueField="genderID" />
             <asp:ObjectDataSource runat="server" ID="GenderObjectDataSource" OldValuesParameterFormatString="original_{0}" 
                 SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController"></asp:ObjectDataSource>
             <br />
@@ -24,9 +22,7 @@
         <div class="row">
             <asp:Label ID="AgeRangeLabel" class="col-md-2 ml-md-5 my-2" runat="server" />
             <asp:DropDownList ID="AgeDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="AgeRangeObjectDataSource" DataTextField="ageRangeDescription" 
-                DataValueField="ageRangeID"  AppendDataBoundItems="true">
-                <asp:ListItem Value="" Text="Select Age Range" />
-            </asp:DropDownList>
+                DataValueField="ageRangeID" />
             <asp:ObjectDataSource runat="server" ID="AgeRangeObjectDataSource" OldValuesParameterFormatString="original_{0}" 
                 SelectMethod="GetAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController"></asp:ObjectDataSource>
             <br />
@@ -59,7 +55,7 @@
     </div>
 
     <%--Back to questions--%>
-    <asp:Button CssClass="" ID="BackButton" runat="server" Text="Back" PostBackUrl="~/TakeSurvey.aspx" />
+    <asp:Button CssClass="" ID="BackButton" runat="server" Text="Back" OnClick="BackButton_Click" />
 
     <%--Submit Survey Button--%>
     <asp:Button CssClass="" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" />

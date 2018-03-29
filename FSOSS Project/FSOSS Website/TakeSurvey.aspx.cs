@@ -35,7 +35,7 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
                 UnitDropDownList.SelectedValue = Session["Unit"].ToString();
                 UnitDropDownList.SelectedItem.Selected = true;
             }
-            if (Session["ParticpantType"] != null)
+            if (Session["ParticipantType"] != null)
             {
                 ParticipantTypeDropDownList.SelectedValue = Session["ParticipantType"].ToString();
                 ParticipantTypeDropDownList.SelectedItem.Selected = true;
