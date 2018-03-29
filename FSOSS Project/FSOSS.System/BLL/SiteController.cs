@@ -29,6 +29,7 @@ namespace FSOSS.System.BLL
                 {
                     var siteList = from x in context.Sites
                                    where !x.archived_yn
+                                   orderby x.site_name ascending
                                    select new SitePOCO()
                                    {
                                        siteID = x.site_id,
@@ -43,6 +44,40 @@ namespace FSOSS.System.BLL
                 }
             }
         }
+
+        //get closed sites
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<SitePOCO> GetArchived()
+        {
+            using (var context = new FSOSSContext())
+            {
+
+                try
+                {
+
+                    var archived = from x in context.Sites
+                                           where x.archived_yn == true
+                                           orderby x.site_name ascending
+                                           select new SitePOCO()
+                                           {
+                                               siteID = x.site_id,
+                                               siteName = x.site_name,
+                                               date_modified = x.date_modified
+                                           };
+
+                    return archived.ToList();
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
+                }
+
+            }
+        }
+
+
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public int GetSiteID(string sitename)
@@ -106,34 +141,22 @@ namespace FSOSS.System.BLL
                 
         } // end of Addsite
 
+
+
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateSite(Site item) //currently for active sites only
+        public string UpdateSite(int SiteID, string siteName) //currently for active sites only
         {
             using (var context = new FSOSSContext())
             {
                 Regex valid = new Regex("^[a-zA-Z ]+$");
-                string message = "";
+                string message = ""; 
                 try
                 {
-                    //context.Entry(item).State = EntityState.Modified;
-                    //context.SaveChanges();
-                    //return message;
-                
-                //var siteList = (from x in context.Sites
-                //                where x.is_closed_yn == false && x.site_id == item.site_id
-                //                      select new Site
-                //                      {
-                //                          siteID = x.site_id,
-                //                          siteName = x.site_name,
-                //                          administrator_account_id = x.administrator_account_id,
-                //                          date_modified = x.date_modified
 
-                //                      }).FirstOrDefault();
-
-                    if (valid.IsMatch(item.site_name))
+                    if (valid.IsMatch(siteName))
                     {
                         var exists = (from x in context.Sites
-                                      where x.archived_yn == false && x.site_id == item.site_id
+                                      where x.archived_yn == false && x.site_id == SiteID
                                       select x);
                         if (exists == null)
                         {
@@ -141,14 +164,16 @@ namespace FSOSS.System.BLL
                         }
                         else
                         {
-                            Site updateSite = context.Sites.Find(item.site_id);
-                            updateSite.site_name = item.site_name.Trim();
+                            Site updateSite = context.Sites.Find(SiteID);
+                            updateSite.site_name = siteName.Trim();
                             updateSite.date_modified = DateTime.Now;
+                            //updateSite.administrator_account_id = admin;
 
                             context.Entry(updateSite).State = EntityState.Modified;
+                            context.SaveChanges();
                         }
 
-                        context.SaveChanges();
+                        
                     }
                     else
                     {
@@ -158,6 +183,48 @@ namespace FSOSS.System.BLL
                 catch (Exception e)
                 {
                     message = e.Message;
+                }
+                return message;
+            }//context
+        }//update site
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public string DisableSite(int siteID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                string message = "";
+                try
+                {
+                    // Check if the site exists
+                    var searchSite = (from x in context.Sites
+                                          where x.site_id == siteID
+                                          select new SitePOCO()
+                                          {
+                                              siteID = x.site_id,
+                                              siteName = x.site_name,
+                                              date_modified = DateTime.Now
+
+                                          }).FirstOrDefault();
+
+                        Site site = context.Sites.Find(siteID);
+                        if (site.archived_yn == false)
+                        {
+                            site.archived_yn = true;
+                            site.date_modified = DateTime.Now;
+                        }
+                        else
+                        {
+                            site.archived_yn = false;
+                            site.date_modified = DateTime.Now;
+                        };
+                        context.Entry(site).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Something went wrong. See " + e.Message);
                 }
                 return message;
             }

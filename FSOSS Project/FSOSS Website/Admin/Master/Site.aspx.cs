@@ -15,6 +15,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         Alert.Visible = false;
         ErrorAlert.Visible = false;
 
+
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -24,7 +25,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             Context.Response.StatusCode = 403;
         } else
         {
-            
+
         }
     }
 
@@ -36,7 +37,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
     protected void AddSite_Click(object sender, EventArgs e)
     {
         SiteController sysmgr = new SiteController();
-        //SurveyWordController swControl = new SurveyWordController();
+        SurveyWordController swControl = new SurveyWordController();
 
         string siteName = AddSiteTextBox.Text.Trim();
         Regex validWord = new Regex("^[a-zA-Z ]+$");
@@ -56,34 +57,32 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         {
             Alert.Visible = true;
             Alert.Text = sysmgr.AddSite(siteName, employee); // adds the site to the database
-           // swControl.AssignNewWord(siteName);
 
+            swControl.NewSite_NewWord(siteName);
             ListView1.DataBind();
             AddSiteTextBox.Text = "";
         }
     }
 
-    protected void UpdateButton_Click(object sender, EventArgs e)
-    {
-        
-    }
-    //protected void ListView1_ItemCommand(object sender,
-    //    ListViewCommandEventArgs e)
+    //protected void UpdateButton_Click(object sender,  EventArgs e)
     //{
+    //    int siteid = int.Parse((ListView1.EditItem.FindControl("SiteIdLabel") as Label).Text);
+    //    string siteName = ((ListView1.EditItem.FindControl("siteNameTextBox") as TextBox).Text);
+    //    int employee = int.Parse(Session["userid"].ToString());
 
-    //    Regex valid = new Regex("^[a-zA-Z]+$");
-    //    TextBox siteName = (TextBox)e.Item.FindControl("siteNameTextBox");
-    //    string updateSite = siteName.Text.Trim();
+    //    SiteController sysmgr = new SiteController();
+    //    sysmgr.UpdateSite(siteid, siteName, employee);
+    //    ListView1.DataBind();
+        
+        
+    //}
 
-    // if (!valid.IsMatch(updateSite))
-    //    {
-    //        ErrorAlert.Visible = true;
-    //        ErrorAlert.Text = "Error: Please enter only alphabetical letters.";
-    //    }
-    //    else
-    //    {
-    //        Alert.Visible = true;
-    //        Alert.Text = "The survey word has been updated to \"" + updateSite + "\".";
-    //    }
+    //protected void Delete_Click(object sender, EventArgs e)
+    //{
+    //    int siteid = int.Parse((ListView1.EditItem.FindControl("SiteIdLabel") as Label).Text);
+
+    //    SiteController sysmgr = new SiteController();
+    //    sysmgr.DisableSite(siteid);
+    //    ListView1.DataBind();
     //}
 }

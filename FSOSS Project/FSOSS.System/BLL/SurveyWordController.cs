@@ -109,5 +109,55 @@ namespace FSOSS.System.BLL
                 return currentSurveyWord;
             }         
         }
+
+        public void NewSite_NewWord(string siteName)
+        {
+            using (var context = new FSOSSContext())
+            {
+                //grab the new site id,
+                int siteId = (from x in context.Sites
+                              where x.site_name.Equals(siteName)
+                              select x.site_id).FirstOrDefault();
+
+                //get all the active words
+                List<PotentialSurveyWord> potentialSurveyWordList = (from x in context.PotentialSurveyWords
+                                                                     where x.archived_yn == false
+                                                                     select x).ToList();
+                //get all the surveywords
+                List<SurveyWord> surveyWordList = (from x in context.SurveyWords
+                                                   select x).ToList();
+                if (surveyWordList.Count >= potentialSurveyWordList.Count)
+                {
+                    SurveyWord wordToBeRemoved = (from x in context.SurveyWords
+                                                        orderby x.date_used
+                                                        select x).FirstOrDefault();
+                    context.SurveyWords.Remove(wordToBeRemoved);
+                    context.SaveChanges();
+                }
+                Random random = new Random();
+                bool wordIsUsed = true;
+                PotentialSurveyWord surveyWordToAdd = null;
+
+                do
+                {
+                    List<SurveyWord> newSurveyWordList = (from x in context.SurveyWords
+                                                          select x).ToList();
+                    int randomIndex = random.Next(0, potentialSurveyWordList.Count());
+                    surveyWordToAdd = potentialSurveyWordList.ElementAt(randomIndex);
+                    wordIsUsed = newSurveyWordList.Any(word => word.survey_word_id == surveyWordToAdd.survey_word_id);
+                } while (wordIsUsed == true);
+
+                SurveyWord newSurveyWord = new SurveyWord()
+                {
+                    date_used = DateTime.Now,
+                    site_id = siteId,
+                    survey_word_id = surveyWordToAdd.survey_word_id
+                };
+                context.SurveyWords.Add(newSurveyWord);
+                context.SaveChanges();
+
+            } 
+         }
     }
 }
+

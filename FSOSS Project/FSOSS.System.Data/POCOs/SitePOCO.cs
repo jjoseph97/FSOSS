@@ -13,7 +13,7 @@ namespace FSOSS.System.Data.POCOs
         public string siteName { get; set; }
         public DateTime date_modified { get; set; }
         public int administrator_account_id { get; set; }
-        public bool is_closed_yn { get; set; }
+        public bool archived_yn { get; set; }
 
     }
 }
