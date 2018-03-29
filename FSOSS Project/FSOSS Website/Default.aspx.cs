@@ -1,4 +1,5 @@
 ﻿using FSOSS.System.BLL;
+using FSOSS.System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ public partial class _Default : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Page.Form.DefaultButton = SurveyButton.UniqueID; // Enables user to press enter button
+        Page.Form.DefaultButton = SurveyButton.UniqueID;
     }
 
     protected void SurveyButton_Click(object sender, EventArgs e)
@@ -18,7 +19,6 @@ public partial class _Default : Page
         SurveyWordController controller = new SurveyWordController();
         bool isValid = controller.ValidateAccessWord(WOTDTextBox.Text.ToLower());
 
-        //if (WOTDTextBox.Text != "spring")
         if (!isValid)
         {
             Message.Visible = true;
@@ -29,11 +29,12 @@ public partial class _Default : Page
             WOTDTextBox.BackColor = System.Drawing.ColorTranslator.FromHtml("#f8d7da");
             WOTDTextBox.ForeColor = System.Drawing.ColorTranslator.FromHtml("#721c24");
 
-            // have a Session to capture latest survey id and site id
+           
         }
-        //else if (WOTDTextBox.Text == "spring")
         else
         {
+            SurveyWordController sysmgr = new SurveyWordController();            
+            Session["site"] = sysmgr.GetSite(WOTDTextBox.Text);
             Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
         }

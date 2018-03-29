@@ -100,6 +100,28 @@ namespace FSOSS.System.BLL
             }
         }
 
+        public Site GetSite(string surveyWordEntered)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    SurveyWord surveyWordToCheck = (from x in context.SurveyWords
+                                                    where x.PotentialSurveyWord.survey_access_word.Equals(surveyWordEntered)
+                                                    select x).FirstOrDefault();
+                    Site selectedSite = (from x in context.Sites
+                                         where x.site_id == surveyWordToCheck.site_id
+                                         select x).FirstOrDefault();
+
+                    return selectedSite;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
         public string GetSurveyWord(int siteID)
         {
             using (var context = new FSOSSContext())
