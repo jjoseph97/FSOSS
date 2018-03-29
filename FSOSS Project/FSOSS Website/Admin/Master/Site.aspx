@@ -36,7 +36,7 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
            
-                <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteId">
+                <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bdfeff; color: #284775;">                          
                             <td>
@@ -216,23 +216,9 @@
 
 
        <%-- ODS SECTION--%>
-        <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="DisableSite">
-            <DeleteParameters>
-                <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
-            </DeleteParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="siteName" Type="String"></asp:Parameter>
-            </UpdateParameters>
+            <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="DisableSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO">
         </asp:ObjectDataSource>
-            <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="DisableSite" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite">
-                <DeleteParameters>
-                    <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
-                </DeleteParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="SiteID" Type="Int32"></asp:Parameter>
-                    <asp:Parameter Name="siteName" Type="String"></asp:Parameter>
-                </UpdateParameters>
+            <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="DisableSite" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO">
             </asp:ObjectDataSource>
    </div>
 </asp:Content>

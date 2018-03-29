@@ -144,7 +144,7 @@ namespace FSOSS.System.BLL
 
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateSite(int SiteID, string siteName) //currently for active sites only
+        public string UpdateSite(SitePOCO update) //currently for active sites only
         {
             using (var context = new FSOSSContext())
             {
@@ -153,10 +153,10 @@ namespace FSOSS.System.BLL
                 try
                 {
 
-                    if (valid.IsMatch(siteName))
+                    if (valid.IsMatch(update.siteName))
                     {
                         var exists = (from x in context.Sites
-                                      where x.archived_yn == false && x.site_id == SiteID
+                                      where x.archived_yn == false && x.site_id == update.siteID
                                       select x);
                         if (exists == null)
                         {
@@ -164,8 +164,8 @@ namespace FSOSS.System.BLL
                         }
                         else
                         {
-                            Site updateSite = context.Sites.Find(SiteID);
-                            updateSite.site_name = siteName.Trim();
+                            Site updateSite = context.Sites.Find(update.siteID);
+                            updateSite.site_name = update.siteName.Trim();
                             updateSite.date_modified = DateTime.Now;
                             //updateSite.administrator_account_id = admin;
 
@@ -189,7 +189,7 @@ namespace FSOSS.System.BLL
         }//update site
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DisableSite(int siteID)
+        public string DisableSite(SitePOCO archive)
         {
             using (var context = new FSOSSContext())
             {
@@ -198,7 +198,7 @@ namespace FSOSS.System.BLL
                 {
                     // Check if the site exists
                     var searchSite = (from x in context.Sites
-                                          where x.site_id == siteID
+                                          where x.site_id == archive.siteID
                                           select new SitePOCO()
                                           {
                                               siteID = x.site_id,
@@ -207,7 +207,7 @@ namespace FSOSS.System.BLL
 
                                           }).FirstOrDefault();
 
-                        Site site = context.Sites.Find(siteID);
+                        Site site = context.Sites.Find(archive.siteID);
                         if (site.archived_yn == false)
                         {
                             site.archived_yn = true;
