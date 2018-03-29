@@ -29,29 +29,31 @@
              <asp:ListView ID="UnitsListView" runat="server" Visible="false" DataSourceID="unitsODS" DataKeyNames="unitID" InsertItemPosition="LastItem">
                  <AlternatingItemTemplate>
                      <tr style="background-color: #FFFFFF; color: #284775;">
-                         <td>
-                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                         </td>
+                        
                          <td>
                              <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
                          <td>
                              <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
                          <td>
                              <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                          <td>
+                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                         </td>
                      </tr>
                  </AlternatingItemTemplate>
                  <EditItemTemplate>
                      <tr style="background-color: #999999;">
-                         <td>
-                             <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                             <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
-                         </td>
+                        
                          <td>
                              <asp:Label Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" /></td>
                          <td>
                              <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
                          <td>
                              <asp:Label Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
+                          <td>
+                             <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
+                             <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                         </td>
                      </tr>
                  </EditItemTemplate>
                  <EmptyDataTemplate>
@@ -63,29 +65,31 @@
                  </EmptyDataTemplate>
                  <InsertItemTemplate>
                      <tr style="">
-                         <td>
-                             <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
-                             <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
-                         </td>
+                       
                          <td>
                              <asp:Label Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" /></td>
                          <td>
                              <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
                          <td>
                              <asp:Label Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
+                           <td>
+                             <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" CausesValidation="false" />
+                             <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" CausesValidatin="false"/>
+                         </td>
                      </tr>
                  </InsertItemTemplate>
                  <ItemTemplate>
                      <tr style="background-color: #E0FFFF; color: #333333;">
-                         <td>
-                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                         </td>
+                        
                          <td>
                              <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
                          <td>
                              <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
                          <td>
                              <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                          <td>
+                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                         </td>
                      </tr>
                  </ItemTemplate>
                  <LayoutTemplate>
@@ -94,7 +98,6 @@
                              <td runat="server">
                                  <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
                                      <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
-                                         <th runat="server"></th>
                                          <th runat="server">Unit ID</th>
                                          <th runat="server">Unit Number</th>
                                          <th runat="server">Date Modified</th>
@@ -110,15 +113,16 @@
                  </LayoutTemplate>
                  <SelectedItemTemplate>
                      <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
-                         <td>
-                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                         </td>
+                        
                          <td>
                              <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
                          <td>
                              <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
                          <td>
                              <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                          <td>
+                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                         </td>
                      </tr>
                  </SelectedItemTemplate>
              </asp:ListView>
@@ -128,22 +132,19 @@
 
 
         <asp:ObjectDataSource ID="SiteODS" runat="server" 
-            OldValuesParameterFormatString="original_{0}" 
+            OldValuesParameterFormatString="{0}" 
             SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
 
-        <asp:ObjectDataSource ID="unitsODS" runat="server" DeleteMethod="DisableUnit" InsertMethod="AddUnit" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit">
+        <asp:ObjectDataSource ID="unitsODS" runat="server" DeleteMethod="DisableUnit" InsertMethod="AddUnit" OldValuesParameterFormatString="{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit">
             <DeleteParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
             </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="unit_number" Type="String"></asp:Parameter>
-            </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="unit_number" Type="String"></asp:Parameter>
+                <asp:Parameter Name="unitNumber" Type="String"></asp:Parameter>
             </UpdateParameters>
         </asp:ObjectDataSource>
 
