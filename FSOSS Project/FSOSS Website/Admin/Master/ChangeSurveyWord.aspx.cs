@@ -22,9 +22,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        SuccessAlert.Visible = false;
-        ErrorAlert.Visible = false;
-
         if (!this.IsPostBack)
         {
             // This is the initial load of the page...
@@ -42,7 +39,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
     {
-        MessageUserControl.HandleDataBoundException(e);
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        if (e.ReturnValue == null)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        else // else show the ReturnValue(success message) as a string to display to the user 
+        {
+            MessageUserControl.ShowInfo(e.ReturnValue.ToString());
+        }
     }
 
     /// <summary>
@@ -52,40 +57,40 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void SearchWordButton_Click(object sender, EventArgs e)
     {
-        if(SearchWordTextBox.Text.Trim() == "")
+        string searchWord = SearchWordTextBox.Text.Trim();
+        MessageUserControl.TryRun(() =>
         {
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Search cannot be empty.";
-        }
-        else
-        {
-            string searchWord = SearchWordTextBox.Text.Trim();
-            SuccessAlert.Visible = true;
-
-            // this check is to determine whether to search for active or archived words depending on the current ODS
-            if(SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+            if (SearchWordTextBox.Text.Trim() == "")
             {
-                SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
-            }
-            else if(SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
-            {
-                SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
-            }
-
-            SurveyWordListView.DataBind();
-            if (searchWord == "")
-            {
-                SuccessAlert.Visible = false;
+                ErrorAlert.Visible = true;
+                MessageUserControl.ShowInfo("Warning", "Search cannot be empty.");
             }
             else
             {
-                SuccessAlert.Text = "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.";
-                SearchWordTextBox.ReadOnly = true;
-                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
-                SearchWordButton.Visible = false;
-                ClearSearchButton.Visible = true;
+                // this check is to determine whether to search for active or archived words depending on the current ODS
+                if(SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+                {
+                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                }
+                else if(SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+                {
+                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
+                }
+
+                SurveyWordListView.DataBind();
+                if (searchWord == "")
+                {
+                    SuccessAlert.Visible = false;
+                }
+                else
+                {
+                    SearchWordTextBox.ReadOnly = true;
+                    SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
+                    SearchWordButton.Visible = false;
+                    ClearSearchButton.Visible = true;
+                }
             }
-        }
+        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.");
     }
 
     /// <summary>
@@ -118,33 +123,16 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
-        PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
+        string newWord = AddWordTextBox.Text.Trim();
+        MessageUserControl.TryRun(() =>
+        {
+            PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
 
-        string addWord = AddWordTextBox.Text.Trim();
-        Regex validWord = new Regex("^[a-zA-Z]+$");
-
-        if (addWord == "" || addWord == null)
-        {
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: You must type in a word to add. Field cannot be empty.";
-        }
-        else if (!validWord.IsMatch(addWord))
-        {
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: Please enter only alphabetical letters and no spaces.";
-        }
-        else if (addWord.Length < 4 || addWord.Length > 8)
-        {
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: New survey word must be between 4 to 8 characters characters in length.";
-        }
-        else
-        {
-            SuccessAlert.Visible = true;
-            SuccessAlert.Text = sysmgr.AddWord(addWord);
+            sysmgr.AddWord(newWord);
             SurveyWordListView.DataBind();
             AddWordTextBox.Text = "";
-        }
+          
+        }, "Success", "Successfully added the new survey word: \"" + newWord + "\"");
     }
 
     /// <summary>

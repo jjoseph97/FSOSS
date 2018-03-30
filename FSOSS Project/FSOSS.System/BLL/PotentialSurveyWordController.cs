@@ -23,24 +23,37 @@ namespace FSOSS.System.BLL
         /// <param name="newWord"></param>
         /// <returns>returns confirmation from the list</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddWord(string newWord)
+        public void AddWord(string newWord)
         {
             using (var context = new FSOSSContext())
             {
                 newWord = newWord.ToLower();
-                string message = "";
-                try
-                {
-                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                    where x.survey_access_word.ToLower().Equals(newWord.ToLower())
-                                                    select new PotentialSurveyWordPOCO()
-                                                    {
-                                                        surveyWord = x.survey_access_word
-                                                    };
+                Regex validWord = new Regex("^[a-zA-Z]+$");
 
-                    if (potentialSurveyWordList.Count() > 0)
+                var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                where x.survey_access_word.ToLower().Equals(newWord.ToLower())
+                                                select new PotentialSurveyWordPOCO()
+                                                {
+                                                    surveyWord = x.survey_access_word
+                                                };
+
+                if (potentialSurveyWordList.Count() > 0)
+                {
+                    throw new Exception("The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.");
+                }
+                else
+                {
+                    if (newWord == "" || newWord == null)
                     {
-                        message = "The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.";
+                        throw new Exception("Error: You must type in a word to add. Field cannot be empty.");
+                    }
+                    else if (!validWord.IsMatch(newWord))
+                    {
+                        throw new Exception("Error: Please enter only alphabetical letters and no spaces.");
+                    }
+                    else if (newWord.Length < 4 || newWord.Length > 8)
+                    {
+                        throw new Exception("Error: New survey word must be between 4 to 8 characters characters in length.");
                     }
                     else
                     {
@@ -51,15 +64,8 @@ namespace FSOSS.System.BLL
                         potentialSurveyWord.date_modified = DateTime.Now;
                         context.PotentialSurveyWords.Add(potentialSurveyWord);
                         context.SaveChanges();
-                        message = "Successfully added the new survey word: \"" + newWord + "\"";
                     }
                 }
-                catch (Exception e)
-                {
-                    message = "Oops, something went wrong. Check " + e.Message;
-                }
-                return message;
-
             } 
         } 
 
@@ -171,15 +177,16 @@ namespace FSOSS.System.BLL
                         }
                         context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
                         context.SaveChanges();
+                        message = "Successfully changed availability on the survey word.";
                     }
                     else
                     {
-                        throw new Exception("Unable to archive selected word. Word is currently in use.");
+                        throw new Exception("Unable to changed availability selected word. Word is currently in use.");
                     }                                                       
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception(e.Message);
                 }
                 return message;
             }
@@ -191,7 +198,7 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<PotentialSurveyWordPOCO> GetActiveSurveyWord(string surveyWord)
+        public List<PotentialSurveyWordPOCO> GetSearchedActiveSurveyWord(string surveyWord)
         {
             using (var context = new FSOSSContext())
             {
@@ -226,7 +233,7 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<PotentialSurveyWordPOCO> GetArchivedSurveyWord(string surveyWord)
+        public List<PotentialSurveyWordPOCO> GetSearchedArchivedSurveyWord(string surveyWord)
         {
             using (var context = new FSOSSContext())
             {
