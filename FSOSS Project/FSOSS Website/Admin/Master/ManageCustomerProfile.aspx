@@ -28,6 +28,7 @@
             <div class="card container">
                 <%--site show section--%>
                 <%--The gender list--%>
+                <%--<Label id="selected" runat="server"></Label>--%>
                 <div id="Genders" runat="server">
                     <asp:ListView ID="DemographicListview" runat="server" DataSourceID="SiteODS">
                         <AlternatingItemTemplate>
@@ -225,6 +226,7 @@
 
                 <%--the meal list--%>
                 <div id="Meals" runat="server">
+                    <h1>meal</h1>
                     <asp:ListView ID="ListView1" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="">
@@ -364,6 +366,7 @@
 
                 <%--the age range list--%>
                 <div id="AgeRanges" runat="server">
+                    <h1>age</h1>
                     <asp:ListView ID="ListView2" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="">
