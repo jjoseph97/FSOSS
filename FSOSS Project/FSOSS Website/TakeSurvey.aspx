@@ -7,15 +7,28 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="card container h5 alert alert-danger">All fields with * are required.</span></asp:Label>
+        </div>
+        <%--<div class="col-sm-12">            
+            <asp:ValidationSummary runat="server" ID="ValidationSummary"
+                HeaderText="Please answer all required fields"
+                CssClass="card container h5 alert alert-danger p-2" 
+                "/>
+        </div>--%>
+    </div>
+
     <div class="col-md-12">
 
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Unit Number:"></asp:Label>
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">*</span>Unit Number:</asp:Label>
             <asp:DropDownList ID="UnitDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="UnitsObjectDataSource" DataTextField="unitNumber" 
                 DataValueField="unitID" AppendDataBoundItems="true">
                 <asp:ListItem Value="" Text="Select a Unit"/>
             </asp:DropDownList>
-
+            <asp:RequiredFieldValidator ErrorMessage="Please choose a unit" ControlToValidate="UnitDropDownList" runat="server" 
+                                InitialValue="" Display="Dynamic" SetFocusOnError ="true" CssClass="text-danger pl-2"/>
             <asp:ObjectDataSource runat="server" ID="UnitsObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" 
                 TypeName="FSOSS.System.BLL.UnitController">
                 <SelectParameters>
@@ -25,23 +38,25 @@
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Participant Type:"></asp:Label> 
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">*</span>Participant Type:</asp:Label> 
             <asp:DropDownList ID="ParticipantTypeDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="ParticipantTypeObjectDataSource" 
                 DataTextField="participantTypeDescription" DataValueField="participantTypeID"  AppendDataBoundItems="true">
                 <asp:ListItem Value="" Text="Select a Participant Type"/>
             </asp:DropDownList>
-
+            <asp:RequiredFieldValidator ErrorMessage="Please choose a participant type" ControlToValidate="ParticipantTypeDropDownList" runat="server" 
+                                 InitialValue="" Display="Dynamic" SetFocusOnError="true" CssClass="text-danger pl-2" />
             <asp:ObjectDataSource runat="server" ID="ParticipantTypeObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetParticipantTypeList" 
                 TypeName="FSOSS.System.BLL.ParticipantController"></asp:ObjectDataSource>
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server" Text="Meal Type:"></asp:Label> 
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">*</span>Meal Type:</asp:Label> 
             <asp:DropDownList ID="MealTypeDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="MealTypeObjectDataSource" DataTextField="mealName" 
                 DataValueField="mealID" AppendDataBoundItems="true">
                 <asp:ListItem Value="" Text="Select a Meal Type"/>
             </asp:DropDownList>
-
+            <asp:RequiredFieldValidator ErrorMessage="Please choose a meal type" ControlToValidate="MealTypeDropDownList" runat="server" 
+                                 InitialValue="" Display="Dynamic" SetFocusOnError="true" CssClass="text-danger pl-2"/>
             <asp:ObjectDataSource runat="server" ID="MealTypeObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetMealList" 
                 TypeName="FSOSS.System.BLL.MealController"></asp:ObjectDataSource>
         </div>
@@ -155,7 +170,7 @@
         <%-- Question #4--%>
         <div class="row">
             <div class="col-md-12">
-                <asp:Label ID="Q4" runat="server" Font-Bold="true" />
+                <span class="text-danger pl-2">*</span><asp:Label ID="Q4" runat="server" Font-Bold="true" />
             </div>
             <br />
             <div class="col-md-12 form-inline">
@@ -163,9 +178,10 @@
                     DataSourceID="Q4ResponseObjectDataSource" DataTextField="Text" DataValueField="Value" AppendDataBoundItems="true">
                     <asp:ListItem Value="" Text="Select..."/>
                 </asp:DropDownList>
+                <asp:RequiredFieldValidator ErrorMessage="Please choose an option for Question 4" ControlToValidate="Q4Response" runat="server" 
+                                 InitialValue="" Display="Dynamic" SetFocusOnError="true" CssClass="text-danger pl-2"/>
                 <asp:ObjectDataSource runat="server" ID="Q4ResponseObjectDataSource" OldValuesParameterFormatString="original_{0}" 
                     SelectMethod="GetQuestion4Reponse" TypeName="FSOSS.System.BLL.QuestionSelectionController"></asp:ObjectDataSource>
-                <asp:Label ID="Message" runat="server" CssClass="col-md-6" />
                 <br />
             </div>
         </div>

@@ -96,29 +96,23 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
 
     protected void NextButton_Click(object sender, EventArgs e)
     {
-       if (Q4Response.SelectedItem.Value == "")
-        {
-            // throw friendly error message
-            Message.Text = "Please select an option";
-        }
-        else
-        {
-            Session["Unit"] = UnitDropDownList.SelectedValue;
-            Session["ParticipantType"] = ParticipantTypeDropDownList.SelectedValue;
-            Session["MealType"] = MealTypeDropDownList.SelectedValue;
 
-            Session["Q1A"] = Q1AResponse.SelectedValue;
-            Session["Q1B"] = Q1BResponse.SelectedValue;
-            Session["Q1C"] = Q1CResponse.SelectedValue;
-            Session["Q1D"] = Q1DResponse.SelectedValue;
-            Session["Q1E"] = Q1EResponse.SelectedValue;
+        Session["Unit"] = UnitDropDownList.SelectedValue;
+        Session["ParticipantType"] = ParticipantTypeDropDownList.SelectedValue;
+        Session["MealType"] = MealTypeDropDownList.SelectedValue;
 
-            Session["Q2"] = Q2Response.SelectedValue;
-            Session["Q3"] = Q3Response.SelectedValue;
-            Session["Q4"] = Q4Response.SelectedValue;
-            Session["Q5"] = Q5.Text;
-            Response.Redirect("~/DemographicsPage.aspx", false);
-        }
+        Session["Q1A"] = Q1AResponse.SelectedValue;
+        Session["Q1B"] = Q1BResponse.SelectedValue;
+        Session["Q1C"] = Q1CResponse.SelectedValue;
+        Session["Q1D"] = Q1DResponse.SelectedValue;
+        Session["Q1E"] = Q1EResponse.SelectedValue;
+
+        Session["Q2"] = Q2Response.SelectedValue;
+        Session["Q3"] = Q3Response.SelectedValue;
+        Session["Q4"] = Q4Response.SelectedValue;
+        Session["Q5"] = Q5.Text;
+        Response.Redirect("~/DemographicsPage.aspx", false);
+        
         
     }
     

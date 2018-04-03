@@ -74,6 +74,7 @@ public partial class SiteMaster : MasterPage
         }
         else
         {
+            //Session.Abandon();
             logolink.HRef = "~/";
             FSOSSNavbar.Visible = false;
             hamburger.Visible = false;
