@@ -11,12 +11,6 @@
         <div class="col-sm-12">
             <asp:Label class="col-md-3 my-2" runat="server"><span class="card container h5 alert alert-danger">All fields with * are required.</span></asp:Label>
         </div>
-        <%--<div class="col-sm-12">            
-            <asp:ValidationSummary runat="server" ID="ValidationSummary"
-                HeaderText="Please answer all required fields"
-                CssClass="card container h5 alert alert-danger p-2" 
-                "/>
-        </div>--%>
     </div>
 
     <div class="col-md-12">
