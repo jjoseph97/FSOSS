@@ -81,7 +81,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     {
         //finding the customer profile choice to display
         String selection = CustomerProfileDropDownList.SelectedValue;
-        selected.InnerText = selection;
+        //selected.InnerText = selection;
         //1 is Age Range
         if (selection == "1")
         {
