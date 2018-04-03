@@ -26,16 +26,10 @@
                 </div>
             </div>    
 
-            <ul class="nav nav-tabs">
-                <li><a href="#ShowActive" data-toggle="tab">Show Active Sites</a></li>
-                <li><a href="#ShowArchived" data-toggle="tab">Show Closed Sites</a></li>
-            </ul>
         <div class="card container"> <%--site show section--%>
-            <div class="tab-content">
-                <div class="tab-pane fade" id="ShowActive">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-           
+            <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click" />
+            <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" />
+            <br />
                 <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bdfeff; color: #284775;">                          
@@ -117,16 +111,12 @@
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
-            </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                </div><%--tab pane fade--%>
+           
+                            
 
-                <%--archived listview section--%>
-                <div class="tab-pane fade" id="ShowArchived">
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                        <ContentTemplate>
-                            <asp:ListView ID="ArchivedListView" runat="server" DataSourceID="ArchivedODS">
+                <%-- -----------------archived listview section------------------%>
+
+                        <asp:ListView ID="ArchivedListView" runat="server" DataSourceID="ArchivedODS" DataKeyNames="siteID">
                                  <AlternatingItemTemplate>
                         <tr style="background-color: #bdfeff; color: #284775;">                          
                             <td>
@@ -207,12 +197,8 @@
                         </tr>
                                 </SelectedItemTemplate>
                             </asp:ListView>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </div><%--tab content--%>
-
         </div>
+    </div>
 
 
        <%-- ODS SECTION--%>
@@ -220,5 +206,5 @@
         </asp:ObjectDataSource>
             <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="DisableSite" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO">
             </asp:ObjectDataSource>
-   </div>
+
 </asp:Content>

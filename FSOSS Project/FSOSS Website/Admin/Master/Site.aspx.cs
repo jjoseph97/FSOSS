@@ -25,8 +25,48 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             Context.Response.StatusCode = 403;
         } else
         {
+            ListView1.Visible = true;
+            ArchivedListView.Visible = false;
+            ListView1.DataBind();
 
+            ShowActiveButton.Visible = false;
+            ShowArchivedButton.Visible = true;
         }
+
+        if (!IsPostBack)
+        {
+            ListView1.DataBind();
+            ArchivedListView.DataBind();
+        }
+    }
+
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void ShowArchivedButton_Click(object sender, EventArgs e)
+    {
+        ListView1.Visible = false;
+        ArchivedListView.Visible = true;
+        ArchivedListView.DataBind();
+
+        ShowActiveButton.Visible = true;
+        ShowArchivedButton.Visible = false;
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void ShowActiveButton_Click(object sender, EventArgs e)
+    {
+        ListView1.Visible = true;
+        ArchivedListView.Visible = false;
+        ListView1.DataBind(); 
+
+        ShowActiveButton.Visible = false;
+        ShowArchivedButton.Visible = true;
     }
 
     protected void SearchSite_Click(object sender, EventArgs e)
@@ -38,6 +78,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
     {
         SiteController sysmgr = new SiteController();
         SurveyWordController swControl = new SurveyWordController();
+        UnitController unControl = new UnitController();
 
         string siteName = AddSiteTextBox.Text.Trim();
         Regex validWord = new Regex("^[a-zA-Z ]+$");
@@ -59,6 +100,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             Alert.Text = sysmgr.AddSite(siteName, employee); // adds the site to the database
 
             swControl.NewSite_NewWord(siteName);
+            //unControl.NewSite_NewUnit(siteName); 
+
             ListView1.DataBind();
             AddSiteTextBox.Text = "";
         }
