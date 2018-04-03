@@ -98,6 +98,18 @@ namespace FSOSS.System.BLL
             }
         }
 
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public string DisplaySiteName (int siteID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                string siteName = (from x in context.Sites
+                                            where x.site_id == siteID
+                                            select x.site_name).FirstOrDefault();
+                return siteName;
+            }
+        }
+
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public string AddSite(string newSiteName, int employee) // add a new site to the database.
         {
@@ -156,7 +168,7 @@ namespace FSOSS.System.BLL
                     if (valid.IsMatch(update.siteName))
                     {
                         var exists = (from x in context.Sites
-                                      where x.archived_yn == false && x.site_id == update.siteID
+                                     where x.site_id == update.siteID
                                       select x);
                         if (exists == null)
                         {
@@ -203,6 +215,7 @@ namespace FSOSS.System.BLL
                                           {
                                               siteID = x.site_id,
                                               siteName = x.site_name,
+                                              archived_yn = x.archived_yn,
                                               date_modified = DateTime.Now
 
                                           }).FirstOrDefault();

@@ -140,7 +140,7 @@ namespace FSOSS.System.BLL
             {
                 //grab the new site id,
                 int siteId = (from x in context.Sites
-                              where x.site_name.Equals(siteName)
+                              where x.site_name.Equals(siteName) && x.archived_yn == false
                               select x.site_id).FirstOrDefault();
 
                 //get all the active words
