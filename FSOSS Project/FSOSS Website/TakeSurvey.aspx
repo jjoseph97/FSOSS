@@ -23,10 +23,11 @@
             </asp:DropDownList>
             <asp:RequiredFieldValidator ErrorMessage="Please choose a unit" ControlToValidate="UnitDropDownList" runat="server" 
                                 InitialValue="" Display="Dynamic" SetFocusOnError ="true" CssClass="text-danger pl-2"/>
-            <asp:ObjectDataSource runat="server" ID="UnitsObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitList" 
+            <asp:ObjectDataSource runat="server" ID="UnitsObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="GetUnitListModified"
                 TypeName="FSOSS.System.BLL.UnitController">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="UnitDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
+                    <asp:SessionParameter SessionField="siteID" Name="site_id" Type="Int32"></asp:SessionParameter>
+
                 </SelectParameters>
             </asp:ObjectDataSource>
         </div>

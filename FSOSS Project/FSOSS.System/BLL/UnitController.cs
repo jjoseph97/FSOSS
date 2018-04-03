@@ -32,8 +32,8 @@ namespace FSOSS.System.BLL
                                    {
                                        unitID = y.unit_id,
                                        unitNumber = y.unit_number,
-                                       dateModified=y.date_modified,
-                                      
+                                       dateModified = y.date_modified,
+
 
                                    };
 
@@ -46,6 +46,36 @@ namespace FSOSS.System.BLL
             }
         }
 
+        #region GetList(Proper?)
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<UnitsPOCO> GetUnitListModified(int site_id)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    var unitList = from y in context.Units
+                                   where y.site_id == site_id
+                                   && y.archived_yn == false
+                                   select new UnitsPOCO()
+                                   {
+                                       unitID = y.unit_id,
+                                       unitNumber = y.unit_number,
+                                       dateModified = y.date_modified,
+
+
+                                   };
+
+                    return unitList.ToList();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+        #endregion
+
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<UnitsPOCO> GetArchivedUnits(int unitID)
@@ -57,13 +87,13 @@ namespace FSOSS.System.BLL
                 {
 
                     var archivedUnitList = from x in context.Units
-                                    where x.archived_yn == true
-                                     select new UnitsPOCO()
-                                      {
-                                                      unitID = x.unit_id,
-                                                      unitNumber = x.unit_number,
-                                                      dateModified=x.date_modified
-                                      };
+                                           where x.archived_yn == true
+                                           select new UnitsPOCO()
+                                           {
+                                               unitID = x.unit_id,
+                                               unitNumber = x.unit_number,
+                                               dateModified = x.date_modified
+                                           };
 
                     return archivedUnitList.ToList();
 
@@ -91,16 +121,16 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-               
+
                 string message = "";
                 try
                 {
                     var UnitList = from x in context.Units
-                                                  where x.unit_number.ToUpper().Equals(unitNumber)
-                                                  select new Unit()
-                                                  {
-                                                      unit_number = x.unit_number
-                                                  };
+                                   where x.unit_number.ToUpper().Equals(unitNumber)
+                                   select new Unit()
+                                   {
+                                       unit_number = x.unit_number
+                                   };
 
                     if (UnitList.Count() > 0)
                     {
@@ -122,7 +152,7 @@ namespace FSOSS.System.BLL
                 {
                     message = "Oops, something went wrong. Check " + e.Message;
                 }
-                
+
             }
         }//eom
 
@@ -149,12 +179,12 @@ namespace FSOSS.System.BLL
                     var unitInHospital = (from x in context.Units
                                           where x.unit_id == unitID
                                           select new UnitsPOCO()
-                                                      {
-                                                          unitID = x.unit_id,
-                                                          unitNumber=x.unit_number,
-                                                          dateModified=x.date_modified
+                                          {
+                                              unitID = x.unit_id,
+                                              unitNumber = x.unit_number,
+                                              dateModified = x.date_modified
 
-                                                      }).FirstOrDefault();
+                                          }).FirstOrDefault();
 
                     if (unitInHospital != null)
                     {
@@ -202,12 +232,12 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var unitList = (from x in context.Units
-                                          select new UnitsPOCO()
-                                          {
-                                              unitID = x.unit_id,
-                                              unitNumber = x.unit_number,
-                                              dateModified = x.date_modified
-                                          }).ToList();
+                                    select new UnitsPOCO()
+                                    {
+                                        unitID = x.unit_id,
+                                        unitNumber = x.unit_number,
+                                        dateModified = x.date_modified
+                                    }).ToList();
 
 
                     foreach (UnitsPOCO item in unitList)
