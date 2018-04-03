@@ -103,6 +103,8 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 
         // abandon session
         Session.Abandon();
+
+        Response.Redirect("~/Thankyou");
     }
 
     protected void BackButton_Click(object sender, EventArgs e)

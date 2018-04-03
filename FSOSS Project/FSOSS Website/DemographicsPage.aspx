@@ -5,6 +5,8 @@
     <div class="form-check">
         <asp:CheckBox ID="CustomerProfileCheckBox" runat="server" CssClass="form-check-input" OnCheckedChanged="CustomerProfileCheckBox_CheckedChanged" AutoPostBack="true" />
         <asp:Label ID="CustomerProfileCheckBoxLabel" runat="server" AssociatedControlID="CustomerProfileCheckBox" CssClass="form-check-lable" Text="Customer Profile" Font-Bold="true" />
+        <br />
+        <asp:Label ID="CustomerProfileOptional" runat="server" Text="(This is optional but helps us to understand our customers' needs)" />  
     </div>
 
     <br />
