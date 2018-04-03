@@ -1,4 +1,5 @@
 ﻿using FSOSS.System.BLL;
+using FSOSS.System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

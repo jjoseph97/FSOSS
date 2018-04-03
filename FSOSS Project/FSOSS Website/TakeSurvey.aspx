@@ -189,7 +189,7 @@
             </div>
             <br />
             <div class="col-md-12">
-                <asp:TextBox ID="Question5" Height="100px" runat="server" CssClass="col-md-4 form-control"></asp:TextBox><br />
+                <asp:TextBox ID="Question5" Height="100px" TextMode="MultiLine" runat="server" CssClass="col-md-4 form-control"></asp:TextBox><br />
             </div>
         </div>
 
