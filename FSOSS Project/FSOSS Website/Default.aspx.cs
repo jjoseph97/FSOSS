@@ -34,7 +34,7 @@ public partial class _Default : Page
         else
         {
             SurveyWordController sysmgr = new SurveyWordController();            
-            Session["site"] = sysmgr.GetSite(WOTDTextBox.Text);
+            Session["siteID"] = sysmgr.GetSite(WOTDTextBox.Text).site_id;
             Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
         }
