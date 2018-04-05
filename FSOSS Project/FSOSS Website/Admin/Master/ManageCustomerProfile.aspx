@@ -110,7 +110,7 @@
                                 <td>
                                     <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
+                                    <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName='<%# seeArchive==false?"Disable":"Enable" %>' Text="Delete" ID="DeleteButton" /></td>
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
@@ -128,14 +128,14 @@
                                     <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
-                                <td>
+                                <td >
                                     <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
 
                                 <td>
                                     <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Delete" ID="DeleteButton" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
 
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
@@ -194,20 +194,20 @@
                                     <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Delete" ID="DeleteButton" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
 
 
 
 
                         </ItemTemplate>
                         <LayoutTemplate>
-                            <table runat="server">
+                            <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="" border="0">
+                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                             <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                                 <th runat="server" class="col-sm-6 py-2">Participant Type</th>
-                                                <th runat="server" class="col-sm-6 py-2">Modified On</th>
+                                                <th runat="server" class="col-sm-4 py-2">Modified On</th>
                                                 <th runat="server" class="col-sm-45 py-2">Last Edited By</th>
                                                 <th runat="server" class="col-sm-3 py-2"></th>
                                                 <th runat="server" class="col-sm-3 py-2"></th>
@@ -244,7 +244,7 @@
                                     <asp:Button runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn btn-success mx-3 my-1" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Delete" ID="DeleteButton" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
 
                             </tr>
                         </SelectedItemTemplate>

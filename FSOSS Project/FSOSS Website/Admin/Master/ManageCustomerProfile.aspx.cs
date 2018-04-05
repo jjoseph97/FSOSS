@@ -7,7 +7,8 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 {
-    static bool seeArchive = false;
+    static public bool seeArchive = false;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,6 +33,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             PTListview.DataSourceID = "PTODS";
             PTListview.DataBind();
             RevealButton.Text = "Show Archived";
+           
         }
         else
         {
@@ -39,6 +41,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             PTListview.DataSourceID = "ArchivedPTODS";
             PTListview.DataBind();
             RevealButton.Text = "Show Active";
+            
         }
     }
 
