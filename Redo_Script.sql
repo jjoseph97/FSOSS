@@ -974,4 +974,88 @@ BEGIN
 END; $$
 LANGUAGE PLPGSQL;
 
+-- Create update_user_with_password function
+CREATE OR REPLACE FUNCTION update_user_with_password (
+	username_param VARCHAR(50), 
+	password_param VARCHAR(60),
+	firstname_param VARCHAR(50),
+	lastname_param VARCHAR(50),
+	archived_yn_param BOOLEAN,
+	securityid_param INTEGER)
+RETURNS VARCHAR(50) AS $$
+DECLARE
+	userID INTEGER;
+	updatedUser VARCHAR(50);
+BEGIN
+	UPDATE
+		administrator_account
+	SET
+		admin_password = crypt(password_param,gen_salt('bf')),
+		first_name = firstname_param, 
+		last_name = lastname_param,
+		archived_yn = archived_yn_param,
+		date_modified = NOW()
+	WHERE
+		username = username_param;
+	
+	SELECT administrator_account_id INTO userID
+	FROM administrator_account
+	WHERE username = username_param;
+	
+	UPDATE
+		administrator_role
+	SET
+		security_role_id = securityid_param,
+		date_modified = NOW()
+	WHERE
+		administrator_account_id = userID;
+	
+	SELECT username INTO updatedUser
+	FROM administrator_account
+	WHERE administrator_account_id = userID;
+	
+	RETURN updatedUser;
+END; $$
+LANGUAGE PLPGSQL;
 
+-- Create update_user_with_password function
+CREATE OR REPLACE FUNCTION update_user_without_password (
+	username_param VARCHAR(50), 
+	firstname_param VARCHAR(50),
+	lastname_param VARCHAR(50),
+	archived_yn_param BOOLEAN,
+	securityid_param INTEGER)
+RETURNS VARCHAR(50) AS $$
+DECLARE
+	userID INTEGER;
+	updatedUser VARCHAR(50);
+BEGIN
+	UPDATE
+		administrator_account
+	SET
+		first_name = firstname_param, 
+		last_name = lastname_param,
+		archived_yn = archived_yn_param,
+		date_modified = NOW()
+	WHERE
+		username = username_param;
+	
+	SELECT administrator_account_id INTO userID
+	FROM administrator_account
+	WHERE username = username_param;
+	
+	UPDATE
+		administrator_role
+	SET
+		security_role_id = securityid_param,
+		date_modified = NOW()
+	WHERE
+		administrator_account_id = userID;
+	
+	SELECT username INTO updatedUser
+	FROM administrator_account
+	WHERE administrator_account_id = userID;
+	
+	RETURN updatedUser;
+END; $$
+LANGUAGE PLPGSQL;
