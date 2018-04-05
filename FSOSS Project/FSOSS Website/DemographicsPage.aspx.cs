@@ -55,7 +55,7 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
-        int surveyVersionId = 1; //TODO - create a method to capture Current Survey ID
+        int surveyVersionId = Convert.ToInt32(Session["survey_version_id"]); //TODO - create a method to capture Current Survey ID
         int unitId = int.Parse(Session["Unit"].ToString());
         int mealId = int.Parse(Session["MealType"].ToString());
         int participantTypeId = int.Parse(Session["ParticipantType"].ToString());
@@ -112,6 +112,10 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
     protected void BackButton_Click(object sender, EventArgs e)
     {
         // TODO - Store user values into Session[]
+        Session["CustomerProfileCheckBox"] = CustomerProfileCheckBox.Checked;
+        Session["GenderDDL"] = GenderDDL.SelectedValue;
+        Session["AgeDDL"] = AgeDDL.SelectedValue;
+
         Response.Redirect("~/TakeSurvey");
     }
 }
