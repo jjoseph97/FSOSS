@@ -20,33 +20,51 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {
-        string username = UsernameTextBox.Text.ToLower();
-        string password = PasswordTextBox.Text;
+        Page.Validate();
 
-        AdministratorAccountController sysmgr = new AdministratorAccountController();
-        if (!sysmgr.UserIsActive(username))
+        if (!IsValid)
         {
             Message.Visible = true;
-            Message.Text = "You are currently deactivated. Please contact a Master Administrator.";
+            Message.Text = "Username and password is required.";
         }
         else
         {
-            bool isValid = sysmgr.VerifyLogin(username, password);
+            string username = UsernameTextBox.Text.ToLower();
+            string password = PasswordTextBox.Text;
 
-            if (isValid)
+            AdministratorAccountController sysmgr = new AdministratorAccountController();
+            if (!sysmgr.UserExists(username))
             {
-                // if valid store userID, username, and securityID in sessions
-                Session["username"] = username.ToLower();
-                int userID = sysmgr.GetUserID(username);
-                Session["userID"] = userID;
-                Session["securityID"] = sysmgr.GetSecurityID(userID);
-
-                Response.Redirect("~/Admin");
+                Message.Visible = true;
+                Message.Text = "Username does not exist.";
             }
             else
             {
-                Message.Visible = true;
-                Message.Text = "Invalid username or password";
+                if (!sysmgr.UserIsActive(username))
+                {
+                    Message.Visible = true;
+                    Message.Text = "You are currently deactivated. Please contact a Master Administrator.";
+                }
+                else
+                {
+                    bool isValid = sysmgr.VerifyLogin(username, password);
+
+                    if (isValid)
+                    {
+                        // if valid store userID, username, and securityID in sessions
+                        Session["username"] = username.ToLower();
+                        int userID = sysmgr.GetUserID(username);
+                        Session["userID"] = userID;
+                        Session["securityID"] = sysmgr.GetSecurityID(userID);
+
+                        Response.Redirect("~/Admin");
+                    }
+                    else
+                    {
+                        Message.Visible = true;
+                        Message.Text = "Invalid username or password";
+                    }
+                }
             }
         }
     }

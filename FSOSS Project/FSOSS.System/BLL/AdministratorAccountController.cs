@@ -26,6 +26,13 @@ namespace FSOSS.System.BLL
                 return result.Equals(0) ? false : true;
             }
         }
+        public bool UserExists(string username)
+        {
+            using (var context = new FSOSSContext())
+            {
+                return context.AdministratorAccounts.Any(e => e.username.Equals(username));
+            }
+        }
         public bool VerifyLogin(string username, string password)
         {
             bool isValid;
@@ -113,6 +120,7 @@ namespace FSOSS.System.BLL
             using (var context = new FSOSSContext())
             {
                 var result = from x in context.AdministratorAccounts
+                             orderby x.username ascending
                              select new AdministratorAccountPOCO
                              {
                                  id = x.administrator_account_id,

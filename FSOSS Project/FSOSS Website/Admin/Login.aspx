@@ -17,16 +17,18 @@
             <asp:Label ID="UsernameLabel" runat="server" AssociatedControlID="UsernameTextbox" CssClass="col-sm-12">Username: </asp:Label>
             <div class="col-sm-12">
                 <asp:TextBox ID="UsernameTextBox" runat="server" CssClass="form-control" AutoComplete="off" Placeholder="Enter username" AutoFocus="true" />
+                <asp:RequiredFieldValidator ID="UsernameRFV"  ControlToValidate="UsernameTextBox" runat="server" />
             </div>
         </div>
         <div class="form-group">
             <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="PasswordTextBox" CssClass="col-sm-12">Password: </asp:Label>
             <div class="col-sm-12">
                 <asp:TextBox ID="PasswordTextBox" runat="server" TextMode="Password" CssClass="form-control" AutoComplete="off" Placeholder="Enter password" AutoFocus="true" />
+                <asp:RequiredFieldValidator ID="PasswordRFV" ControlToValidate="PasswordTextBox" runat="server" />
             </div>
         </div>
         <div class="col-sm-12 mt-2 mb-2">
-            <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-primary col-sm-12" Text="Log in" OnClick="LoginButton_Click" />
+            <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-primary col-sm-12" Text="Log in" OnClick="LoginButton_Click" CausesValidation="false" />
         </div>
     </div>
     <div class="text-center mt-3">
