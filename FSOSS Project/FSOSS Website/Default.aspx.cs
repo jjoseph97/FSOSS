@@ -28,13 +28,11 @@ public partial class _Default : Page
             WOTDTextBox.BorderColor = System.Drawing.Color.Red;
             WOTDTextBox.BackColor = System.Drawing.ColorTranslator.FromHtml("#f8d7da");
             WOTDTextBox.ForeColor = System.Drawing.ColorTranslator.FromHtml("#721c24");
-
-           
         }
         else
         {
             SurveyWordController sysmgr = new SurveyWordController();            
-            Session["siteID"] = sysmgr.GetSite(WOTDTextBox.Text).site_id;
+            Session["siteID"] = sysmgr.GetSite(WOTDTextBox.Text.ToLower()).site_id;
             Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
         }

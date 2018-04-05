@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="CreateUser.aspx.cs" Inherits="Admin_Master_CreateUser" %>
+﻿<%@ Page Title="Create Administrator" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="CreateUser.aspx.cs" Inherits="Admin_Master_CreateUser" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+<asp:Content ID="CreateUser" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
         <div class="col-sm-12">
             <h1 class="card container py-2 h4 font-weight-bold">Create New User</h1>
