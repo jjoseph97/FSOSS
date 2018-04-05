@@ -24,8 +24,7 @@ namespace FSOSS.System.Data.Entity
         [Key, Column("question_id", Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int question_id { get; set; }
-        
-        [Required]
+
         [StringLength(100, ErrorMessage = "Survey response cannot exceed 100 characters")]
         public string participant_answer { get; set; }
 
