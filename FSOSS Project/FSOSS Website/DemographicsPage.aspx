@@ -35,31 +35,33 @@
     <br />
 
     <%--Contact Requests--%>
+    <%--Customer Profile--%>
     <div class="form-check">
         <asp:CheckBox ID="ContactRequestsCheckBox" runat="server" CssClass="form-check-input" OnCheckedChanged="ContactRequestsCheckBox_CheckedChanged" AutoPostBack="true" />
         <asp:Label ID="ContactRequestsCheckBoxLabel" runat="server" AssociatedControlID="ContactRequestsCheckBox" CssClass="form-check-lable"
             Text="If you have any meal or service concerns, please check the box and provide your <br/> phone number and room number so that we can contact you."
             Font-Bold="true" />
     </div>
-
     <br />
-
+    <%--Contact Phone and Room Number--%>
     <div id ="ContactRequestsContent" runat="server">
         <div class="row">
             <asp:Label CssClass="col-md-2 ml-md-5 my-2" runat="server" Text="Phone Number:"></asp:Label>
-            <asp:TextBox CssClass="col-md-4 form-control" ID="PhoneTextBox" runat="server" placeholder="Enter phone number to be reached at"></asp:TextBox>
+            <asp:TextBox CssClass="col-md-4 form-control" ID="PhoneTextBox" runat="server" AutoComplete="off" placeholder="Enter phone number to be reached at"></asp:TextBox>
         </div>
         <br />
         <div class="row">
             <asp:Label CssClass="col-md-2 ml-md-5 my-2" runat="server" Text="Room Number:"></asp:Label>
-            <asp:TextBox CssClass="col-md-4 form-control" ID="RoomTextBox" runat="server" placeholder="Enter room number e.g.001"></asp:TextBox>
+            <asp:TextBox CssClass="col-md-4 form-control" ID="RoomTextBox" runat="server" AutoComplete="off" placeholder="Enter room number e.g.001"></asp:TextBox>
         </div>
     </div>
 
-    <%--Back to questions--%>
-    <asp:Button CssClass="" ID="BackButton" runat="server" Text="Back" OnClick="BackButton_Click" />
+    <div class="col-md-12">
+        <%--Back to questions--%>
+        <asp:Button CssClass="btn col-md-2 my-5 mr-5" ID="BackButton" runat="server" Text="Back" OnClick="BackButton_Click"/>
 
-    <%--Submit Survey Button--%>
-    <asp:Button CssClass="" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" />
+        <%--Submit Survey Button--%>
+        <asp:Button CssClass="btn col-md-2 my-5 offset-sm-2" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" BackColor="#A6EBF7"/>
+    </div>
 </asp:Content>
 
