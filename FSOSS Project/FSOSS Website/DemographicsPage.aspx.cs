@@ -21,13 +21,27 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
             GenderLabel.Text = sysmgr.GetQuestionGender();
             AgeRangeLabel.Text = sysmgr.GetQuestionAgeRange();
 
+            if (Session["CustomerProfileCheckBox"] != null)
+                CustomerProfileCheckBox.Checked = Convert.ToBoolean(Session["CustomerProfileCheckBox"]);
+
             if (CustomerProfileCheckBox.Checked)
+            {
                 CustomerProfileContent.Visible = true;
+                AgeDDL.SelectedValue = Session["AgeDDL"].ToString();
+                GenderDDL.SelectedValue = Session["GenderDDL"].ToString();
+            }
             else
                 CustomerProfileContent.Visible = false;
 
+            if (Session["ContactRequestsCheckBox"] != null)
+                ContactRequestsCheckBox.Checked = Convert.ToBoolean(Session["ContactRequestsCheckBox"]);
+
             if (ContactRequestsCheckBox.Checked)
+            {
                 ContactRequestsContent.Visible = true;
+                PhoneTextBox.Text = Session["PhoneTextBox"].ToString();
+                RoomTextBox.Text = Session["RoomTextBox"].ToString();
+            }   
             else
                 ContactRequestsContent.Visible = false;
         }
@@ -116,6 +130,10 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         Session["GenderDDL"] = GenderDDL.SelectedValue;
         Session["AgeDDL"] = AgeDDL.SelectedValue;
 
+        Session["ContactRequestsCheckBox"] = ContactRequestsCheckBox.Checked;
+        Session["PhoneTextBox"] = PhoneTextBox.Text;
+        Session["RoomTextBox"] = RoomTextBox.Text;
+    
         Response.Redirect("~/TakeSurvey");
     }
 }
