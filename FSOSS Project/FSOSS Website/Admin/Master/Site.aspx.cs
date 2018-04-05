@@ -23,7 +23,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         else if (Session["securityID"].ToString() != "2" && Session["securityID"].ToString() != "1") // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
-        } else
+        }
+
+
+
+        if (!IsPostBack)
         {
             ListView1.Visible = true;
             ArchivedListView.Visible = false;
@@ -31,12 +35,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
 
             ShowActiveButton.Visible = false;
             ShowArchivedButton.Visible = true;
-        }
 
-        if (!IsPostBack)
-        {
-            ListView1.DataBind();
-            ArchivedListView.DataBind();
         }
     }
 
@@ -99,8 +98,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             Alert.Visible = true;
             Alert.Text = sysmgr.AddSite(siteName, employee); // adds the site to the database
 
-            swControl.NewSite_NewWord(siteName);
-            //unControl.NewSite_NewUnit(siteName); 
+            swControl.NewSite_NewWord(siteName); // assigns a survey word to the site
+            unControl.NewSite_NewUnit(siteName, employee); // adds the Not Applicable Unit option to the site
 
             ListView1.DataBind();
             AddSiteTextBox.Text = "";

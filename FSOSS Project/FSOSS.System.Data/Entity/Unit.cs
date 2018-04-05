@@ -33,6 +33,5 @@ namespace FSOSS.System.Data.Entity
 
         public virtual AdministratorAccount AdministratorAccount { get; set; }
         public virtual Site Site { get; set; }
-        public virtual ICollection<Unit> unit { get; set; }
     }
 }

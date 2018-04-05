@@ -271,6 +271,43 @@ namespace FSOSS.System.BLL
             }
         }
 
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public string NewSite_NewUnit (string newSiteName, int employee) 
+            // add Not Applicable Unit to the new site.
+        {
+            using (var context = new FSOSSContext())
+            {
+                string message = "";
+
+                try
+                {
+                    //grab the new site id,
+                    int siteId = (from x in context.Sites
+                                  where x.site_name.Equals(newSiteName) && 
+                                  x.archived_yn == false
+                                  select x.site_id).FirstOrDefault();
+
+                    //add the new unit where unit number is NA
+                    Unit newSite = new Unit()
+                    {
+                        administrator_account_id = employee,
+                        site_id = siteId,
+                        date_modified = DateTime.Now,
+                        unit_number = "Not Applicable",
+                        archived_yn = false
+                    };
+                    context.Units.Add(newSite);
+                    context.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    message = "Oops, something went wrong. Check " + e.Message;
+                }
+                return message;
+            } //end of using var context
+
+        } // end of Addsite
     }
 }
 

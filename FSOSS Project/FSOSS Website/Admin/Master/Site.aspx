@@ -14,11 +14,11 @@
     </div>
         <div class="col-sm-12">
             <div class="card container mb-2">
-                <div class="row container mx-auto px-0">
+                <%--<div class="row container mx-auto px-0">
                     <asp:Label ID="SearchSiteLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Search Site: " />
                     <asp:TextBox ID="SearcSiteTextBox" class="col-sm-4 my-2" runat="server" placeholder="Enter site to search for..." />
                     <asp:Button ID="SearchSiteButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchSite_Click" />
-                </div>
+                </div>--%>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="AddWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Add Site: " />
                     <asp:TextBox ID="AddSiteTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to add..." />
