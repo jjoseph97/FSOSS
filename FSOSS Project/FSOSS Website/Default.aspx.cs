@@ -33,6 +33,12 @@ public partial class _Default : Page
         {
             SurveyWordController sysmgr = new SurveyWordController();            
             Session["siteID"] = sysmgr.GetSite(WOTDTextBox.Text.ToLower()).site_id;
+
+            //RETURN LATEST SURVEY ID
+            SurveyVersionController version = new SurveyVersionController();
+            Session["survey_version_id"] = version.GetLatestSurvey().survey_version_id;
+
+
             Session["takingSurvey"] = true;
             Response.Redirect("~/TakeSurvey.aspx");
         }
