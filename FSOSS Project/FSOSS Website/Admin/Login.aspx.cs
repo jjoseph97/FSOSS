@@ -24,22 +24,30 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
         string password = PasswordTextBox.Text;
 
         AdministratorAccountController sysmgr = new AdministratorAccountController();
-        bool isValid = sysmgr.VerifyLogin(username, password);
-
-        if (isValid)
+        if (!sysmgr.UserIsActive(username))
         {
-            // if valid store userID, username, and securityID in sessions
-            Session["username"] = username.ToLower();
-            int userID = sysmgr.GetUserID(username);
-            Session["userID"] = userID;
-            Session["securityID"] = sysmgr.GetSecurityID(userID);
-
-            Response.Redirect("~/Admin");
+            Message.Visible = true;
+            Message.Text = "You are currently deactivated. Please contact a Master Administrator.";
         }
         else
         {
-            Message.Visible = true;
-            Message.Text = "Invalid username or password";
+            bool isValid = sysmgr.VerifyLogin(username, password);
+
+            if (isValid)
+            {
+                // if valid store userID, username, and securityID in sessions
+                Session["username"] = username.ToLower();
+                int userID = sysmgr.GetUserID(username);
+                Session["userID"] = userID;
+                Session["securityID"] = sysmgr.GetSecurityID(userID);
+
+                Response.Redirect("~/Admin");
+            }
+            else
+            {
+                Message.Visible = true;
+                Message.Text = "Invalid username or password";
+            }
         }
     }
 }
