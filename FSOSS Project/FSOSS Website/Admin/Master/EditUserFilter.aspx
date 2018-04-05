@@ -32,8 +32,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" /></td>
                             <td>
-                                <asp:LinkButton Text="text" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' />
-                            </td>
+                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EmptyDataTemplate>
@@ -55,6 +54,8 @@
                                 <asp:Label Text='<%# Eval("lastName") %>' runat="server" ID="lastNameLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" /></td>
+                            <td>
+                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>

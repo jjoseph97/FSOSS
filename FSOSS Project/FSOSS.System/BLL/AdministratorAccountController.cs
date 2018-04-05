@@ -15,9 +15,21 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class AdministratorAccountController
     {
+        public bool UserIsActive(string username)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = (from x in context.AdministratorAccounts
+                              where !x.archived_yn && username.Equals(x.username)
+                              select x).Count();
+
+                return result.Equals(0) ? false : true;
+            }
+        }
         public bool VerifyLogin(string username, string password)
         {
             bool isValid;
+
             using (var connection = new NpgsqlConnection())
             {
                 try
@@ -111,6 +123,98 @@ namespace FSOSS.System.BLL
                              };
 
                 return result.ToList();
+            }
+        }
+
+        public AdministratorAccountPOCO GetAdministratorInformation(int administratorID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = (from x in context.AdministratorRoles
+                             where x.administratoraccount.administrator_account_id == administratorID
+                             select new AdministratorAccountPOCO
+                             {
+                                 username = x.administratoraccount.username,
+                                 firstName = x.administratoraccount.first_name,
+                                 lastName = x.administratoraccount.last_name,
+                                 archivedBool = x.administratoraccount.archived_yn,
+                                 roleId = x.security_role_id,
+                             }).FirstOrDefault();
+
+                return result;
+            }
+        }
+        // TODO: Rameses - Ensure RedoScript is updated with new functions
+        public string UpdateAdministratorAccount(string username, string password, string firstname, string lastname, bool archive, int selectedRoleId)
+        {
+            #region DOES NOT WORK
+            //using (var context = new FSOSSContext())
+            //{
+            //    var result = (from x in context.AdministratorAccounts
+            //                  where x.username.Equals(username)
+            //                  select x).FirstOrDefault();
+
+            //    result.first_name = firstName;
+            //    result.last_name = lastName;
+            //    result.archived_yn = archive;
+            //    result.date_modified = DateTime.Now;
+
+            //    context.Entry(result).Property(y => y.first_name).IsModified = true;
+            //    context.Entry(result).Property(y => y.last_name).IsModified = true;
+            //    context.Entry(result).Property(y => y.archived_yn).IsModified = true;
+            //    context.Entry(result).Property(y => y.date_modified).IsModified = true;
+
+            //    var rename = (from y in context.AdministratorRoles
+            //                  where y.administrator_account_id.Equals(result.administrator_account_id)
+            //                  select y).FirstOrDefault();
+
+            //    //rename.security_role_id = securityRoleId; // does not like this code due to it being a primary key...?
+            //    rename.date_modified = DateTime.Now;
+
+            //    //context.Entry(rename).Property(y => y.security_role_id).IsModified = true;
+            //    context.Entry(rename).Property(y => y.date_modified).IsModified = true;
+
+            //    context.SaveChanges();
+
+            //}
+            #endregion
+            using (var connection = new NpgsqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                connection.Open();
+                var cmd = new NpgsqlCommand("update_user_with_password", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("username_param", username);
+                cmd.Parameters.AddWithValue("password_param", password);
+                cmd.Parameters.AddWithValue("firstname_param", firstname);
+                cmd.Parameters.AddWithValue("lastname_param", lastname);
+                cmd.Parameters.AddWithValue("archived_yn_param", archive);
+                cmd.Parameters.AddWithValue("securityid_param", selectedRoleId);
+                string updatedUser = cmd.ExecuteScalar().ToString();
+                connection.Close();
+                return updatedUser;
+            }
+        }
+        public string UpdateAdministratorAccount(string username, string firstname, string lastname, bool archive, int selectedRoleId)
+        {
+            using (var connection = new NpgsqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
+                connection.Open();
+                var cmd = new NpgsqlCommand("update_user_without_password", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("username_param", username);
+                cmd.Parameters.AddWithValue("firstname_param", firstname);
+                cmd.Parameters.AddWithValue("lastname_param", lastname);
+                cmd.Parameters.AddWithValue("archived_yn_param", archive);
+                cmd.Parameters.AddWithValue("securityid_param", selectedRoleId);
+                string updatedUser = cmd.ExecuteScalar().ToString();
+                connection.Close();
+                return updatedUser;
             }
         }
     }

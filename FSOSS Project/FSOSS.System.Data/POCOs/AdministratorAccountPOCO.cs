@@ -13,5 +13,7 @@ namespace FSOSS.System.Data.POCOs
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string archived { get; set; }
+        public bool archivedBool { get; set; }
+        public int roleId { get; set; }
     }
 }
