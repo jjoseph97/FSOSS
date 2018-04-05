@@ -15,6 +15,8 @@
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                             <td>
+                                <asp:Label Text='<%# Eval("site") %>' runat="server" CssClass="pl-3" ID="siteLabel" /></td>
+                            <td>
                                 <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" CssClass="pl-3" ID="unitNumberLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("participantType") %>' runat="server" CssClass="pl-3" ID="participantTypeLabel" /></td>
@@ -23,7 +25,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
+                                <asp:Button runat="server" class="btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display: none;">
@@ -46,6 +48,8 @@
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                             <td>
+                                <asp:Label Text='<%# Eval("site") %>' runat="server" CssClass="pl-3" ID="siteLabel" /></td>
+                            <td>
                                 <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" CssClass="pl-3" ID="unitNumberLabel" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("participantType") %>' runat="server" CssClass="pl-3" ID="participantTypeLabel" /></td>
@@ -54,7 +58,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
+                                <asp:Button runat="server" class="btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display: none;">
@@ -71,21 +75,22 @@
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                            <th runat="server" class="col-sm-2 py-2">Unit Number</th>
+                                            <th runat="server" class="col-sm-3 py-2">Hospital</th>
+                                            <th runat="server" class="col-sm-1 py-2">Unit Number</th>
                                             <th runat="server" class="col-sm-2 py-2">Participant Type</th>
                                             <th runat="server" class="col-sm-2 py-2">Meal Name</th>
-                                            <th runat="server" class="col-sm-4 py-2">Date Submitted</th>
-                                            <th runat="server" class="col-sm-2 py-2">View Survey</th>
+                                            <th runat="server" class="col-sm-3 py-2">Date Submitted</th>
+                                            <th runat="server" class="col-sm-1 py-2">View Survey</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
                                 </td>
                             </tr>
-                            <tr runat="server">
+                            <tr runat="server" class="mx-2 my-2">
                                 <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                    <asp:DataPager runat="server" ID="DataPager1">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                         </Fields>
                                     </asp:DataPager>
                                 </td>

@@ -102,10 +102,11 @@ namespace FSOSS.System.BLL
                     if (siteID == 0 && mealID != 0)
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
-                                                  orderby x.date_entered
+                                                  orderby x.date_entered descending
                                                   where x.date_entered >= startDate && x.date_entered <= endDate && x.meal_id == mealID
                                                   select new SubmittedSurveyPOCO()
                                                   {
+                                                      site = x.Unit.Site.site_name,
                                                       submittedSurveyID = x.submitted_survey_id,
                                                       unitNumber = x.Unit.unit_number,
                                                       mealName = x.Meal.meal_name,
@@ -123,10 +124,11 @@ namespace FSOSS.System.BLL
                     else if (siteID != 0 && mealID != 0)
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
-                                                  orderby x.date_entered
+                                                  orderby x.date_entered descending
                                                   where x.Unit.site_id == siteID && x.date_entered >= startDate && x.date_entered <= endDate && x.meal_id == mealID
                                                   select new SubmittedSurveyPOCO()
                                                   {
+                                                      site = x.Unit.Site.site_name,
                                                       submittedSurveyID = x.submitted_survey_id,
                                                       unitNumber = x.Unit.unit_number,
                                                       mealName = x.Meal.meal_name,
@@ -144,10 +146,11 @@ namespace FSOSS.System.BLL
                     else if (mealID == 0 && unitID != 0)
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
-                                                  orderby x.date_entered
+                                                  orderby x.date_entered descending
                                                   where x.date_entered >= startDate && x.date_entered <= endDate && x.unit_id == unitID
                                                   select new SubmittedSurveyPOCO()
                                                   {
+                                                      site = x.Unit.Site.site_name,
                                                       submittedSurveyID = x.submitted_survey_id,
                                                       unitNumber = x.Unit.unit_number,
                                                       mealName = x.Meal.meal_name,
@@ -165,10 +168,11 @@ namespace FSOSS.System.BLL
                     else
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
-                                                  orderby x.date_entered
+                                                  orderby x.date_entered descending
                                                   where x.date_entered >= startDate && x.date_entered <= endDate
                                                   select new SubmittedSurveyPOCO()
                                                   {
+                                                      site = x.Unit.Site.site_name,
                                                       submittedSurveyID = x.submitted_survey_id,
                                                       unitNumber = x.Unit.unit_number,
                                                       mealName = x.Meal.meal_name,
