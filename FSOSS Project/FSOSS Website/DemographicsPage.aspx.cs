@@ -73,7 +73,9 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         string q2Response = Session["Q2"].ToString();
         string q3Response = Session["Q3"].ToString();
         string q4Response = Session["Q4"].ToString();
-        string q5Response = Session["Q5"].ToString();
+
+        //If Q5 is null or empty return as an empty string
+        string q5Response = String.IsNullOrEmpty(Session["Q5"].ToString()) ? "" : Session["Q5"].ToString();
 
         if (!customerProfileCheckBox)
         {

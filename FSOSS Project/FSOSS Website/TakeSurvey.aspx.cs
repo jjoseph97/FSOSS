@@ -90,7 +90,7 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
             }
             if (Session["Q5"] != null)
             {
-                Q5.Text = Session["Q5"].ToString();
+                Question5.Text = Session["Q5"].ToString();
             }
         }
     }
@@ -111,7 +111,7 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
         Session["Q2"] = Q2Response.SelectedValue;
         Session["Q3"] = Q3Response.SelectedValue;
         Session["Q4"] = Q4Response.SelectedValue;
-        Session["Q5"] = Q5.Text;
+        Session["Q5"] = Question5.Text;
         Response.Redirect("~/DemographicsPage.aspx", false);
         
         
