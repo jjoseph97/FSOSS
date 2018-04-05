@@ -10,6 +10,7 @@
     <div class="row">
         <div class="col-sm-12">
             <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success p-2" />
+            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 alert alert-danger p-2" />
             <asp:ValidationSummary runat="server" ID="ValidationSummary"
                 HeaderText="Failed to edit the user due to the following:"
                 CssClass="card container h5 alert alert-danger p-2" />
@@ -84,7 +85,7 @@
 
                     <div class="form-group row float-md-right">
                         <div class="col-sm-12">
-                            <asp:Button ID="UpdateButton" runat="server" CssClass="btn btn-primary btn-block" Text="Update User" OnClick="UpdateButton_Click" CausesValidation="false"/>
+                            <asp:Button ID="UpdateButton" runat="server" CssClass="btn btn-primary btn-block" Text="Update User" OnClick="UpdateButton_Click" CausesValidation="false" />
                         </div>
                     </div>
 

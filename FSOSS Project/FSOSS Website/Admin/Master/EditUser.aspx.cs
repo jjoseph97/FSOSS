@@ -16,6 +16,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
         else
         {
             SuccessMessage.Visible = false;
+            FailedMessage.Visible = false;
             int id = int.Parse(Request.QueryString["id"].ToString());
 
             if (!IsPostBack)
@@ -36,10 +37,18 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
     // TODO: Rameses - clean up this method
     protected void UpdateButton_Click(object sender, EventArgs e)
     {
+        #region REGULAR STUFF
         if (Convert.ToInt32(Request.QueryString["id"]).Equals(Convert.ToInt32(Session["userID"])) && DeactivateCheckBox.Checked)
         {
-            SuccessMessage.Visible = true;
-            SuccessMessage.Text = "Bad";
+            SuccessMessage.Visible = false;
+            FailedMessage.Visible = true;
+            FailedMessage.Text = "You cannot Deactivate your own account.";
+        }
+        else if (UserNameTextBox.Text.Equals("webmaster") && DeactivateCheckBox.Checked)
+        {
+            SuccessMessage.Visible = false;
+            FailedMessage.Visible = true;
+            FailedMessage.Text = "You cannot Deactivate the webmaster account.";
         }
         else
         {
@@ -88,5 +97,6 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                 }
             }
         }
+        #endregion
     }
 }
