@@ -62,6 +62,9 @@ namespace FSOSS.System.BLL
                                                   participantTypeID = x.participant_type_id,
                                                   participantTypeDescription = x.participant_description
                                                   ,
+                                                  administratorAccountId = x.administrator_account_id,
+                                                  username = x.AdministratorAccount.username,
+                                                  dateModified = x.date_modified,
                                                   archivedYn = x.archived_yn
                                               };
 
@@ -93,6 +96,9 @@ namespace FSOSS.System.BLL
                                                   participantTypeID = x.participant_type_id,
                                                   participantTypeDescription = x.participant_description
                                                   ,
+                                                  administratorAccountId = x.administrator_account_id,
+                                                  username = x.AdministratorAccount.username,
+                                                  dateModified = x.date_modified,
                                                   archivedYn = x.archived_yn
                                               };
 
@@ -115,7 +121,7 @@ namespace FSOSS.System.BLL
         /// <param name="ptDesc">The new Participant Type Description</param>
         /// <param name="adminID"> The ID of the Administrator Account that created the new Participant Type</param>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddParticipantType(ParticipantTypePOCO pt)
+        public void AddParticipantType(string participantTypeDescription, int admin)
         {
             using (var context = new FSOSSContext())
             {
@@ -125,30 +131,32 @@ namespace FSOSS.System.BLL
 
                     //add check for pre-use
                     var participantTypeList = from x in context.ParticipantTypes
-                                              where x.participant_description.ToLower().Equals(pt.participantTypeDescription.ToLower()) && !x.archived_yn
+                                              where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && !x.archived_yn
                                               select new ParticipantTypePOCO()
                                               {
                                                   participantTypeDescription = x.participant_description
                                               };
+
+
                     var GoneparticipantTypeList = from x in context.ParticipantTypes
-                                              where x.participant_description.ToLower().Equals(pt.participantTypeDescription.ToLower()) && x.archived_yn
-                                              select new ParticipantTypePOCO()
-                                              {
-                                                  participantTypeDescription = x.participant_description
-                                              };
+                                                  where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && x.archived_yn
+                                                  select new ParticipantTypePOCO()
+                                                  {
+                                                      participantTypeDescription = x.participant_description
+                                                  };
                     if (participantTypeList.Count() > 0) //if so, return an error message
                     {
-                        throw new Exception("The participant type \"" + pt.participantTypeDescription.ToLower() + "\" already exists. Please enter a new participant type.");
+                        throw new Exception("The participant type \"" + participantTypeDescription.ToLower() + "\" already exists. Please enter a new participant type.");
                     }
                     else if (GoneparticipantTypeList.Count() > 0) //if so, return an error message
                     {
-                        throw new Exception("The participant type \"" + pt.participantTypeDescription.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
+                        throw new Exception("The participant type \"" + participantTypeDescription.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
                     }
                     else
                     {
                         ParticipantType pt2 = new ParticipantType();
-                        pt2.participant_description = pt.participantTypeDescription;
-                        pt2.administrator_account_id = 1;
+                        pt2.participant_description = participantTypeDescription;
+                        pt2.administrator_account_id = admin;
                         pt2.date_modified = DateTime.Now;
                         pt2.archived_yn = false;
                         context.ParticipantTypes.Add(pt2);
@@ -158,7 +166,7 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception(e.InnerException.Message);
                 }
 
 
@@ -170,24 +178,30 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="ptID">The ID of the Participant Type to (un)archive</param>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public void ArchiveParticipantType(ParticipantTypePOCO pt)
+        public void ArchiveParticipantType(int participantTypeID, int admin)
         {
             using (var context = new FSOSSContext())
             {
                 try
                 {
                     //throw new Exception("tried to delete ptid="+ participantTypeID);
-                    ParticipantType pt2 = context.ParticipantTypes.Find(pt.participantTypeID);
+                    ParticipantType pt2 = context.ParticipantTypes.Find(participantTypeID);
                     if (pt2.archived_yn)
                     {
                         pt2.archived_yn = false;
+
                     }
                     else
                     {
 
                         pt2.archived_yn = true;
+
                     }
+                    pt2.administrator_account_id = admin;
+                    pt2.date_modified = DateTime.Now;
                     context.Entry(pt2).Property(y => y.archived_yn).IsModified = true;
+                    context.Entry(pt2).Property(y => y.administrator_account_id).IsModified = true;
+                    context.Entry(pt2).Property(y => y.date_modified).IsModified = true;
                     context.SaveChanges();
                 }
                 catch (Exception e)
@@ -204,7 +218,7 @@ namespace FSOSS.System.BLL
         /// <param name="ptDesc"></param>
         /// <param name="ptID"></param>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public void UpdateParticipantType(ParticipantTypePOCO pt)
+        public void UpdateParticipantType(int participantTypeID, string participantTypeDescription, int admin)
         {
             using (var context = new FSOSSContext())
             {
@@ -213,13 +227,14 @@ namespace FSOSS.System.BLL
 
                     //add duplicate check
 
-                    ParticipantType pt2 = context.ParticipantTypes.Find(pt.participantTypeID);
-                    pt2.participant_description = pt.participantTypeDescription;
+                    ParticipantType pt2 = context.ParticipantTypes.Find(participantTypeID);
+                    pt2.participant_description = participantTypeDescription;
                     pt2.date_modified = DateTime.Now;
-                    //add adminid
+                    pt2.administrator_account_id = admin;
 
                     context.Entry(pt2).Property(y => y.participant_description).IsModified = true;
                     context.Entry(pt2).Property(y => y.date_modified).IsModified = true;
+                    context.Entry(pt2).Property(y => y.administrator_account_id).IsModified = true;
 
                     context.SaveChanges();
                 }

@@ -21,9 +21,9 @@
                         <asp:ListItem Text="Participant Types" Value="2" />
                         <asp:ListItem Text="Meals" Value="3" />
                     </asp:DropDownList>
-                    <asp:Button ID="ViewCustomerProfileButton" class="col-sm-1 offset-sm-2 my-2 btn btn-info" runat="server" Text="View" />
-                    <asp:Button ID="RevealButton" runat="server" Text="Show Archived" OnClick="ToggleView" />
+                    <%--<asp:Button ID="ViewCustomerProfileButton" class="col-sm-1 offset-sm-2 my-2 btn btn-info" runat="server" Text="View" />--%>
                 </div>
+                <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" />
             </div>
             <div class="card container">
                 <%--site show section--%>
@@ -123,63 +123,79 @@
                             <tr style="background-color: #E0FFFF; color: #333333;">
 
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
+                                    <asp:Label Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                <td class="pl-3">
                                     <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
 
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                    <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
-
-
-
+                                <td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Delete" ID="DeleteButton" /></td>
 
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
                             <tr style="">
 
+
                                 <td style="display: none">
                                     <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                <td class="pl-3">
+                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" />
+                                </td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" /></td>
+                                    <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                                    <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                                    <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Cancel" ID="CancelButton" />
                                 </td>
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <table runat="server" style="">
+                            <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                                 <tr>
-                                    <td>No data was returned.</td>
+                                    <td>No Participant Types were found.</td>
                                 </tr>
                             </table>
                         </EmptyDataTemplate>
                         <InsertItemTemplate>
                             <tr style="">
 
-                                <td style="display: none">
-                                    <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+
+
+                                <td class="pl-3">
+                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" />
+                                </td>
+                                <td></td>
+
+                                <td></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" /></td>
+                                    <asp:Button runat="server" CommandName="Insert" CssClass="btn btn btn-success mx-3 my-1" Text="Insert" ID="InsertButton" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
-                                    <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
+                                    <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Clear" ID="CancelButton" />
                                 </td>
                             </tr>
                         </InsertItemTemplate>
                         <ItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #FFFFFF; color: #333333;">
 
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
+                                    <asp:Label Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                <td class="pl-3">
                                     <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Delete" ID="DeleteButton" /></td>
+
 
 
 
@@ -189,9 +205,12 @@
                                 <tr runat="server">
                                     <td runat="server">
                                         <table runat="server" id="itemPlaceholderContainer" style="" border="0">
-                                            <tr runat="server" style="">
-                                                <th runat="server">Participant Type</th>
-                                                <th runat="server"></th>
+                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                                <th runat="server" class="col-sm-6 py-2">Participant Type</th>
+                                                <th runat="server" class="col-sm-6 py-2">Modified On</th>
+                                                <th runat="server" class="col-sm-45 py-2">Last Edited By</th>
+                                                <th runat="server" class="col-sm-3 py-2"></th>
+                                                <th runat="server" class="col-sm-3 py-2"></th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
@@ -199,7 +218,7 @@
                                 </tr>
                                 <tr runat="server">
                                     <td runat="server" style="">
-                                        <asp:DataPager runat="server" ID="DataPager1">
+                                        <asp:DataPager runat="server" ID="DataPager2">
                                             <Fields>
                                                 <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                             </Fields>
@@ -209,16 +228,24 @@
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
 
-                                <td style="display: none">
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+
                                 <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
-                                <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                    <asp:Label Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                <td class="pl-3">
+                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" />
                                 </td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn btn-success mx-3 my-1" ID="EditButton" />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Delete" ID="DeleteButton" /></td>
+
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
@@ -227,7 +254,7 @@
                 <%--the meal list--%>
                 <div id="Meals" runat="server">
                     <h1>meal</h1>
-                    <asp:ListView ID="ListView1" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
+                    <asp:ListView ID="ListView1" InsertItemPosition="LastItem" runat="server" DataSourceID="" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="">
                                 <td>
@@ -367,7 +394,7 @@
                 <%--the age range list--%>
                 <div id="AgeRanges" runat="server">
                     <h1>age</h1>
-                    <asp:ListView ID="ListView2" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
+                    <asp:ListView ID="ListView2" InsertItemPosition="LastItem" runat="server" DataSourceID="" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="">
                                 <td>
@@ -502,8 +529,36 @@
                         </SelectedItemTemplate>
                     </asp:ListView>
                 </div>
-                <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="original_{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" DataObjectTypeName="FSOSS.System.Data.POCOs.ParticipantTypePOCO"></asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DataObjectTypeName="FSOSS.System.Data.POCOs.ParticipantTypePOCO" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType"></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType">
+                    <DeleteParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                    </UpdateParameters>
+                </asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType">
+                    <DeleteParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                    </UpdateParameters>
+                </asp:ObjectDataSource>
 
             </div>
         </div>

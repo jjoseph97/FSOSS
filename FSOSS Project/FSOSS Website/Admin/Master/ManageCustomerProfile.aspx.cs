@@ -19,42 +19,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             ParticipantTypes.Visible = false;
             Genders.Visible = true;
         }
-
-        //finding the customer profile choice to display
-        //String selection = CustomerProfileDropDownList.SelectedValue;
-        //selected.InnerText = selection;
-        ////1 is Age Range
-        //if (selection == "1")
-        //{
-        //    AgeRanges.Visible = false;
-        //    Meals.Visible = false;
-        //    ParticipantTypes.Visible = false;
-        //    Genders.Visible = true;
-        //}
-        ////2 is Participant Type
-        //else if (selection == "2")
-        //{
-        //    AgeRanges.Visible = true;
-        //    Meals.Visible = false;
-        //    ParticipantTypes.Visible = false;
-        //    Genders.Visible = false;
-        //}
-        ////3 is Meal
-        //else if (selection == "3")
-        //{
-        //    AgeRanges.Visible = false;
-        //    Meals.Visible = true;
-        //    ParticipantTypes.Visible = false;
-        //    Genders.Visible = false;
-        //}
-        ////0 is Gender, and if the selection is somehow none of those, we still set it to Gender
-        //else
-        //{
-        //    AgeRanges.Visible = false;
-        //    Meals.Visible = false;
-        //    ParticipantTypes.Visible = false;
-        //    Genders.Visible = true;
-        //}
+        
 
     }
 
