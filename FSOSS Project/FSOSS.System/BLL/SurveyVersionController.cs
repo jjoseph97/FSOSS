@@ -24,12 +24,9 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var allSurveyVersions = (from x in context.SurveyVersions
-                                            select x).ToList();
-
                     SurveyVersion surveyVersion = new SurveyVersion();
                     surveyVersion = (from x in context.SurveyVersions
-                                     where x.start_date == allSurveyVersions.Where(endDate => endDate.end_date.Equals(null))
+                                     where x.start_date == context.SurveyVersions.Where(endDate => endDate.end_date.Equals(null))
                                                                             .Max(latestDate => latestDate.start_date)
                                      select x).FirstOrDefault();
 
@@ -39,32 +36,7 @@ namespace FSOSS.System.BLL
                 {
                     throw new Exception(e.Message);
                 } 
-            }
-               
-        }
-
-        public int GetLatestSurveyId()
-        {
-            using (var context = new FSOSSContext())
-            {
-                try
-                {
-                    var allSurveyVersions = (from x in context.SurveyVersions
-                                             select x).ToList();
-
-                    var surveyVersion = (from x in context.SurveyVersions
-                                     where x.start_date == allSurveyVersions.Where(endDate => endDate.end_date.Equals(null))
-                                                                            .Max(latestDate => latestDate.start_date)
-                                     select x.survey_version_id).FirstOrDefault();
-
-                    return surveyVersion;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
-            }
-
+            }      
         }
     }
 }
