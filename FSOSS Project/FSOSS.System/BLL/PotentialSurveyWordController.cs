@@ -123,9 +123,7 @@ namespace FSOSS.System.BLL
                             context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
                             context.SaveChanges();
 
-                            // NEED WAY TO HANDLE SUCCESS MESSAGES FROM LISTVIEW
-
-                            //throw new Exception("The survey word has been updated to \"" + surveyWord + "\".");
+                            message = "The survey word has been updated to \"" + surveyWord + "\".";
                         }
                         else
                         {
@@ -134,7 +132,7 @@ namespace FSOSS.System.BLL
                     }
                     catch (Exception e)
                     {
-                        message = e.Message;
+                        throw new Exception(e.Message);
                     }
                 }
                 return message;

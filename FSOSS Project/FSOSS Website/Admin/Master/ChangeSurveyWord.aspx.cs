@@ -16,7 +16,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 {
     /// <summary>
     /// When the page loads, the SuccessAlert and ErrorAlert labels (messages for the user to see) are turned off.
-    /// The DataSoruceID on the SurveyWordListView is set to the ActiveSurveyWordODS Object Data Source.
+    /// The DataSourceID on the SurveyWordListView is set to the ActiveSurveyWordODS Object Data Source.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -24,7 +24,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         if (!this.IsPostBack)
         {
-            // This is the initial load of the page...
+            // This is the initial load of the page.
             if (SearchWordTextBox.Text == "")
             {
                 SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
@@ -33,7 +33,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This method is required to use the MessageUserControl on the ListView in order to handle thrown exceptions from the controller.
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -46,12 +47,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         }
         else // else show the ReturnValue(success message) as a string to display to the user 
         {
-            MessageUserControl.ShowInfo(e.ReturnValue.ToString());
+            string successMessage = e.ReturnValue.ToString();
+            MessageUserControl.TryRun(() =>
+            {
+            }, "Success", successMessage);
         }
     }
 
     /// <summary>
-    /// 
+    /// This button on click method is for when the user clicks the "Search" button. Results in the ListView are returned matching the search string.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -60,10 +64,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         string searchWord = SearchWordTextBox.Text.Trim();
         MessageUserControl.TryRun(() =>
         {
-            if (SearchWordTextBox.Text.Trim() == "")
+            if (searchWord == "")
             {
-                ErrorAlert.Visible = true;
-                MessageUserControl.ShowInfo("Warning", "Search cannot be empty.");
+                throw new Exception("Search cannot be empty.");
             }
             else
             {
@@ -76,25 +79,18 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 {
                     SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
                 }
-
                 SurveyWordListView.DataBind();
-                if (searchWord == "")
-                {
-                    SuccessAlert.Visible = false;
-                }
-                else
-                {
-                    SearchWordTextBox.ReadOnly = true;
-                    SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
-                    SearchWordButton.Visible = false;
-                    ClearSearchButton.Visible = true;
-                }
+
+                SearchWordTextBox.ReadOnly = true;
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
+                SearchWordButton.Visible = false;
+                ClearSearchButton.Visible = true;
             }
         }, "Success", "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.");
     }
 
     /// <summary>
-    /// 
+    /// This button on click method is to clear the search and return to a ListView with full results for the user.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -109,15 +105,17 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         {
             SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
         }
+
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
+        SearchWordTextBox.BackColor = System.Drawing.Color.White;
         SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
     }
 
     /// <summary>
-    /// 
+    /// This button on click method is for adding a new survey word to the database.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -136,7 +134,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// 
+    /// This button on click method is for showing the current archived survey words that are in the database.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -152,7 +150,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// 
+    /// This button on click method is for showing the current active survey words that are in the database.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -160,6 +158,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
         SurveyWordListView.DataBind();
+
         // this is to clear the search when switching from active to archived words
         ClearSearchButton_Click(null, EventArgs.Empty);
         ShowActiveButton.Visible = false;
@@ -204,7 +203,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// 
+    /// This method is for responding to certain button commands that are returned from the ListView in order to assign the ListView to the correct ODS.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -278,22 +277,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             else
             {
                 SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
-            }
-            Label surveyWord = (Label)e.Item.FindControl("surveyWordLabel");
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
-                Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
-                if (disabledBtn.Visible == true)
-                {
-                    //ErrorAlert.Visible = true;
-                    //ErrorAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been disabled.";
-                }
-                else if (enabledBtn.Visible == true)
-                {
-                    SuccessAlert.Visible = true;
-                    SuccessAlert.Text = "The survey word \"" + surveyWord.Text + "\" has been enabled.";
-                }
             }
         }
     }
