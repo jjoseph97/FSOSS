@@ -61,7 +61,7 @@
         <asp:Button CssClass="btn col-md-2 my-5 mr-5" ID="BackButton" runat="server" Text="Back" OnClick="BackButton_Click"/>
 
         <%--Submit Survey Button--%>
-        <asp:Button CssClass="btn col-md-2 my-5 offset-sm-2" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" BackColor="#A6EBF7"/>
+        <asp:Button CssClass="btn col-md-2 my-5 offset-md-2" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" BackColor="#A6EBF7"/>
     </div>
 </asp:Content>
 
