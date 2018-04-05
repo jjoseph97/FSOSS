@@ -134,7 +134,7 @@
             </div>
             <br />
             <div class="col-md-12">
-                <asp:DropDownList ID="Q2Response" CssClass="col-md-4 form-control" runat="server" 
+                <asp:DropDownList ID="Q2Response" CssClass="col-md-4 form-control my-2" runat="server" 
                     DataSourceID="Q2ResponseObjectDataSource" DataTextField="Text" DataValueField="Value" AppendDataBoundItems="true">
                     <asp:ListItem Value="" Text="Select..."/>
                 </asp:DropDownList>
@@ -169,7 +169,7 @@
             </div>
             <br />
             <div class="col-md-12 form-inline">
-                <asp:DropDownList ID="Q4Response" CssClass="col-md-4 form-control" runat="server" 
+                <asp:DropDownList ID="Q4Response" CssClass="col-md-4 form-control my-2" runat="server" 
                     DataSourceID="Q4ResponseObjectDataSource" DataTextField="Text" DataValueField="Value" AppendDataBoundItems="true">
                     <asp:ListItem Value="" Text="Select..."/>
                 </asp:DropDownList>
@@ -189,7 +189,7 @@
             </div>
             <br />
             <div class="col-md-12">
-                <asp:TextBox ID="Question5" Height="100px" TextMode="MultiLine" runat="server" CssClass="col-md-4 form-control"></asp:TextBox><br />
+                <asp:TextBox ID="Question5" Height="100px" TextMode="MultiLine" runat="server" CssClass="col-md-4 form-control my-2"></asp:TextBox><br />
             </div>
         </div>
 
