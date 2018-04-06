@@ -11,27 +11,37 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(Request.QueryString["id"]))
-            Response.Redirect("~/Admin/Master/EditUserFilter");
+        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
+        {
+            Context.Response.StatusCode = 403;
+        }
         else
         {
-            SuccessMessage.Visible = false;
-            FailedMessage.Visible = false;
-            int id = int.Parse(Request.QueryString["id"].ToString());
-
-            if (!IsPostBack)
+            if (String.IsNullOrEmpty(Request.QueryString["id"]))
+                Response.Redirect("~/Admin/Master/EditUserFilter");
+            else
             {
-                // Populate user information fields
-                AdministratorAccountController sysmgr = new AdministratorAccountController();
-                AdministratorAccountPOCO info = sysmgr.GetAdministratorInformation(id);
+                SuccessMessage.Visible = false;
+                FailedMessage.Visible = false;
+                int id = int.Parse(Request.QueryString["id"].ToString());
 
-                UserNameTextBox.Text = info.username;
-                FirstNameTextBox.Text = info.firstName;
-                LastNameTextBox.Text = info.lastName;
-                SecurityLevelDDL.SelectedValue = info.roleId.ToString();
-                DeactivateCheckBox.Checked = info.archivedBool;
+                if (!IsPostBack)
+                {
+                    // Populate user information fields
+                    AdministratorAccountController sysmgr = new AdministratorAccountController();
+                    AdministratorAccountPOCO info = sysmgr.GetAdministratorInformation(id);
+
+                    UserNameTextBox.Text = info.username;
+                    FirstNameTextBox.Text = info.firstName;
+                    LastNameTextBox.Text = info.lastName;
+                    SecurityLevelDDL.SelectedValue = info.roleId.ToString();
+                    DeactivateCheckBox.Checked = info.archivedBool;
+                }
             }
-
         }
     }
     // TODO: Rameses - clean up this method

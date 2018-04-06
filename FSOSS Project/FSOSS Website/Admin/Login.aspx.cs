@@ -52,10 +52,11 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
                     if (isValid)
                     {
                         // if valid store userID, username, and securityID in sessions
+                        AdministratorRoleController roleController = new AdministratorRoleController();
                         Session["username"] = username.ToLower();
                         int userID = sysmgr.GetUserID(username);
                         Session["userID"] = userID;
-                        Session["securityID"] = sysmgr.GetSecurityID(userID);
+                        Session["securityID"] = roleController.GetAdministratorRole(userID).security_role_id;
 
                         Response.Redirect("~/Admin");
                     }

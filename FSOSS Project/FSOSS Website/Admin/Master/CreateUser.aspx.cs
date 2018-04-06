@@ -14,7 +14,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if (Session["securityID"].ToString() != "2") // Return HTTP Code 403
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
         }
