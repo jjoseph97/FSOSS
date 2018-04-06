@@ -8,14 +8,8 @@
     <div class="panel-body">
         <asp:Label ID="MessageLabel" runat="server" />
         <asp:Repeater ID="MessageDetailsRepeater" runat="server" EnableViewState="false">
-            <headertemplate>
-                <ul>
-            </headertemplate>
-            <footertemplate>
-                </ul>
-            </footertemplate>
             <itemtemplate>
-                <li><%# Eval("Error") %></li>
+                <asp:Label runat="server"><%# Eval("Error") %></asp:Label>
             </itemtemplate>
         </asp:Repeater>
     </div>

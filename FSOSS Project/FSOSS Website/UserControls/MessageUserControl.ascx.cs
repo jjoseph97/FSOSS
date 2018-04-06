@@ -10,7 +10,6 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
 {
     #region String Constants
     private const string STR_TITLE_GeneralErrors = "Processing Error";
-    private const string STR_TEXT_GeneralErrors = "Unable to process your submission due to the following reason(s).";
     private const string STR_TITLE_ValidationErrors = "Validation Errors";
     private const string STR_TEXT_ValidationErrors = "Validation errors encountered with your submission.";
     private const string STR_TITLE_UsageInstructions = "Usage Instructions";
@@ -156,7 +155,7 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
         else
         {
             dynamic[] details = new dynamic[] { new { Error = root.Message } };
-            ShowExceptions(details, STR_TEXT_GeneralErrors, STR_TITLE_GeneralErrors, STR_TITLE_ICON_warning, STR_PANEL_danger);
+            ShowExceptions(details, null, STR_TITLE_GeneralErrors, STR_TITLE_ICON_warning, STR_PANEL_danger);
         }
     }
     /// <summary>
