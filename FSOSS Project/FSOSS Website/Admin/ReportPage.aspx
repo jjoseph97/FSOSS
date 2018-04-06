@@ -24,7 +24,7 @@
         $.ajax({
             type: "POST",
             url: "ReportPage.aspx/GetDataViaPOCO",
-            data: '{}',
+            data: "{}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
