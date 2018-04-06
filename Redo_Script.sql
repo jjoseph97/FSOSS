@@ -320,7 +320,7 @@ VALUES (1, 'circle', Now());
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('mystery',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('enough',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('concept',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('existence',1);
+INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('riddle',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('coin',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('glad',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('asked',1);
