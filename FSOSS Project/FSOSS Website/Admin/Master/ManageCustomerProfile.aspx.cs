@@ -9,9 +9,15 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 {
     static public bool seeArchive = false;
     
-
+    /// <summary>
+    /// when the page loads, if it is the first time loading the page, the gender list is set to viewable, and 
+    ///only active options are visible.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
+        //set the viewable lists, and set to view active options
         if (!IsPostBack)
         {
             seeArchive = false;
@@ -24,7 +30,12 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 
     }
 
-
+    /// <summary>
+    /// when the view active/archive is clicked, this changes the chosen ods for all listviews to the other ods.
+    /// if the archived ods is being used, then the active ods is set, and vice-versa.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ToggleView(object sender, EventArgs e)
     {
         if (seeArchive)
@@ -45,6 +56,12 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// changes the viewable listview for the newly selected category.
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void CustomerProfileDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
         //finding the customer profile choice to display
@@ -81,6 +98,31 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             Meals.Visible = false;
             ParticipantTypes.Visible = false;
             Genders.Visible = true;
+        }
+    }
+
+
+
+
+    /// <summary>
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        if (e.ReturnValue == null)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        else // else show the ReturnValue(success message) as a string to display to the user 
+        {
+            string successMessage = e.ReturnValue.ToString();
+            MessageUserControl.TryRun(() =>
+            {
+            }, "Success", successMessage);
         }
     }
 }

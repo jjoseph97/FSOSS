@@ -121,7 +121,7 @@ namespace FSOSS.System.BLL
         /// <param name="ptDesc">The new Participant Type Description</param>
         /// <param name="adminID"> The ID of the Administrator Account that created the new Participant Type</param>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddParticipantType(string participantTypeDescription, int admin)
+        public string AddParticipantType(string participantTypeDescription, int admin)
         {
             using (var context = new FSOSSContext())
             {
@@ -161,6 +161,7 @@ namespace FSOSS.System.BLL
                         pt2.archived_yn = false;
                         context.ParticipantTypes.Add(pt2);
                         context.SaveChanges();
+                        return "Participant Type "+participantTypeDescription+" added.";
                     }
 
                 }
@@ -178,8 +179,9 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="ptID">The ID of the Participant Type to (un)archive</param>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public void ArchiveParticipantType(int participantTypeID, int admin)
+        public string ArchiveParticipantType(int participantTypeID, int admin)
         {
+            string result="";
             using (var context = new FSOSSContext())
             {
                 try
@@ -189,12 +191,13 @@ namespace FSOSS.System.BLL
                     if (pt2.archived_yn)
                     {
                         pt2.archived_yn = false;
-
+                        result = "enabled.";
                     }
                     else
                     {
 
                         pt2.archived_yn = true;
+                        result = "disabled";
 
                     }
                     pt2.administrator_account_id = admin;
@@ -203,6 +206,8 @@ namespace FSOSS.System.BLL
                     context.Entry(pt2).Property(y => y.administrator_account_id).IsModified = true;
                     context.Entry(pt2).Property(y => y.date_modified).IsModified = true;
                     context.SaveChanges();
+
+                    return "Participant Type succesfully "+result;
                 }
                 catch (Exception e)
                 {
@@ -218,7 +223,7 @@ namespace FSOSS.System.BLL
         /// <param name="ptDesc"></param>
         /// <param name="ptID"></param>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public void UpdateParticipantType(int participantTypeID, string participantTypeDescription, int admin)
+        public string UpdateParticipantType(int participantTypeID, string participantTypeDescription, int admin)
         {
             using (var context = new FSOSSContext())
             {
@@ -237,6 +242,8 @@ namespace FSOSS.System.BLL
                     context.Entry(pt2).Property(y => y.administrator_account_id).IsModified = true;
 
                     context.SaveChanges();
+
+                    return "Participant Type successfully updated.";
                 }
                 catch (Exception e)
                 {
