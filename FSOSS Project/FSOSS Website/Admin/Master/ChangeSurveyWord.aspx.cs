@@ -15,8 +15,7 @@ using FSOSS.System.Data.Entity;
 public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads, the SuccessAlert and ErrorAlert labels (messages for the user to see) are turned off.
-    /// The DataSourceID on the SurveyWordListView is set to the ActiveSurveyWordODS Object Data Source.
+    /// When the page loads, the DataSourceID on the SurveyWordListView is set to the ActiveSurveyWordODS Object Data Source.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
