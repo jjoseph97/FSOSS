@@ -25,32 +25,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         if(filter == null)
         {
           Response.Redirect("~/Admin/ViewReportFilter.aspx");
-        }
-        else
-        {
-            ReportController sysmgr = new ReportController();
-            finalReport = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
-            Page.ClientScript.RegisterStartupScript(Page.GetType(), "PieGraphFunction", "DrawChart", true);
-        }
-        
-        
+        }                       
     }
 
-    protected override void OnLoad(EventArgs e)
+    [WebMethod]
+    public List<ResponsePOCO> GetDataListViaPOCO()
     {
-        base.OnLoad(e);
+
+        FilterPOCO filter = (FilterPOCO)(Session["filter"]);
         ReportController sysmgr = new ReportController();
-        finalReport = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
-        // Test if theres any data
-        if (finalReport != null)
+        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
+        List<ResponsePOCO> responses = new List<ResponsePOCO>();
+        for (int counter = 0; counter <= report.QuestionTwoValueCount.Count; counter++)
         {
-           
-          
+            ResponsePOCO response = new ResponsePOCO
+            {
+                Text = report.QuestionTwoValueList[counter],
+                Value = report.QuestionTwoValueCount[counter].ToString()
+            };
+            responses.Add(response);
+            response = null;
         }
-        else
-        {
-            Alert.Visible = true;
-            Alert.Text = "Theres no value";
-        }
+        return responses;
     }
 }

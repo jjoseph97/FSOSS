@@ -2,314 +2,77 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <div class="row">
         <div class="col-sm-12">
             <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
     </div>
-     <div class="container">
-          <asp:Label ID="Q1a" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1aCount" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1b" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1bCount" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1c" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1cCount" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1d" runat="server" Text=""></asp:Label>
-          <asp:Label ID="Q1dCount" runat="server" Text=""></asp:Label>
-         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#questionOne">Question One</a></li>
-            <li><a data-toggle="tab" href="#questionTwo">Question Two</a></li>
-            <li><a data-toggle="tab" href="#questionThree">Question Three</a></li>
-            <li><a data-toggle="tab" href="#questionFour">Question Four</a></li>
-
-        </ul>
-    
-        <div id="questionOne" class="tab-pane fade in active">
-
-        <div id="questionOneAChart" style="height: 370px; width: 100%;"></div>
-        
-        <div id="questionOneBChart" style="height: 370px; width: 100%;"></div>
-         
-        <div id="questionOneCChart" style="height: 370px; width: 100%;"></div>
-     
-        <div id="questionOneDChart" style="height: 370px; width: 100%"></div>
-        
-        <div id="questionOneEChart" style="height: 370px; width: 100%;"></div>
-              </div>
-
-          <div id="questionTwo" class="tab-pane fade">
-
-        <div id="questionTwoChart" style="height: 370px; width: 100%;"></div>
-              </div>
-
-
-         
-          <div id="questionThree" class="tab-pane fade">
-        <div id="questionThreeChart" style="height: 370px; width: 100%;"></div>
-              </div>
-             
-
-         <div id="questionFour" class="tab-pane fade">
-        <div id="questionFourChart" style="height: 370px; width: 100%;"></div>
-             </div>
-
+    <canvas id="chartSampleQuestion1" height="400" width="400"></canvas>
     
 <script>
-window.onload = function () {
 
-    var questionOneOption = new CanvasJS.Chart("questionOneAChart",
-    {
-	title: {
-        text: "<% = finalReport.QuestionTwoValueList[0] %>"
-	},
-	subtitles: [{
-		text: "For "
-	}],
-	animationEnabled: true,
-	data: [{
-		type: "pie",
-		startAngle: 40,
-		toolTipContent: "<b>{label}</b>: {y}%",
-		showInLegend: "true",
-		legendText: "{label}",
-		indexLabelFontSize: 16,
-		indexLabel: "{label} - {y}%",
-		dataPoints: [
-			{ y: 45.00, label: "Very good" },
-			{ y: 22.00, label: "Good" },
-			{ y: 15.37, label: "Fair" },
-            { y: 5.63, label: "Poor" },
-            { y: 3.00, label: "Don't Know/No Opinion" },
-            
-			
-		]
-	}]
-        });
-    questionOneOption.render();
+    window.onload = function () {
+        var ctx = document.getElementById('chartSampleQuestion1').getContext('2d');
+        $.ajax({
+            type: "POST",
+            url: "ReportPage.aspx/GetDataViaPOCO",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var aData = response.d;
+                var labelArray = [];
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    var labelsObj = {};
+                    var valueObj = {};
+                    labelsObj.Text = val.Text;
+                    obj.Value = val.Value;
+                    labelArray.push(labelsObj);
+                    valueArray.push(valueObj)
+                });
+                //var el = document.createElement('canvas');
+                //$("#dvChart")[0].appendChild(el);
+                //// Fix for IE 8.00
+                //if ($.browser.msie && $.browser.version == "8.0") {
+                //    G_vmlCanvasManager.initElement(el);
+                //}
+                ////var ctx = el.getContext('2d');
 
-    
-
-
-
-
-    var ChartB = new CanvasJS.Chart("questionOneBChart", 
-        {
-        title: {
-            text: "1B. The taste and flavor of your meals"
-        },
-        subtitles: [{
-            text: "For "
-        }],
-        animationEnabled: true,
-        data: [{
-            type: "pie",
-            startAngle: 40,
-            toolTipContent: "<b>{label}</b>: {y}%",
-            showInLegend: "true",
-            legendText: "{label}",
-            indexLabelFontSize: 16,
-            indexLabel: "{label} - {y}%",
-            dataPoints: [
-                { y: 30.00, label: "Very good" },
-                { y: 37.00, label: "Good" },
-                { y: 15.37, label: "Fair" },
-                { y: 5.63, label: "Poor" },
-                { y: 3.00, label: "Don't Know/No Opinion" },
-
-            ]
-        }]
-    });
-    ChartB.render();
-
-
-    var ChartC = new CanvasJS.Chart("questionOneCChart",
-        {
-            title: {
-                text: "1C. The temperature of your hot food"
+                var pieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            label: 'Question 1',
+                            data: valueArray,
+                            backgroundColor: 'rgba(75,192,192,0.4)',
+                            borderColor: 'rgba(75,192,192,1)',
+                        }]
+                    },
+                })
             },
-            subtitles: [{
-                text: "For "
-            }],
-            animationEnabled: true,
-            data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: 20.00, label: "Very good" },
-                    { y: 50.00, label: "Good" },
-                    { y: 12.37, label: "Fair" },
-                    { y: 5.63, label: "Poor" },
-                    { y: 4.00, label: "Don't Know/No Opinion" },
-
-                ]
-            }]
-        });
-    ChartC.render();
-
-
-
-    var ChartD = new CanvasJS.Chart("questionOneDChart",
-        {
-            title: {
-                text: "1D. The overall appearance of your meal"
+            failure: function (response) {
+                alert(response.d);
             },
-            subtitles: [{
-                text: "For "
-            }],
-            animationEnabled: true,
-            data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: 50.70, label: "Very good" },
-                    { y: 20.00, label: "Good" },
-                    { y: 13.50, label: "Fair" },
-                    { y: 13.50, label: "Poor" },
-                    { y: 2.30, label: "Don't Know/No Opinion" },
 
-                ]
-            }]
+            error: function (response) {
+                alert(response.d);
+            }
+
         });
-    ChartD.render();
-
-    var ChartE = new CanvasJS.Chart("questionOneEChart",
-        {
-            title: {
-                text: "1E. The helpfulness of the staff who deliver your meals"
-            },
-            subtitles: [{
-                text: "For "
-            }],
-            animationEnabled: true,
-            data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: 70.25, label: "Very good" },
-                    { y: 10.25, label: "Good" },
-                    { y: 14.5, label: "Fair" },
-                    { y: 3.40, label: "Poor" },
-                    { y: 1.60, label: "Don't Know/No Opinion" },
-
-                ]
-            }]
-        });
-    ChartE.render();
 
 
-
-
-    var chartTwo = new CanvasJS.Chart("questionTwoChart",
-        {
-            title: {
-                text: "2. How satisfied are you with the portion sizes of your meals?"
-            },
-            subtitles: [{
-                text: "For "
-            }],
-            animationEnabled: true,
-            data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: 20.00, label: "Portion sizes are too small" },
-                    { y: 60.00, label: "Portion sizes are just right" },
-                    { y: 40.00, label: "Portion sizes are too large" },
-                 
-
-                ]
-            }]
-        });
-    chartTwo.render();
-
-
-
-    var chartThree = new CanvasJS.Chart("questionThreeChart",
-        {
-            title: {
-                text: "3 .Do your meals take into account your specific diet requirements?"
-            },
-            subtitles: [{
-                text: "For "
-            }],
-            animationEnabled: true,
-            data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: 90.00, label: "Always" },
-                    { y: 7.50, label: "Usually" },
-                    { y: 1.63, label: "Occasionally" },
-                    { y: 0.62, label: "Never" },
-                    { y: 0.25, label: "I do not have any specific dietary requirements" },
-
-
-                ]
-            }]
-        });
-    chartThree.render();
-
-    var chartFour = new CanvasJS.Chart("questionFourChart",
-        {
-            title: {
-                text: "4. Overall, how would you rate your meal experience?"
-            },
-            subtitles: [{
-                text: "For "
-            }],
-            animationEnabled: true,
-            data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    { y: 35.00, label: "Very Good" },
-                    { y: 35.00, label: "Good" },
-                    { y: 11.11, label: "Fair" },
-                    { y: 10.50, label: "Poor" },
-                    { y: 8.40, label: "Very Poor" },
-
-
-                ]
-            }]
-        });
-    chartFour.render();
-
- }
-
-
+    }
 </script>
-             </div>
          
 </asp:Content>
 
