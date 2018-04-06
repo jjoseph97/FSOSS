@@ -31,7 +31,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     protected void SearchUnitButton_Click(object sender, EventArgs e)
     {
-       
+        UnitsListView.Visible = true;
+        DisplayArchivedButton.Visible = true;
 
     }
 
@@ -40,6 +41,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     protected void DisplayActiveButton_Click(object sender, EventArgs e)
     {
 
+        UnitsListView.Visible = false;
+        //ArchivedUnitsListView.Visible = true;
+        //ArchivedUnitsListView.DataBind();
 
         DisplayActiveButton.Visible = false;
         DisplayArchivedButton.Visible = true;
@@ -48,9 +52,32 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     protected void DisplayArchivedButton_Click(object sender, EventArgs e)
     {
+        UnitsListView.Visible = true;
+        //ArchivedUnitsListView.Visible = false;
+        UnitsListView.DataBind();
         DisplayActiveButton.Visible = true;
         DisplayArchivedButton.Visible = false;
     }
 
-   
+    /// <summary>
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        if (e.ReturnValue == null)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        else // else show the ReturnValue(success message) as a string to display to the user 
+        {
+            string successMessage = e.ReturnValue.ToString();
+            MessageUserControl.TryRun(() =>
+            {
+            }, "Success", successMessage);
+        }
+    }
 }
