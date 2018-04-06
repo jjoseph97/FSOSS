@@ -41,7 +41,7 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
                 ContactRequestsContent.Visible = true;
                 PhoneTextBox.Text = Session["PhoneTextBox"].ToString();
                 RoomTextBox.Text = Session["RoomTextBox"].ToString();
-            }   
+            }
             else
                 ContactRequestsContent.Visible = false;
         }
@@ -80,8 +80,8 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         string contactRoomNumber;
         string contactPhoneNumber;
         string q1AResponse = Session["Q1A"].ToString();
-        string q1BResponse = Session["Q1B"].ToString(); 
-        string q1CResponse = Session["Q1C"].ToString(); 
+        string q1BResponse = Session["Q1B"].ToString();
+        string q1CResponse = Session["Q1C"].ToString();
         string q1DResponse = Session["Q1D"].ToString();
         string q1EResponse = Session["Q1E"].ToString();
         string q2Response = Session["Q2"].ToString();
@@ -109,10 +109,23 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         }
         else
         {
-            contactRoomNumber = RoomTextBox.Text;
-            contactPhoneNumber = PhoneTextBox.Text;
+            if (PhoneTextBox.Text == "")
+            {
+                contactPhoneNumber = "N/A";
+            }
+            else
+            {
+                contactPhoneNumber = PhoneTextBox.Text;
+            }
+            if (RoomTextBox.Text == "")
+            {
+                contactRoomNumber = "N/A";
+            }
+            else
+            {
+                contactRoomNumber = RoomTextBox.Text;
+            }
         }
-
         SubmittedSurveyController sysmgr = new SubmittedSurveyController();
         //sysmgr.SubmitSurvey(1, 1, 1, 1, 1, 1, true, "1234", "7801231234", "", "Good", "Good", "Good", "Good", "Good", "Good", "Good", "Good");
         sysmgr.SubmitSurvey(surveyVersionId, unitId, mealId, participantTypeId, ageRangeId, genderId, contactRequest, contactRoomNumber, contactPhoneNumber, q1AResponse, q1BResponse, q1CResponse, q1DResponse, q1EResponse, q2Response, q3Response, q4Response, q5Response);
@@ -121,6 +134,7 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         Session.Abandon();
 
         Response.Redirect("~/Thankyou");
+
     }
 
     protected void BackButton_Click(object sender, EventArgs e)
@@ -133,7 +147,7 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
         Session["ContactRequestsCheckBox"] = ContactRequestsCheckBox.Checked;
         Session["PhoneTextBox"] = PhoneTextBox.Text;
         Session["RoomTextBox"] = RoomTextBox.Text;
-    
+
         Response.Redirect("~/TakeSurvey");
     }
 }
