@@ -11,6 +11,7 @@ using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
 #endregion
 namespace FSOSS.System.BLL
 {
@@ -61,9 +62,6 @@ namespace FSOSS.System.BLL
                                    {
                                        unitID = y.unit_id,
                                        unitNumber = y.unit_number,
-                                       dateModified = y.date_modified,
-
-
                                    };
 
                     return unitList.ToList();
@@ -117,7 +115,7 @@ namespace FSOSS.System.BLL
         /// <returns>returns confirmation from the Site</returns>
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddUnit(Unit newunitNumber, string unitNumber)
+        public void AddUnit(string newunitNumber, int employee)
         {
             using (var context = new FSOSSContext())
             {
@@ -126,22 +124,24 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var UnitList = from x in context.Units
-                                   where x.unit_number.ToUpper().Equals(unitNumber)
-                                   select new Unit()
+                                   where x.unit_number.ToUpper().Equals(newunitNumber.ToUpper())
+                                   select new UnitsPOCO()
                                    {
-                                       unit_number = x.unit_number
+                                       unitNumber= x.unit_number
                                    };
 
                     if (UnitList.Count() > 0)
                     {
-                        message = "The Unit number \"" + unitNumber + "\" already exists. Please Add a new unit number .";
+                        message = "The Unit number \"" + newunitNumber + "\" already exists. Please Add a new unit number .";
                     }
 
                     else
                     {
                         Unit newUnit = new Unit();
-                        // to be set once the admin security is working
-                        newUnit.administrator_account_id = 1;
+                       
+                        newUnit.administrator_account_id = employee;
+                        newUnit.unit_number = newunitNumber.Trim();
+                        newUnit.archived_yn = false;
                         newUnit.date_modified = DateTime.Now;
                         context.Units.Add(newUnit);
                         context.SaveChanges();
@@ -163,12 +163,9 @@ namespace FSOSS.System.BLL
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public void SwitchUnitSatus(Unit unit)
-        {
-            SwitchUnitSatus(unit.unit_id);
-        }
+      
 
-        public string SwitchUnitSatus(int unitID)
+        public string SwitchUnitSatus(UnitsPOCO unitStatus)
         {
             using (var context = new FSOSSContext())
             {
@@ -177,34 +174,30 @@ namespace FSOSS.System.BLL
                 {
                     // Check if the unit exists
                     var unitInHospital = (from x in context.Units
-                                          where x.unit_id == unitID
+                                          where x.unit_id == unitStatus.unitID
                                           select new UnitsPOCO()
                                           {
                                               unitID = x.unit_id,
                                               unitNumber = x.unit_number,
-                                              dateModified = x.date_modified
-
+                                              dateModified = x.date_modified,
+                                              archived_yn= x.archived_yn
                                           }).FirstOrDefault();
-
-                    if (unitInHospital != null)
-                    {
-                        Unit unit = context.Units.Find(unitID);
+                    Unit unit = context.Units.Find(unitStatus.unitID);
+ 
                         if (unit.archived_yn == false)
                         {
                             unit.archived_yn = true;
+                            unit.date_modified = DateTime.Now;
                         }
                         else if (unit.archived_yn == true)
                         {
                             unit.archived_yn = false;
-                        }
+                            unit.date_modified = DateTime.Now;
+                    }
 
-                        context.Entry(unit).Property(y => y.archived_yn).IsModified = true;
+                        context.Entry(unit).State = EntityState.Modified;
                         context.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new Exception("Unable to archive selected Unit.");
-                    }
+                   
                 }
                 catch (Exception e)
                 {
@@ -221,42 +214,41 @@ namespace FSOSS.System.BLL
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateUnit(int unitID, string unitNumber, DateTime dateModified)
+        public string UpdateUnit(UnitsPOCO updateUnit)
         {
             using (var context = new FSOSSContext())
             {
-                unitNumber = unitNumber.ToUpper();
+               
                 Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z]*$");
                 string message = "";
-                bool inUse = false;
+                
                 try
                 {
-                    var unitList = (from x in context.Units
-                                    select new UnitsPOCO()
-                                    {
-                                        unitID = x.unit_id,
-                                        unitNumber = x.unit_number,
-                                        dateModified = x.date_modified
-                                    }).ToList();
+                    
 
-
-                    foreach (UnitsPOCO item in unitList)
+                    if (validUnit.IsMatch(updateUnit.unitNumber))
                     {
-                        if (item.unitID == unitID && item.dateModified == DateTime.Now)
+
+                        var unitExists = (from x in context.Units
+                                      where x.unit_id == updateUnit.unitID
+                                      select x);
+
+
+                        if (unitExists==null)
                         {
-                            inUse = true;
-                            break;
+                            throw new Exception("This unit is not open.");
                         }
-                    }
 
-                    if (validUnit.IsMatch(unitNumber) && inUse == false)
-                    {
-                        var unitToUpdate = context.Units.Find(unitID);
-                        unitToUpdate.archived_yn = true;
-                        unitToUpdate.date_modified = DateTime.Now;
-                        context.Entry(unitToUpdate).Property(y => y.archived_yn).IsModified = true;
-                        context.Entry(unitToUpdate).Property(y => y.date_modified).IsModified = true;
-                        context.SaveChanges();
+
+                        else
+                        {
+                            var unitToUpdate = context.Units.Find(updateUnit.unitID);
+                            unitToUpdate.unit_number = updateUnit.unitNumber.Trim();
+                            unitToUpdate.date_modified = DateTime.Now;
+                            context.Entry(updateUnit).State = EntityState.Modified;
+                            
+                            context.SaveChanges();
+                        }
                     }
                     else
                     {
