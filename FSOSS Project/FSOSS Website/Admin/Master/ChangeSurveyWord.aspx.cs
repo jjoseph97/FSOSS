@@ -121,11 +121,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         string newWord = AddWordTextBox.Text.Trim();
+        int userID = Convert.ToInt32(Session["userID"]);
+
         MessageUserControl.TryRun(() =>
         {
             PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
 
-            sysmgr.AddWord(newWord);
+            sysmgr.AddWord(newWord, userID);
             SurveyWordListView.DataBind();
             AddWordTextBox.Text = "";
           

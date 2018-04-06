@@ -23,7 +23,7 @@ namespace FSOSS.System.BLL
         /// <param name="newWord"></param>
         /// <returns>returns confirmation from the list</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddWord(string newWord)
+        public void AddWord(string newWord, int userID)
         {
             using (var context = new FSOSSContext())
             {
@@ -58,8 +58,7 @@ namespace FSOSS.System.BLL
                     else
                     {
                         PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                        // ~!~ administrator_account_id is to be set once the user security is active
-                        potentialSurveyWord.administrator_account_id = 1;
+                        potentialSurveyWord.administrator_account_id = userID;
                         potentialSurveyWord.survey_access_word = newWord.Trim();
                         potentialSurveyWord.date_modified = DateTime.Now;
                         context.PotentialSurveyWords.Add(potentialSurveyWord);
@@ -76,7 +75,7 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWordID"></param>
         /// <returns>returns confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateWord(string surveyWord, int surveyWordID)
+        public string UpdateWord(string surveyWord, int surveyWordID, int userID)
         {
             using (var context = new FSOSSContext())
             {
@@ -117,8 +116,7 @@ namespace FSOSS.System.BLL
                         if (validWord.IsMatch(surveyWord) && inUse == false)
                         {
                             var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                            // ~!~ administrator_account_id is to be set once the user security is active
-                            wordToUpdate.administrator_account_id = 1;
+                            wordToUpdate.administrator_account_id = userID;
                             wordToUpdate.survey_access_word = surveyWord.Trim();
                             wordToUpdate.date_modified = DateTime.Now;
                             context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
@@ -148,22 +146,24 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWordID"></param>
         /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string ChangeAvailability(int surveyWordID)
+        public string ChangeAvailability(int surveyWordID, int userID)
         {
             using (var context = new FSOSSContext())
             {
                 string message = "";
                 try
                 {
-                    // Check if the current word is in use
+                    // Get the current date.
+                    DateTime dateTime = DateTime.Today;
+                    // Check if the current word is in use by checking todays date against the words in the database
                     var surveyWordAttachToHospital = (from x in context.SurveyWords
-                                                      where x.survey_word_id == surveyWordID
+                                                      where x.date_used.Day == dateTime.Day
                                                       select new SurveyWordPOCO()
                                                       {
                                                             siteID = x.site_id,
                                                             surveyWordID = x.survey_word_id,
                                                             dateUsed = x.date_used
-                                                         
+                                                  
                                                       }).FirstOrDefault();
 
                     if (surveyWordAttachToHospital == null)
@@ -176,8 +176,7 @@ namespace FSOSS.System.BLL
                         {
                             potentialSurveyWord.archived_yn = true;
                         }
-                        // ~!~ administrator_account_id is to be set once the user security is active
-                        potentialSurveyWord.administrator_account_id = 1;
+                        potentialSurveyWord.administrator_account_id = userID;
                         potentialSurveyWord.date_modified = DateTime.Now;
                         context.Entry(potentialSurveyWord).Property(y => y.administrator_account_id).IsModified = true;
                         context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
