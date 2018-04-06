@@ -21,32 +21,38 @@ public partial class Pages_AdministratorPages_ContactListPage : System.Web.UI.Pa
         //message.Text = HttpContext.Current.Request.RawUrl.StartsWith("/Pages/AdministratorPages").ToString();
 
 
-        if (Session["securityID"] == null || Session["securityID"].ToString() == "") // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-
-        if (!Page.IsPostBack)
+        else if ((int)Session["securityID"] != 1 && (int)Session["securityID"] != 2) // Return HTTP Code 403
         {
-
-            //retrieve the site id passed from the main screen
-            SubmittedSurveyController ssc = new SubmittedSurveyController();
-            SiteDDL.DataBind();
-            string broughtSite = Request.QueryString["sid"];
-
-            //add check to ensure the passed siteid is a vaild site id
-
-            //set the selection to the given site id
-            SiteDDL.SelectedValue = broughtSite;
-
-            string value = SiteDDL.SelectedValue;
-            //update label to display the desired value
-            if (value != null)
+            Context.Response.StatusCode = 403;
+        }
+        else
+        {
+            if (!Page.IsPostBack)
             {
-                //PendingRequestNumberLabel.Text = value;
-                int siteID = Convert.ToInt32(value);
-                int contactCount = ssc.GetContactRequestTotal(siteID);
-                ContactCountLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
+
+                //retrieve the site id passed from the main screen
+                SubmittedSurveyController ssc = new SubmittedSurveyController();
+                SiteDDL.DataBind();
+                string broughtSite = Request.QueryString["sid"];
+
+                //add check to ensure the passed siteid is a vaild site id
+
+                //set the selection to the given site id
+                SiteDDL.SelectedValue = broughtSite;
+
+                string value = SiteDDL.SelectedValue;
+                //update label to display the desired value
+                if (value != null)
+                {
+                    //PendingRequestNumberLabel.Text = value;
+                    int siteID = Convert.ToInt32(value);
+                    int contactCount = ssc.GetContactRequestTotal(siteID);
+                    ContactCountLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
+                }
             }
         }
 
