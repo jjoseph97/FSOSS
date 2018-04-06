@@ -115,16 +115,16 @@ namespace FSOSS.System.BLL
         /// <returns>returns confirmation from the Site</returns>
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddUnit(string newunitNumber, int employee)
+        public string AddUnit(UnitsPOCO newUnitNumber)
         {
             using (var context = new FSOSSContext())
             {
-
+                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z]*$"); 
                 string message = "";
                 try
                 {
                     var UnitList = from x in context.Units
-                                   where x.unit_number.ToUpper().Equals(newunitNumber.ToUpper())
+                                   where x.unit_number.ToUpper().Equals(newUnitNumber.unitNumber.ToUpper())
                                    select new UnitsPOCO()
                                    {
                                        unitNumber= x.unit_number
@@ -132,15 +132,16 @@ namespace FSOSS.System.BLL
 
                     if (UnitList.Count() > 0)
                     {
-                        message = "The Unit number \"" + newunitNumber + "\" already exists. Please Add a new unit number .";
+                        message = "The Unit number \"" + newUnitNumber + "\" already exists. Please Add a new unit number .";
                     }
 
+                  
                     else
                     {
                         Unit newUnit = new Unit();
-                       
-                        newUnit.administrator_account_id = employee;
-                        newUnit.unit_number = newunitNumber.Trim();
+
+                        newUnit.administrator_account_id = 1;
+                        newUnit.unit_number = newUnitNumber.unitNumber.ToUpper();
                         newUnit.archived_yn = false;
                         newUnit.date_modified = DateTime.Now;
                         context.Units.Add(newUnit);
@@ -152,14 +153,14 @@ namespace FSOSS.System.BLL
                 {
                     message = "Oops, something went wrong. Check " + e.Message;
                 }
-
+                return message;
             }
         }//eom
 
         /// <summary>
         /// Method use to disable or enable Unit from the list that is use in a site
         /// </summary>
-        /// <param Entity="Unit"></param>
+        /// <param Class UnitsPOCO="unitStatus"></param>
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
@@ -210,11 +211,11 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to Update unit from the list that is use in the Site
         /// </summary>
-        /// <param name="unit_id" name="string unitNumber"></param>
+        /// <param name="unitID" name="string unitNumber"></param>
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateUnit(UnitsPOCO updateUnit)
+        public string UpdateUnit(UnitsPOCO unitUpdate)
         {
             using (var context = new FSOSSContext())
             {
@@ -226,12 +227,12 @@ namespace FSOSS.System.BLL
                 {
                     
 
-                    if (validUnit.IsMatch(updateUnit.unitNumber))
+                    if (validUnit.IsMatch(unitUpdate.unitNumber))
                     {
 
                         var unitExists = (from x in context.Units
-                                      where x.unit_id == updateUnit.unitID
-                                      select x);
+                                          where x.unit_id.Equals(unitUpdate.unitID)
+                                          select x);
 
 
                         if (unitExists==null)
@@ -242,10 +243,11 @@ namespace FSOSS.System.BLL
 
                         else
                         {
-                            var unitToUpdate = context.Units.Find(updateUnit.unitID);
-                            unitToUpdate.unit_number = updateUnit.unitNumber.Trim();
+                            
+                            Unit unitToUpdate = context.Units.Find(unitUpdate.unitID);
+                            unitToUpdate.unit_number = unitUpdate.unitNumber;
                             unitToUpdate.date_modified = DateTime.Now;
-                            context.Entry(updateUnit).State = EntityState.Modified;
+                            context.Entry(unitToUpdate).State = EntityState.Modified;
                             
                             context.SaveChanges();
                         }
