@@ -16,12 +16,11 @@ using System.Web.Services;
 public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
 {
 
-    public FilterPOCO filter = new FilterPOCO();
-    public FinalReportPOCO finalReport = new FinalReportPOCO();
+   
     protected void Page_Load(object sender, EventArgs e)
     {
         Alert.Visible = false;
-        filter = (FilterPOCO)(Session["filter"]);
+        FilterPOCO filter = (FilterPOCO)(Session["filter"]);
         if(filter == null)
         {
           Response.Redirect("~/Admin/ViewReportFilter.aspx");
@@ -29,10 +28,10 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     }
 
     [WebMethod]
-    public List<ResponsePOCO> GetDataListViaPOCO()
+    public static List<ResponsePOCO> GetDataListViaPOCO()
     {
 
-        FilterPOCO filter = (FilterPOCO)(Session["filter"]);
+        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
         ReportController sysmgr = new ReportController();
         FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ResponsePOCO> responses = new List<ResponsePOCO>();
