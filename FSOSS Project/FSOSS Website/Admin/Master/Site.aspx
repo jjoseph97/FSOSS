@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Site.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_Site" %>
 
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <div class="row">
         <div class="col-sm-12">
@@ -8,8 +10,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
+            <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
         </div>
     </div>
         <div class="col-sm-12">
@@ -202,9 +203,9 @@
 
 
        <%-- ODS SECTION--%>
-            <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="DisableSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO">
+            <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="DisableSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
         </asp:ObjectDataSource>
-            <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="DisableSite" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO">
+            <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="DisableSite" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
             </asp:ObjectDataSource>
 
 </asp:Content>

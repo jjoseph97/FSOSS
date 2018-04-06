@@ -11,6 +11,7 @@ namespace FSOSS.System.Data.POCOs
         public int genderID { get; set; }
         public string genderDescription { get; set; }
         public DateTime dateModified { get; set; }
+        public string username { get; set; }
         public int administratorAccountId { get; set; }
         public bool archivedYn { get; set; }
     }

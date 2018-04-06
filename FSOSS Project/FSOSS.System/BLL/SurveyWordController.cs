@@ -145,11 +145,12 @@ namespace FSOSS.System.BLL
 
                 //get all the active words
                 List<PotentialSurveyWord> potentialSurveyWordList = (from x in context.PotentialSurveyWords
-                                                                     where x.archived_yn == false
-                                                                     select x).ToList();
+                                          where x.archived_yn == false
+                                          select x).ToList();
                 //get all the surveywords
                 List<SurveyWord> surveyWordList = (from x in context.SurveyWords
                                                    select x).ToList();
+                // If the count of survey words being used
                 if (surveyWordList.Count >= potentialSurveyWordList.Count)
                 {
                     SurveyWord wordToBeRemoved = (from x in context.SurveyWords

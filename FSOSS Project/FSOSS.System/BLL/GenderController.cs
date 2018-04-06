@@ -59,7 +59,11 @@ namespace FSOSS.System.BLL
                                        select new GenderPOCO()
                                        {
                                            genderID = x.gender_id,
-                                           genderDescription = x.gender_description
+                                           genderDescription = x.gender_description,
+                                           administratorAccountId = x.administrator_account_id,
+                                           username = x.AdministratorAccount.username,
+                                           dateModified = x.date_modified,
+                                           archivedYn = x.archived_yn
                                        };
 
                     return genderList.ToList();

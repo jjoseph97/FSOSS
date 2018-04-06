@@ -12,10 +12,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Alert.Visible = false;
-        ErrorAlert.Visible = false;
-
-
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -24,8 +20,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         {
             Context.Response.StatusCode = 403;
         }
-
-
 
         if (!IsPostBack)
         {
@@ -36,6 +30,22 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             ShowActiveButton.Visible = false;
             ShowArchivedButton.Visible = true;
 
+        }
+    }
+
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        if (e.ReturnValue == null)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        else // else show the ReturnValue(success message) as a string to display to the user 
+        {
+            string successMessage = e.ReturnValue.ToString();
+            MessageUserControl.TryRun(() =>
+            {
+            }, "Success", successMessage);
         }
     }
 
@@ -68,11 +78,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         ShowArchivedButton.Visible = true;
     }
 
-    protected void SearchSite_Click(object sender, EventArgs e)
-    {
-
-    }
-
     protected void AddSite_Click(object sender, EventArgs e)
     {
         SiteController sysmgr = new SiteController();
@@ -80,51 +85,16 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         UnitController unControl = new UnitController();
 
         string siteName = AddSiteTextBox.Text.Trim();
-        Regex validWord = new Regex("^[a-zA-Z ]+$");
         int employee = int.Parse(Session["userid"].ToString());
 
-        if (siteName == "" || siteName == null)
+        MessageUserControl.TryRun(() =>
         {
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: Please enter a site name. Field cannot be empty.";
-        }
-        else if (!validWord.IsMatch(siteName))
-        {
-            ErrorAlert.Visible = true;
-            ErrorAlert.Text = "Error: Please enter only alphabetical letters.";
-        }
-        else
-        {
-            Alert.Visible = true;
-            Alert.Text = sysmgr.AddSite(siteName, employee); // adds the site to the database
-
+            sysmgr.AddSite(siteName, employee); // adds the site to the database
             swControl.NewSite_NewWord(siteName); // assigns a survey word to the site
             unControl.NewSite_NewUnit(siteName, employee); // adds the Not Applicable Unit option to the site
 
             ListView1.DataBind();
             AddSiteTextBox.Text = "";
-        }
+        }, "Success", "Successfully added the new site: \"" + siteName + "\"");
     }
-
-    //protected void UpdateButton_Click(object sender,  EventArgs e)
-    //{
-    //    int siteid = int.Parse((ListView1.EditItem.FindControl("SiteIdLabel") as Label).Text);
-    //    string siteName = ((ListView1.EditItem.FindControl("siteNameTextBox") as TextBox).Text);
-    //    int employee = int.Parse(Session["userid"].ToString());
-
-    //    SiteController sysmgr = new SiteController();
-    //    sysmgr.UpdateSite(siteid, siteName, employee);
-    //    ListView1.DataBind();
-        
-        
-    //}
-
-    //protected void Delete_Click(object sender, EventArgs e)
-    //{
-    //    int siteid = int.Parse((ListView1.EditItem.FindControl("SiteIdLabel") as Label).Text);
-
-    //    SiteController sysmgr = new SiteController();
-    //    sysmgr.DisableSite(siteid);
-    //    ListView1.DataBind();
-    //}
 }

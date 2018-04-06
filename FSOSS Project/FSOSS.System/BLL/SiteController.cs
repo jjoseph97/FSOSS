@@ -17,9 +17,8 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class SiteController
     {
-
-
-        //obtain list of all not closed sites
+        
+        //This method obtains a list of all the sites that are not closed.
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<SitePOCO> GetSiteList()
         {
@@ -45,7 +44,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //get closed sites
+        //This method obtains a list of all the sites that are closed.
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<SitePOCO> GetArchived()
         {
@@ -66,19 +65,16 @@ namespace FSOSS.System.BLL
                                            };
 
                     return archived.ToList();
-
-
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception("Something went wrong. " + e.Message);
                 }
 
             }
         }
-
-
-
+        
+        // This method gets the siteID via site name.
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public int GetSiteID(string sitename)
         {
@@ -98,6 +94,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        // This method gets the site name via a siteID.
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string DisplaySiteName (int siteID)
         {
@@ -110,27 +107,42 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //This method adds a new site to the database.
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddSite(string newSiteName, int employee) // add a new site to the database.
+        public string AddSite(string newSiteName, int employee)
         {
             using (var context = new FSOSSContext())
             {
                 string message = "";
+                Regex validWord = new Regex("^[a-zA-Z ]+$");
 
                 try
                 {
-                    //check to see if the site already exists in the database
+                    //Get a list of site names that are the same as the new site name.This will be to to check if it already exists in the database.
                     var siteList = from x in context.Sites
                                    where x.site_name.ToLower().Equals(newSiteName.ToLower())
                                    select new SitePOCO()
                                    {
                                        siteName = x.site_name
                                    };
-                    if (siteList.Count() > 0) //if so, return an error message
+                    //CHECK THE CHARACTER LIMIT
+                    //If the user did not enter anything or if the new site name is null, display an error.
+                    if (newSiteName == "" || newSiteName == null)
                     {
-                        message = "The site \"" + newSiteName.ToLower() + "\" already exists. Please enter a new site.";
+                        throw new Exception("Error: Please enter a site name. Field cannot be empty.");
                     }
-                    else //otherwise enter new site into the database
+                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
+                    else if (!validWord.IsMatch(newSiteName))
+                    {
+                        throw new Exception("Error: Please enter only alphabetical letters.");
+                    }
+                    //If the site already exists in the database, then display an error messsage.
+                    else if (siteList.Count() > 0) 
+                    {
+                       throw new Exception("The site \"" + newSiteName.ToLower() + "\" already exists. Please enter a new site.");
+                    }
+                    //If everything checks out, then proceed to add the new site name to the database.
+                    else 
                     {
                         Site newSite = new Site();
                         newSite.administrator_account_id = employee;
@@ -140,23 +152,20 @@ namespace FSOSS.System.BLL
                         context.Sites.Add(newSite);
                         context.SaveChanges();
 
-                        message = "Successfully added the new site: \"" + newSiteName + "\"";
-
                     }
                 }
                 catch (Exception e)
                 {
-                    message = "Oops, something went wrong. Check " + e.Message;
+                    throw new Exception(e.Message);
                 }
                 return message;
             } //end of using var context
                 
         } // end of Addsite
 
-
-
+        //This method updates the site name of a site that exists in the database.
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateSite(SitePOCO update) //currently for active sites only
+        public string UpdateSite(SitePOCO update) 
         {
             using (var context = new FSOSSContext())
             {
@@ -164,15 +173,17 @@ namespace FSOSS.System.BLL
                 string message = ""; 
                 try
                 {
-
+                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
                     if (valid.IsMatch(update.siteName))
                     {
+                        //Select all the information about a site, where the siteID matches the siteID passed in from the POCO.
                         var exists = (from x in context.Sites
                                      where x.site_id == update.siteID
                                       select x);
+                        //If exists does not return anything, throw an exception.
                         if (exists == null)
                         {
-                            throw new Exception("This hospital is not open.");
+                            throw new Exception("This site does not exist.");
                         }
                         else
                         {

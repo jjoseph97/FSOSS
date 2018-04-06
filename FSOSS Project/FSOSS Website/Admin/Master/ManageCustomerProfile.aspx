@@ -36,31 +36,41 @@
                 <%--The gender list--%>
                 <%--<Label id="selected" runat="server"></Label>--%>
                 <div id="Genders" runat="server">
-                    <asp:ListView ID="DemographicListview" runat="server" DataSourceID="SiteODS">
+                    <asp:ObjectDataSource ID="GenderODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController"></asp:ObjectDataSource>
+                
+                    <asp:ListView ID="GenderListView" runat="server" DataSourceID="GenderODS">
                         <AlternatingItemTemplate>
-                            <tr style="background-color: #E0FFFF; color: #333333;">
-                                <td class="pl-3">
-                                    <asp:Label Text='Male' runat="server" ID="siteNameLabel" /></td>
+                            <tr style="background-color: #FFFFFF; color: #284775;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                    <asp:Label Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
-                                <tr style="background-color: #E0FFFF; color: #333333;">
-                                    <td class="pl-3">
-                                        <asp:Label Text='Female' runat="server" ID="Label1" /></td>
-                                    <td>
-                                        <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="Button1" /></td>
-                                    <td>
-                                        <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="Button2" /></td>
-                                    <tr style="background-color: #E0FFFF; color: #333333;">
-                                        <td class="pl-3">
-                                            <asp:Label Text='Other' runat="server" ID="Label4" /></td>
-                                        <td>
-                                            <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="Button3" /></td>
-                                        <td>
-                                            <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="Button4" /></td>
-                                    </tr>
+                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <td>
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
                         </AlternatingItemTemplate>
+                        <EditItemTemplate>
+                            <tr style="background-color: #999999;">
+                                <td>
+                                    <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
+                                    <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                                </td>
+                                <td style="display: none">
+                                    <asp:TextBox Text='<%# Bind("genderID") %>' runat="server" ID="genderIDTextBox" /></td>
+                                <td>
+                                    <asp:TextBox Text='<%# Bind("genderDescription") %>' runat="server" ID="genderDescriptionTextBox" /></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                            </tr>
+                        </EditItemTemplate>
                         <EmptyDataTemplate>
                             <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                                 <tr>
@@ -69,57 +79,62 @@
                             </table>
                         </EmptyDataTemplate>
                         <ItemTemplate>
-                            <tr style="background-color: #FFFFFF; color: #333333;">
-                                <td class="pl-3">
-                                    <asp:Label Text='Male' runat="server" ID="siteNameLabel" /></td>
+                            <tr style="background-color: #E0FFFF; color: #333333;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                    <asp:Label Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="DeleteButton" /></td>
-                                <tr style="background-color: #FFFFFF; color: #333333;">
-                                    <td class="pl-3">
-                                        <asp:Label Text='Female' runat="server" ID="Label1" /></td>
-                                    <td>
-                                        <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="Button1" /></td>
-                                    <td>
-                                        <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="Button2" /></td>
-                                    <tr style="background-color: #FFFFFF; color: #333333;">
-                                        <td class="pl-3">
-                                            <asp:Label Text='Other' runat="server" ID="Label4" /></td>
-                                        <td>
-                                            <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="Button3" /></td>
-                                        <td>
-                                            <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Delete" ID="Button4" /></td>
-                                    </tr>
+                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <td>
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
                         </ItemTemplate>
                         <LayoutTemplate>
-                            <table runat="server" style="width: 100%;" class="mt-2 mb-2">
+                            <table runat="server">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
                                             <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                                 <th runat="server" class="col-sm-6 py-2">Gender</th>
-                                                <th runat="server" class="col-sm-3 py-2">Edit</th>
-                                                <th runat="server" class="col-sm-3 py-2">Delete</th>
-
+                                                <th runat="server" class="col-sm-4 py-2">Date Modified</th>
+                                                <th runat="server" class="col-sm-4 py-2">Modified by</th>
+                                                <th runat="server" class="col-sm-2 py-2">Edit </th>
+                                                <th runat="server" class="col-sm-2 py-2">Archive</th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
                                     </td>
                                 </tr>
+                                <tr runat="server">
+                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF"></td>
+                                </tr>
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
                             <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
-                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                                    <asp:Label Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName='<%# seeArchive==false?"Disable":"Enable" %>' Text="Delete" ID="DeleteButton" /></td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <td>
+                                  <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
+                
                 </div>
 
                 <%-- The participant type list--%>
@@ -571,7 +586,7 @@
 
             </div>
         </div>
-        <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
+        
     </div>
 </asp:Content>
 
