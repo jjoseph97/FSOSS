@@ -16,33 +16,34 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class ParticipantController
     {
+        //COmmented out April 6th. If nothing bad occurs of this, remove outright.
         /// <summary>
-        /// Method use to get one participant type object
+        /// Method use to get one participant type object. 
         /// </summary>
         /// <param name="participantID"></param>
         /// <returns>One participant object</returns>
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public ParticipantType GetParticipant(int participantID)
-        {
+        //[DataObjectMethod(DataObjectMethodType.Select, false)]
+        //public ParticipantType GetParticipant(int participantID)
+        //{
 
-            using (var context = new FSOSSContext())
-            {
-                try
-                {
-                    ParticipantType participant = new ParticipantType();
-                    participant = (from x in context.ParticipantTypes
-                                   where x.participant_type_id == participantID
-                                   select x).FirstOrDefault();
+        //    using (var context = new FSOSSContext())
+        //    {
+        //        try
+        //        {
+        //            ParticipantType participant = new ParticipantType();
+        //            participant = (from x in context.ParticipantTypes
+        //                           where x.participant_type_id == participantID
+        //                           select x).FirstOrDefault();
 
-                    return participant;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
+        //            return participant;
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            throw new Exception(e.Message);
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary>
         /// Method use to get the list of participant types
@@ -128,7 +129,14 @@ namespace FSOSS.System.BLL
 
                 try
                 {
-
+                    if (admin == 0)
+                    {
+                        throw new Exception("Can't let you do that. You're not logged in.");
+                    }
+                    if (participantTypeDescription=="" || participantTypeDescription==null)
+                    {
+                        throw new Exception("Please enter a Participant Type Description");
+                    }
                     //add check for pre-use
                     var participantTypeList = from x in context.ParticipantTypes
                                               where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && !x.archived_yn
@@ -152,6 +160,7 @@ namespace FSOSS.System.BLL
                     {
                         throw new Exception("The participant type \"" + participantTypeDescription.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
                     }
+
                     else
                     {
                         ParticipantType pt2 = new ParticipantType();
@@ -161,13 +170,13 @@ namespace FSOSS.System.BLL
                         pt2.archived_yn = false;
                         context.ParticipantTypes.Add(pt2);
                         context.SaveChanges();
-                        return "Participant Type "+participantTypeDescription+" added.";
+                        return "Participant Type " + participantTypeDescription + " added.";
                     }
 
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.InnerException.Message);
+                    throw new Exception(e.Message);
                 }
 
 
@@ -181,11 +190,16 @@ namespace FSOSS.System.BLL
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
         public string ArchiveParticipantType(int participantTypeID, int admin)
         {
-            string result="";
+            string result = "";
             using (var context = new FSOSSContext())
             {
                 try
                 {
+                    if (admin == 0)
+                    {
+                        throw new Exception("Can't let you do that. You're not logged in.");
+                    }
+
                     //throw new Exception("tried to delete ptid="+ participantTypeID);
                     ParticipantType pt2 = context.ParticipantTypes.Find(participantTypeID);
                     if (pt2.archived_yn)
@@ -207,7 +221,7 @@ namespace FSOSS.System.BLL
                     context.Entry(pt2).Property(y => y.date_modified).IsModified = true;
                     context.SaveChanges();
 
-                    return "Participant Type succesfully "+result;
+                    return "Participant Type succesfully " + result;
                 }
                 catch (Exception e)
                 {
@@ -229,21 +243,54 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-
+                    if (admin == 0)
+                    {
+                        throw new Exception("Can't let you do that. You're not logged in.");
+                    }
+                    if (participantTypeDescription == "" || participantTypeDescription == null)
+                    {
+                        throw new Exception("Please enter a Participant Type Description");
+                    }
                     //add duplicate check
+                    var participantTypeList = from x in context.ParticipantTypes
+                                              where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && !x.archived_yn
+                                              select new ParticipantTypePOCO()
+                                              {
+                                                  participantTypeDescription = x.participant_description
+                                              };
 
-                    ParticipantType pt2 = context.ParticipantTypes.Find(participantTypeID);
-                    pt2.participant_description = participantTypeDescription;
-                    pt2.date_modified = DateTime.Now;
-                    pt2.administrator_account_id = admin;
 
-                    context.Entry(pt2).Property(y => y.participant_description).IsModified = true;
-                    context.Entry(pt2).Property(y => y.date_modified).IsModified = true;
-                    context.Entry(pt2).Property(y => y.administrator_account_id).IsModified = true;
+                    var GoneparticipantTypeList = from x in context.ParticipantTypes
+                                                  where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && x.archived_yn
+                                                  select new ParticipantTypePOCO()
+                                                  {
+                                                      participantTypeDescription = x.participant_description
+                                                  };
+                    if (participantTypeList.Count() > 0) //if so, return an error message
+                    {
+                        throw new Exception("The participant type \"" + participantTypeDescription.ToLower() + "\" already exists. Please enter a new participant type.");
+                    }
+                    else if (GoneparticipantTypeList.Count() > 0) //if so, return an error message
+                    {
+                        throw new Exception("The participant type \"" + participantTypeDescription.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
+                    }
 
-                    context.SaveChanges();
+                    else
+                    {
 
-                    return "Participant Type successfully updated.";
+                        ParticipantType pt2 = context.ParticipantTypes.Find(participantTypeID);
+                        pt2.participant_description = participantTypeDescription;
+                        pt2.date_modified = DateTime.Now;
+                        pt2.administrator_account_id = admin;
+
+                        context.Entry(pt2).Property(y => y.participant_description).IsModified = true;
+                        context.Entry(pt2).Property(y => y.date_modified).IsModified = true;
+                        context.Entry(pt2).Property(y => y.administrator_account_id).IsModified = true;
+
+                        context.SaveChanges();
+
+                        return "Participant Type successfully updated.";
+                    }
                 }
                 catch (Exception e)
                 {

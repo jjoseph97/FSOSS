@@ -151,8 +151,11 @@
                                 <td style="display: none">
                                     <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
                                 <td class="pl-3">
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="100" />
+                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="25" />
                                 </td>
+                                <td></td>
+
+                                <td></td>
                                 <td>
                                     <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton" /></td>
                                 <td>
@@ -173,7 +176,7 @@
 
 
                                 <td class="pl-3">
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="100" />
+                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="25" />
                                 </td>
                                 <td></td>
 
@@ -538,31 +541,31 @@
                 <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                     </DeleteParameters>
                     <InsertParameters>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
                     </DeleteParameters>
                     <InsertParameters>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
 
