@@ -58,7 +58,7 @@ namespace FSOSS.System.BLL
                     else
                     {
                         PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                        // to be set once the admin security is working
+                        // ~!~ administrator_account_id is to be set once the user security is active
                         potentialSurveyWord.administrator_account_id = 1;
                         potentialSurveyWord.survey_access_word = newWord.Trim();
                         potentialSurveyWord.date_modified = DateTime.Now;
@@ -117,8 +117,11 @@ namespace FSOSS.System.BLL
                         if (validWord.IsMatch(surveyWord) && inUse == false)
                         {
                             var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
+                            // ~!~ administrator_account_id is to be set once the user security is active
+                            wordToUpdate.administrator_account_id = 1;
                             wordToUpdate.survey_access_word = surveyWord.Trim();
                             wordToUpdate.date_modified = DateTime.Now;
+                            context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
                             context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
                             context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
                             context.SaveChanges();
@@ -173,7 +176,12 @@ namespace FSOSS.System.BLL
                         {
                             potentialSurveyWord.archived_yn = true;
                         }
+                        // ~!~ administrator_account_id is to be set once the user security is active
+                        potentialSurveyWord.administrator_account_id = 1;
+                        potentialSurveyWord.date_modified = DateTime.Now;
+                        context.Entry(potentialSurveyWord).Property(y => y.administrator_account_id).IsModified = true;
                         context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
+                        context.Entry(potentialSurveyWord).Property(y => y.date_modified).IsModified = true;
                         context.SaveChanges();
                         message = "Successfully changed availability on the survey word.";
                     }
