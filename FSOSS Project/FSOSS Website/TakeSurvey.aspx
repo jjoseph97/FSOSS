@@ -8,6 +8,12 @@
     </div>
 
     <div class="row">
+        <div class="col-md-12 text-right">
+            <asp:Label ID="SiteName" runat="server"></asp:Label>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-12">
             <asp:Label class="col-md-3 my-2" runat="server"><span class="card container h5 alert alert-danger">All fields with * are required.</span></asp:Label>
         </div>

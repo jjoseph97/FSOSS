@@ -17,6 +17,10 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            //Display the site name 
+            SiteController site = new SiteController();
+            SiteName.Text = "Hospital: <span style=font-weight:bold;>" + site.DisplaySiteName(Convert.ToInt32(Session["siteID"])) + "</span>";
+
             QuestionTextController sysmgr = new QuestionTextController();
             Q1.Text = "1. " + sysmgr.GetQuestion1();
             Q1A.Text = sysmgr.GetQuestion1A();
