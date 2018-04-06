@@ -60,6 +60,13 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
             FailedMessage.Visible = true;
             FailedMessage.Text = "You cannot Deactivate the webmaster account.";
         }
+        else if (UserNameTextBox.Text.Equals("webmaster") && SecurityLevelDDL.SelectedValue.Equals("1"))
+        {
+            SuccessMessage.Visible = false;
+            FailedMessage.Visible = true;
+            FailedMessage.Text = "You cannot set the webmaster account as Standard Administrator.";
+            SecurityLevelDDL.SelectedValue = "2";
+        }
         else
         {
             if (String.IsNullOrEmpty(ConfirmPasswordTextBox.Text))
