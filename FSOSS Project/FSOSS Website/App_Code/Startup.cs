@@ -14,7 +14,11 @@ namespace FSOSS_Website
             JobStorage.Current = new PostgreSqlStorage("User ID = postgres; Password = Password1; Host = localhost; Port = 5432; Database = FSOSSDatabase; Pooling = false;");
             app.UseHangfireDashboard();
             SurveyWordController sysmgr = new SurveyWordController();
-            RecurringJob.AddOrUpdate(() => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Daily);
+            RecurringJob.AddOrUpdate("GenerateSurveyWord", () => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Daily);
+            if (string.IsNullOrEmpty(sysmgr.GetSurveyWord(1)))
+            {
+                RecurringJob.Trigger("GenerateSurveyWord");
+            }
             // Check if recurring works. Take note this will occur every minute!
             //RecurringJob.AddOrUpdate(() => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Minutely);
         }
