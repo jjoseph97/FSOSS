@@ -27,46 +27,53 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                newWord = newWord.ToLower();
-                Regex validWord = new Regex("^[a-zA-Z]+$");
-
-                var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                where x.survey_access_word.ToLower().Equals(newWord.ToLower())
-                                                select new PotentialSurveyWordPOCO()
-                                                {
-                                                    surveyWord = x.survey_access_word
-                                                };
-
-                if (potentialSurveyWordList.Count() > 0)
+                try
                 {
-                    throw new Exception("The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.");
-                }
-                else
-                {
-                    if (newWord == "" || newWord == null)
+                    newWord = newWord.ToLower();
+                    Regex validWord = new Regex("^[a-zA-Z]+$");
+
+                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  where x.survey_access_word.ToLower().Equals(newWord.ToLower())
+                                                  select new PotentialSurveyWordPOCO()
+                                                  {
+                                                      surveyWord = x.survey_access_word
+                                                  };
+
+                    if (potentialSurveyWordList.Count() > 0)
                     {
-                        throw new Exception("Error: You must type in a word to add. Field cannot be empty.");
-                    }
-                    else if (!validWord.IsMatch(newWord))
-                    {
-                        throw new Exception("Error: Please enter only alphabetical letters and no spaces.");
-                    }
-                    else if (newWord.Length < 4 || newWord.Length > 8)
-                    {
-                        throw new Exception("Error: New survey word must be between 4 to 8 characters characters in length.");
+                        throw new Exception("The word \"" + newWord.ToLower() + "\" already exists. Please choose another word.");
                     }
                     else
                     {
-                        PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                        potentialSurveyWord.administrator_account_id = userID;
-                        potentialSurveyWord.survey_access_word = newWord.Trim();
-                        potentialSurveyWord.date_modified = DateTime.Now;
-                        context.PotentialSurveyWords.Add(potentialSurveyWord);
-                        context.SaveChanges();
+                        if (newWord == "" || newWord == null)
+                        {
+                            throw new Exception("You must type in a word to add. Field cannot be empty.");
+                        }
+                        else if (!validWord.IsMatch(newWord))
+                        {
+                            throw new Exception("Please enter only alphabetical letters and no spaces.");
+                        }
+                        else if (newWord.Length < 4 || newWord.Length > 8)
+                        {
+                            throw new Exception("New survey word must be between 4 to 8 characters characters in length.");
+                        }
+                        else
+                        {
+                            PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
+                            potentialSurveyWord.administrator_account_id = userID;
+                            potentialSurveyWord.survey_access_word = newWord.Trim();
+                            potentialSurveyWord.date_modified = DateTime.Now;
+                            context.PotentialSurveyWords.Add(potentialSurveyWord);
+                            context.SaveChanges();
+                        }
                     }
                 }
-            } 
-        } 
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
 
         /// <summary>
         /// Method used to update a survey word from the list
@@ -79,62 +86,86 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                surveyWord = surveyWord.ToLower().Trim();
-                Regex validWord = new Regex("^[a-zA-Z]+$");
                 string message = "";
-                if (surveyWord.Length < 4 || surveyWord.Length > 8)
+                try
                 {
-                    throw new Exception("Error: Updated survey word must be between 4 to 8 characters in length.");
-                }
-                else if (!validWord.IsMatch(surveyWord))
-                {
-                    throw new Exception("Error: Please enter only alphabetical letters and no spaces.");
-                }
-                else
-                {
-                    bool inUse = false;
-                    try
+                    if (surveyWord == "" || surveyWord == null)
                     {
-                        var surveyWordList = (from x in context.SurveyWords
-                                              select new SurveyWordPOCO
-                                              {
-                                                  siteID = x.site_id,
-                                                  dateUsed = x.date_used,
-                                                  surveyWordID = x.survey_word_id
-                                              }).ToList();
+                        throw new Exception("Edit field cannot be blank. You must enter a word between 4 to 8 characters in length.");
+                    }
+                    else
+                    {
+                        surveyWord = surveyWord.ToLower().Trim();
+                    }
+                    Regex validWord = new Regex("^[a-zA-Z]+$");
 
+                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  where x.survey_access_word.ToLower().Equals(surveyWord.ToLower())
+                                                  select new PotentialSurveyWordPOCO()
+                                                  {
+                                                      surveyWord = x.survey_access_word
+                                                  };
 
-                        foreach (SurveyWordPOCO item in surveyWordList)
+                    if (potentialSurveyWordList.Count() > 0)
+                    {
+                        throw new Exception("The word \"" + surveyWord.ToLower() + "\" already exists. Please choose another word.");
+                    }
+                    else
+                    {
+                        if (surveyWord.Length < 4 || surveyWord.Length > 8)
                         {
-                            if (item.surveyWordID == surveyWordID && item.dateUsed == DateTime.Now)
-                            {
-                                inUse = true;
-                                break;
-                            }
+                            throw new Exception("Updated survey word must be between 4 to 8 characters in length.");
                         }
-
-                        if (validWord.IsMatch(surveyWord) && inUse == false)
+                        else if (!validWord.IsMatch(surveyWord))
                         {
-                            var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                            wordToUpdate.administrator_account_id = userID;
-                            wordToUpdate.survey_access_word = surveyWord.Trim();
-                            wordToUpdate.date_modified = DateTime.Now;
-                            context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
-                            context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
-                            context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
-                            context.SaveChanges();
-
-                            message = "The survey word has been updated to \"" + surveyWord + "\".";
+                            throw new Exception("Please enter only alphabetical letters and no spaces.");
                         }
                         else
                         {
-                            throw new Exception("Word is currently use. Update failed.");
+                            bool inUse = false;
+
+                            var surveyWordList = (from x in context.SurveyWords
+                                                  select new SurveyWordPOCO
+                                                  {
+                                                      siteID = x.site_id,
+                                                      dateUsed = x.date_used,
+                                                      surveyWordID = x.survey_word_id
+                                                  }).ToList();
+
+
+                            foreach (SurveyWordPOCO item in surveyWordList)
+                            {
+                                if (item.surveyWordID == surveyWordID && item.dateUsed == DateTime.Now)
+                                {
+                                    inUse = true;
+                                    break;
+                                }
+                            }
+
+                            if (validWord.IsMatch(surveyWord) && inUse == false)
+                            {
+                                var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
+                                wordToUpdate.administrator_account_id = userID;
+                                wordToUpdate.survey_access_word = surveyWord.Trim();
+                                wordToUpdate.date_modified = DateTime.Now;
+                                context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
+                                context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
+                                context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
+                                context.SaveChanges();
+
+                                message = "The survey word has been updated to \"" + surveyWord + "\".";
+                            }
+                            else
+                            {
+                                throw new Exception("Unable to update the selected word. Word is currently in use.");
+                            }
+
                         }
                     }
-                    catch (Exception e)
-                    {
-                        throw new Exception(e.Message);
-                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
                 }
                 return message;
             }
@@ -160,10 +191,10 @@ namespace FSOSS.System.BLL
                                                       where x.date_used.Day == dateTime.Day
                                                       select new SurveyWordPOCO()
                                                       {
-                                                            siteID = x.site_id,
-                                                            surveyWordID = x.survey_word_id,
-                                                            dateUsed = x.date_used
-                                                  
+                                                          siteID = x.site_id,
+                                                          surveyWordID = x.survey_word_id,
+                                                          dateUsed = x.date_used
+
                                                       }).FirstOrDefault();
 
                     if (surveyWordAttachToHospital == null)
@@ -172,7 +203,8 @@ namespace FSOSS.System.BLL
                         if (potentialSurveyWord.archived_yn == true)
                         {
                             potentialSurveyWord.archived_yn = false;
-                        } else if (potentialSurveyWord.archived_yn == false)
+                        }
+                        else if (potentialSurveyWord.archived_yn == false)
                         {
                             potentialSurveyWord.archived_yn = true;
                         }
@@ -186,8 +218,8 @@ namespace FSOSS.System.BLL
                     }
                     else
                     {
-                        throw new Exception("Unable to changed availability selected word. Word is currently in use.");
-                    }                                                       
+                        throw new Exception("Unable to changed availability of the selected word. Word is currently in use.");
+                    }
                 }
                 catch (Exception e)
                 {
@@ -226,7 +258,7 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
 
             }
@@ -261,7 +293,7 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
 
             }
@@ -295,7 +327,7 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
 
             }
@@ -329,7 +361,7 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
 
             }
