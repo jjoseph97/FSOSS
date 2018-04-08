@@ -186,9 +186,9 @@ namespace FSOSS.System.BLL
                 {
                     // Get the current date.
                     DateTime dateTime = DateTime.Today;
-                    // Check if the current word is in use by checking todays date against the words in the database
+                    // Check if the current word is in use by matching the correct survey word ID and then checking todays day/month/year against the survey word in the database to see if it is in use today
                     var surveyWordAttachToHospital = (from x in context.SurveyWords
-                                                      where x.date_used.Day == dateTime.Day
+                                                      where x.PotentialSurveyWord.survey_word_id == surveyWordID && x.date_used.Day == dateTime.Day && x.date_used.Month == dateTime.Month && x.date_used.Year == dateTime.Year
                                                       select new SurveyWordPOCO()
                                                       {
                                                           siteID = x.site_id,
