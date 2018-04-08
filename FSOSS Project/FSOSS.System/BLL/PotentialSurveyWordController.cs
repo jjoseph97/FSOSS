@@ -177,14 +177,14 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWordID"></param>
         /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string ChangeAvailability(int surveyWordID, int userID)
+        public string ChangeAvailability(string surveyWord, int surveyWordID, int userID)
         {
             using (var context = new FSOSSContext())
             {
                 string message = "";
                 try
                 {
-                    // Get the current date.
+                    // Get the current date
                     DateTime dateTime = DateTime.Today;
                     // Check if the current word is in use by matching the correct survey word ID and then checking todays day/month/year against the survey word in the database to see if it is in use today
                     var surveyWordAttachToHospital = (from x in context.SurveyWords
@@ -214,7 +214,7 @@ namespace FSOSS.System.BLL
                         context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
                         context.Entry(potentialSurveyWord).Property(y => y.date_modified).IsModified = true;
                         context.SaveChanges();
-                        message = "Successfully changed availability on the survey word.";
+                        message = "Successfully changed availability on the survey word \"" + surveyWord + "\".";
                     }
                     else
                     {

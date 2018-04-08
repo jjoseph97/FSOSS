@@ -66,15 +66,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             Regex validWord = new Regex("^[a-zA-Z]+$");
             if (searchWord == "")
             {
-                throw new Exception("Search cannot be empty."); // check if the search is empty
+                throw new Exception("The search field cannot be empty."); // check if the search is empty
             }
             else if (searchWord.Length > 8) // check that the length of the search is a maximum of 8 characters
             {
-                throw new Exception("Search can only be a maximum of 8 characters in length.");
+                throw new Exception("The search field can only be a maximum of 8 characters in length.");
             }
             else if (!validWord.IsMatch(searchWord)) // check that there is only alphabetical letters and no spaces in the search
             {
-                throw new Exception("Please enter only alphabetical letters and no spaces.");
+                throw new Exception("Please enter only alphabetical letters and no spaces in the search field.");
             }
             else if (SurveyWordListView.Items.Any()) // check if any results were returned
             {

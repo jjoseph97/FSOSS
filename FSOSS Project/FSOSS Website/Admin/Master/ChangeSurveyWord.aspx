@@ -24,7 +24,7 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="AddWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Add Word: " />
                     <asp:TextBox ID="AddWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to add..." style="background-color: #FFFFFF;" />
-                    <asp:Button ID="AddWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add" OnClick="AddWordButton_Click" />
+                    <asp:Button ID="AddWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Word" OnClick="AddWordButton_Click" />
                 </div>
             </div>
             <div class="card container">
@@ -32,7 +32,7 @@
                     <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
                     <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
                 </div>
-                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound" OnItemCommand="SurveyWordListView_ItemCommand">
+                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWord,surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound" OnItemCommand="SurveyWordListView_ItemCommand">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
                             <td style="display:none;">
@@ -107,6 +107,7 @@
                 <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
+                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
@@ -119,6 +120,7 @@
                 <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
+                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
@@ -131,6 +133,7 @@
                 <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSearchedActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
+                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
@@ -146,6 +149,7 @@
                 <asp:ObjectDataSource ID="SearchArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSearchedArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
+                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
