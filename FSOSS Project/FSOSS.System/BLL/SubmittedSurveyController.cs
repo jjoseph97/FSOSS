@@ -70,7 +70,7 @@ namespace FSOSS.System.BLL
                                           mealName = x.Meal.meal_name,
                                           dateEntered = x.date_entered,
                                           contactRequest = x.contact_request,
-                                          contacted=x.contacted,
+                                          contacted = x.contacted,
                                           contactRoomNumber = x.contact_room_number,
                                           contactPhoneNumber = x.contact_phone_number
                                       };
@@ -203,17 +203,17 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// This method obtains specific submitted survey results
         /// </summary>
-        /// <param name="subSurNum"></param>
+        /// <param name="subSurveyID"></param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public SubmittedSurveyPOCO GetSubmittedSurvey(int subSurNum)
+        public SubmittedSurveyPOCO GetSubmittedSurvey(int subSurveyID)
         {
             using (var context = new FSOSSContext())
             {
                 try
                 {
                     var survey = from x in context.SubmittedSurveys
-                                 where x.submitted_survey_id == subSurNum
+                                 where x.submitted_survey_id == subSurveyID
                                  select new SubmittedSurveyPOCO
                                  {
                                      submittedSurveyID = x.submitted_survey_id,
@@ -225,12 +225,12 @@ namespace FSOSS.System.BLL
                                      gender = x.Gender.gender_description,
                                      dateEntered = x.date_entered,
                                      contactRequest = x.contact_request,
-                                     contacted=x.contacted,
+                                     contacted = x.contacted,
                                      contactRoomNumber = x.contact_room_number,
                                      contactPhoneNumber = x.contact_phone_number
                                      
                                  };
-                    return (SubmittedSurveyPOCO)survey.FirstOrDefault();
+                    return survey.FirstOrDefault();
                 }
                 catch (Exception e)
                 {
@@ -243,17 +243,17 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// This method obtains specific submitted survey answers
         /// </summary>
-        /// <param name="subSurNum"></param>
+        /// <param name="subSurveyID"></param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<ParticipantResponsePOCO> GetSubmittedSurveyAnswers(int subSurNum)
+        public List<ParticipantResponsePOCO> GetSubmittedSurveyAnswers(int subSurveyID)
         {
             using (var context = new FSOSSContext())
             {
                 try
                 {
                     var survey = (from y in context.ParticipantResponses
-                                                where y.submitted_survey_id == subSurNum
+                                                where y.submitted_survey_id == subSurveyID
                                                 select new ParticipantResponsePOCO
                                                 {
                                                     question = y.question.question_text,
