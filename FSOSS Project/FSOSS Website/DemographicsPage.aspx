@@ -47,12 +47,16 @@
     <div id ="ContactRequestsContent" runat="server">
         <div class="row">
             <asp:Label CssClass="col-md-2 ml-md-5 my-2" runat="server" Text="Phone Number:"></asp:Label>
-            <asp:TextBox CssClass="col-md-4 form-control" ID="PhoneTextBox" runat="server" AutoComplete="off" placeholder="Enter phone number to be reached at"></asp:TextBox>
+            <asp:TextBox CssClass="col-md-4 form-control" ID="PhoneTextBox" runat="server" AutoComplete="off" placeholder="Enter phone number e.g. 7801234567"></asp:TextBox>
+            
+            <%--Validation check for phone number--%>
+            <asp:Label ID="PhoneNumber" runat="server" Text="Please enter a 10 digit phone number" CssClass="text-danger pl-2" Visible="false" />
         </div>
         <br />
         <div class="row">
             <asp:Label CssClass="col-md-2 ml-md-5 my-2" runat="server" Text="Room Number:"></asp:Label>
-            <asp:TextBox CssClass="col-md-4 form-control" ID="RoomTextBox" runat="server" AutoComplete="off" placeholder="Enter room number e.g.001"></asp:TextBox>
+            <asp:TextBox CssClass="col-md-4 form-control" ID="RoomTextBox" runat="server" AutoComplete="off" placeholder="Enter room number"></asp:TextBox>
+            <asp:Label ID="RoomNumber" runat="server" Text="Please enter a proper room number" CssClass="text-danger pl-2" Visible="false" />
         </div>
     </div>
 
@@ -61,7 +65,8 @@
         <asp:Button CssClass="btn col-md-2 my-5 mr-5" ID="BackButton" runat="server" Text="Back" OnClick="BackButton_Click"/>
 
         <%--Submit Survey Button--%>
-        <asp:Button CssClass="btn col-md-2 my-5 offset-md-2" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" BackColor="#A6EBF7"/>
+       <asp:Button CssClass="btn col-md-2 my-5 offset-md-2" ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" BackColor="#A6EBF7" CausesValidation="true"/>
+      
     </div>
 </asp:Content>
 
