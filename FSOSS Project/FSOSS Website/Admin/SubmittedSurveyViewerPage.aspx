@@ -48,7 +48,6 @@
                     </div>
                     <div id="ContactResolve" class="row container mx-auto px-0" runat="server">
                         <asp:Button ID="ResolveButton" class="col-sm-2 mx-auto mb-2 btn btn-success border border-dark" runat="server" Text="Resolve" OnClick="ResolveButton_Click" OnClientClick="return confirm('Are you Sure?')"></asp:Button>
-                        <asp:Button ID="UnresolveButton" class="col-sm-2 mx-auto mb-2 btn btn-danger border border-dark" runat="server" Text="Unresolve" OnClick="UnresolveButton_Click" Visible="false" />
                     </div>
                 </div>
             </div>
