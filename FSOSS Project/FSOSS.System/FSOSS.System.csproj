@@ -95,7 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministratorAccountController.cs" />
+    <Compile Include="BLL\AdministratorAccountController.cs" />
     <Compile Include="BLL\AdministratorRoleController.cs" />
     <Compile Include="BLL\AgeRangeController.cs" />
     <Compile Include="BLL\GenderController.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSOSS.System.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -109,6 +110,32 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             Genders.Visible = true;
         }
     }
+
+
+
+
+    /// <summary>
+    /// This button on click method is for adding a new Participant Type to the database.
+    /// Added April 10
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void AddPTButton_Click(object sender, EventArgs e)
+    {
+        string ptDesc = AddPTBox.Text.Trim();
+        int userID = Convert.ToInt32(Session["userID"]);
+
+        MessageUserControl.TryRun(() =>
+        {
+            ParticipantController sysmgr = new ParticipantController();
+
+            sysmgr.AddParticipantType(ptDesc, userID);
+            PTListview.DataBind();
+            AddPTBox.Text = "";
+
+        }, "Success", "Successfully added the new participant type: \"" + ptDesc + "\"");
+    }
+
 
 
 

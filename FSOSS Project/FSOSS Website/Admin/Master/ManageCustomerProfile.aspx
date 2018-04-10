@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="col-sm-12">
-                <uc1:messageusercontrol runat="server" class="alert alert-danger mb-2 card" id="MessageUserControl" />
+                <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
             </div>
             <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
@@ -37,7 +37,7 @@
                 <%--<Label id="selected" runat="server"></Label>--%>
                 <div id="Genders" runat="server">
                     <asp:ObjectDataSource ID="GenderODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController"></asp:ObjectDataSource>
-                
+
                     <asp:ListView ID="GenderListView" runat="server" DataSourceID="GenderODS">
                         <AlternatingItemTemplate>
                             <tr style="background-color: #FFFFFF; color: #284775;">
@@ -50,7 +50,7 @@
                                 <td>
                                     <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                    <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
                                     <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
@@ -89,7 +89,7 @@
                                 <td>
                                     <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                    <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
                                     <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
@@ -127,19 +127,24 @@
                                 <td>
                                     <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                  <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                    <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
                                     <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
-                
+
                 </div>
 
                 <%-- The participant type list--%>
                 <div id="ParticipantTypes" runat="server">
-                    <asp:ListView ID="PTListview" InsertItemPosition="LastItem" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
+                    <div class="row container mx-auto px-0">
+                        <asp:Label ID="AddPTLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Participant Type: " />
+                        <asp:TextBox ID="AddPTBox" class="col-sm-4 my-2" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" />
+                        <asp:Button ID="AddPTButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
+                    </div>
+                    <asp:ListView ID="PTListview"  runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
 
@@ -185,7 +190,7 @@
                                 </tr>
                             </table>
                         </EmptyDataTemplate>
-                        <InsertItemTemplate>
+                        <%--<InsertItemTemplate>
                             <tr style="">
 
 
@@ -202,7 +207,7 @@
                                     <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Clear" ID="CancelButton" />
                                 </td>
                             </tr>
-                        </InsertItemTemplate>
+                        </InsertItemTemplate>--%>
                         <ItemTemplate>
                             <tr style="background-color: #FFFFFF; color: #333333;">
 
@@ -560,33 +565,33 @@
                     </DeleteParameters>
                     <InsertParameters>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                     </DeleteParameters>
                     <InsertParameters>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
                         <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
 
             </div>
         </div>
-        
+
     </div>
 </asp:Content>
 
