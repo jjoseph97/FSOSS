@@ -245,11 +245,11 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr runat="server">
-                                    <td runat="server" style="">
+                                <tr runat="server" class="mx-2 my-2">
+                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
                                         <asp:DataPager runat="server" ID="DataPager2">
                                             <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                                <asp:NextPreviousPagerField ButtonType="Button"  ButtonCssClass="btn btn-primary text-light border border-dark"  ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                             </Fields>
                                         </asp:DataPager>
                                     </td>
