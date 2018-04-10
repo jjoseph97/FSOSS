@@ -34,114 +34,11 @@
 
 
 <%--------------------  Active Units ListView --------------------------%>
-             <asp:ListView ID="UnitsListView" runat="server" DataSourceID="UnitsCrudODS" DataKeyNames="unitID" InsertItemPosition="LastItem" Visible="false">
-                 <AlternatingItemTemplate>
-                     <tr style="background-color: #bdfeff; color: #284775;">
-                        
-                         <td>
-                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
-                         <td>
-                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
-                          <td>
-                             <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Close" ID="Button1" /></td>
-                         <td>
-                             <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-primary mx-3 my-1" Text="Edit" ID="Button2" />
-                         </td>
-                         
-                      
-                     </tr>
-                 </AlternatingItemTemplate>
-                 <EditItemTemplate>
-                     <tr style="background-color: #bdfeff;">
-                       
-                         <td>
-                             <asp:Label Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" /></td>
-                         <td>
-                             <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
-                           <td>
-                             <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-primary mx-3 my-1" Text="Update" ID="UpdateButton" /></td>
-                         <td>
-                             <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
-                         </td>
-           
-                     </tr>
-                 </EditItemTemplate>
-                 <EmptyDataTemplate>
-                     <table runat="server" style="">
-                         <tr>
-                             <td>No data was returned.</td>
-                         </tr>
-                     </table>
-                 </EmptyDataTemplate>
-                 <InsertItemTemplate>
-                     <tr style="background-color: #E0FFFF; color: #333333;">
-                        
-                         <td>
-                             <asp:Label Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" /></td>
-                         <td>
-                             <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
-                          <td>
-                             <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" /></td>
-                         <td>
-                             <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
-                         </td>
-                      
-                     </tr>
-                 </InsertItemTemplate>
-                 <ItemTemplate>
-                     <tr style="background-color: #E0FFFF; color: #333333;">
-                        
-                         <td>
-                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
-                         <td>
-                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
-                          <td>
-                             <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text="Close" ID="DeleteButton" /></td>
-                            <td>
-                             <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-primary mx-3 my-1" Text="Edit" ID="EditButton" />
+             <asp:ListView ID="UnitsListView" runat="server" Visible="false" DataSourceID="UnitsODS" InsertItemPosition="LastItem">
 
-                         </td>
-                 
-                     </tr>
-                 </ItemTemplate>
-                 <LayoutTemplate>
-                     <table runat="server">
-                         <tr runat="server">
-                             <td runat="server">
-                                 <table runat="server" id="itemPlaceholderContainer" style="" border="0">
-                                     <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                         <th runat="server">Unit ID</th>
-                                         <th runat="server">Unit Number</th>
-                                         <th runat="server">Close Unit</th>
-                                         <th runat="server"></th>
-                                    
-                                     </tr>
-                                     <tr runat="server" id="itemPlaceholder"></tr>
-                                 </table>
-                             </td>
-                         </tr>
-                         <tr runat="server">
-                             <td runat="server" style=""></td>
-                         </tr>
-                     </table>
-                 </LayoutTemplate>
-                 <SelectedItemTemplate>
-                     <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
-                      
-                         <td>
-                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
-                         <td>
-                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
 
-                            <td>
-                             <asp:Button runat="server" CommandName="Delete" Text="Close" CssClass="btn btn btn-danger mx-3 my-1" ID="DeleteButton" />
-                         </td>
-                          <td>
-                             <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-primary mx-3 my-1" Text="Edit" ID="EditButton" />
-                          </td>
-            
-                     </tr>
-                 </SelectedItemTemplate>
+
+          
              </asp:ListView>
 
          </div>
@@ -150,7 +47,8 @@
 
 
 
-
+       
+        
 
 
 
@@ -167,16 +65,18 @@
 
 
 <%-- -----------------Active Units List ODS------------------%>
-        <asp:ObjectDataSource ID="UnitsCrudODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetUnitList" TypeName="FSOSS.System.BLL.UnitController" DataObjectTypeName="FSOSS.System.Data.POCOs.UnitsPOCO" DeleteMethod="SwitchUnitSatus" InsertMethod="AddUnit" UpdateMethod="UpdateUnit">
+  
+        <asp:ObjectDataSource ID="UnitsODS" runat="server" DataObjectTypeName="FSOSS.System.Data.POCOs.UnitsPOCO" DeleteMethod="SwitchUnitSatus" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetActiveUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit"
+            OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
         </asp:ObjectDataSource>
-  
         
 
 <%-- -----------------Archived Units List ODS------------------%>     
-      
+       <%--OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException"--%>>
 
 
 

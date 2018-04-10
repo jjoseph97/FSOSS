@@ -47,9 +47,13 @@ namespace FSOSS.System.BLL
             }
         }
 
-        #region GetList(Proper?)
+        /// <summary>
+        /// Method use to get the list of Active units of the site slected
+        /// </summary>
+        /// <param String="unitNumber" , int= emploeeID ></param>
+        /// <returns>returns confirmation from the Site</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<UnitsPOCO> GetUnitListModified(int site_id)
+        public List<UnitsPOCO> GetActiveUnitList(int site_id)
         {
             using (var context = new FSOSSContext())
             {
@@ -72,7 +76,7 @@ namespace FSOSS.System.BLL
                 }
             }
         }
-        #endregion
+        
 
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
@@ -111,51 +115,48 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to add new unit to the Site
         /// </summary>
-        /// <param Entity="Unit"></param>
+        /// <param String="unitNumber" , int= emploeeID ></param>
         /// <returns>returns confirmation from the Site</returns>
+        //[DataObjectMethod(DataObjectMethodType.Insert, false)]
+        //public string AddUnit(string newUnitNumber)
+        //{
+        //    using (var context = new FSOSSContext())
+        //    {
+        //        try
+        //        {
 
-        [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddUnit(UnitsPOCO newUnitNumber)
-        {
-            using (var context = new FSOSSContext())
-            {
-                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z]*$"); 
-                string message = "";
-                try
-                {
-                    var UnitList = from x in context.Units
-                                   where x.unit_number.ToUpper().Equals(newUnitNumber.unitNumber.ToUpper())
-                                   select new UnitsPOCO()
-                                   {
-                                       unitNumber= x.unit_number
-                                   };
+        //            var unitExist = from x in context.Units
+        //                            where x.unit_number.ToUpper() == newUnitNumber.ToUpper()
+        //                            select new Unit()
+        //                            {
+        //                                unit_number = x.unit_number
+        //                            };
 
-                    if (UnitList.Count() > 0)
-                    {
-                        message = "The Unit number \"" + newUnitNumber + "\" already exists. Please Add a new unit number .";
-                    }
+        //            if (unitExist.Count() > 0) //if so, return an error message
+        //            {
+        //                throw new Exception("The unit \"" + newUnitNumber.ToUpper() + "\" already exists. Please enter a new Unit.");
+        //            }
 
-                  
-                    else
-                    {
-                        Unit newUnit = new Unit();
+        //            else
+        //            {
+        //                Unit newUnit = new Unit();
+        //                newUnit.unit_number = newUnitNumber.Trim();
+        //                newUnit.administrator_account_id = 1;
+        //                newUnit.date_modified = DateTime.Now;
+        //                newUnit.archived_yn = false;
+        //                context.Units.Add(newUnit);
+        //                context.SaveChanges();
+        //                return " Unit " + newUnitNumber + " added.";
+        //            }
 
-                        newUnit.administrator_account_id = 1;
-                        newUnit.unit_number = newUnitNumber.unitNumber.ToUpper();
-                        newUnit.archived_yn = false;
-                        newUnit.date_modified = DateTime.Now;
-                        context.Units.Add(newUnit);
-                        context.SaveChanges();
-                        message = "Successfully added the new unit: \"" + newUnit + "\"";
-                    }
-                }
-                catch (Exception e)
-                {
-                    message = "Oops, something went wrong. Check " + e.Message;
-                }
-                return message;
-            }
-        }//eom
+                    
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            throw new Exception(e.Message);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Method use to disable or enable Unit from the list that is use in a site
