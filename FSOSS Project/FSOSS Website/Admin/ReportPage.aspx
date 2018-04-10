@@ -15,14 +15,74 @@
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
     </div>
-    <canvas id="chartSampleQuestion1" height="400" width="400"></canvas>
+    <div class="row"> 
+          <asp:Label ID="FilterDescription" CssClass="mx-auto h2" class="label label-primary"  runat="server"></asp:Label>
+          <asp:Label ID="TotalNumberOfSubmittedSurvey" CssClass="mx-auto h4" class="label label-primary" runat="server"></asp:Label>
+    </div>
     
+    <div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#question1Tab" data-toggle="tab">Question 1</a> </li>
+            <li><a href="#question6Tab" data-toggle="tab">Question 9</a> </li>
+            <li><a href="#question6Tab" data-toggle="tab">Question 10</a> </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane-fade" id="question1Tab">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+             <ContentTemplate>
+                <div style="width:1000px; height:600px">
+                    <canvas id="Question1"></canvas>         
+                </div>
+                <div style="width:1000px; height:600px">
+                    <canvas id="Question2"></canvas>
+                </div>
+                <div style="width:1000px; height:600px">
+                    <canvas id="Question3"></canvas>
+                </div>
+                <div style="width:1000px; height:600px">
+                    <canvas id="Question4"></canvas>
+                </div>
+                <div style="width:1000px; height:600px">
+                    <canvas id="Question5"></canvas>
+                </div>
+              </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+        <div class="tab-pane-fade" id="question6Tab">
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>              
+                   <div style="width:1000px; height:600px">
+                     <canvas id="Question6"></canvas>
+                   </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+         <div class="tab-pane-fade" id="question7Tab">
+            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                <ContentTemplate>              
+                   <div style="width:1000px; height:600px">
+                     <canvas id="Question7"></canvas>
+                   </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </div>
+   
+
+       
 <script type="text/javascript">
 
     $(document).ready(function () {
-        var ctx = document.getElementById("chartSampleQuestion1").getContext("2d");
+        var chart1 = document.getElementById("Question1").getContext("2d");
+        var chart2 = document.getElementById("Question2").getContext("2d");
+        var chart3 = document.getElementById("Question3").getContext("2d");
+        var chart4 = document.getElementById("Question4").getContext("2d");
+        var chart5 = document.getElementById("Question5").getContext("2d");
+        var chart6 = document.getElementById("Question6").getContext("2d");
+        var chart7 = document.getElementById("Question7").getContext("2d");
         $.ajax({          
-            url: 'ReportPage.aspx/GetDataListViaPOCO',
+            url: 'ReportPage.aspx/GetQuestionTwoData',
             type: 'POST',
             data: '{}',
             contentType: 'application/json; charset=utf-8',
@@ -30,29 +90,35 @@
             success: function (response) {
                 var aData = $.parseJSON(response.d);
                 var labelArray = [];
+                var title;
+                var colorArray = [];
                 var valueArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
+                    colorArray.push(val.Color);
+                    title = 'Question 1A: ' + val.Title;
                 });
-                var pieChart = new Chart(ctx, {
+                
+                var pieChart = new Chart(chart1, {
                     type: 'pie',
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
                       
                     },
                     options: {
-                        responsive: true
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
                     }
                 });
             
@@ -71,6 +137,356 @@
 
         });
 
+        $.ajax({
+            url: 'ReportPage.aspx/GetQuestionThreeData',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                var aData = $.parseJSON(response.d);
+                var labelArray = [];
+                var title;
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
+                    title = 'Question 1B: ' + val.Title;
+                });
+
+                var pieChart = new Chart(chart2, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert(response.d);
+                console.log(response.d);
+            },
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
+            }
+
+        });
+        $.ajax({
+            url: 'ReportPage.aspx/GetQuestionFourData',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                var aData = $.parseJSON(response.d);
+                var labelArray = [];
+                var title;
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
+                    title = 'Question 1C: ' + val.Title;
+                });
+
+                var pieChart = new Chart(chart3, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert(response.d);
+                console.log(response.d);
+            },
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
+            }
+
+        });
+        $.ajax({
+            url: 'ReportPage.aspx/GetQuestionFiveData',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                var aData = $.parseJSON(response.d);
+                var labelArray = [];
+                var title;
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
+                    title = 'Question 1D: ' + val.Title;
+                    console.log(val.Text, val.Value);
+                });
+
+                var pieChart = new Chart(chart4, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert(response.d);
+                console.log(response.d);
+            },
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
+            }
+
+        });
+
+        $.ajax({
+            url: 'ReportPage.aspx/GetQuestionSixData',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                var aData = $.parseJSON(response.d);
+                var labelArray = [];
+                var title;
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
+                    title = 'Question 1E: ' + val.Title;
+                    console.log(val.Text, val.Value);
+                });
+
+                var pieChart = new Chart(chart5, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert(response.d);
+                console.log(response.d);
+            },
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
+            }
+
+        });
+
+        $.ajax({
+            url: 'ReportPage.aspx/GetQuestionNineData',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                var aData = $.parseJSON(response.d);
+                var labelArray = [];
+                var title;
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
+                    title = 'Question 9: ' + val.Title;
+                    console.log(val.Text, val.Value);
+                });
+
+                var pieChart = new Chart(chart6, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert(response.d);
+                console.log(response.d);
+            },
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
+            }
+
+        });
+
+        $.ajax({
+            url: 'ReportPage.aspx/GetQuestionTenData',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                var aData = $.parseJSON(response.d);
+                var labelArray = [];
+                var title;
+                var valueArray = [];
+                $.each(aData, function (inx, val) {
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
+                    title = 'Question 10: ' + val.Title;
+                });
+
+                var pieChart = new Chart(chart7, {
+                    type: 'pie',
+                    data: {
+                        labels: labelArray,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: title,
+                            fontSize: 18,
+                            fontColor: "#111"
+                        },
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert(response.d);
+                console.log(response.d);
+            },
+
+
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
+            }
+
+        });
 
     });
 </script>
