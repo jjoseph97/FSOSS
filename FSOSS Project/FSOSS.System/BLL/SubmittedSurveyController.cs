@@ -24,6 +24,7 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// The method to obtain the total of contact requests for a given site.
         /// Updated March 22, 2018. Fixed so it returns the count for the site only.- Chris
+        /// Updated April 8, 2018. Fixed to handle bad SiteIDs.
 
         /// </summary>
         /// <param name="siteID">the id of the site for which we want to know the number of contact requests</param>
@@ -34,7 +35,12 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted == false && x.Unit.site_id == siteID);
+                    var contactCount=0;
+                    if (context.Sites.Find(siteID) != null)
+                    {
+                        contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted == false && x.Unit.site_id == siteID);
+                        
+                    }
                     return contactCount;
                 }
                 catch (Exception e)
@@ -44,6 +50,32 @@ namespace FSOSS.System.BLL
             }
         }
 
+        /// <summary>
+        /// Used to check if the given Site ID is a valid site ID for an existing Site
+        /// </summary>
+        /// <param name="subSurveyID"></param>
+        /// <returns></returns>
+        public bool validSurvey(int subSurveyID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    bool good=false;
+                    if (context.Sites.Find(subSurveyID) == null)
+                    {
+                        good = true;
+
+                    }
+                    return good;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>

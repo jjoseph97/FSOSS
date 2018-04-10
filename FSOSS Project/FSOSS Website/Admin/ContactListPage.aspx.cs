@@ -33,7 +33,7 @@ public partial class Pages_AdministratorPages_ContactListPage : System.Web.UI.Pa
         {
             if (!Page.IsPostBack)
             {
-
+                //Updated April 8. Bad ID handling.
                 //retrieve the site id passed from the main screen
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 SiteDDL.DataBind();
@@ -45,11 +45,14 @@ public partial class Pages_AdministratorPages_ContactListPage : System.Web.UI.Pa
                 SiteDDL.SelectedValue = broughtSite;
 
                 string value = SiteDDL.SelectedValue;
+                bool good;
+                int siteID;
+                good= Int32.TryParse(value, out siteID);
                 //update label to display the desired value
-                if (value != null)
+                if (value != null && good)
                 {
                     //PendingRequestNumberLabel.Text = value;
-                    int siteID = Convert.ToInt32(value);
+                    
                     int contactCount = ssc.GetContactRequestTotal(siteID);
                     ContactCountLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
                 }

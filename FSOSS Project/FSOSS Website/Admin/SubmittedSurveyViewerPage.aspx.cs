@@ -17,16 +17,27 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string ssn = Request.QueryString["sid"];
-        if (ssn == null)
+        int subSurveyID;
+        bool good = Int32.TryParse(ssn, out subSurveyID);
+
+        SubmittedSurveyController ssc = new SubmittedSurveyController();
+        if (ssn == null )
         {
             Response.Redirect("ViewSurveyFilter.aspx");
+        }
+        //if the submitted survey ID is a bad number (too big or references a non-existant submitted survey)
+        else if (!good || ssc.validSurvey(subSurveyID))
+        {
+            ContactResolve.Visible = false;
+            MessageUserControl.TryRun(() =>
+            {
+                throw new Exception("Submitted Survey #" + subSurveyID + " does not exist.");
+            },"?","what?");
         }
         else
         {
             SubSurveyNumLabel.Text = ssn;
-            int subSurveyID = Convert.ToInt32(ssn);
-
-            SubmittedSurveyController ssc = new SubmittedSurveyController();
+            
             if (ssc.wantsContact(subSurveyID))
             {
                 ContactResolve.Visible = true;
@@ -108,4 +119,27 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     {
 
     }
+
+    /// <summary>
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        if (e.ReturnValue == null)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        else // else show the ReturnValue(success message) as a string to display to the user 
+        {
+            string successMessage = e.ReturnValue.ToString();
+            MessageUserControl.TryRun(() =>
+            {
+            }, "Success", successMessage);
+        }
+    }
+
 }

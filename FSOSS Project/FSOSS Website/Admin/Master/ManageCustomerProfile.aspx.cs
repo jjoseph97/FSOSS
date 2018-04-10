@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 {
     static public bool seeArchive = false;
+
     
     /// <summary>
     /// when the page loads, if it is the first time loading the page, the gender list is set to viewable, and 
@@ -116,7 +117,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 
     /// <summary>
     /// This button on click method is for adding a new Participant Type to the database.
-    /// Added April 10
+    /// Added April 10. Modification of Potential SUrvey Word's Add method.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>

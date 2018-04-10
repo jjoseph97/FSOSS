@@ -141,10 +141,10 @@
                 <div id="ParticipantTypes" runat="server">
                     <div class="row container mx-auto px-0">
                         <asp:Label ID="AddPTLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Participant Type: " />
-                        <asp:TextBox ID="AddPTBox" class="col-sm-4 my-2" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" />
+                        <asp:TextBox ID="AddPTBox" class="col-sm-4 my-2" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
                         <asp:Button ID="AddPTButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
                     </div>
-                    <asp:ListView ID="PTListview"  runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
+                    <asp:ListView ID="PTListview" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
 
@@ -165,23 +165,25 @@
 
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
-                            <tr style="">
+                            <asp:Panel DefaultButton="UpdateButton" runat="server">
+                                <tr style="">
 
 
-                                <td style="display: none">
-                                    <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
-                                <td class="pl-3">
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="25" />
-                                </td>
-                                <td></td>
+                                    <td style="display: none">
+                                        <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                    <td class="pl-3">
+                                        <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" onkeydown = "return (event.keyCode!=13);" ID="participantTypeDescriptionTextBox" MaxLength="25" />
+                                    </td>
+                                    <td></td>
 
-                                <td></td>
-                                <td>
-                                    <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton" /></td>
-                                <td>
-                                    <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Cancel" ID="CancelButton" />
-                                </td>
-                            </tr>
+                                    <td></td>
+                                    <td>
+                                        <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton" /></td>
+                                    <td>
+                                        <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Cancel" ID="CancelButton" />
+                                    </td>
+                                </tr>
+                            </asp:Panel>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
                             <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
@@ -249,7 +251,7 @@
                                     <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
                                         <asp:DataPager runat="server" ID="DataPager2">
                                             <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button"  ButtonCssClass="btn btn-primary text-light border border-dark"  ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                                <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                             </Fields>
                                         </asp:DataPager>
                                     </td>
