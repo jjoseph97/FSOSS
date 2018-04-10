@@ -259,7 +259,7 @@
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 1D: ' + val.Title;
-                    valueArray.push(val.Color);
+                    colorArray.push(val.Color);
                 });
 
                 var pieChart = new Chart(chart4, {
@@ -313,7 +313,7 @@
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 1E: ' + val.Title;
-                    valueArray.push(val.Color);
+                    colorArray.push(val.Color);
                 });
 
                 var pieChart = new Chart(chart5, {
