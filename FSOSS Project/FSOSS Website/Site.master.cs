@@ -71,12 +71,12 @@ public partial class SiteMaster : MasterPage
         if (HttpContext.Current.Request.RawUrl.StartsWith("/Admin") || HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
         {
             //logolink.HRef = "~/Admin";
-            LogoLink1.PostBackUrl = "~/Admin/";
+            LogoLink.PostBackUrl = "~/Admin/";
         }
         else
         {
             //logolink.HRef = "~/";
-            LogoLink1.PostBackUrl = "~/";
+            LogoLink.PostBackUrl = "~/";
             FSOSSNavbar.Visible = false;
             hamburger.Visible = false;
         }
@@ -114,7 +114,7 @@ public partial class SiteMaster : MasterPage
 
     protected void LogoLink_Click(object sender, EventArgs e)
     {
-        if (!HttpContext.Current.Request.RawUrl.StartsWith("/Admin") || !HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
+        if (!HttpContext.Current.Request.RawUrl.StartsWith("/Admin") && !HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
         {
             Session.Abandon();
         }
