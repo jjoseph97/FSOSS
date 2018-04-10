@@ -95,8 +95,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Title = report.Question[1];
             response.Color = COLOR_VALUE[counter];
             responses.Add(response);
-
-            responses.Add(response);
             response = null;
         }
         return JsonConvert.SerializeObject(responses);
@@ -116,16 +114,15 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             if (report.QuestionFourValueList[counter].Equals(""))
             {
                 response.Text = "No Response";
-                response.Value = report.QuestionFourValueCount[counter];
-                response.Title = report.Question[2];
+
             }
             else
             {
                 response.Text = report.QuestionFourValueList[counter];
-                response.Value = report.QuestionFourValueCount[counter];
-                response.Title = report.Question[2];
             }
-
+            response.Value = report.QuestionFourValueCount[counter];
+            response.Title = report.Question[2];
+            response.Color = COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -145,16 +142,14 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             if (report.QuestionFiveValueList[counter].Equals(""))
             {
                 response.Text = "No Response";
-                response.Value = report.QuestionFiveValueCount[counter];
-                response.Title = report.Question[3];
             }
             else
             {
                 response.Text = report.QuestionFiveValueList[counter];
-                response.Value = report.QuestionFiveValueCount[counter];
-                response.Title = report.Question[3];
             }
-
+            response.Value = report.QuestionFiveValueCount[counter];
+            response.Title = report.Question[3];
+            response.Color = COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -175,16 +170,14 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             if (report.QuestionSixValueList[counter].Equals(""))
             {
                 response.Text = "No Response";
-                response.Value = report.QuestionSixValueCount[counter];
-                response.Title = report.Question[4];
             }
             else
             {
                 response.Text = report.QuestionSixValueList[counter];
-                response.Value = report.QuestionSixValueCount[counter];
-                response.Title = report.Question[4];
             }
-
+            response.Value = report.QuestionSixValueCount[counter];
+            response.Title = report.Question[4];
+            response.Color = COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -205,16 +198,14 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             if (report.QuestionNineValueList[counter].Equals(""))
             {
                 response.Text = "No Response";
-                response.Value = report.QuestionNineValueCount[counter];
-                response.Title = report.Question[5];
             }
             else
             {
                 response.Text = report.QuestionNineValueList[counter];
-                response.Value = report.QuestionNineValueCount[counter];
-                response.Title = report.Question[5];
             }
-
+            response.Value = report.QuestionNineValueCount[counter];
+            response.Title = report.Question[5];
+            response.Color = COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -235,8 +226,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             if (report.QuestionTenValueList[counter].Equals(""))
             {
                 response.Text = "No Response";
-                response.Value = report.QuestionTenValueCount[counter];
-                response.Title = report.Question[6];
             }
             else
             {
@@ -244,7 +233,9 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.Value = report.QuestionTenValueCount[counter];
                 response.Title = report.Question[6];
             }
-
+            response.Value = report.QuestionTenValueCount[counter];
+            response.Title = report.Question[6];
+            response.Color = COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
