@@ -39,8 +39,11 @@
 
         <div class="navbar navbar-expand-lg mb-2 navbar-light bg-light">
             <div class="container">
-                <a id="logolink" runat="server" class="navbar-brand" href="~/">
-                    <img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" /></a>
+                <asp:LinkButton ID="LogoLink1" CssClass="navbar-brand" NavigateUrl="~/" runat="server" OnClick="LogoLink_Click" CausesValidation="false" >
+                    <img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" />
+                </asp:LinkButton>
+                <%--<a id="logolink" runat="server" class="navbar-brand" href="~/">
+                    <img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" /></a>--%>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#FSOSSNavbar" aria-controls="FSOSSNavbar" aria-expanded="false" aria-label="Toggle navigation" runat="server" id="hamburger">
                     <span class="navbar-toggler-icon"></span>
                 </button>
