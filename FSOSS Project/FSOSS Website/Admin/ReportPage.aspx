@@ -147,10 +147,12 @@
                 var aData = $.parseJSON(response.d);
                 var labelArray = [];
                 var title;
+                var colorArray = [];
                 var valueArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
+                    colorArray.push(val.Color);
                     title = 'Question 1B: ' + val.Title;
                 });
 
@@ -159,13 +161,7 @@
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
 
@@ -204,10 +200,12 @@
                 var aData = $.parseJSON(response.d);
                 var labelArray = [];
                 var title;
+                var colorArray = [];
                 var valueArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
+                    colorArray.push(val.Color);
                     title = 'Question 1C: ' + val.Title;
                 });
 
@@ -216,13 +214,7 @@
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
 
@@ -261,12 +253,13 @@
                 var aData = $.parseJSON(response.d);
                 var labelArray = [];
                 var title;
+                var colorArray = [];
                 var valueArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 1D: ' + val.Title;
-                    console.log(val.Text, val.Value);
+                    valueArray.push(val.Color);
                 });
 
                 var pieChart = new Chart(chart4, {
@@ -274,13 +267,7 @@
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
 
@@ -321,11 +308,12 @@
                 var labelArray = [];
                 var title;
                 var valueArray = [];
+                var colorArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 1E: ' + val.Title;
-                    console.log(val.Text, val.Value);
+                    valueArray.push(val.Color);
                 });
 
                 var pieChart = new Chart(chart5, {
@@ -333,13 +321,7 @@
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
 
@@ -380,11 +362,12 @@
                 var labelArray = [];
                 var title;
                 var valueArray = [];
+                var colorArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 9: ' + val.Title;
-                    console.log(val.Text, val.Value);
+                    colorArray.push(val.Color);
                 });
 
                 var pieChart = new Chart(chart6, {
@@ -392,13 +375,7 @@
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
 
@@ -439,10 +416,12 @@
                 var labelArray = [];
                 var title;
                 var valueArray = [];
+                var colorArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 10: ' + val.Title;
+                    colorArray.push(val.Color);
                 });
 
                 var pieChart = new Chart(chart7, {
@@ -450,13 +429,7 @@
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            backgroundColor: [
-                                'rgb(255, 0, 0)',
-                                'rgb(255, 255, 0)',
-                                'rgb(0, 153, 0)',
-                                'rgb(0, 0, 255)',
-                                'rgb(255, 0, 255)',
-                            ],
+                            backgroundColor: colorArray,
                             data: valueArray
                         }],
 
