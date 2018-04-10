@@ -17,61 +17,62 @@
     </div>
     <canvas id="chartSampleQuestion1" height="400" width="400"></canvas>
     
-<script>
+<script type="text/javascript">
 
-    window.onload = function () {
-        var ctx = document.getElementById('chartSampleQuestion1').getContext('2d');
-        $.ajax({
-            type: "POST",
-            url: "ReportPage.aspx/GetDataViaPOCO",
-            data: "{}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+    $(document).ready(function () {
+        var ctx = document.getElementById("chartSampleQuestion1").getContext("2d");
+        $.ajax({          
+            url: 'ReportPage.aspx/GetDataListViaPOCO',
+            type: 'POST',
+            data: '{}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             success: function (response) {
-                var aData = response.d;
+                var aData = $.parseJSON(response.d);
                 var labelArray = [];
                 var valueArray = [];
                 $.each(aData, function (inx, val) {
-                    var labelsObj = {};
-                    var valueObj = {};
-                    labelsObj.Text = val.Text;
-                    obj.Value = val.Value;
-                    labelArray.push(labelsObj);
-                    valueArray.push(valueObj)
+                    labelArray.push(val.Text);
+                    valueArray.push(val.Value);
                 });
-                //var el = document.createElement('canvas');
-                //$("#dvChart")[0].appendChild(el);
-                //// Fix for IE 8.00
-                //if ($.browser.msie && $.browser.version == "8.0") {
-                //    G_vmlCanvasManager.initElement(el);
-                //}
-                ////var ctx = el.getContext('2d');
-
                 var pieChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
                         labels: labelArray,
                         datasets: [{
-                            label: 'Question 1',
-                            data: valueArray,
-                            backgroundColor: 'rgba(75,192,192,0.4)',
-                            borderColor: 'rgba(75,192,192,1)',
-                        }]
+                            backgroundColor: [
+                                'rgb(255, 0, 0)',
+                                'rgb(255, 255, 0)',
+                                'rgb(0, 153, 0)',
+                                'rgb(0, 0, 255)',
+                                'rgb(255, 0, 255)',
+                            ],
+                            data: valueArray
+                        }],
+                      
                     },
-                })
+                    options: {
+                        responsive: true
+                    }
+                });
+            
             },
             failure: function (response) {
                 alert(response.d);
+                console.log(response.d);
             },
 
-            error: function (response) {
-                alert(response.d);
+            
+            error: function (xhr, errorType, exception) {
+                var responseText;
+                responseText = jQuery.parseJSON(xhr.responseText);
+                console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
             }
 
         });
 
 
-    }
+    });
 </script>
          
 </asp:Content>

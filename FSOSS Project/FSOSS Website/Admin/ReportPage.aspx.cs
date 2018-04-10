@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using FSOSS.System.Data.POCOs;
 using FSOSS.System.Data.DTO;
 using FSOSS.System.BLL;
-using FSOSS.System.Data.Entity;
+using Newtonsoft.Json;
 using System.Web.Services;
 #endregion
 
@@ -28,23 +28,23 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     }
 
     [WebMethod]
-    public static List<ResponsePOCO> GetDataListViaPOCO()
+    public static string  GetDataListViaPOCO()
     {
 
         FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
         ReportController sysmgr = new ReportController();
         FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
-        List<ResponsePOCO> responses = new List<ResponsePOCO>();
-        for (int counter = 0; counter <= report.QuestionTwoValueCount.Count; counter++)
+        List<ChartPOCO> responses = new List<ChartPOCO>();
+        for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
         {
-            ResponsePOCO response = new ResponsePOCO
+            ChartPOCO response = new ChartPOCO
             {
                 Text = report.QuestionTwoValueList[counter],
-                Value = report.QuestionTwoValueCount[counter].ToString()
+                Value = report.QuestionTwoValueCount[counter]
             };
             responses.Add(response);
             response = null;
         }
-        return responses;
+        return JsonConvert.SerializeObject(responses);
     }
 }

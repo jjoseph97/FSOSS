@@ -119,6 +119,7 @@
     <Compile Include="POCOs\AdministratorAccountPOCO.cs" />
     <Compile Include="POCOs\AgeRangePOCO.cs" />
     <Compile Include="POCOs\AnswerPOCO.cs" />
+    <Compile Include="POCOs\ChartPOCO.cs" />
     <Compile Include="POCOs\ContactSubmittedSurveyPOCO.cs" />
     <Compile Include="POCOs\FilterPOCO.cs" />
     <Compile Include="POCOs\ParticipantResponsePOCO.cs" />
