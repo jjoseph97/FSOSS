@@ -20,7 +20,7 @@
              <div class="card container mb-2">
                <asp:Label ID="SearchUnitLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Search units: " />
                <asp:DropDownList ID="SiteDropDownList" class="col-sm-3 my-2 form-control" runat="server" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID"></asp:DropDownList>
-               <asp:Button ID="SearchUnitButton" class="btn btn-info" runat="server" Text="Search" OnClick="SearchUnitButton_Click" />
+               <asp:Button ID="SearchUnitButton" class="col-sm-2 mt-2 btn btn-info" runat="server" Text="Search" OnClick="SearchUnitButton_Click" />
                  </div>
 
 
@@ -34,12 +34,12 @@
 
 
 <%--------------------  Active Units ListView --------------------------%>
-             <asp:ListView ID="UnitsListView" runat="server" Visible="false" DataSourceID="UnitsODS" InsertItemPosition="LastItem">
+             <asp:ListView ID="UnitsListView" runat="server" Visible="False" DataSourceID="UnitsODS" DataKeyNames="unitID" InsertItemPosition="LastItem">
 
 
-
-          
-             </asp:ListView>
+        
+              </asp:ListView>
+   
 
          </div>
 
@@ -65,18 +65,31 @@
 
 
 <%-- -----------------Active Units List ODS------------------%>
-  
-        <asp:ObjectDataSource ID="UnitsODS" runat="server" DataObjectTypeName="FSOSS.System.Data.POCOs.UnitsPOCO" DeleteMethod="SwitchUnitSatus" OldValuesParameterFormatString="original_{0}"
+
+        <asp:ObjectDataSource ID="UnitsODS" runat="server" DeleteMethod="SwitchUnitSatus" InsertMethod="AddUnit" OldValuesParameterFormatString="{0}" 
             SelectMethod="GetActiveUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit"
             OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+            <DeleteParameters>
+                <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="unitNumber" Type="String"></asp:Parameter>
+                 <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+                <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
+            </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="unitNumber" Type="String"></asp:Parameter>
+            </UpdateParameters>
         </asp:ObjectDataSource>
+
         
 
 <%-- -----------------Archived Units List ODS------------------%>     
-       <%--OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException"--%>>
+       <%--OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException"--%>
 
 
 

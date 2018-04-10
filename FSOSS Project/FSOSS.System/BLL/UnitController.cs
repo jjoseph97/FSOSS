@@ -50,7 +50,7 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to get the list of Active units of the site slected
         /// </summary>
-        /// <param String="unitNumber" , int= emploeeID ></param>
+        /// <param String="unitNumber" ></param>
         /// <returns>returns confirmation from the Site</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<UnitsPOCO> GetActiveUnitList(int site_id)
@@ -66,6 +66,7 @@ namespace FSOSS.System.BLL
                                    {
                                        unitID = y.unit_id,
                                        unitNumber = y.unit_number,
+                                       siteID = y.site_id
                                    };
 
                     return unitList.ToList();
@@ -115,48 +116,62 @@ namespace FSOSS.System.BLL
         /// <summary>
         /// Method use to add new unit to the Site
         /// </summary>
-        /// <param String="unitNumber" , int= emploeeID ></param>
+        /// <param String="unitNumber" , int= admin , int= siteID ></param>
         /// <returns>returns confirmation from the Site</returns>
-        //[DataObjectMethod(DataObjectMethodType.Insert, false)]
-        //public string AddUnit(string newUnitNumber)
-        //{
-        //    using (var context = new FSOSSContext())
-        //    {
-        //        try
-        //        {
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public string AddUnit(string unitNumber, int admin , int siteID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    if (admin == 0)
+                    {
+                        throw new Exception("Can't let you do that. You're not logged in.");
+                    }
 
-        //            var unitExist = from x in context.Units
-        //                            where x.unit_number.ToUpper() == newUnitNumber.ToUpper()
-        //                            select new Unit()
-        //                            {
-        //                                unit_number = x.unit_number
-        //                            };
+                    if (unitNumber == "" || unitNumber == null)
+                    {
+                        throw new Exception("Please enter a Unit Number");
+                    }
 
-        //            if (unitExist.Count() > 0) //if so, return an error message
-        //            {
-        //                throw new Exception("The unit \"" + newUnitNumber.ToUpper() + "\" already exists. Please enter a new Unit.");
-        //            }
+                   
 
-        //            else
-        //            {
-        //                Unit newUnit = new Unit();
-        //                newUnit.unit_number = newUnitNumber.Trim();
-        //                newUnit.administrator_account_id = 1;
-        //                newUnit.date_modified = DateTime.Now;
-        //                newUnit.archived_yn = false;
-        //                context.Units.Add(newUnit);
-        //                context.SaveChanges();
-        //                return " Unit " + newUnitNumber + " added.";
-        //            }
+                    var unitExist = from x in context.Units
+                                    where x.unit_number.ToUpper() == unitNumber.ToUpper()
+                                    select new UnitsPOCO()
+                                    {
+                                        unitNumber = x.unit_number,
+                                        siteID=x.site_id
+                                       
+                                    };
 
-                    
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            throw new Exception(e.Message);
-        //        }
-        //    }
-        //}
+                    if (unitExist.Count() > 0) //if so, return an error message
+                    {
+                        throw new Exception("The unit \"" + unitNumber.ToUpper() + "\" already exists. Please enter a new Unit.");
+                    }
+
+                    else
+                    {
+                        Unit newUnit = new Unit();
+                        newUnit.unit_number = unitNumber.Trim();
+                        newUnit.administrator_account_id = admin;
+                        newUnit.site_id = siteID;
+                        newUnit.date_modified = DateTime.Now;
+                        newUnit.archived_yn = false;
+                        context.Units.Add(newUnit);
+                        context.SaveChanges();
+                        return " Unit " + unitNumber + " added.";
+                    }
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
 
         /// <summary>
         /// Method use to disable or enable Unit from the list that is use in a site
@@ -167,7 +182,7 @@ namespace FSOSS.System.BLL
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
       
 
-        public string SwitchUnitSatus(UnitsPOCO unitStatus)
+        public string SwitchUnitSatus(int unitID)
         {
             using (var context = new FSOSSContext())
             {
@@ -175,48 +190,46 @@ namespace FSOSS.System.BLL
                 try
                 {
                     // Check if the unit exists
-                    var unitInHospital = (from x in context.Units
-                                          where x.unit_id == unitStatus.unitID
-                                          select new UnitsPOCO()
-                                          {
-                                              unitID = x.unit_id,
-                                              unitNumber = x.unit_number,
-                                              dateModified = x.date_modified,
-                                              archived_yn= x.archived_yn
-                                          }).FirstOrDefault();
-                    Unit unit = context.Units.Find(unitStatus.unitID);
+                    
+                        Unit unit = context.Units.Find(unitID);
  
                         if (unit.archived_yn == false)
                         {
                             unit.archived_yn = true;
-                            unit.date_modified = DateTime.Now;
+                            message = "enabled.";
+
                         }
-                        else if (unit.archived_yn == true)
+                        else 
                         {
                             unit.archived_yn = false;
-                            unit.date_modified = DateTime.Now;
+                            message = "disabled";
                     }
+                    unit.date_modified = DateTime.Now;
+                    context.Entry(unit).Property(y => y.archived_yn).IsModified = true;
+                    //context.Entry(unit).Property(y => y.administrator_account_id).IsModified = true;
+                    context.Entry(unit).Property(y => y.date_modified).IsModified = true;
+                    context.SaveChanges();
 
-                        context.Entry(unit).State = EntityState.Modified;
-                        context.SaveChanges();
-                   
+                    return "Unit successfully" + message;
+
+
                 }
                 catch (Exception e)
                 {
                     throw new Exception("Something went wrong. See " + e.Message);
                 }
-                return message;
+                
             }
         }
 
         /// <summary>
         /// Method use to Update unit from the list that is use in the Site
         /// </summary>
-        /// <param name="unitID" name="string unitNumber"></param>
+        /// <param name="int unitID" name="string unitNumber" name="siteID" ></param>
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateUnit(UnitsPOCO unitUpdate)
+        public string UpdateUnit(int unitID, string unitNumber)
         {
             using (var context = new FSOSSContext())
             {
@@ -228,11 +241,11 @@ namespace FSOSS.System.BLL
                 {
                     
 
-                    if (validUnit.IsMatch(unitUpdate.unitNumber))
+                    if (validUnit.IsMatch(unitNumber))
                     {
 
                         var unitExists = (from x in context.Units
-                                          where x.unit_id.Equals(unitUpdate.unitID)
+                                          where x.unit_id == unitID
                                           select x);
 
 
@@ -245,8 +258,8 @@ namespace FSOSS.System.BLL
                         else
                         {
                             
-                            Unit unitToUpdate = context.Units.Find(unitUpdate.unitID);
-                            unitToUpdate.unit_number = unitUpdate.unitNumber;
+                            Unit unitToUpdate = context.Units.Find(unitID);
+                            unitToUpdate.unit_number = unitNumber;
                             unitToUpdate.date_modified = DateTime.Now;
                             context.Entry(unitToUpdate).State = EntityState.Modified;
                             

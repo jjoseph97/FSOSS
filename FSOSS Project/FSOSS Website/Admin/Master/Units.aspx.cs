@@ -18,14 +18,14 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         SuccessAlert.Visible = false;
         ErrorAlert.Visible = false;
 
-        //if (Session["securityID"] == null) // Redirect user to login if not logged in
-        //{
-        //    Response.Redirect("~/Admin/Login.aspx");
-        //}
-        //else if (Session["securityID"].ToString() != "2" && Session["securityID"].ToString() != "1") // Return HTTP Code 403
-        //{
-        //    Context.Response.StatusCode = 403;
-        //}
+        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+        else if (Session["securityID"].ToString() != "2" && Session["securityID"].ToString() != "1") // Return HTTP Code 403
+        {
+            Context.Response.StatusCode = 403;
+        }
 
     }
 
