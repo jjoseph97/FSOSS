@@ -10,18 +10,18 @@ using System.Web.UI.WebControls;
 public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
 {
     /// <summary>
-    /// 
+    /// When the page loads, the query string for the surveyID (sid) is obtained to populate the page with the appropriate submitted survey details. 
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        string ssn = Request.QueryString["sid"];
+        string ssn = Request.QueryString["sid"]; // retreive the surveyID through a query string request passed from the submitted survey list page
         int subSurveyID;
         bool good = Int32.TryParse(ssn, out subSurveyID);
 
         SubmittedSurveyController ssc = new SubmittedSurveyController();
-        if (ssn == null )
+        if (ssn == null) // if the query string is null, the user may have came to this page directly and is taken back to the view survey filter page
         {
             Response.Redirect("ViewSurveyFilter.aspx");
         }
@@ -36,7 +36,7 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
         }
         else
         {
-            SubSurveyNumLabel.Text = ssn;
+            SubSurveyIDLabel.Text = ssn;
             
             if (ssc.wantsContact(subSurveyID))
             {
@@ -85,42 +85,6 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void ResolveButton_Click(object sender, EventArgs e)
-    {
-        string ssn = Request.QueryString["sid"];
-        SubSurveyNumLabel.Text = ssn;
-        int surveyNum = Convert.ToInt32(ssn);
-        SubmittedSurveyController ssc = new SubmittedSurveyController();
-        ssc.contactSurvey(surveyNum);
-        ContactResolve.Visible = false; // remove the resolve button after it's been clicked
-        Response.Redirect(Request.RawUrl); // reload the page to see the new contact information populated
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void UnresolveButton_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void BackToSurveyListButton_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    /// <summary>
     /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
     /// as well as info and success messages from the code behind.
     /// </summary>
@@ -142,4 +106,29 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void ResolveButton_Click(object sender, EventArgs e)
+    {
+        string ssn = Request.QueryString["sid"];
+        SubSurveyIDLabel.Text = ssn;
+        int surveyNum = Convert.ToInt32(ssn);
+        SubmittedSurveyController ssc = new SubmittedSurveyController();
+        ssc.contactSurvey(surveyNum);
+        ContactResolve.Visible = false; // remove the resolve button after it's been clicked
+        Response.Redirect(Request.RawUrl); // reload the page to see the new contact information populated
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void BackToSurveyListButton_Click(object sender, EventArgs e)
+    {
+
+    }
 }

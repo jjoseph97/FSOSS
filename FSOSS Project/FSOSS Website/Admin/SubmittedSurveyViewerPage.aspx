@@ -5,7 +5,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
-    <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
     <div class="row">
         <div class="col-sm-12">
             <h1 class="card container py-2 h4" style="font-weight: bold;">View Individual Survey</h1>
@@ -13,13 +12,13 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
+            <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
+        </div>
+        <div class="col-sm-12">
             <div class="card container pt-2">
-
                 <div class="row container mx-auto px-0">
-                    <asp:Label ID="SubSurveyNumLabel" runat="server" Text="" Style="display: none"></asp:Label>
+                    <asp:Label ID="SubSurveyIDLabel" runat="server" Text="" Style="display: none"></asp:Label>
                     <div class="col-sm-4 px-0">
-
-
                         <asp:Label ID="SiteLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site:"></asp:Label>
                         <asp:Label runat="server" ID="SiteNameLabel" Text="" /><br />
                         <asp:Label ID="UnitLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Unit Number:"></asp:Label>
