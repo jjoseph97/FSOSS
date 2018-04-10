@@ -249,7 +249,9 @@ namespace FSOSS.System.BLL
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
-                                                      surveyWord = x.survey_access_word
+                                                      surveyWord = x.survey_access_word,
+                                                      dateModified = x.date_modified,
+                                                      username = x.AdministratorAccount.username
                                                   };
 
                     return potentialSurveyWordList.ToList();
@@ -284,7 +286,9 @@ namespace FSOSS.System.BLL
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
-                                                      surveyWord = x.survey_access_word
+                                                      surveyWord = x.survey_access_word,
+                                                      dateModified = x.date_modified,
+                                                      username = x.AdministratorAccount.username
                                                   };
 
                     return potentialSurveyWordList.ToList();
@@ -318,7 +322,9 @@ namespace FSOSS.System.BLL
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
-                                                      surveyWord = x.survey_access_word
+                                                      surveyWord = x.survey_access_word,
+                                                      dateModified = x.date_modified,
+                                                      username = x.AdministratorAccount.username
                                                   };
 
                     return potentialSurveyWordList.ToList();
@@ -352,7 +358,9 @@ namespace FSOSS.System.BLL
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWordID = x.survey_word_id,
-                                                      surveyWord = x.survey_access_word
+                                                      surveyWord = x.survey_access_word,
+                                                      dateModified = x.date_modified,
+                                                      username = x.AdministratorAccount.username
                                                   };
 
                     return potentialSurveyWordList.ToList();

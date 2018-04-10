@@ -10,5 +10,7 @@ namespace FSOSS.System.Data.POCOs
     {
         public int surveyWordID { get; set; }
         public string surveyWord { get; set; }
+        public DateTime dateModified { get; set; }
+        public string username { get; set; }
     }
 }

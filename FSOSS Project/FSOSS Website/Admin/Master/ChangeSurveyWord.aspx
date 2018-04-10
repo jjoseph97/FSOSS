@@ -40,6 +40,10 @@
                             <td>
                                 <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordLabel" /></td>
                             <td>
+                                <asp:Label Text='<%# Eval("dateModified") %>' runat="server" CssClass="pl-3" ID="dateModifiedLabel" /></td>
+                            <td>
+                                <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
+                            <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
@@ -52,6 +56,10 @@
                                 <asp:TextBox Text='<%# Bind("surveyWordID") %>' runat="server" ID="surveyWordIDTextBox" Visible="false" /></td>
                             <td>
                                 <asp:TextBox Text='<%# Bind("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordTextBox" /></td>
+                            <td>
+                                <asp:Label Text='<%# Bind("dateModified") %>' runat="server" CssClass="pl-3" ID="dateModifiedLabel" /></td>
+                            <td>
+                                <asp:Label Text='<%# Bind("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
                             <td>
@@ -72,6 +80,10 @@
                             <td>
                                 <asp:Label Text='<%# Eval("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordLabel" /></td>
                             <td>
+                                <asp:Label Text='<%# Eval("dateModified") %>' runat="server" CssClass="pl-3" ID="dateModifiedLabel" /></td>
+                            <td>
+                                <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
+                            <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
@@ -84,9 +96,11 @@
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                            <th runat="server" class="col-sm-6 py-2">Survey Word</th>
-                                            <th runat="server" class="col-sm-3 py-2">Edit Word</th>
-                                            <th runat="server" class="col-sm-3 py-2">Change Availability</th>
+                                            <th runat="server" class="col-sm-2 py-2">Survey Word</th>
+                                            <th runat="server" class="col-sm-4 py-2">Modified On</th>
+                                            <th runat="server" class="col-sm-2 py-2">Last Edited By</th>
+                                            <th runat="server" class="col-sm-2 py-2">Edit Word</th>
+                                            <th runat="server" class="col-sm-2 py-2">Change Availability</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
