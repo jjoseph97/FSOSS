@@ -13,7 +13,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
         editArea.Visible = false;
 
         if (!IsPostBack)
+        {
             Message.Visible = false;
+        }
 
     }
 
@@ -47,5 +49,17 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
             Message.Visible = true;
             Message.Text = "Error";
         }
+    }
+
+    protected void QuestionUpdate_Click(object sender, EventArgs e)
+    {
+        
+        string newQuestion = DescriptionTextBox.Text.Trim();
+        int questionID = Convert.ToInt32(QuestionDDL.SelectedValue);
+
+        QuestionTextController sysmgr = new QuestionTextController();
+        sysmgr.UpdateQuestionsText(questionID, newQuestion);
+
+        editArea.Visible = true;
     }
 }
