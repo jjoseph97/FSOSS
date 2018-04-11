@@ -18,27 +18,93 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                List<SubmittedSurvey> submittedSurveyList = (from x in context.SubmittedSurveys
-                                                             where x.date_entered >= startDate && x.date_entered <= endDate
-                                                             && x.meal_id == mealID
-                                                             select x).ToList();
-
-                List<ParticipantResponse> participantResponseList = (from x in context.ParticipantResponses
-                                             where x.submittedsurvey.date_entered >= startDate
-                                             && x.submittedsurvey.date_entered <= endDate
-                                             && x.submittedsurvey.meal_id == mealID
-                                             select x).ToList();
-                var result = (from x in context.QuestionSelections
-                             group x by new { x.question_id } into newData
-                             select new CountPOCO
-                             {
-
-                                  count = newData.Count()
-                             }).FirstOrDefault();
-
-                List<List<string>> valueList = new List<List<string>>();
-                List<List<int>> countList = new List<List<int>>();
+                List<ParticipantResponse> participantResponseList = new List<ParticipantResponse>();
+                List<SubmittedSurvey> submittedSurveyList = new List<SubmittedSurvey>();
+                if (siteID == 0 && mealID != 0)
+                {
+                    participantResponseList = (from x in context.ParticipantResponses
+                                                                         where x.submittedsurvey.date_entered >= startDate
+                                                                         && x.submittedsurvey.date_entered <= endDate
+                                                                         && x.submittedsurvey.meal_id == mealID
+                                                                         select x).ToList();
+                    submittedSurveyList = (from x in context.SubmittedSurveys
+                                                                 where x.date_entered >= startDate && x.date_entered <= endDate
+                                                                 && x.meal_id == mealID
+                                                                 select x).ToList();
+                }
+                else if (siteID == 0 && mealID == 0)
+                {
+                    participantResponseList = (from x in context.ParticipantResponses
+                                                                         where x.submittedsurvey.date_entered >= startDate
+                                                                         && x.submittedsurvey.date_entered <= endDate
+                                                                         select x).ToList();
+                    submittedSurveyList = (from x in context.SubmittedSurveys
+                                                                 where x.date_entered >= startDate && x.date_entered <= endDate
+                                                                 select x).ToList();
+                }
+                else if (mealID == 0 && siteID !=0)
+                {
+                    participantResponseList = (from x in context.ParticipantResponses
+                                                                         where x.submittedsurvey.date_entered >= startDate
+                                                                         && x.submittedsurvey.date_entered <= endDate
+                                                                         && x.submittedsurvey.Unit.site_id == siteID
+                                                                         select x).ToList();
+                    submittedSurveyList = (from x in context.SubmittedSurveys
+                                                                 where x.date_entered >= startDate && x.date_entered <= endDate
+                                                                 && x.Unit.site_id == siteID
+                                                                 select x).ToList();
+                }
+                else
+                {
+                    participantResponseList = (from x in context.ParticipantResponses
+                                                                         where x.submittedsurvey.date_entered >= startDate
+                                                                         && x.submittedsurvey.date_entered <= endDate
+                                                                         && x.submittedsurvey.Unit.site_id == siteID
+                                                                         && x.submittedsurvey.meal_id == mealID
+                                                                         select x).ToList();
+                    submittedSurveyList = (from x in context.SubmittedSurveys
+                                                                 where x.date_entered >= startDate && x.date_entered <= endDate
+                                                                 && x.Unit.site_id == siteID
+                                                                 && x.meal_id == mealID
+                                                                 select x).ToList();
+                }
+                List<Question> questions = (from x in context.Questions
+                                            select x).ToList();
                 List<string> Questions = new List<string>();
+                foreach (Question question in questions)
+                {
+                    if (question.question_id == 2)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                    else if (question.question_id == 3)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                    else if (question.question_id == 4)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                    else if (question.question_id == 5)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                    else if (question.question_id == 6)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                    else if (question.question_id == 9)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                    else if (question.question_id == 10)
+                    {
+                        Questions.Add(question.question_text);
+                    }
+                }
+               
+
+              
                 List<string> QuestionTwoValueList = new List<string>();
                 List<int> QuestionTwoValueCount = new List<int>();
                 List<string> QuestionThreeValueList = new List<string>();
@@ -61,7 +127,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionTwoValueList.Count < 1 || !QuestionTwoValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionTwoValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionTwoValueCount.Add(valueCounter);
@@ -80,7 +145,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionThreeValueList.Count < 1 || !QuestionThreeValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionThreeValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionThreeValueCount.Add(valueCounter);
@@ -98,7 +162,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionFourValueList.Count < 1 || !QuestionFourValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionFourValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionFourValueCount.Add(valueCounter);
@@ -116,7 +179,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionFiveValueList.Count < 1 || !QuestionFiveValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionFiveValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionFiveValueCount.Add(valueCounter);
@@ -134,7 +196,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionSixValueList.Count < 1 || !QuestionSixValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionSixValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionSixValueCount.Add(valueCounter);
@@ -152,7 +213,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionNineValueList.Count < 1 || !QuestionNineValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionNineValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionNineValueCount.Add(valueCounter);
@@ -170,7 +230,6 @@ namespace FSOSS.System.BLL
                     {
                         if (QuestionTenValueList.Count < 1 || !QuestionTenValueList.Contains(responses.participant_answer))
                         {
-                            Questions.Add(responses.question.question_text);
                             QuestionTenValueList.Add(responses.participant_answer);
                             valueCounter++;
                             QuestionTenValueCount.Add(valueCounter);
@@ -206,11 +265,6 @@ namespace FSOSS.System.BLL
                 };
                 return finalReport;
             }
-        }
-
-        public class CountPOCO
-        {
-            public int count { get; set; }
-        }
+        }      
     }
 }

@@ -16,8 +16,9 @@ using FSOSS.System.Data.Entity;
 
 public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
 {
+    public static FinalReportPOCO report = new FinalReportPOCO();
 
-   
+
     protected void Page_Load(object sender, EventArgs e)
     {
         Alert.Visible = false;
@@ -29,27 +30,43 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         else
         {
             ReportController sysmgr = new ReportController();
-            FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
+            report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
             SiteController siteMgr = new SiteController();
+            string siteName = "";
+            siteName = siteMgr.DisplaySiteName(filter.siteID);
+            if (siteName == null)
+            {
+                siteName = "All sites";
+            }
             MealController mealMgr = new MealController();
             Meal meal = new Meal();
             meal = mealMgr.GetMeal(filter.mealID);
-            FilterDescription.Text = "Report from " + siteMgr.DisplaySiteName(filter.siteID) + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") + 
-                " with a meal filter of " + meal.meal_name + ".";
+            string mealFilter;
+            if(meal == null)
+            {
+                mealFilter = "none";
+            }
+            else
+            {
+                mealFilter = meal.meal_name;
+            }
+            FilterDescription.Text = "Report from " + siteName + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") + 
+                " with a meal filter of " + mealFilter + ".";
             TotalNumberOfSubmittedSurvey.Text = "Total number of submitted survey with the given criteria: "+report.SubmittedSurveyList.Count().ToString() + " surveys submitted.";
-
+            if(report.QuestionTenValueCount.Count < 1)
+            {
+                TotalNumberOfSubmittedSurvey.Visible = false;
+                EmptyMessage.Visible = true;
+                EmptyMessage.Text = "No Submitted Survey Found. Please check your filter";
+            }
         } 
     }
 
     public static readonly string[] COLOR_VALUE = {"rgb(255, 0, 0)", "rgb(255, 255, 0)","rgb(0, 153, 0)","rgb(0, 0, 255)","rgb(255, 0, 255)" };
-
+    
     [WebMethod]
     public static string GetQuestionTwoData()
     {
-       
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();      
         for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
         {
@@ -75,10 +92,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetQuestionThreeData()
     {
-
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();
         for (int counter = 0; counter < report.QuestionThreeValueCount.Count; counter++)
         {
@@ -103,10 +116,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetQuestionFourData()
     {
-
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();
         for (int counter = 0; counter < report.QuestionFourValueCount.Count; counter++)
         {
@@ -131,10 +140,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetQuestionFiveData()
     {
-
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();
         for (int counter = 0; counter < report.QuestionFiveValueCount.Count; counter++)
         {
@@ -159,10 +164,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetQuestionSixData()
     {
-
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();
         for (int counter = 0; counter < report.QuestionSixValueCount.Count; counter++)
         {
@@ -187,10 +188,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetQuestionNineData()
     {
-
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();
         for (int counter = 0; counter < report.QuestionNineValueCount.Count; counter++)
         {
@@ -215,10 +212,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetQuestionTenData()
     {
-
-        FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
-        ReportController sysmgr = new ReportController();
-        FinalReportPOCO report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
         List<ChartPOCO> responses = new List<ChartPOCO>();
         for (int counter = 0; counter < report.QuestionTenValueCount.Count; counter++)
         {
