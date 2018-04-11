@@ -11,7 +11,11 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["takingSurvey"] == null)
+        if (Session["takingSurvey"] == null 
+            && Session["Unit"] == null
+            && Session["MealType"] == null
+            && Session["ParticipantType"] == null
+            && Session["Q4"] == null)
         {
             Response.Redirect("~/");
         }
