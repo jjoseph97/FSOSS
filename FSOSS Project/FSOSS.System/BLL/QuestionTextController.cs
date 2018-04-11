@@ -15,7 +15,8 @@ namespace FSOSS.System.BLL
     public class QuestionTextController
     {
 
-        //Survey Questions 
+        //TakeSurvey.aspx & TakeSurvey.aspx.cs
+        //method used to get the string value for Question 1
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1()
         {
@@ -29,6 +30,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question1A
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1A()
         {
@@ -42,6 +44,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question1B
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1B()
         {
@@ -55,6 +58,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question1C
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1C()
         {
@@ -68,6 +72,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question1D
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1D()
         {
@@ -81,6 +86,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question1E
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1E()
         {
@@ -94,6 +100,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question2
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion2()
         {
@@ -107,6 +114,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question3
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion3()
         {
@@ -120,6 +128,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question4
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion4()
         {
@@ -133,6 +142,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method used to get the string value for Question5
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion5()
         {
@@ -146,8 +156,8 @@ namespace FSOSS.System.BLL
             }
         }
 
-
         //Customer Profile
+        //method to return the string for Gender  
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionGender()
         {
@@ -161,6 +171,7 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //method to return the string for Age Range
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionAgeRange()
         {
@@ -174,6 +185,8 @@ namespace FSOSS.System.BLL
             }
         }
 
+        //Edit Survey Questions Page
+        //Method used to get current question string
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionText(int question_id)
         {
@@ -195,8 +208,20 @@ namespace FSOSS.System.BLL
             return questiontext;
         }
 
+        //Update survey questions to return new string
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void UpdateQuestionsText(int questionid, string text)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = (from x in context.Questions
+                              where x.question_id == questionid
+                              select x).FirstOrDefault();
 
+                result.question_text = text;
 
-        //select question_text from question where question_id = 1;
+                context.SaveChanges();
+            }
+        }
     }
 }

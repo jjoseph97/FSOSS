@@ -12,7 +12,8 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class QuestionSelectionController
     {
-        //Question 1A
+        //TakeSurvey.aspx and TakeSurvey.aspx.cs
+        //method used to get the response string value for Question 1A
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1AReponse()
         {
@@ -20,6 +21,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 2
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -29,7 +31,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 1B
+        //method used to get the response string value for Question 1B
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1BReponse()
         {
@@ -37,6 +39,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 3
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -46,7 +49,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 1C
+        //method used to get the response string value Question 1C
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1CReponse()
         {
@@ -54,6 +57,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 4
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -63,7 +67,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 1D
+        //method used to get the response string value for Question 1D
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1DReponse()
         {
@@ -71,6 +75,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 5
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -80,7 +85,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 1E
+        //method used to get the response string value for Question 1E
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1EReponse()
         {
@@ -88,6 +93,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 6
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -97,7 +103,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 2
+        //method used to get the response string value for Question 2
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion2Reponse()
         {
@@ -105,6 +111,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 8
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -114,7 +121,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 3
+        //method used to get the response string value for Question 3
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion3Reponse()
         {
@@ -122,6 +129,7 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 9
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
@@ -131,7 +139,7 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Question 4
+        //method used to get the response string value for Question 4
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion4Reponse()
         {
@@ -139,12 +147,50 @@ namespace FSOSS.System.BLL
             {
                 var result = from x in context.QuestionSelections
                                 where x.question_id == 10
+                                orderby x.question_selection_id
                                 select new ResponsePOCO
                                 {
                                     Text = x.question_selection_text,
                                     Value = x.question_selection_value
                                 };
                 return result.ToList();
+            }
+        }
+
+        //Edit Survey Questions Page
+        //Method used to display current survey responses
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<ResponsePOCO> GetQuestionResponses(int questionid)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = from x in context.QuestionSelections
+                             where x.question_id == questionid
+                             orderby x.question_selection_id
+                             select new ResponsePOCO
+                             {
+                                 ResponseId = x.question_selection_id,
+                                 Text = x.question_selection_text,
+                                 Value = x.question_selection_value
+                             };
+                return result.ToList();
+            }
+        }
+
+        //Update survey responses to return new string 
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void UpdateQuestionResponses(int questionid, int ResponseId, string text, string value)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = (from x in context.QuestionSelections
+                             where x.question_id == questionid && x.question_selection_id == ResponseId
+                             select x).FirstOrDefault();
+
+                result.question_selection_text = text;
+                result.question_selection_value = text;
+
+                context.SaveChanges();
             }
         }
     }
