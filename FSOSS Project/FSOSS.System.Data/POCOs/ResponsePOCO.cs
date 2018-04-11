@@ -8,6 +8,7 @@ namespace FSOSS.System.Data.POCOs
 {
     public class ResponsePOCO
     {
+        public int ResponseId { get; set; }
         public string Text { get; set; }
         public string Value { get; set; }
     }
