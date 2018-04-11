@@ -19,13 +19,13 @@ namespace FSOSS.System.Data.Entity
 
         [Key]
         public int administrator_account_id { get; set; }
-        [Required]
+        [Required, StringLength(100, ErrorMessage = "Username can only be 100 characters long")]
         public string username { get; set; }
-        [Required]
+        [Required, StringLength(60, ErrorMessage = "Password can only be 60 characters long")]
         public string admin_password { get; set; }
-        [Required]
+        [Required, StringLength(50, ErrorMessage = "First Name can only be 50 characters long")]
         public string first_name { get; set; }
-        [Required]
+        [Required, StringLength(50, ErrorMessage = "Last Name can only be 50 characters long")]
         public string last_name { get; set; }
         [Required]
         public bool archived_yn {get; set;}

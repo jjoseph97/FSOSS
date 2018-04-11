@@ -37,6 +37,8 @@
                                 Display="None" SetFocusOnError="true" />
                             <asp:RegularExpressionValidator ErrorMessage="First Name must start with a capital letter and will only contain letters" ControlToValidate="FirstNameTextBox" runat="server"
                                 ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true" />
+                            <asp:CustomValidator ErrorMessage="First Name must be less than 50 characters" ControlToValidate="FirstNameTextBox" runat="server"
+                                Display="None" SetFocusOnError="true" OnServerValidate="FirstNameLengthValidator_ServerValidate" />
                         </div>
                     </div>
 
@@ -48,6 +50,8 @@
                                 Display="None" SetFocusOnError="true" />
                             <asp:RegularExpressionValidator ErrorMessage="Last Name must start with a capital letter and will only contain letters" ControlToValidate="LastNameTextBox" runat="server" 
                                 ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true" />
+                            <asp:CustomValidator ErrorMessage="Last Name must be less than 50 characters" ControlToValidate="LastNameTextBox" runat="server"
+                                Display="None" SetFocusOnError="true" OnServerValidate="LastNameLengthValidator_ServerValidate"/>
                         </div>
                     </div>
 
@@ -64,9 +68,9 @@
                         <div class="col-sm-8">
                             <asp:TextBox ID="ConfirmPasswordTextBox" runat="server" TextMode="Password" CssClass="form-control" AutoComplete="off" />
                             <asp:RequiredFieldValidator ID="ConfirmPasswordRFV" ErrorMessage="Please confirm the password" ControlToValidate="ConfirmPasswordTextBox" runat="server" 
-                                Display="None" />
-                            <asp:CompareValidator ID="ConfirmPasswordCV" ErrorMessage="Invalid password confirmation" ControlToValidate="ConfirmPasswordTextBox" runat="server"
-                                Display="None" ControlToCompare="PasswordTextBox" />
+                                Display="None" SetFocusOnError="false" />
+                            <asp:CompareValidator ID="ConfirmPasswordCV" ErrorMessage="Password confirmation did not match" ControlToValidate="ConfirmPasswordTextBox" runat="server"
+                                Display="None" ControlToCompare="PasswordTextBox" SetFocusOnError="false" />
                         </div>
                     </div>
 
@@ -85,7 +89,7 @@
 
                     <div class="form-group row float-md-right">
                         <div class="col-sm-12">
-                            <asp:Button ID="UpdateButton" runat="server" CssClass="btn btn-primary btn-block" Text="Update User" OnClick="UpdateButton_Click" CausesValidation="false" />
+                            <asp:Button ID="UpdateButton" runat="server" CssClass="btn btn-info btn-block" Text="Update User" OnClick="UpdateButton_Click" CausesValidation="false" />
                         </div>
                     </div>
 

@@ -11,6 +11,9 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Set Default button for page
+        Page.Form.DefaultButton = UpdateButton.UniqueID; // Enables user to press enter button
+
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -47,7 +50,6 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
     // TODO: Rameses - clean up this method
     protected void UpdateButton_Click(object sender, EventArgs e)
     {
-        #region REGULAR STUFF
         if (Convert.ToInt32(Request.QueryString["id"]).Equals(Convert.ToInt32(Session["userID"])) && DeactivateCheckBox.Checked)
         {
             SuccessMessage.Visible = false;
@@ -69,7 +71,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
         }
         else
         {
-            if (String.IsNullOrEmpty(ConfirmPasswordTextBox.Text))
+            if (String.IsNullOrEmpty(ConfirmPasswordTextBox.Text) && String.IsNullOrEmpty(PasswordTextBox.Text))
             {
                 // Disable validation checks for password input
                 ConfirmPasswordRFV.Enabled = false;
@@ -80,40 +82,36 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                 if (IsValid)
                 {
                     // Update user excluding the password change
-                    // Update user including the password change
                     AdministratorAccountController sysmgr = new AdministratorAccountController();
-                    try
-                    {
-                        SuccessMessage.Visible = true;
-                        SuccessMessage.Text = "Successfully updated: " + sysmgr.UpdateAdministratorAccount(UserNameTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text, DeactivateCheckBox.Checked, int.Parse(SecurityLevelDDL.SelectedItem.Value));
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
+                    string updatedUser = sysmgr.UpdateAdministratorAccount(UserNameTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text, DeactivateCheckBox.Checked, int.Parse(SecurityLevelDDL.SelectedItem.Value));
+                    SuccessMessage.Visible = true;
+                    SuccessMessage.Text = "Successfully updated: " + updatedUser;
                 }
             }
             else
             {
+                ConfirmPasswordRFV.Enabled = true;
+                ConfirmPasswordCV.Enabled = true;
                 Page.Validate();
                 if (IsValid)
                 {
                     // Update user including the password change
                     AdministratorAccountController sysmgr = new AdministratorAccountController();
-                    try
-                    {
-                        SuccessMessage.Visible = true;
-                        SuccessMessage.Text = "Successfully updated: " + sysmgr.UpdateAdministratorAccount(UserNameTextBox.Text, PasswordTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text, DeactivateCheckBox.Checked, int.Parse(SecurityLevelDDL.SelectedItem.Value));
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
+                    string updatedUser = sysmgr.UpdateAdministratorAccount(UserNameTextBox.Text, PasswordTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text, DeactivateCheckBox.Checked, int.Parse(SecurityLevelDDL.SelectedItem.Value));
+                    SuccessMessage.Visible = true;
+                    SuccessMessage.Text = "Successfully updated: " + updatedUser;
                 }
             }
         }
-        #endregion
+    }
+
+    protected void FirstNameLengthValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = (FirstNameTextBox.Text.Trim().Length < 50);
+    }
+
+    protected void LastNameLengthValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = (LastNameTextBox.Text.Trim().Length < 50);
     }
 }

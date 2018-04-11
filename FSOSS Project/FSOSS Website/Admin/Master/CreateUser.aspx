@@ -29,6 +29,8 @@
                                 Display="None" SetFocusOnError="true" />
                             <asp:RegularExpressionValidator ErrorMessage="First Name must start with a capital letter and will only contain letters" ControlToValidate="FirstNameTextBox" runat="server"
                                 ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true" />
+                            <asp:CustomValidator ErrorMessage="First Name must be less than 50 characters" ControlToValidate="FirstNameTextBox" runat="server"
+                                Display="None" SetFocusOnError="true" OnServerValidate="FirstNameLengthValidator_ServerValidate" />
                         </div>
                     </div>
 
@@ -40,6 +42,8 @@
                                 Display="None" SetFocusOnError="true" />
                             <asp:RegularExpressionValidator ErrorMessage="Last Name must start with a capital letter and will only contain letters" ControlToValidate="LastNameTextBox" runat="server" 
                                 ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true"/>
+                            <asp:CustomValidator ErrorMessage="Last Name must be less than 50 characters" ControlToValidate="LastNameTextBox" runat="server"
+                                Display="None" SetFocusOnError="true" OnServerValidate="LastNameLengthValidator_ServerValidate"/>
                         </div>
                     </div>
 
@@ -74,7 +78,7 @@
 
                     <div class="form-group row float-md-right">
                         <div class="col-sm-12">
-                            <asp:Button ID="CreateButton" runat="server" CssClass="btn btn-primary btn-block" Text="Create User" OnClick="CreateButton_Click" CausesValidation="false"/>
+                            <asp:Button ID="CreateButton" runat="server" CssClass="btn btn-info btn-block" Text="Create User" OnClick="CreateButton_Click" CausesValidation="false"/>
                         </div>
                     </div>
 

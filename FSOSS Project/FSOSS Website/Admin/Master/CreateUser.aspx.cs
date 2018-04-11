@@ -25,6 +25,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
 
             if (!IsPostBack)
             {
+                FirstNameTextBox.Focus();
                 SuccessMessage.Visible = false;
                 ClearFields();
             }
@@ -41,8 +42,8 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
         }
         else
         {
-            string firstName = FirstNameTextBox.Text;
-            string lastName = LastNameTextBox.Text;
+            string firstName = FirstNameTextBox.Text.Trim();
+            string lastName = LastNameTextBox.Text.Trim();
             string password = PasswordTextBox.Text;
             int selectedRoleId = Convert.ToInt32(SecurityLevelDDL.SelectedItem.Value);
 
@@ -66,5 +67,15 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
         LastNameTextBox.Text = null;
         PasswordTextBox.Text = null;
         SecurityLevelDDL.SelectedIndex = 0;
+    }
+
+    protected void FirstNameLengthValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = (FirstNameTextBox.Text.Trim().Length < 50);
+    }
+
+    protected void LastNameLengthValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = (LastNameTextBox.Text.Trim().Length < 50);
     }
 }

@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
@@ -127,7 +128,30 @@ namespace FSOSS.System.BLL
                                  username = x.username,
                                  firstName = x.first_name,
                                  lastName = x.last_name,
-                                 archived = x.archived_yn == true ? "Disabled" : "Enabled"
+                                 archived = x.archived_yn == true ? "Deactive" : "Active"
+                             };
+
+                return result.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<AdministratorAccountPOCO> GetSearchedUserList(string searchedWord)
+        {
+            using (var context = new FSOSSContext())
+            {
+                var result = from x in context.AdministratorAccounts
+                             orderby x.username ascending
+                             where x.username.Contains(searchedWord.Trim().ToLower()) 
+                                || x.first_name.ToLower().Contains(searchedWord.Trim().ToLower())
+                                || x.last_name.ToLower().Contains(searchedWord.Trim().ToLower())
+                             select new AdministratorAccountPOCO
+                             {
+                                 id = x.administrator_account_id,
+                                 username = x.username,
+                                 firstName = x.first_name,
+                                 lastName = x.last_name,
+                                 archived = x.archived_yn == true ? "Inactive" : "Active"
                              };
 
                 return result.ToList();

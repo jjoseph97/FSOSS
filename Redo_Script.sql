@@ -36,7 +36,7 @@ CREATE TABLE SECURITY_ROLE
 CREATE TABLE ADMINISTRATOR_ACCOUNT
 (
 	ADMINISTRATOR_ACCOUNT_ID SERIAL PRIMARY KEY NOT NULL,
-	USERNAME VARCHAR(50) UNIQUE NOT NULL,
+	USERNAME VARCHAR(100) UNIQUE NOT NULL,
 	ADMIN_PASSWORD VARCHAR(60) NOT NULL, -- Changed to VARCHAR(50) for hashing
 	FIRST_NAME VARCHAR(50) NOT NULL,
 	LAST_NAME VARCHAR(50) NOT NULL,
@@ -2536,15 +2536,15 @@ LANGUAGE PLPGSQL;
 
 -- Create add_user function
 CREATE OR REPLACE FUNCTION add_user (
-	username_param VARCHAR(50), 
+	username_param VARCHAR(100), 
 	password_param VARCHAR(60),
 	firstname_param VARCHAR(50),
 	lastname_param VARCHAR(50),
 	securityid_param INTEGER)
-RETURNS VARCHAR(50) AS $$
+RETURNS VARCHAR(100) AS $$
 DECLARE
 	userID INTEGER;
-	createdUsername VARCHAR(50);
+	createdUsername VARCHAR(100);
 BEGIN
 	INSERT INTO administrator_account (username, admin_password, first_name, last_name, date_created)
 	VALUES (username_param, crypt(password_param,gen_salt('bf')), firstname_param, lastname_param, NOW());
@@ -2566,16 +2566,16 @@ LANGUAGE PLPGSQL;
 
 -- Create update_user_with_password function
 CREATE OR REPLACE FUNCTION update_user_with_password (
-	username_param VARCHAR(50), 
+	username_param VARCHAR(100), 
 	password_param VARCHAR(60),
 	firstname_param VARCHAR(50),
 	lastname_param VARCHAR(50),
 	archived_yn_param BOOLEAN,
 	securityid_param INTEGER)
-RETURNS VARCHAR(50) AS $$
+RETURNS VARCHAR(100) AS $$
 DECLARE
 	userID INTEGER;
-	updatedUser VARCHAR(50);
+	updatedUser VARCHAR(100);
 BEGIN
 	UPDATE
 		administrator_account
@@ -2615,10 +2615,10 @@ CREATE OR REPLACE FUNCTION update_user_without_password (
 	lastname_param VARCHAR(50),
 	archived_yn_param BOOLEAN,
 	securityid_param INTEGER)
-RETURNS VARCHAR(50) AS $$
+RETURNS VARCHAR(100) AS $$
 DECLARE
 	userID INTEGER;
-	updatedUser VARCHAR(50);
+	updatedUser VARCHAR(100);
 BEGIN
 	UPDATE
 		administrator_account

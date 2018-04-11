@@ -9,30 +9,38 @@
 
     <div class="row">
         <div class="col-sm-12">
+            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success p-2" Visible="false" />
+            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 alert alert-danger p-2" Visible="false" />
+        </div>
+        <div class="col-sm-12">
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="SearchUserLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search User: " />
-                    <asp:TextBox ID="SearchUserTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type user to search for..." AutoComplete="off"/>
-                    <asp:Button ID="SearchUserButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" />
+                    <asp:TextBox ID="SearchUserTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type user to search for..." AutoComplete="off" />
+                    <asp:Button ID="SearchUserButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchUserButton_Click" />
                 </div>
             </div>
 
             <div class="card container">
-                <asp:ListView runat="server" DataSourceID="AdministratorAccountODS">
+                <%--<div class="row container mx-auto px-0">
+                    <asp:Button ID="ShowDeactiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Deactive" OnClick="ShowDeactiveButton_Click" ></asp:Button>
+                    <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false" ></asp:Button>
+                </div>--%>
+                <asp:ListView ID="AdministratorAccountListView" runat="server" DataSourceID="AdministratorAccountODS">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #FFFFFF; color: #284775;">
-                            <td style="display:none;">
-                                <asp:Label Text='<%# Eval("id") %>' runat="server" ID="idLabel" Visible="false" /></td>
+                            <td style="display: none;">
+                                <asp:Label Text='<%# Eval("id") %>' runat="server" ID="idLabel" Visible="false" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("firstName") %>' runat="server" ID="firstNameLabel" /></td>
+                                <asp:Label Text='<%# Eval("firstName") %>' runat="server" ID="firstNameLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("lastName") %>' runat="server" ID="lastNameLabel" /></td>
+                                <asp:Label Text='<%# Eval("lastName") %>' runat="server" ID="lastNameLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" /></td>
+                                <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' /></td>
+                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' CssClass="btn btn btn-info mx-3 my-1" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EmptyDataTemplate>
@@ -44,40 +52,41 @@
                     </EmptyDataTemplate>
                     <ItemTemplate>
                         <tr style="background-color: #E0FFFF; color: #333333;">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("id") %>' runat="server" ID="idLabel" Visible="false" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("firstName") %>' runat="server" ID="firstNameLabel" /></td>
+                                <asp:Label Text='<%# Eval("firstName") %>' runat="server" ID="firstNameLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("lastName") %>' runat="server" ID="lastNameLabel" /></td>
+                                <asp:Label Text='<%# Eval("lastName") %>' runat="server" ID="lastNameLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" /></td>
+                                <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' /></td>
+                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' CssClass="btn btn btn-info mx-3 my-1" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table runat="server">
+                        <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                        <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
-                                            <th runat="server">username</th>
-                                            <th runat="server">firstName</th>
-                                            <th runat="server">lastName</th>
-                                            <th runat="server">archived</th>
+                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                            <th runat="server" class="col-sm-4 py-2 px-3">Username</th>
+                                            <th runat="server" class="col-sm-4 py-2 px-3">First Name</th>
+                                            <th runat="server" class="col-sm-4 py-2 px-3">Last Name</th>
+                                            <th runat="server" class="py-2 px-3">Status</th>
+                                            <th runat="server" class="py-2"></th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
                                 </td>
                             </tr>
-                            <tr runat="server">
+                            <tr runat="server" class="mx-2 my-2">
                                 <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                    <asp:DataPager runat="server" ID="DataPager2">
+                                    <asp:DataPager runat="server" ID="DataPager2" PageSize="6">
                                         <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                         </Fields>
                                     </asp:DataPager>
                                 </td>
@@ -86,6 +95,11 @@
                     </LayoutTemplate>
                 </asp:ListView>
                 <asp:ObjectDataSource runat="server" ID="AdministratorAccountODS" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllUserList" TypeName="FSOSS.System.BLL.AdministratorAccountController"></asp:ObjectDataSource>
+                <asp:ObjectDataSource runat="server" ID="SearchedAdministratorAccountODS" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSearchedUserList" TypeName="FSOSS.System.BLL.AdministratorAccountController">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="SearchUserTextBox" PropertyName="Text" Name="searchedWord" Type="String"></asp:ControlParameter>
+                    </SelectParameters>
+                </asp:ObjectDataSource>
             </div>
         </div>
     </div>
