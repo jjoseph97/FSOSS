@@ -11,12 +11,13 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["takingSurvey"] == null 
-            && Session["Unit"] == null
+        if (Session["takingSurvey"] == null ||
+            (Session["Unit"] == null
             && Session["MealType"] == null
             && Session["ParticipantType"] == null
-            && Session["Q4"] == null)
+            && Session["Q4"] == null))
         {
+            Session.Abandon();
             Response.Redirect("~/");
         }
 
@@ -177,9 +178,6 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 
                 SubmittedSurveyController sysmgr = new SubmittedSurveyController();
                 sysmgr.SubmitSurvey(surveyVersionId, unitId, mealId, participantTypeId, ageRangeId, genderId, contactRequest, contactRoomNumber, contactPhoneNumber, q1AResponse, q1BResponse, q1CResponse, q1DResponse, q1EResponse, q2Response, q3Response, q4Response, q5Response);
-
-                // abandon session
-                Session.Abandon();
 
                 Response.Redirect("~/Thankyou");
             }

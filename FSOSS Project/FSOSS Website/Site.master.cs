@@ -67,19 +67,23 @@ public partial class SiteMaster : MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         LoginButton.Text = Session["userID"] != null ? "Log out" : "Log in";
-
-        if (HttpContext.Current.Request.RawUrl.StartsWith("/Admin") || HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
+        
+        if (!HttpContext.Current.Request.RawUrl.StartsWith("/Admin") && !HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
         {
             //logolink.HRef = "~/Admin";
-            LogoLink.PostBackUrl = "~/Admin/";
-        }
-        else
-        {
-            //logolink.HRef = "~/";
-            LogoLink.PostBackUrl = "~/";
+            //LogoLink.PostBackUrl = "~/Admin/";
+            //FSOSSNavbar.Visible = true;
+            //hamburger.Visible = true;
             FSOSSNavbar.Visible = false;
             hamburger.Visible = false;
         }
+        //else
+        //{
+        //    //logolink.HRef = "~/";
+        //    //LogoLink.PostBackUrl = "~/";
+        //    FSOSSNavbar.Visible = false;
+        //    hamburger.Visible = false;
+        //}
 
         if (Session["securityID"] != null)
         {
@@ -114,9 +118,24 @@ public partial class SiteMaster : MasterPage
 
     protected void LogoLink_Click(object sender, EventArgs e)
     {
-        if (!HttpContext.Current.Request.RawUrl.StartsWith("/Admin") && !HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
+        //if (!HttpContext.Current.Request.RawUrl.StartsWith("/Admin") && !HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
+        //{
+        //    Session.Abandon();
+        //}
+
+        if (HttpContext.Current.Request.RawUrl.StartsWith("/Admin") || HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
         {
+            //logolink.HRef = "~/Admin";
+            Response.Redirect("~/Admin");
+        }
+        else
+        {
+            //logolink.HRef = "~/";
             Session.Abandon();
+            Response.Redirect("~/");
+            
+            //FSOSSNavbar.Visible = false;
+            //hamburger.Visible = false;
         }
     }
 }

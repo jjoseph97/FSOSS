@@ -29,7 +29,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
         }
         else
         {
-            string username = UsernameTextBox.Text.ToLower();
+            string username = UsernameTextBox.Text.Trim().ToLower();
             string password = PasswordTextBox.Text;
 
             AdministratorAccountController sysmgr = new AdministratorAccountController();

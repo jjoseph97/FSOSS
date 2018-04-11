@@ -13,6 +13,7 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
     {
         if (Session["takingSurvey"] == null)
         {
+            Session.Abandon();
             Response.Redirect("~/");
         }
         if (!IsPostBack)
