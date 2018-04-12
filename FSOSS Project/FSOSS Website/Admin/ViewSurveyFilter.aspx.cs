@@ -11,6 +11,12 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // this is for the client side input values to be retained after the page loads when a validation error is triggered (so the text is not lost)
+        string startingPeriodInput = Request.Form["StartingPeriodInput"];
+        string endingPeriodInput = Request.Form["EndingPeriodInput"];
+        this.startingInputValue = startingPeriodInput;
+        this.endingInputValue = endingPeriodInput;
+
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -19,22 +25,25 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         {
             Context.Response.StatusCode = 403;
         }
-        else if (!IsPostBack)
+        else if (!IsPostBack) // this is for loading the dropdown lists on the page with the data from the database
         {
             SiteController siteController = new SiteController();
-            List<SitePOCO> siteList = siteController.GetSiteList();
+            List<SitePOCO> siteList = siteController.GetSiteList(); // get sites for the sites drop down list
             HospitalDropDownList.DataSource = siteList;
             HospitalDropDownList.DataValueField = "siteID";
             HospitalDropDownList.DataTextField = "siteName";
             HospitalDropDownList.DataBind();
             MealController mealController = new MealController();
-            List<MealPOCO> mealList = mealController.GetMealList();
+            List<MealPOCO> mealList = mealController.GetMealList(); // get meals for the meals drop down list
             MealDropDownList.DataSource = mealList;
             MealDropDownList.DataValueField = "mealID";
             MealDropDownList.DataTextField = "mealName";
             MealDropDownList.DataBind();
         }
     }
+
+    protected string startingInputValue { get; set; }
+    protected string endingInputValue { get; set; }
 
     /// <summary>
     /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
@@ -48,6 +57,11 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         MessageUserControl.HandleDataBoundException(e);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         MessageUserControl.TryRun(() =>
@@ -76,19 +90,28 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                 }
                 else
                 {
+                    
                     throw new Exception("Please select an ending period");
                 }
             }
             else
             {
+                
                 throw new Exception("Please select a starting period");
+                
             }
         }, "Success", "Redirecting to the survey list page.");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void HospitalDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (HospitalDropDownList.SelectedIndex != 0)
+        // if the site drop down list has changed (not all hospitals but a particular one) then retrieve the units from the database and populate the unit drop odwn list
+        if (HospitalDropDownList.SelectedIndex != 0) 
         {
             UnitLabel.Visible = true;
             UnitDropDownList.Visible = true;
@@ -101,7 +124,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             UnitDropDownList.DataTextField = "unitNumber";
             UnitDropDownList.DataBind();
         }
-        else
+        else // else, if no hospital has been selected (all hospitals) hide the unit drop down and do not populate the datasource
         {
             UnitDropDownList.AppendDataBoundItems = false;
             UnitDropDownList.DataSource = "";
