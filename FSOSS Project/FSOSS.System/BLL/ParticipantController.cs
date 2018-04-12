@@ -253,7 +253,9 @@ namespace FSOSS.System.BLL
                     }
                     //add duplicate check
                     var participantTypeList = from x in context.ParticipantTypes
-                                              where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && !x.archived_yn
+                                              where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) &&
+                                              x.participant_type_id != participantTypeID &&
+                                              !x.archived_yn
                                               select new ParticipantTypePOCO()
                                               {
                                                   participantTypeDescription = x.participant_description
@@ -261,7 +263,9 @@ namespace FSOSS.System.BLL
 
 
                     var GoneparticipantTypeList = from x in context.ParticipantTypes
-                                                  where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) && x.archived_yn
+                                                  where x.participant_description.ToLower().Equals(participantTypeDescription.ToLower()) &&
+                                              x.participant_type_id != participantTypeID && 
+                                              x.archived_yn
                                                   select new ParticipantTypePOCO()
                                                   {
                                                       participantTypeDescription = x.participant_description
