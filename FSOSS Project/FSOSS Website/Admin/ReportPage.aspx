@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>--%>
     <div class="row">
         <div class="col-sm-12">
             <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
@@ -23,14 +23,14 @@
     </div>
       
     <div id="chartContainers"> 
-        <ul class="nav nav-pills nav fill nav-justified" id="myTab" role="tablist">
+        <ul class="nav nav-pills nav-fill nav-justified" id="myTab" role="tablist">
             <li class="nav-item">
-                <a id="question1Tab" href="#question1" class="nav-link-active" role="tab" aria-selected="true" data-toggle="pill">Question 1</a> 
+                <a id="question1Tab" href="#question1" class="nav-link active" role="tab" aria-selected="true" data-toggle="pill">Question 1</a> 
             </li>
             <li class="nav-item">
-                <a id="question6Tab" href="#question6" aria-selected="false" role="tab" data-toggle="pill">Question 9</a> </li>
+                <a id="question6Tab" href="#question6" class="nav-link" aria-selected="false" role="tab" data-toggle="pill">Question 9</a> </li>
             <li class="nav-item">
-                <a id="question7Tab" href="#question7" aria-selected="false" role="tab" data-toggle="pill">Question 10</a>
+                <a id="question7Tab" href="#question7" class="nav-link" aria-selected="false" role="tab" data-toggle="pill">Question 10</a>
             </li>
         </ul>
      <div class="tab-content">
@@ -116,27 +116,38 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
                             },
-                            tooltips: {
-                                callbacks: {
-                                    title: function (tooltipItem, data) {
-                                        return data['labels'][tooltipItem[0]['index']];
-                                    },
-                                    label: function (tooltipItem, data) {
-                                        return data['datasets'][0]['data'][tooltipItem['index']];
-                                    },
-                                    afterLabel: function (tooltipItem, data) {
-                                        var dataset = data['datasets'][0];
-                                        var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                                        return '(' + percent + '%)';
-                                    }
-                                },
-                                titleFontSize: 16,
-                                bodyFontSize: 14
-                            }
-                        }
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                             animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            },
+                             tooltips: {
+                                 callbacks: {
+                                     label: function (tooltipItem, data) {
+                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                             return previousValue + currentValue;
+                                         });
+                                         var currentValue = dataset.data[tooltipItem.index];
+                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                         return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
+                                     }
+                                 },
+                                 backgroundColor: '#C0C0C0',
+                                 titleFontSize: 18,
+                                 titleFontColor: '#0066ff',
+                                 bodyFontColor: '#000',
+                                 bodyFontSize: 18,
+                                 displayColors: false
+                             }
+                        }                        
                     });
                 }
                 else
@@ -190,7 +201,8 @@
                             datasets: [{
                                 backgroundColor: colorArray,
                                 data: valueArray,
-                                borderColor: borderArray
+                                borderColor: borderArray,
+                                borderWidth: 3
                             }],
 
                         },
@@ -200,27 +212,40 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
+                            },
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
                             },
                             tooltips: {
                                 callbacks: {
-                                    title: function (tooltipItem, data) {
-                                        return data['labels'][tooltipItem[0]['index']];
-                                    },
                                     label: function (tooltipItem, data) {
-                                        return data['datasets'][0]['data'][tooltipItem['index']];
-                                    },
-                                    afterLabel: function (tooltipItem, data) {
-                                        var dataset = data['datasets'][0];
-                                        var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                                        return '(' + percent + '%)';
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
                                     }
                                 },
-                                titleFontSize: 16,
-                                bodyFontSize: 14
+                                backgroundColor: '#C0C0C0',
+                                titleFontSize: 18,
+                                titleFontColor: '#0066ff',
+                                bodyFontColor: '#000',
+                                bodyFontSize: 18,
+                                displayColors: false
                             }
                         }
+                        
+                        
                     });
                 }
             },
@@ -247,11 +272,13 @@
                 var title;
                 var colorArray = [];
                 var valueArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
                     title = 'Question 1C: ' + val.Title;
+                    borderArray.push(val.BorderColor);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart3, {
@@ -260,7 +287,8 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray
                             }],
 
                         },
@@ -270,9 +298,37 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
                             },
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
+                                    }
+                                },
+                                backgroundColor: '#C0C0C0',
+                                titleFontSize: 18,
+                                titleFontColor: '#0066ff',
+                                bodyFontColor: '#000',
+                                bodyFontSize: 18,
+                                displayColors: false
+                            }
                         }
                     });
                 }
@@ -300,11 +356,13 @@
                 var title;
                 var colorArray = [];
                 var valueArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 1D: ' + val.Title;
                     colorArray.push(val.Color);
+                    borderArray.push(val.BorderColor);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart4, {
@@ -313,7 +371,8 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray
                             }],
 
                         },
@@ -323,9 +382,37 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
                             },
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
+                                    }
+                                },
+                                backgroundColor: '#C0C0C0',
+                                titleFontSize: 18,
+                                titleFontColor: '#0066ff',
+                                bodyFontColor: '#000',
+                                bodyFontSize: 18,
+                                displayColors: false
+                            }
                         }
                     });
                 }
@@ -354,11 +441,13 @@
                 var title;
                 var valueArray = [];
                 var colorArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 1E: ' + val.Title;
                     colorArray.push(val.Color);
+                    borderArray.push(val.BorderColor);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart5, {
@@ -367,7 +456,9 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray,
+                                borderWidth: 3
                             }],
 
                         },
@@ -377,9 +468,37 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
                             },
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
+                                    }
+                                },
+                                backgroundColor: '#C0C0C0',
+                                titleFontSize: 18,
+                                titleFontColor: '#0066ff',
+                                bodyFontColor: '#000',
+                                bodyFontSize: 18,
+                                displayColors: false
+                            }
                         }
                     });
                 }
@@ -408,11 +527,13 @@
                 var title;
                 var valueArray = [];
                 var colorArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 9: ' + val.Title;
                     colorArray.push(val.Color);
+                    borderArray.push(val.BorderColor);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart6, {
@@ -421,7 +542,9 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray,
+                                borderWidth: 3
                             }],
 
                         },
@@ -431,9 +554,37 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
                             },
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
+                                    }
+                                },
+                                backgroundColor: '#C0C0C0',
+                                titleFontSize: 18,
+                                titleFontColor: '#0066ff',
+                                bodyFontColor: '#000',
+                                bodyFontSize: 18,
+                                displayColors: false
+                            }
                         }
                     });
                 }
@@ -462,10 +613,12 @@
                 var title;
                 var valueArray = [];
                 var colorArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     title = 'Question 10: ' + val.Title;
+                    borderArray.push(val.BorderColor);
                     colorArray.push(val.Color);
                 });
                 if (valueArray.length > 0) {
@@ -475,7 +628,9 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray,
+                                borderWidth: 3
                             }],
 
                         },
@@ -485,9 +640,37 @@
                                 display: true,
                                 position: "top",
                                 text: title,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontColor: "#111"
                             },
+                            legend: {
+                                labels: {
+                                    fontSize: 18
+                                }
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Total Response: ' + currentValue + ' Percentage: ' + precentage + "%";
+                                    }
+                                },
+                                backgroundColor: '#C0C0C0',
+                                titleFontSize: 18,
+                                titleFontColor: '#0066ff',
+                                bodyFontColor: '#000',
+                                bodyFontSize: 18,
+                                displayColors: false
+                            }
                         }
                     });
                 }
