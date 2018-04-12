@@ -33,30 +33,33 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     {
         UnitsListView.Visible = true;
         DisplayArchivedButton.Visible = true;
-
+        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
     }
 
 
 
     protected void DisplayActiveButton_Click(object sender, EventArgs e)
     {
-
+        //Listview Visible when clicked
         UnitsListView.Visible = false;
-        //ArchivedUnitsListView.Visible = true;
-        //ArchivedUnitsListView.DataBind();
-
-        DisplayActiveButton.Visible = false;
-        DisplayArchivedButton.Visible = true;
+        ArchivedUnitsListView.Visible = true;
+        ArchivedUnitsListView.DataBind();
+        // Buttons visible when clicked
+        DisplayActiveButton.Visible = true;
+        DisplayArchivedButton.Visible = false;
 
     }
 
     protected void DisplayArchivedButton_Click(object sender, EventArgs e)
     {
+        //Listview Visible when clicked
         UnitsListView.Visible = true;
-        //ArchivedUnitsListView.Visible = false;
+        ArchivedUnitsListView.Visible = false;
         UnitsListView.DataBind();
-        DisplayActiveButton.Visible = true;
-        DisplayArchivedButton.Visible = false;
+
+        // Buttons visible when clicked
+        DisplayActiveButton.Visible = false;
+        DisplayArchivedButton.Visible = true;
     }
 
     /// <summary>
