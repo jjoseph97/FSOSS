@@ -36,7 +36,6 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <div class="navbar navbar-expand-lg mb-2 navbar-light bg-light">
             <div class="container">
                 <asp:LinkButton ID="LogoLink" CssClass="navbar-brand" runat="server" OnClick="LogoLink_Click" CausesValidation="false" >
@@ -45,9 +44,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#FSOSSNavbar" aria-controls="FSOSSNavbar" aria-expanded="false" aria-label="Toggle navigation" runat="server" id="hamburger">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="FSOSSNavbar" runat="server">
-
                     <ul class="navbar-nav text-center">
                         <li id="MasterAdminDropDown" runat="server" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -112,12 +109,10 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - FSOSS</p>
+                <p>&copy; <%: DateTime.Now.Year %> - beyond HORIZON SOLUTIONS</p>
             </footer>
         </div>
     </form>
-
-    <%-- TODO: Put navbar submenu scripts into a script file --%>
     <script>
         $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
             if (!$(this).next().hasClass('show')) {
@@ -126,11 +121,9 @@
             var $subMenu = $(this).next(".dropdown-menu");
             $subMenu.toggleClass('show');
 
-
             $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
                 $('.dropdown-submenu .show').removeClass("show");
             });
-
 
             return false;
         });

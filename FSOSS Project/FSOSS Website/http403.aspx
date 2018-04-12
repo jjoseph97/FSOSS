@@ -8,7 +8,10 @@
                 <h2>Unauthorized</h2>
                 <p>You are unauthorized to access this page.
                     <br />
-                    Please go to the FSOSS home page by clicking the button below.</p>
+                    Please go to the FSOSS home page by clicking the button below
+                    <br />
+                    or click the back button on your browser.
+                </p>
                 <asp:Button ID="TheButton" runat="server" CssClass="btn btn-primary" Text="FSOSS Home" PostBackUrl="~/" />
             </div>
         </div>

@@ -9,9 +9,8 @@ public partial class http403 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        var fsossnavbar = Master.FindControl("FSOSSNavbar");
-        var hamburger = Master.FindControl("hamburger");
-        fsossnavbar.Visible = false;
-        hamburger.Visible = false;
+        Master.FindControl("FSOSSNavbar").Visible = false;
+        Master.FindControl("hamburger").Visible = false;
+        Master.FindControl("LogoLink").Visible = false;
     }
 }
