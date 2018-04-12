@@ -18,30 +18,26 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     {
         string ssn = Request.QueryString["sid"]; // retreive the surveyID through a query string request passed from the submitted survey list page
         int subSurveyID;
-        bool good = Int32.TryParse(ssn, out subSurveyID);
+        Int32.TryParse(ssn, out subSurveyID);
 
         SubmittedSurveyController ssc = new SubmittedSurveyController();
-        if (ssn == null) // if the query string is null, the user may have came to this page directly and is taken back to the view survey filter page
+        // if the query string is null, the survey id is not a number, or is not a valid number (too big or references a non-existant submitted survey), 
+        // then the user is taken back to the view survey filter page
+        if (ssn == null || !ssc.ValidSurvey(subSurveyID)) 
         {
             Response.Redirect("ViewSurveyFilter.aspx");
         }
-        //if the submitted survey ID is a bad number (too big or references a non-existant submitted survey)
-        else if (!good || ssc.validSurvey(subSurveyID))
-        {
-            ContactResolve.Visible = false;
-            MessageUserControl.TryRun(() =>
-            {
-                throw new Exception("Submitted Survey #" + subSurveyID + " does not exist.");
-            },"?","what?");
-        }
+        // else, the submitted survey details are shown on the page
         else
         {
             SubSurveyIDLabel.Text = ssn;
             
-            if (ssc.wantsContact(subSurveyID))
+            // the "Resolve" button will be shown if the user wishes to be contacted and the issue has not been resolved yet
+            if (ssc.RequestsContact(subSurveyID))
             {
                 ContactResolve.Visible = true;
             }
+            // else, the "Resolve" button will not be shown
             else
             {
                 ContactResolve.Visible = false;
@@ -114,12 +110,15 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     protected void ResolveButton_Click(object sender, EventArgs e)
     {
         string ssn = Request.QueryString["sid"];
-        SubSurveyIDLabel.Text = ssn;
-        int surveyNum = Convert.ToInt32(ssn);
-        SubmittedSurveyController ssc = new SubmittedSurveyController();
-        ssc.contactSurvey(surveyNum);
-        ContactResolve.Visible = false; // remove the resolve button after it's been clicked
-        Response.Redirect(Request.RawUrl); // reload the page to see the new contact information populated
+        MessageUserControl.TryRun(() =>
+        {
+            SubSurveyIDLabel.Text = ssn;
+            int surveyNum = Convert.ToInt32(ssn);
+            SubmittedSurveyController ssc = new SubmittedSurveyController();
+            ssc.ContactSurvey(surveyNum);
+            ContactResolve.Visible = false; // remove the resolve button after it's been clicked
+            Response.Redirect(Request.RawUrl); // reload the page to see the new contact information populated
+        }, "Success", "The survey's contact request has been resolved.");
     }
 
     /// <summary>

@@ -35,11 +35,11 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var contactCount=0;
+                    var contactCount = 0;
                     if (context.Sites.Find(siteID) != null)
                     {
                         contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted == false && x.Unit.site_id == siteID);
-                        
+
                     }
                     return contactCount;
                 }
@@ -51,23 +51,23 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Used to check if the given Site ID is a valid site ID for an existing Site
+        /// Used to check if the given submitted survey ID is a valid submitted survey ID in the database
         /// </summary>
         /// <param name="subSurveyID"></param>
         /// <returns></returns>
-        public bool validSurvey(int subSurveyID)
+        public bool ValidSurvey(int subSurveyID)
         {
             using (var context = new FSOSSContext())
             {
                 try
                 {
-                    bool good=false;
-                    if (context.Sites.Find(subSurveyID) == null)
+                    bool valid = true;
+                    if (context.SubmittedSurveys.Find(subSurveyID) == null)
                     {
-                        good = true;
+                        valid = false;
 
                     }
-                    return good;
+                    return valid;
 
                 }
                 catch (Exception e)
@@ -93,7 +93,7 @@ namespace FSOSS.System.BLL
                     var contactList = from x in context.SubmittedSurveys
                                       where x.Unit.site_id == siteID &&
                                         x.contact_request == true &&
-                                        x.contacted==false
+                                        x.contacted == false
                                       select new ContactSubmittedSurveyPOCO
                                       {
                                           submittedSurveyID = x.submitted_survey_id,
@@ -260,7 +260,7 @@ namespace FSOSS.System.BLL
                                      contacted = x.contacted,
                                      contactRoomNumber = x.contact_room_number,
                                      contactPhoneNumber = x.contact_phone_number
-                                     
+
                                  };
                     return survey.FirstOrDefault();
                 }
@@ -285,12 +285,12 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var survey = (from y in context.ParticipantResponses
-                                                where y.submitted_survey_id == subSurveyID
-                                                select new ParticipantResponsePOCO
-                                                {
-                                                    question = y.question.question_text,
-                                                    response = y.participant_answer
-                                                }).Take(9);
+                                  where y.submitted_survey_id == subSurveyID
+                                  select new ParticipantResponsePOCO
+                                  {
+                                      question = y.question.question_text,
+                                      response = y.participant_answer
+                                  }).Take(9);
                     return survey.ToList();
                 }
                 catch (Exception e)
@@ -309,7 +309,7 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="submittedSurveyID">The id of the submitted survey that had a contact request, but won't soon</param>
         /// <returns></returns>
-        public void contactSurvey(int submittedSurveyID)
+        public void ContactSurvey(int submittedSurveyID)
         {
 
             using (var context = new FSOSSContext())
@@ -331,10 +331,10 @@ namespace FSOSS.System.BLL
 
 
 
-            
+
 
         }
-        
+
         /// <summary>
         /// Returns if the participant of the submitted survey 
         /// wants/wanted contact
@@ -342,7 +342,7 @@ namespace FSOSS.System.BLL
         /// <param name="submittedSurveyID">the submitted survey id of the survey 
         /// which we want to know if they want contact</param>
         /// <returns>true, wants contact. false, no contact wanted/needed</returns>
-        public bool wantsContact(int submittedSurveyID)
+        public bool RequestsContact(int submittedSurveyID)
         {
 
             using (var context = new FSOSSContext())
@@ -350,7 +350,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     SubmittedSurvey ss = context.SubmittedSurveys.Find(submittedSurveyID);
-                    if (ss.contacted==false && ss.contact_request==true)
+                    if (ss.contacted == false && ss.contact_request == true)
                     {
                         return true;
                     }
@@ -367,9 +367,9 @@ namespace FSOSS.System.BLL
             }
         }
 
-        public void SubmitSurvey(int survey_version_id_param, int unit_id_param, int meal_id_param, int participant_type_id_param, int age_range_id_param, 
+        public void SubmitSurvey(int survey_version_id_param, int unit_id_param, int meal_id_param, int participant_type_id_param, int age_range_id_param,
             int gender_id_param, bool contact_request_param, string contact_room_number_param, string contact_phone_number_param, string Q1AResponse_param,
-            string Q1BResponse_param, string Q1CResponse_param, string Q1DResponse_param, string Q1EResponse_param, string Q2Response_param, string Q3Response_param, 
+            string Q1BResponse_param, string Q1CResponse_param, string Q1DResponse_param, string Q1EResponse_param, string Q2Response_param, string Q3Response_param,
             string Q4Response_param, string Q5Response_param)
         {
             using (var context = new FSOSSContext())
