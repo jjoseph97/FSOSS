@@ -131,14 +131,4 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
             Response.Redirect(Request.RawUrl); // reload the page to see the new contact information populated
         }, "Success", "The survey's contact request has been resolved.");
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void BackToSurveyListButton_Click(object sender, EventArgs e)
-    {
-
-    }
 }

@@ -21,8 +21,6 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         }
         else if (!IsPostBack)
         {
-            SuccessAlert.Visible = false;
-            ErrorAlert.Visible = false;
             SiteController siteController = new SiteController();
             List<SitePOCO> siteList = siteController.GetSiteList();
             HospitalDropDownList.DataSource = siteList;
@@ -38,41 +36,54 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        MessageUserControl.HandleDataBoundException(e);
+    }
+
     protected void ViewButton_Click(object sender, EventArgs e)
     {
-        FilterPOCO filter = new FilterPOCO();
-        string startingPeriodInput = String.Format("{0}", Request.Form["StartingPeriodInput"]); 
-        if (startingPeriodInput != "")
+        MessageUserControl.TryRun(() =>
         {
-            filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+            FilterPOCO filter = new FilterPOCO();
+            string startingPeriodInput = Request.Form["StartingPeriodInput"];
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
-            if (endingPeriodInput != "")
+            if (startingPeriodInput != "")
             {
-                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
-                filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                if (UnitDropDownList.Enabled == false)
+                filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                if (endingPeriodInput != "")
                 {
-                    filter.unitID = 0;
+                    filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                    filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
+                    filter.mealID = int.Parse(MealDropDownList.SelectedValue);
+                    if (UnitDropDownList.Enabled == false)
+                    {
+                        filter.unitID = 0;
+                    }
+                    else
+                    {
+                        filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
+                    }
+                    Session["filter"] = filter;
+                    Response.Redirect("SubmittedSurveyList.aspx");
                 }
                 else
                 {
-                    filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
+                    throw new Exception("Please select an ending period");
                 }
-                Session["filter"] = filter;
-                Response.Redirect("SubmittedSurveyList.aspx");
             }
             else
             {
-                SuccessAlert.Text = "Please select an ending period";
-                SuccessAlert.Visible = true;
+                throw new Exception("Please select a starting period");
             }
-        }
-        else
-        {
-            SuccessAlert.Text = "Please select a starting period";
-            SuccessAlert.Visible = true;
-        }     
+        }, "Success", "Redirecting to the survey list page.");
     }
 
     protected void HospitalDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,8 +93,6 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             UnitLabel.Visible = true;
             UnitDropDownList.Visible = true;
             UnitDropDownList.Enabled = true;
-            UnitDropDownList.AppendDataBoundItems = true;
-            UnitDropDownList.Items.Insert(0, "All Units");
             UnitController unitController = new UnitController();
             int selectedSiteID = int.Parse(HospitalDropDownList.SelectedValue);
             List<UnitsPOCO> unitList = unitController.GetUnitList(selectedSiteID);

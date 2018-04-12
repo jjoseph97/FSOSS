@@ -23,14 +23,13 @@
     {
         Exception ex = Server.GetLastError();
 
-        if (ex is HttpRequestValidationException)
+        if (ex is HttpRequestValidationException) // this catches if an HTML tag or injection attack occurs on one of the sites input fields
         {
-            string script = "</sc" + "ript>";
             Response.Clear();
             Response.StatusCode = 200;
-            Response.Redirect("~/HttpValidationException.aspx");
-                Response.End();
-            }
+            Response.Redirect("~/HttpValidationException.aspx"); // redirect to this page to handle the exception and display a user-friendly error message
+            Response.End();
         }
+    }
 
 </script>
