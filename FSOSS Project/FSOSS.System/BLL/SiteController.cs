@@ -32,7 +32,12 @@ namespace FSOSS.System.BLL
                                    select new SitePOCO()
                                    {
                                        siteID = x.site_id,
-                                       siteName = x.site_name
+                                       siteName = x.site_name,
+                                       dateModified = x.date_modified,
+                                       username = x.AdministratorAccount.username,
+                                       administrator_account_id = x.administrator_account_id,
+                                       archived_yn = x.archived_yn
+
                                    };
 
                     return siteList.ToList();
@@ -61,7 +66,10 @@ namespace FSOSS.System.BLL
                                            {
                                                siteID = x.site_id,
                                                siteName = x.site_name,
-                                               date_modified = x.date_modified
+                                               dateModified = x.date_modified,
+                                               username = x.AdministratorAccount.username,
+                                               administrator_account_id = x.administrator_account_id,
+                                               archived_yn = x.archived_yn
                                            };
 
                     return archived.ToList();
@@ -165,7 +173,7 @@ namespace FSOSS.System.BLL
 
         //This method updates the site name of a site that exists in the database.
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateSite(SitePOCO update) 
+        public string UpdateSite(int siteID, string siteName, int admin) 
         {
             using (var context = new FSOSSContext())
             {
@@ -174,11 +182,11 @@ namespace FSOSS.System.BLL
                 try
                 {
                     //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
-                    if (valid.IsMatch(update.siteName))
+                    if (valid.IsMatch(siteName))
                     {
                         //Select all the information about a site, where the siteID matches the siteID passed in from the POCO.
                         var exists = (from x in context.Sites
-                                     where x.site_id == update.siteID
+                                     where x.site_id == siteID
                                       select x);
                         //If exists does not return anything, throw an exception.
                         if (exists == null)
@@ -187,10 +195,10 @@ namespace FSOSS.System.BLL
                         }
                         else
                         {
-                            Site updateSite = context.Sites.Find(update.siteID);
-                            updateSite.site_name = update.siteName.Trim();
+                            Site updateSite = context.Sites.Find(siteID);
+                            updateSite.site_name = siteName.Trim();
                             updateSite.date_modified = DateTime.Now;
-                            //updateSite.administrator_account_id = admin;
+                            updateSite.administrator_account_id = admin;
 
                             context.Entry(updateSite).State = EntityState.Modified;
                             context.SaveChanges();
@@ -227,7 +235,7 @@ namespace FSOSS.System.BLL
                                               siteID = x.site_id,
                                               siteName = x.site_name,
                                               archived_yn = x.archived_yn,
-                                              date_modified = DateTime.Now
+                                              dateModified = DateTime.Now
 
                                           }).FirstOrDefault();
 

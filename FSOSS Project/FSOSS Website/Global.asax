@@ -14,31 +14,22 @@
         BundleConfig.RegisterBundles(BundleTable.Bundles);
     }
 
+    /// <summary>
+    /// This method is to handle site-wide validation for incorrect input of HTML tags (possible injection attacks) on input fields
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     void Application_Error(object sender, EventArgs e)
     {
         Exception ex = Server.GetLastError();
 
-        if (ex is HttpRequestValidationException)
+        if (ex is HttpRequestValidationException) // this catches if an HTML tag or injection attack occurs on one of the sites input fields
         {
-            string script = "</sc" + "ript>";
             Response.Clear();
             Response.StatusCode = 200;
-            Response.Write(@"
-                <html>
-                <head><title>HTML Not Allowed</title>
-                </head>
-                <body style='font-family: Arial, Sans-serif;'>
-                <h1>Oops!</h1>
-                <p>I'm sorry, but HTML entry is not allowed on that page.</p>
-                <p>Please make sure that your entries do not contain 
-                any angle brackets like &lt; or &gt;.</p>
-                <p><a href='javascript:back()'>Go back</a></p>
-                </body>
-                </html>
-                <script language='JavaScript'><!--
-                function back() { history.go(-1); } //-->" + script);
-                Response.End();
-            }
+            Response.Redirect("~/HttpValidationException.aspx"); // redirect to this page to handle the exception and display a user-friendly error message
+            Response.End();
         }
+    }
 
 </script>

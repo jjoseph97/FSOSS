@@ -97,8 +97,10 @@
                 </div>
             </div>
             <div class="row container mx-auto px-0">
-                <asp:Button ID="BackToSurveyListButton" class="col-sm-2 mx-auto my-2 btn btn-info border border-dark" runat="server" Text="Back to Survey List" OnClick="BackToSurveyListButton_Click"></asp:Button>
+                <a href="javascript:back()" class="col-sm-2 mx-auto my-2 btn btn-info border border-dark">Back to Survey List</a>
             </div>
+            <script>
+            function back() { history.go(-1); } </script>
         </div>
     </div>
 </asp:Content>

@@ -153,7 +153,7 @@ namespace FSOSS.System.BLL
                                                   };
                         return submittedSurveyList.ToList();
                     }
-                    else if (siteID != 0 && mealID != 0)
+                    else if (siteID != 0 && mealID != 0 && unitID == 0)
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
                                                   orderby x.date_entered descending

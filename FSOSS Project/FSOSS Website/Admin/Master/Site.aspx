@@ -28,8 +28,9 @@
             </div>    
 
         <div class="card container"> <%--site show section--%>
-            <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click" />
-            <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" />
+            <%--<asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click" />
+            <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" />--%>
+            <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
             <br />
                 <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
                     <AlternatingItemTemplate>
@@ -37,10 +38,12 @@
                             <td>
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                            <td><asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td><asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                  <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                                 <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" Text="Close" ID="DeleteButton" CommandName="Delete"/></td>
+                                <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -66,10 +69,11 @@
                             <td>
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                            <td><asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td><asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                              <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
-                            <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" Text="Close" ID="DeleteButton" CommandName="Delete"/></td>
+                            <td><asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
@@ -81,6 +85,8 @@
                                             <th runat="server" class="col-sm-6 py-2">Site</th>
                                             <th runat="server" class="col-sm-3 py-2">Edit</th>
                                             <th runat="server" class="col-sm-3 py-2">Close Site</th>
+                                            <th runat="server"></th>
+                                            <th runat="server"></th>
 
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
@@ -105,99 +111,16 @@
                             <td>
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
+                            <td><asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                <td><asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                              <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
-                            <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" Text="Close" ID="DeleteButton" CommandName="Delete"/></td>
+                            <td><asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                         </tr>
                     </SelectedItemTemplate>
                 </asp:ListView>
            
-                            
-
-                <%-- -----------------archived listview section------------------%>
-
-                        <asp:ListView ID="ArchivedListView" runat="server" DataSourceID="ArchivedODS" DataKeyNames="siteID">
-                                 <AlternatingItemTemplate>
-                        <tr style="background-color: #bdfeff; color: #284775;">                          
-                            <td>
-                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
-                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
-                                 <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
-                                <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" Text="Open" ID="DeleteButton" CommandName="Delete"/></td>
-                        </tr>
-                    </AlternatingItemTemplate>
-                    <EditItemTemplate>
-                        <tr style="background-color: #bdfeff;"> 
-                            <td>
-                              <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
-                                <asp:TextBox CssClass="mx-3" Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
-                            <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton"  CommandName="Update" /></td>
-                            <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
-                        </tr>
-                    </EditItemTemplate>
-                    <EmptyDataTemplate>
-                        <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
-                            <tr>
-                                <td>No data was returned.</td>
-                            </tr>
-                        </table>
-                    </EmptyDataTemplate>
-                    <ItemTemplate>
-                        <tr style="background-color: #E0FFFF; color: #333333;">
-                            <td>
-                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
-                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
-                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
-                            <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" Text="Open" ID="DeleteButton" CommandName="Delete"/></td>
-                        </tr>
-                    </ItemTemplate>
-                    <LayoutTemplate>
-                        <table runat="server" style="width: 100%;" class="mt-2 mb-2">
-                            <tr runat="server">
-                                <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                            <th runat="server" class="col-sm-6 py-2">Site</th>
-                                            <th runat="server" class="col-sm-3 py-2">Edit</th>
-                                            <th runat="server" class="col-sm-3 py-2">Open Site</th>
-
-                                        </tr>
-                                        <tr runat="server" id="itemPlaceholder"></tr>
-                                    </table>
-                                </td>
-                            </tr>
-                           <%-- <tr runat="server">
-                                <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                    <asp:DataPager runat="server" ID="DataPager1">
-                                        <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False"></asp:NextPreviousPagerField>
-                                            <asp:NumericPagerField></asp:NumericPagerField>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False"></asp:NextPreviousPagerField>
-                                        </Fields>
-                                    </asp:DataPager>
-                                </td>
-                            </tr>--%>
-                        </table>
-                    </LayoutTemplate>
-                    <SelectedItemTemplate>
-                        <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
-                            <td>
-                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
-                                <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
-                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
-                            <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" Text="Open" ID="DeleteButton" CommandName="Delete"/></td>
-                        </tr>
-                                </SelectedItemTemplate>
-                            </asp:ListView>
+  
         </div>
     </div>
 

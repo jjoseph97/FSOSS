@@ -62,8 +62,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         } 
     }
 
-    public static readonly string[] COLOR_VALUE = {"rgb(255, 0, 0)", "rgb(255, 255, 0)","rgb(0, 153, 0)","rgb(0, 0, 255)","rgb(255, 0, 255)" };
-    
+    public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.4)", "rgba(255, 255, 0, 0.4)", "rgba(0, 153, 0, 0.4)", "rgba(0, 0, 255, 0.4)", "rgba(255, 0, 255, 0.4)" };
+    public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)" };
     [WebMethod]
     public static string GetQuestionTwoData()
     {
@@ -82,6 +82,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionTwoValueCount[counter];
             response.Title = report.Question[0];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -107,6 +108,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionThreeValueCount[counter];
             response.Title = report.Question[1];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -132,6 +134,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionFourValueCount[counter];
             response.Title = report.Question[2];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -155,6 +158,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionFiveValueCount[counter];
             response.Title = report.Question[3];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -179,6 +183,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionSixValueCount[counter];
             response.Title = report.Question[4];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -203,6 +208,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionNineValueCount[counter];
             response.Title = report.Question[5];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }
@@ -229,6 +235,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             response.Value = report.QuestionTenValueCount[counter];
             response.Title = report.Question[6];
             response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
             response = null;
         }

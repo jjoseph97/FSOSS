@@ -12,5 +12,6 @@ namespace FSOSS.System.Data.POCOs
       public int Value { get; set; }
       public string Title { get; set; }
       public string Color { get; set; }
+      public string BorderColor { get; set; }
     }
 }
