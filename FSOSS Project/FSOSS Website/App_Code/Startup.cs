@@ -17,7 +17,7 @@ namespace FSOSS_Website
             RecurringJob.AddOrUpdate("GenerateSurveyWord", () => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Daily);
             if (string.IsNullOrEmpty(sysmgr.GetSurveyWord(1)))
             {
-                RecurringJob.Trigger("GenerateSurveyWord");
+                sysmgr.GenerateSurveyWordOfTheDay();
             }
             // Check if recurring works. Take note this will occur every minute!
             //RecurringJob.AddOrUpdate(() => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Minutely);
