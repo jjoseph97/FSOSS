@@ -21,9 +21,20 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     protected void Page_Load(object sender, EventArgs e)
     {
         filter = (FilterPOCO)(Session["filter"]);
-        if (filter == null)
+        if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
-            Response.Redirect("ViewSurveyFilter.aspx");
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
+        {
+            Context.Response.StatusCode = 403;
+        }
+        else if (!IsPostBack)
+        { 
+            if (filter == null)
+            {
+                Response.Redirect("ViewSurveyFilter.aspx");
+            }
         }
     }
 

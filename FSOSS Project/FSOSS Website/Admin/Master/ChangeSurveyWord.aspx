@@ -17,7 +17,7 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="SearchWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Search Word: " />
-                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to search for..." />
+                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to search for..." style="background-color: #FFFFFF;" />
                     <asp:Button ID="SearchWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchWordButton_Click" />
                     <asp:Button ID="ClearSearchButton" class="col-sm-2 offset-sm-2 my-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" Visible="false" />
                 </div>
@@ -97,7 +97,7 @@
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-2 py-2">Survey Word</th>
-                                            <th runat="server" class="col-sm-4 py-2">Modified On</th>
+                                            <th runat="server" class="col-sm-4 py-2">Last Edited On</th>
                                             <th runat="server" class="col-sm-2 py-2">Last Edited By</th>
                                             <th runat="server" class="col-sm-2 py-2">Edit Word</th>
                                             <th runat="server" class="col-sm-2 py-2">Change Availability</th>

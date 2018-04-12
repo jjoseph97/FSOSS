@@ -21,7 +21,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!this.IsPostBack)
+        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
+        {
+            Context.Response.StatusCode = 403;
+        }
+        else if (!IsPostBack)
         {
             // This is the initial load of the page.
             if (SearchWordTextBox.Text == "")
@@ -90,6 +98,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 SurveyWordListView.DataBind();
 
                 SearchWordTextBox.ReadOnly = true;
+                SearchWordTextBox.Attributes.Remove("style");
                 SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
                 SearchWordButton.Visible = false;
                 ClearSearchButton.Visible = true;
@@ -120,6 +129,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
+        SearchWordTextBox.Attributes.Remove("style");
         SearchWordTextBox.BackColor = System.Drawing.Color.White;
         SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
