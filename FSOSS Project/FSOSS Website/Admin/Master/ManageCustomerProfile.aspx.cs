@@ -54,6 +54,9 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             seeArchive = false;
             PTListview.DataSourceID = "PTODS";
             PTListview.DataBind();
+
+            GenderListView.DataSourceID = "GenderODS";
+            GenderListView.DataBind();
             RevealButton.Text = "Show Archived";
            
         }
@@ -62,6 +65,9 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             seeArchive = true;
             PTListview.DataSourceID = "ArchivedPTODS";
             PTListview.DataBind();
+
+            GenderListView.DataSourceID = "ArchiveGenderODS";
+            GenderListView.DataBind();
             RevealButton.Text = "Show Active";
             
         }
@@ -162,4 +168,22 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             }, "Success", successMessage);
         }
     }
-}
+
+    protected void AddGenderButton_Click(object sender, EventArgs e)
+    {
+        //finding the customer profile choice to display
+        string addItem = AddGenderBox.Text.Trim();
+        int userID = Convert.ToInt32(Session["userID"]);
+
+            MessageUserControl.TryRun(() =>
+            {
+                GenderController sysmgr = new GenderController();
+
+                sysmgr.AddGender(addItem, userID);
+                GenderListView.DataBind();
+                AddGenderBox.Text = "";
+
+            }, "Success", "Successfully added the new gender: \"" + addItem + "\"");
+     }
+
+   }
