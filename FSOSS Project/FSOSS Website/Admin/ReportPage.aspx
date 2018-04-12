@@ -89,10 +89,12 @@
                 var title;
                 var colorArray = [];
                 var valueArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
+                    borderArray.push(val.BorderColor);
                     title = 'Question 1A: ' + val.Title;
                 });
                 if (valueArray.length > 0) {
@@ -102,7 +104,9 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray,
+                                borderWidth: 3
                             }],
 
                         },
@@ -115,6 +119,23 @@
                                 fontSize: 18,
                                 fontColor: "#111"
                             },
+                            tooltips: {
+                                callbacks: {
+                                    title: function (tooltipItem, data) {
+                                        return data['labels'][tooltipItem[0]['index']];
+                                    },
+                                    label: function (tooltipItem, data) {
+                                        return data['datasets'][0]['data'][tooltipItem['index']];
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data['datasets'][0];
+                                        var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                                        return '(' + percent + '%)';
+                                    }
+                                },
+                                titleFontSize: 16,
+                                bodyFontSize: 14
+                            }
                         }
                     });
                 }
@@ -153,10 +174,12 @@
                 var title;
                 var colorArray = [];
                 var valueArray = [];
+                var borderArray = [];
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
+                    borderArray.push(val.BorderColor);
                     title = 'Question 1B: ' + val.Title;
                 });
                 if (valueArray.length > 0) {
@@ -166,7 +189,8 @@
                             labels: labelArray,
                             datasets: [{
                                 backgroundColor: colorArray,
-                                data: valueArray
+                                data: valueArray,
+                                borderColor: borderArray
                             }],
 
                         },
@@ -179,6 +203,23 @@
                                 fontSize: 18,
                                 fontColor: "#111"
                             },
+                            tooltips: {
+                                callbacks: {
+                                    title: function (tooltipItem, data) {
+                                        return data['labels'][tooltipItem[0]['index']];
+                                    },
+                                    label: function (tooltipItem, data) {
+                                        return data['datasets'][0]['data'][tooltipItem['index']];
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data['datasets'][0];
+                                        var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                                        return '(' + percent + '%)';
+                                    }
+                                },
+                                titleFontSize: 16,
+                                bodyFontSize: 14
+                            }
                         }
                     });
                 }
