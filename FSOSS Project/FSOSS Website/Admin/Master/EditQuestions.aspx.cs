@@ -10,8 +10,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        editArea.Visible = false;
-
+        editQuestion.Visible = false;
+        editResponse.Visible = false;
+        if (QuestionDDL.SelectedValue != "")
+        {
+            editQuestion.Visible = true;
+            editResponse.Visible = true;
+        }
         if (!IsPostBack)
         {
             Message.Visible = false;
@@ -30,12 +35,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
             description = sysmgr.GetQuestionText(selectedQuestion);
             if (String.IsNullOrEmpty(description))
             {
-                editArea.Visible = false;
+                editQuestion.Visible = false;
+                editResponse.Visible = false;
             }
 
             else
             {
-                editArea.Visible = true;
+                editQuestion.Visible = true;
+                editResponse.Visible = true;
+                Message.Visible = false;
                 QuestionID.Value = QuestionDDL.SelectedItem.Value; // this is the ID for Question ID on the Question Table (use for update)
                 headerText.InnerText = QuestionDDL.SelectedItem.Text;
                 DescriptionTextBox.Text = description;
@@ -45,9 +53,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
         }
         catch
         {
-            editArea.Visible = false;
+            editQuestion.Visible = false;
+            editResponse.Visible = false;
             Message.Visible = true;
-            Message.Text = "Error";
         }
     }
 
@@ -57,9 +65,35 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
         string newQuestion = DescriptionTextBox.Text.Trim();
         int questionID = Convert.ToInt32(QuestionDDL.SelectedValue);
 
-        QuestionTextController sysmgr = new QuestionTextController();
-        sysmgr.UpdateQuestionsText(questionID, newQuestion);
+        MessageUserControl.TryRun(() =>
+        {
+            QuestionTextController sysmgr = new QuestionTextController();
+            sysmgr.UpdateQuestionsText(questionID, newQuestion);
 
-        editArea.Visible = true;
+            editQuestion.Visible = true;
+            editResponse.Visible = true;
+        }, "Success", headerText.InnerText + " has been successfully updated");
+    }
+
+    /// <summary>
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        if (e.ReturnValue == null)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        else // else show the ReturnValue(success message) as a string to display to the user 
+        {
+            string successMessage = e.ReturnValue.ToString();
+            MessageUserControl.TryRun(() =>
+            {
+            }, "Success", successMessage);
+        }
     }
 }
