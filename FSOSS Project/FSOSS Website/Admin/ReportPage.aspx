@@ -85,7 +85,7 @@
         </div>
     </div>
     </div>
-    <asp:Button ID="Return" class="btn btn-primary btn-lg btn-block" runat="server" Text="Return To Filter" OnClick="Return_Click" />
+    <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
    
    
 
