@@ -31,7 +31,6 @@ namespace FSOSS.System.BLL
                     Meal meal = new Meal();
                     meal = (from x in context.Meals
                             where x.meal_id == mealID
-                            orderby x.meal_name ascending
                             select x).FirstOrDefault();
 
                     return meal;
@@ -58,6 +57,7 @@ namespace FSOSS.System.BLL
                 {
                     var mealList = from x in context.Meals
                                    where !x.archived_yn
+                                   orderby x.meal_name ascending
                                    select new MealPOCO()
                                    {
                                        mealID = x.meal_id,
