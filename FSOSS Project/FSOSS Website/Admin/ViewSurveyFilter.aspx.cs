@@ -42,8 +42,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         }
     }
 
-    protected string startingInputValue { get; set; }
-    protected string endingInputValue { get; set; }
+    protected string startingInputValue { get; set; } // this is in order to get and set the starting date input text on page reload
+    protected string endingInputValue { get; set; } // this is in order to get and set the end date input text on page reload
 
     /// <summary>
     /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller

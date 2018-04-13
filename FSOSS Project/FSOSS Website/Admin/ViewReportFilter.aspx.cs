@@ -12,8 +12,21 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        if(!IsPostBack)
+        // this is for the client side input values to be retained after the page loads when a validation error is triggered (so the text is not lost)
+        string startingPeriodInput = Request.Form["StartingPeriodInput"];
+        string endingPeriodInput = Request.Form["EndingPeriodInput"];
+        this.startingInputValue = startingPeriodInput;
+        this.endingInputValue = endingPeriodInput;
+
+        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
+        {
+            Context.Response.StatusCode = 403;
+        }
+        else if (!IsPostBack)
         {
             MealController mealController = new MealController();
             Alert.Visible = false;
@@ -39,11 +52,11 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         Alert.Text = "";
         ErrorAlert.Text = "";
         Alert.Visible = false;
-        ErrorAlert.Visible = false;
-        
-        
-        
+        ErrorAlert.Visible = false;  
     }
+
+    protected string startingInputValue { get; set; } // this is in order to get and set the starting date input text on page reload
+    protected string endingInputValue { get; set; } // this is in order to get and set the end date input text on page reload
 
     protected void ViewButton_Click(object sender, EventArgs e)
     {
