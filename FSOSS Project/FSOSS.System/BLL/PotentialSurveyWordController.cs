@@ -100,7 +100,7 @@ namespace FSOSS.System.BLL
                     Regex validWord = new Regex("^[a-zA-Z]+$");
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                  where x.survey_access_word.ToLower().Equals(surveyWord.ToLower())
+                                                  where x.survey_access_word.ToLower().Equals(surveyWord.ToLower()) && x.survey_word_id != surveyWordID
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWord = x.survey_access_word

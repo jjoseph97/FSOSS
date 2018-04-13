@@ -31,12 +31,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         }
         else
         {
-            if (SearchWordTextBox.Text == "")
+            if (SearchWordTextBox.Text == "") // check if the SearchWordTextBox is empty, then change the back color to white
             {
                 SearchWordTextBox.Attributes.Remove("style");
                 SearchWordTextBox.BackColor = System.Drawing.Color.White;
             }
-            else
+            else  // else, check if the SearchWordTextBox is not empty, then change the back color to light gray
             {
                 SearchWordTextBox.Attributes.Remove("style");
                 SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
@@ -104,7 +104,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 
                 SearchWordTextBox.ReadOnly = true;
                 SearchWordTextBox.Attributes.Remove("style");
-                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray; // set the SearchWordTextBox back color to light gray
                 SearchWordButton.Visible = false;
                 ClearSearchButton.Visible = true;
             }
@@ -112,7 +112,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             {
                 throw new Exception("No results were found.");
             }
-        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.");
+        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the filtered results, click on the \"Clear Search\" Button.");
     }
 
     /// <summary>
@@ -135,7 +135,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
         SearchWordTextBox.Attributes.Remove("style");
-        SearchWordTextBox.BackColor = System.Drawing.Color.White;
+        SearchWordTextBox.BackColor = System.Drawing.Color.White; // set the SearchWordTextBox back color to white
         SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
