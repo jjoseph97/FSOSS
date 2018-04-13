@@ -57,6 +57,7 @@ namespace FSOSS.System.BLL
                 {
                     var mealList = from x in context.Meals
                                    where !x.archived_yn
+                                   orderby x.meal_name ascending
                                    select new MealPOCO()
                                    {
                                        mealID = x.meal_id,
@@ -93,7 +94,8 @@ namespace FSOSS.System.BLL
                 {
                     var mealList = from x in context.Meals
                                               where x.archived_yn
-                                              select new MealPOCO()
+                                              orderby x.meal_name ascending
+                                   select new MealPOCO()
                                               {
                                                   mealID = x.meal_id,
                                                   mealName = x.meal_name

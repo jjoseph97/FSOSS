@@ -94,6 +94,7 @@ namespace FSOSS.System.BLL
                                       where x.Unit.site_id == siteID &&
                                         x.contact_request == true &&
                                         x.contacted == false
+                                      orderby x.date_entered descending
                                       select new ContactSubmittedSurveyPOCO
                                       {
                                           submittedSurveyID = x.submitted_survey_id,

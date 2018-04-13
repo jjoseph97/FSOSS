@@ -100,7 +100,7 @@ namespace FSOSS.System.BLL
                     Regex validWord = new Regex("^[a-zA-Z]+$");
 
                     var potentialSurveyWordList = from x in context.PotentialSurveyWords
-                                                  where x.survey_access_word.ToLower().Equals(surveyWord.ToLower())
+                                                  where x.survey_access_word.ToLower().Equals(surveyWord.ToLower()) && x.survey_word_id != surveyWordID
                                                   select new PotentialSurveyWordPOCO()
                                                   {
                                                       surveyWord = x.survey_access_word
@@ -177,7 +177,7 @@ namespace FSOSS.System.BLL
         /// <param name="surveyWordID"></param>
         /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string ChangeAvailability(string surveyWord, int surveyWordID, int userID)
+        public string ChangeAvailability(int surveyWordID, int userID)
         {
             using (var context = new FSOSSContext())
             {
@@ -203,12 +203,12 @@ namespace FSOSS.System.BLL
                         if (potentialSurveyWord.archived_yn == true)
                         {
                             potentialSurveyWord.archived_yn = false;
-                            message = "Successfully enabled the survey word \"" + surveyWord + "\".";
+                            message = "Successfully enabled the survey word.";
                         }
                         else if (potentialSurveyWord.archived_yn == false)
                         {
                             potentialSurveyWord.archived_yn = true;
-                            message = "Successfully disabled the survey word \"" + surveyWord + "\".";
+                            message = "Successfully disabled the survey word.";
                         }
                         potentialSurveyWord.administrator_account_id = userID;
                         potentialSurveyWord.date_modified = DateTime.Now;

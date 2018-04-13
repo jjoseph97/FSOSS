@@ -20,7 +20,7 @@
         <div class="col-sm-12">
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
-                    <asp:Label ID="CustomerProfileLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Customer Profile:"></asp:Label>
+                    <asp:Label ID="CustomerProfileLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Select Customer Profile Category:"></asp:Label>
                     <asp:DropDownList ID="CustomerProfileDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="CustomerProfileDDL_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Text="Genders" Value="0" Selected="True" />
                         <asp:ListItem Text="Age Ranges" Value="1" />

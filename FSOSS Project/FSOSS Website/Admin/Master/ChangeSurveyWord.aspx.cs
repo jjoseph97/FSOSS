@@ -29,12 +29,17 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         {
             Context.Response.StatusCode = 403;
         }
-        else if (!IsPostBack)
+        else
         {
-            // This is the initial load of the page.
-            if (SearchWordTextBox.Text == "")
+            if (SearchWordTextBox.Text == "") // check if the SearchWordTextBox is empty, then change the back color to white
             {
-                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                SearchWordTextBox.Attributes.Remove("style");
+                SearchWordTextBox.BackColor = System.Drawing.Color.White;
+            }
+            else  // else, check if the SearchWordTextBox is not empty, then change the back color to light gray
+            {
+                SearchWordTextBox.Attributes.Remove("style");
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
             }
         }
     }
@@ -99,7 +104,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 
                 SearchWordTextBox.ReadOnly = true;
                 SearchWordTextBox.Attributes.Remove("style");
-                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray; // set the SearchWordTextBox back color to light gray
                 SearchWordButton.Visible = false;
                 ClearSearchButton.Visible = true;
             }
@@ -107,7 +112,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             {
                 throw new Exception("No results were found.");
             }
-        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the results and search again, click on the \"Clear Search\" Button.");
+        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the filtered results, click on the \"Clear Search\" Button.");
     }
 
     /// <summary>
@@ -130,7 +135,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
         SearchWordTextBox.Attributes.Remove("style");
-        SearchWordTextBox.BackColor = System.Drawing.Color.White;
+        SearchWordTextBox.BackColor = System.Drawing.Color.White; // set the SearchWordTextBox back color to white
         SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
@@ -293,14 +298,30 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 
         if (e.CommandName == "Delete")
         {
-            // assign the appropriate ODS if a search term has been entered
-            if (SearchWordTextBox.Text == "")
+            // check if currently in archived words, or in active words
+            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+                }
+                else if (SearchWordTextBox.Text != "")
+                {
+                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
+                }
             }
-            else
+            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                }
+                else
+                {
+                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                }
             }
         }
     }
