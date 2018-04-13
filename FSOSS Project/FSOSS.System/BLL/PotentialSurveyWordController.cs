@@ -203,10 +203,12 @@ namespace FSOSS.System.BLL
                         if (potentialSurveyWord.archived_yn == true)
                         {
                             potentialSurveyWord.archived_yn = false;
+                            message = "Successfully enabled the survey word \"" + surveyWord + "\".";
                         }
                         else if (potentialSurveyWord.archived_yn == false)
                         {
                             potentialSurveyWord.archived_yn = true;
+                            message = "Successfully disabled the survey word \"" + surveyWord + "\".";
                         }
                         potentialSurveyWord.administrator_account_id = userID;
                         potentialSurveyWord.date_modified = DateTime.Now;
@@ -214,7 +216,6 @@ namespace FSOSS.System.BLL
                         context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
                         context.Entry(potentialSurveyWord).Property(y => y.date_modified).IsModified = true;
                         context.SaveChanges();
-                        message = "Successfully changed availability on the survey word \"" + surveyWord + "\".";
                     }
                     else
                     {
@@ -230,7 +231,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// 
+        /// Used to get the active survey words for when the user enters a search term to filter the list of words on the ChangeSurveyWord page
         /// </summary>
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>
@@ -267,7 +268,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// 
+        /// Used to get the archived survey words for when the user enters a search term to filter the list of words on the ChangeSurveyWord page
         /// </summary>
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>
@@ -304,7 +305,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// 
+        /// Used to get all the active survey words and populate the list on the ChangeSurveyWord page
         /// </summary>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
@@ -340,7 +341,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// 
+        /// Used to get all the archived survey words and populate the list on the ChangeSurveyWord page
         /// </summary>
         /// <returns>potentialSurveyWordList</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]

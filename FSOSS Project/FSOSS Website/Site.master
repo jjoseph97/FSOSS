@@ -50,7 +50,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">Administrator
                             </a>
-                            <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu text-left" style="width: 30%; margin:auto" aria-labelledby="navbarDropdownMenuLink">
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="#">User</a>
                                     <ul class="dropdown-menu text-center">
