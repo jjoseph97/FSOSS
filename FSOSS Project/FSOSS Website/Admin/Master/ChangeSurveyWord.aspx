@@ -32,7 +32,7 @@
                     <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
                     <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
                 </div>
-                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWord,surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound" OnItemCommand="SurveyWordListView_ItemCommand">
+                <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound" OnItemCommand="SurveyWordListView_ItemCommand">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
                             <td style="display:none;">
@@ -57,9 +57,9 @@
                             <td>
                                 <asp:TextBox Text='<%# Bind("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordTextBox" /></td>
                             <td>
-                                <asp:Label Text='<%# Bind("dateModified") %>' runat="server" CssClass="pl-3" ID="dateModifiedLabel" /></td>
+                                <asp:Label Text='<%# Eval("dateModified") %>' runat="server" CssClass="pl-3" ID="dateModifiedLabel" /></td>
                             <td>
-                                <asp:Label Text='<%# Bind("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
+                                <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
                             <td>
@@ -97,8 +97,8 @@
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-2 py-2">Survey Word</th>
-                                            <th runat="server" class="col-sm-4 py-2">Last Edited On</th>
-                                            <th runat="server" class="col-sm-2 py-2">Last Edited By</th>
+                                            <th runat="server" class="col-sm-4 py-2">Last Modified On</th>
+                                            <th runat="server" class="col-sm-2 py-2">Last Modified By</th>
                                             <th runat="server" class="col-sm-2 py-2">Edit Word</th>
                                             <th runat="server" class="col-sm-2 py-2">Change Availability</th>
                                         </tr>
@@ -121,35 +121,32 @@
                 <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
-                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
-                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSearchedActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
-                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
                     <SelectParameters>
                         <asp:ControlParameter ControlID="SearchWordTextBox" PropertyName="Text" Name="surveyWord" Type="String"></asp:ControlParameter>
@@ -157,15 +154,14 @@
                     <UpdateParameters>
                         <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="SearchArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSearchedArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController" 
                     DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
-                        <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </DeleteParameters>
                     <SelectParameters>
                         <asp:ControlParameter ControlID="SearchWordTextBox" PropertyName="Text" Name="surveyWord" Type="String"></asp:ControlParameter>
@@ -173,7 +169,7 @@
                     <UpdateParameters>
                         <asp:Parameter Name="surveyWord" Type="String"></asp:Parameter>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter Name="userID" SessionField="userID"  Type="Int32"></asp:SessionParameter>
+                        <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
                     </UpdateParameters>
                 </asp:ObjectDataSource>
             </div>

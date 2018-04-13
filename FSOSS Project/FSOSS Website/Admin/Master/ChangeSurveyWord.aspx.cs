@@ -29,12 +29,17 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         {
             Context.Response.StatusCode = 403;
         }
-        else if (!IsPostBack)
+        else
         {
-            // This is the initial load of the page.
             if (SearchWordTextBox.Text == "")
             {
-                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                SearchWordTextBox.Attributes.Remove("style");
+                SearchWordTextBox.BackColor = System.Drawing.Color.White;
+            }
+            else
+            {
+                SearchWordTextBox.Attributes.Remove("style");
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
             }
         }
     }
@@ -293,14 +298,30 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
 
         if (e.CommandName == "Delete")
         {
-            // assign the appropriate ODS if a search term has been entered
-            if (SearchWordTextBox.Text == "")
+            // check if currently in archived words, or in active words
+            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+                }
+                else if (SearchWordTextBox.Text != "")
+                {
+                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
+                }
             }
-            else
+            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
             {
-                SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                // assign the appropriate ODS if a search term has been entered
+                if (SearchWordTextBox.Text == "")
+                {
+                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+                }
+                else
+                {
+                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                }
             }
         }
     }
