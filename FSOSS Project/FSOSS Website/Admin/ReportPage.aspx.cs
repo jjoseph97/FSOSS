@@ -29,6 +29,10 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         }                  
         else
         {
+            if (Session["securityID"] == null)
+            {
+                Response.Redirect("~/Admin/Login.aspx");
+            }
             ReportController sysmgr = new ReportController();
             report = sysmgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
             SiteController siteMgr = new SiteController();
@@ -61,7 +65,10 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             }
         } 
     }
-
+    protected void Return_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Admin/VireReportFilter.aspx");
+    }
     public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.4)", "rgba(255, 255, 0, 0.4)", "rgba(0, 153, 0, 0.4)", "rgba(0, 0, 255, 0.4)", "rgba(255, 0, 255, 0.4)" };
     public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)" };
     [WebMethod]
@@ -191,6 +198,31 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     }
 
     [WebMethod]
+    public static string GetQuestionEightData()
+    {
+        List<ChartPOCO> responses = new List<ChartPOCO>();
+        for (int counter = 0; counter < report.QuestionEightValueCount.Count; counter++)
+        {
+            ChartPOCO response = new ChartPOCO();
+            if (report.QuestionEightValueList[counter].Equals(""))
+            {
+                response.Text = "No Response";
+            }
+            else
+            {
+                response.Text = report.QuestionEightValueList[counter];
+            }
+            response.Value = report.QuestionEightValueCount[counter];
+            response.Title = report.Question[5];
+            response.Color = COLOR_VALUE[counter];
+            response.BorderColor = BORDER_COLOR_VALUE[counter];
+            responses.Add(response);
+            response = null;
+        }
+        return JsonConvert.SerializeObject(responses);
+    }
+
+    [WebMethod]
     public static string GetQuestionNineData()
     {
         List<ChartPOCO> responses = new List<ChartPOCO>();
@@ -206,7 +238,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.Text = report.QuestionNineValueList[counter];
             }
             response.Value = report.QuestionNineValueCount[counter];
-            response.Title = report.Question[5];
+            response.Title = report.Question[6];
             response.Color = COLOR_VALUE[counter];
             response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
@@ -229,11 +261,9 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             else
             {
                 response.Text = report.QuestionTenValueList[counter];
-                response.Value = report.QuestionTenValueCount[counter];
-                response.Title = report.Question[6];
             }
             response.Value = report.QuestionTenValueCount[counter];
-            response.Title = report.Question[6];
+            response.Title = report.Question[7];
             response.Color = COLOR_VALUE[counter];
             response.BorderColor = BORDER_COLOR_VALUE[counter];
             responses.Add(response);
@@ -241,4 +271,6 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         }
         return JsonConvert.SerializeObject(responses);
     }
+
+    
 }

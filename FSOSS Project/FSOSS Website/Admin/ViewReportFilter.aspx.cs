@@ -18,6 +18,8 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             MealController mealController = new MealController();
             Alert.Visible = false;
             ErrorAlert.Visible = false;
+            Alert.Text = "";
+            ErrorAlert.Text = "";
             List<MealPOCO> mealList = mealController.GetMealList();
             MealDropDownList.DataSource = mealList;
             MealDropDownList.DataValueField = "mealID";
@@ -29,8 +31,17 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             HospitalDropDownList.DataValueField = "siteID";
             HospitalDropDownList.DataTextField = "siteName";
             HospitalDropDownList.DataBind();
-           // int userID = int.Parse(Session["userID"].ToString());
+            if (Session["securityID"] == null)
+            {
+                Response.Redirect("~/Admin/Login.aspx");
+            }
         }
+        Alert.Text = "";
+        ErrorAlert.Text = "";
+        Alert.Visible = false;
+        ErrorAlert.Visible = false;
+        
+        
         
     }
 
@@ -45,7 +56,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000","yyyy-MM-dd HH:mm:ss:ffffff",null);
             if(endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
             {
-                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:999999", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 if (filter.startingDate <= filter.endDate)
                 {                  
                     filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
@@ -55,7 +66,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
                 }
                 else
                 {
-                    Alert.Text = String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate, filter.endDate);
+                    Alert.Text = String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.endDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
                     Alert.Visible = true;
                 }
                
