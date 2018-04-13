@@ -202,7 +202,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             AgeRangeController sysmgr = new AgeRangeController();
 
             sysmgr.AddAgeRange(addItem, userID);
-            GenderListView.DataBind();
+            AgeRangeListView.DataBind();
             AddAgeRangeTextBox.Text = "";
 
         }, "Success", "Successfully added the new age range: \"" + addItem + "\"");

@@ -117,7 +117,7 @@ namespace FSOSS.System.BLL
 
         //This method adds a new site to the database.
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddSite(string newSiteName, int employee)
+        public string AddSite(string newSiteName, int admin)
         {
             using (var context = new FSOSSContext())
             {
@@ -137,12 +137,12 @@ namespace FSOSS.System.BLL
                     //If the user did not enter anything or if the new site name is null, display an error.
                     if (newSiteName == "" || newSiteName == null)
                     {
-                        throw new Exception("Error: Please enter a site name. Field cannot be empty.");
+                        throw new Exception("Please enter a site name. Field cannot be empty.");
                     }
                     //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
                     else if (!validWord.IsMatch(newSiteName))
                     {
-                        throw new Exception("Error: Please enter only alphabetical letters.");
+                        throw new Exception("Please enter only alphabetical letters.");
                     }
                     //If the site already exists in the database, then display an error messsage.
                     else if (siteList.Count() > 0) 
@@ -153,7 +153,7 @@ namespace FSOSS.System.BLL
                     else 
                     {
                         Site newSite = new Site();
-                        newSite.administrator_account_id = employee;
+                        newSite.administrator_account_id = admin;
                         newSite.site_name = newSiteName.Trim();
                         newSite.date_modified = DateTime.Now;
                         newSite.archived_yn = false;
@@ -193,6 +193,7 @@ namespace FSOSS.System.BLL
                         {
                             throw new Exception("This site does not exist.");
                         }
+
                         else
                         {
                             Site updateSite = context.Sites.Find(siteID);
@@ -220,16 +221,21 @@ namespace FSOSS.System.BLL
         }//update site
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string DisableSite(SitePOCO archive)
+        public string ArchiveSite(int siteID, int admin)
         {
             using (var context = new FSOSSContext())
             {
                 string message = "";
                 try
                 {
+                    if (admin == 0)
+                    {
+                        throw new Exception("Can't let you do that. You're not logged in.");
+                    }
+
                     // Check if the site exists
                     var searchSite = (from x in context.Sites
-                                          where x.site_id == archive.siteID
+                                          where x.site_id == siteID
                                           select new SitePOCO()
                                           {
                                               siteID = x.site_id,
@@ -239,7 +245,7 @@ namespace FSOSS.System.BLL
 
                                           }).FirstOrDefault();
 
-                        Site site = context.Sites.Find(archive.siteID);
+                        Site site = context.Sites.Find(siteID);
                         if (site.archived_yn == false)
                         {
                             site.archived_yn = true;

@@ -58,6 +58,7 @@ namespace FSOSS.System.BLL
                 {
                     var participantTypeList = from x in context.ParticipantTypes
                                               where !x.archived_yn
+                                              orderby x.participant_description ascending
                                               select new ParticipantTypePOCO()
                                               {
                                                   participantTypeID = x.participant_type_id,
@@ -92,6 +93,7 @@ namespace FSOSS.System.BLL
                 {
                     var participantTypeList = from x in context.ParticipantTypes
                                               where x.archived_yn
+                                              orderby x.participant_description ascending
                                               select new ParticipantTypePOCO()
                                               {
                                                   participantTypeID = x.participant_type_id,

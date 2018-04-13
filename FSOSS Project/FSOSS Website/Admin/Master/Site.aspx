@@ -28,8 +28,6 @@
             </div>    
 
         <div class="card container"> <%--site show section--%>
-            <%--<asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click" />
-            <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" />--%>
             <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
             <br />
                 <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
@@ -51,6 +49,8 @@
                             <td>
                               <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:TextBox CssClass="mx-3" Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
+                            <td></td>
+                            <td></td>
                             <td>
                                 <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton"  CommandName="Update" /></td>
                             <td>
@@ -83,8 +83,8 @@
                                     <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                             <th runat="server" class="col-sm-6 py-2">Site</th>
-                                            <th runat="server" class="col-sm-3 py-2">Edit</th>
-                                            <th runat="server" class="col-sm-3 py-2">Close Site</th>
+                                            <th runat="server" class="col-sm-3 py-2">Date Modified</th>
+                                            <th runat="server" class="col-sm-3 py-2">Modified by</th>
                                             <th runat="server"></th>
                                             <th runat="server"></th>
 
@@ -126,9 +126,35 @@
 
 
        <%-- ODS SECTION--%>
-            <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="DisableSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO"  OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
-        </asp:ObjectDataSource>
-            <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="DisableSite" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DataObjectTypeName="FSOSS.System.Data.POCOs.SitePOCO" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
-            </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="ArchiveSite" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" InsertMethod="AddSite">
+        <DeleteParameters>
+            <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
+            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="newSiteName" Type="String"></asp:Parameter>
+            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
+            <asp:Parameter Name="siteName" Type="String"></asp:Parameter>
+            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+        </UpdateParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="ArchiveSite" OldValuesParameterFormatString="{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" InsertMethod="AddSite">
+        <DeleteParameters>
+            <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
+            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="newSiteName" Type="String"></asp:Parameter>
+            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
+            <asp:Parameter Name="siteName" Type="String"></asp:Parameter>
+            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
+        </UpdateParameters>
+    </asp:ObjectDataSource>
 
 </asp:Content>

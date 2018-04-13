@@ -58,7 +58,8 @@ namespace FSOSS.System.BLL
                 {
                     var ageRangeList = from x in context.AgeRanges
                                        where !x.archived_yn
-                                   select new AgeRangePOCO()
+                                       orderby x.age_range_description ascending
+                                       select new AgeRangePOCO()
                                    {
                                        ageRangeID = x.age_range_id,
                                        ageRangeDescription = x.age_range_description,
@@ -92,7 +93,8 @@ namespace FSOSS.System.BLL
                 {
                     var ageList = from x in context.AgeRanges
                                    where x.archived_yn
-                                   select new AgeRangePOCO()
+                                  orderby x.age_range_description ascending
+                                  select new AgeRangePOCO()
                                    {
                                        ageRangeID = x.age_range_id,
                                        ageRangeDescription = x.age_range_description

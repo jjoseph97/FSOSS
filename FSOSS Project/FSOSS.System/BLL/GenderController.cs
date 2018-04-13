@@ -57,7 +57,8 @@ namespace FSOSS.System.BLL
                 {
                     var genderList = from x in context.Genders
                                      where !x.archived_yn
-                                       select new GenderPOCO()
+                                     orderby x.gender_description ascending
+                                     select new GenderPOCO()
                                        {
                                            genderID = x.gender_id,
                                            genderDescription = x.gender_description,
@@ -90,7 +91,8 @@ namespace FSOSS.System.BLL
                 {
                     var genderList = from x in context.Genders
                                      where x.archived_yn
-                                              select new GenderPOCO()
+                                     orderby x.gender_description ascending
+                                     select new GenderPOCO()
                                               {
                                                   genderID = x.gender_id,
                                                   genderDescription = x.gender_description,
