@@ -179,10 +179,19 @@ namespace FSOSS.System.BLL
 
         //Update survey responses to return new string 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public void UpdateQuestionResponses(int questionid, int ResponseId, string text, string value)
+        public string UpdateQuestionResponses(int questionid, int ResponseId, string text, string value, string strQuestion)
         {
+            string message = "";
             using (var context = new FSOSSContext())
             {
+                if (text.Length.Equals(0))
+                {
+                    throw new Exception("Edit field can't be empty");
+                }
+                if (text.Length > 100)
+                {
+                    throw new Exception("Response must be less than 100 characters");
+                }
                 var result = (from x in context.QuestionSelections
                              where x.question_id == questionid && x.question_selection_id == ResponseId
                              select x).FirstOrDefault();
@@ -191,6 +200,8 @@ namespace FSOSS.System.BLL
                 result.question_selection_value = text;
 
                 context.SaveChanges();
+
+                return message = "Successfully updated response for " + strQuestion;
             }
         }
     }
