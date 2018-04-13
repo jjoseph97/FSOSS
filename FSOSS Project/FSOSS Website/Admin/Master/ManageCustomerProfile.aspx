@@ -61,7 +61,7 @@
                     </asp:ObjectDataSource>
                
                     <%-- ODS for archived Genders --%>
-                    <asp:ObjectDataSource ID="ArchiveGenderODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedGenderList" TypeName="FSOSS.System.BLL.GenderController" DeleteMethod="ArchiveGender" UpdateMethod="UpdateGender" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                    <asp:ObjectDataSource ID="ArchivedGenderODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedGenderList" TypeName="FSOSS.System.BLL.GenderController" DeleteMethod="ArchiveGender" UpdateMethod="UpdateGender" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="genderID" Type="Int32"></asp:Parameter>
                             <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32"  DefaultValue="0"></asp:SessionParameter>
@@ -270,7 +270,6 @@
 
 
 
-
                         </ItemTemplate>
                         <LayoutTemplate>
                             <table runat="server" style="width: 100%;" class="mt-2 mb-2">
@@ -325,113 +324,142 @@
 
                 <%--the meal list--%>
                 <div id="Meals" runat="server">
-                    <h1>meal</h1>
-                    <asp:ListView ID="ListView1" InsertItemPosition="LastItem" runat="server" DataSourceID="" DataKeyNames="participantTypeID">
+                    <%-- Add Meals --%>
+                    <div class="row container mx-auto px-0">
+                        <asp:Label ID="AddMealsLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Meal: " />
+                        <asp:TextBox ID="AddMealsTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
+                        <asp:Button ID="AddMealsButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Meal" OnClick="AddMealButton_Click" />
+                    </div>
+
+                    <%-- ODS Section --%>
+                    <asp:ObjectDataSource ID="MealsODS" runat="server" DeleteMethod="ArchiveMeal" OldValuesParameterFormatString="{0}" SelectMethod="GetMealList" TypeName="FSOSS.System.BLL.MealController" UpdateMethod="UpdateParticipantType" InsertMethod="AddMeal" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                        <DeleteParameters>
+                            <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </DeleteParameters>
+                        <InsertParameters>
+                            <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </InsertParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </UpdateParameters>
+                    </asp:ObjectDataSource>
+                    <asp:ObjectDataSource ID="ArchivedMealsODS" runat="server" DeleteMethod="ArchiveMeal" InsertMethod="AddMeal" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedMealList" TypeName="FSOSS.System.BLL.MealController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                        <DeleteParameters>
+                            <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </DeleteParameters>
+                        <InsertParameters>
+                            <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </InsertParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </UpdateParameters>
+                    </asp:ObjectDataSource>
+
+                    <%-- The Meals Listview --%>
+                    <asp:ListView ID="MealsListView" runat="server" DataSourceID="MealsODS" DataKeyNames="mealID">
                         <AlternatingItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #FFFFFF; color: #284775;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                                </td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                               <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
-
-
-
-
-                        </AlternatingItemTemplate>
-                        <EditItemTemplate>
-                            <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                                    <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
+                        </AlternatingItemTemplate>
+                        <EditItemTemplate>
+                            <tr style="background-color: #999999;">
+                                <td style="display: none">
+                                    <asp:TextBox Text='<%# Bind("mealID") %>' runat="server" ID="mealIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" /></td>
+                                    <asp:TextBox Text='<%# Bind("mealName") %>' runat="server" ID="mealNameTextBox" /></td>
+                                <td></td>
+                                <td></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
-                                <td>
-                                    <asp:TextBox Text='<%# Bind("administratorAccountId") %>' runat="server" ID="administratorAccountIdTextBox" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Bind("archivedYn") %>' runat="server" ID="archivedYnCheckBox" /></td>
+                                        <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="Button2" /></td>
+                                    <td>
+                                        <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Cancel" ID="Button3" />
+                                    </td>
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <table runat="server" style="">
+                            <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                                 <tr>
                                     <td>No data was returned.</td>
                                 </tr>
                             </table>
                         </EmptyDataTemplate>
-                        <InsertItemTemplate>
+                       <%-- <InsertItemTemplate>
                             <tr style="">
                                 <td>
                                     <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
                                     <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
                                 </td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                    <asp:TextBox Text='<%# Bind("mealID") %>' runat="server" ID="mealIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" /></td>
+                                    <asp:TextBox Text='<%# Bind("mealName") %>' runat="server" ID="mealNameTextBox" /></td>
                                 <td>
                                     <asp:TextBox Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("administratorAccountId") %>' runat="server" ID="administratorAccountIdTextBox" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Bind("archivedYn") %>' runat="server" ID="archivedYnCheckBox" /></td>
-                            </tr>
-                        </InsertItemTemplate>
-                        <ItemTemplate>
-                            <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
+                        </InsertItemTemplate>--%>
+                        <ItemTemplate>
+                            <tr style="background-color: #E0FFFF; color: #333333;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
                                 <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
-
-
-
-
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
                         </ItemTemplate>
                         <LayoutTemplate>
                             <table runat="server">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="" border="0">
-                                            <tr runat="server" style="">
+                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                            <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
+                                                <th runat="server">Meal</th>
+                                                <th runat="server">Date Modified</th>
+                                                <th runat="server">Modified By</th>
                                                 <th runat="server"></th>
-                                                <th runat="server">participantTypeID</th>
-                                                <th runat="server">participantTypeDescription</th>
-
-                                                <th runat="server">dateModified</th>
-                                                <th runat="server">administratorAccountId</th>
-                                                <th runat="server">archivedYn</th>
+                                                <th runat="server"></th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr runat="server">
-                                    <td runat="server" style="">
+                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
                                         <asp:DataPager runat="server" ID="DataPager1">
                                             <Fields>
                                                 <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
@@ -442,137 +470,166 @@
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                                </td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
                                 <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
-                </div>
+
+                </div><%-- end of meals--%>
 
 
                 <%--the age range list--%>
                 <div id="AgeRanges" runat="server">
-                    <h1>age</h1>
-                    <asp:ListView ID="ListView2" InsertItemPosition="LastItem" runat="server" DataSourceID="" DataKeyNames="participantTypeID">
+                    <%-- Add Age Range --%>
+                    <div class="row container mx-auto px-0">
+                        <asp:Label ID="AddAgeRangeLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Age Range: " />
+                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
+                        <asp:Button ID="AddAgeRangeButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Age Range" OnClick="AddARButton_Click" />
+                    </div>
+
+                   <%-- ODS Section --%>
+                    <asp:ObjectDataSource ID="AgeRangeODS" runat="server" DeleteMethod="ArchiveAgeRange" InsertMethod="AddAgeRange" OldValuesParameterFormatString="{0}" SelectMethod="GetAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController" UpdateMethod="UpdateAgeRange" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                        <DeleteParameters>
+                            <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </DeleteParameters>
+                        <InsertParameters>
+                            <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </InsertParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </UpdateParameters>
+                    </asp:ObjectDataSource>
+                    <asp:ObjectDataSource ID="ArchivedAgeRangeODS" runat="server" DeleteMethod="ArchiveAgeRange" InsertMethod="AddAgeRange" OldValuesParameterFormatString="original_{0}" SelectMethod="GetArchivedMealList" TypeName="FSOSS.System.BLL.AgeRangeController" UpdateMethod="UpdateAgeRange" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                        <DeleteParameters>
+                            <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </DeleteParameters>
+                        <InsertParameters>
+                            <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </InsertParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
+                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                        </UpdateParameters>
+                    </asp:ObjectDataSource>
+
+                    <%-- The Age Range ListView --%>
+                    <asp:ListView ID="AgeRangeListView" runat="server" DataSourceID="AgeRangeODS" DataKeyNames="ageRangeID">
                         <AlternatingItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #FFFFFF; color: #284775;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                                </td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
-
-
-
-
-                        </AlternatingItemTemplate>
-                        <EditItemTemplate>
-                            <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                                    <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
+                        </AlternatingItemTemplate>
+                        <EditItemTemplate>
+                            <tr style="background-color: #999999;">
+                                <td style="display: none">
+                                    <asp:TextBox Text='<%# Bind("ageRangeID") %>' runat="server" ID="ageRangeIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="100" /></td>
+                                    <asp:TextBox Text='<%# Bind("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionTextBox" /></td>
+                                <td></td>
+                                 <td></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
-                                <td>
-                                    <asp:TextBox Text='<%# Bind("administratorAccountId") %>' runat="server" ID="administratorAccountIdTextBox" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Bind("archivedYn") %>' runat="server" ID="archivedYnCheckBox" /></td>
+                                        <asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="Button4" /></td>
+                                    <td>
+                                        <asp:Button runat="server" CommandName="Cancel" CssClass="btn btn btn-danger mx-3 my-1" Text="Cancel" ID="Button5" />
+                                    </td>
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <table runat="server" style="">
+                            <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                                 <tr>
                                     <td>No data was returned.</td>
                                 </tr>
                             </table>
                         </EmptyDataTemplate>
-                        <InsertItemTemplate>
+                        <%--<InsertItemTemplate>
                             <tr style="">
                                 <td>
                                     <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
                                     <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
                                 </td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                    <asp:TextBox Text='<%# Bind("ageRangeID") %>' runat="server" ID="ageRangeIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionTextBox" MaxLength="100" /></td>
+                                    <asp:TextBox Text='<%# Bind("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionTextBox" /></td>
                                 <td>
                                     <asp:TextBox Text='<%# Bind("dateModified") %>' runat="server" ID="dateModifiedTextBox" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("administratorAccountId") %>' runat="server" ID="administratorAccountIdTextBox" /></td>
-                                <td>
-                                    <asp:CheckBox Checked='<%# Bind("archivedYn") %>' runat="server" ID="archivedYnCheckBox" /></td>
-                            </tr>
-                        </InsertItemTemplate>
-                        <ItemTemplate>
-                            <tr style="">
-                                <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
+                        </InsertItemTemplate>--%>
+                        <ItemTemplate>
+                            <tr style="background-color: #E0FFFF; color: #333333;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
                                 <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
-
-
-
-
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            </tr>
                         </ItemTemplate>
                         <LayoutTemplate>
                             <table runat="server">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="" border="0">
-                                            <tr runat="server" style="">
+                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                            <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
+                                                <th runat="server">Age Range</th>
+                                                <th runat="server">Date Modified</th>
+                                                <th runat="server">Modified By</th>
                                                 <th runat="server"></th>
-                                                <th runat="server">participantTypeID</th>
-                                                <th runat="server">participantTypeDescription</th>
-
-                                                <th runat="server">dateModified</th>
-                                                <th runat="server">administratorAccountId</th>
-                                                <th runat="server">archivedYn</th>
+                                                <th runat="server"></th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr runat="server">
-                                    <td runat="server" style="">
-                                        <asp:DataPager runat="server" ID="DataPager1">
+                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
+                                        <asp:DataPager runat="server" ID="DataPager3">
                                             <Fields>
                                                 <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                             </Fields>
@@ -582,25 +639,27 @@
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
-                            <tr style="">
+                            <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
+                                <td style="display: none">
+                                    <asp:Label Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
-                                    <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
-                                    <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
-                                </td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
-                                <td>
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
                                 <td>
                                     <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                 <td>
+                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("administratorAccountId") %>' runat="server" ID="administratorAccountIdLabel" /></td>
+                                <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
+                                </td>
                                 <td>
-                                    <asp:CheckBox Checked='<%# Eval("archivedYn") %>' runat="server" ID="archivedYnCheckBox" Enabled="false" /></td>
+                                    <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
                             </tr>
                         </SelectedItemTemplate>
                     </asp:ListView>
-                </div>
+
+                </div> <%--end of age range--%>
+
+
                 <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>

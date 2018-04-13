@@ -57,6 +57,13 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 
             GenderListView.DataSourceID = "GenderODS";
             GenderListView.DataBind();
+
+            MealsListView.DataSourceID = "MealsODS";
+            MealsListView.DataBind();
+
+            AgeRangeListView.DataSourceID = "AgeRangeODS";
+            AgeRangeListView.DataBind();
+
             RevealButton.Text = "Show Archived";
            
         }
@@ -66,8 +73,15 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             PTListview.DataSourceID = "ArchivedPTODS";
             PTListview.DataBind();
 
-            GenderListView.DataSourceID = "ArchiveGenderODS";
+            GenderListView.DataSourceID = "ArchivedGenderODS";
             GenderListView.DataBind();
+
+            MealsListView.DataSourceID = "ArchivedMealsODS";
+            MealsListView.DataBind();
+
+            AgeRangeListView.DataSourceID = "ArchivedAgeRangeODS";
+            AgeRangeListView.DataBind();
+
             RevealButton.Text = "Show Active";
             
         }
@@ -143,9 +157,56 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         }, "Success", "Successfully added the new participant type: \"" + ptDesc + "\"");
     }
 
+    protected void AddGenderButton_Click(object sender, EventArgs e)
+    {
+        //finding the customer profile choice to display
+        string addItem = AddGenderBox.Text.Trim();
+        int userID = Convert.ToInt32(Session["userID"]);
 
+        MessageUserControl.TryRun(() =>
+        {
+            GenderController sysmgr = new GenderController();
 
+            sysmgr.AddGender(addItem, userID);
+            GenderListView.DataBind();
+            AddGenderBox.Text = "";
 
+        }, "Success", "Successfully added the new gender: \"" + addItem + "\"");
+    }
+
+    protected void AddMealButton_Click(object sender, EventArgs e)
+    {
+        //finding the customer profile choice to display
+        string addItem = AddMealsTextBox.Text.Trim();
+        int userID = Convert.ToInt32(Session["userID"]);
+
+        MessageUserControl.TryRun(() =>
+        {
+            MealController sysmgr = new MealController();
+
+            sysmgr.AddMeal(addItem, userID);
+            MealsListView.DataBind();
+            AddMealsTextBox.Text = "";
+
+        }, "Success", "Successfully added the new meal: \"" + addItem + "\"");
+    }
+
+    protected void AddARButton_Click(object sender, EventArgs e)
+    {
+        //finding the customer profile choice to display
+        string addItem = AddAgeRangeTextBox.Text.Trim();
+        int userID = Convert.ToInt32(Session["userID"]);
+
+        MessageUserControl.TryRun(() =>
+        {
+            AgeRangeController sysmgr = new AgeRangeController();
+
+            sysmgr.AddAgeRange(addItem, userID);
+            GenderListView.DataBind();
+            AddAgeRangeTextBox.Text = "";
+
+        }, "Success", "Successfully added the new age range: \"" + addItem + "\"");
+    }
 
     /// <summary>
     /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
@@ -169,21 +230,5 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         }
     }
 
-    protected void AddGenderButton_Click(object sender, EventArgs e)
-    {
-        //finding the customer profile choice to display
-        string addItem = AddGenderBox.Text.Trim();
-        int userID = Convert.ToInt32(Session["userID"]);
-
-            MessageUserControl.TryRun(() =>
-            {
-                GenderController sysmgr = new GenderController();
-
-                sysmgr.AddGender(addItem, userID);
-                GenderListView.DataBind();
-                AddGenderBox.Text = "";
-
-            }, "Success", "Successfully added the new gender: \"" + addItem + "\"");
-     }
 
    }
