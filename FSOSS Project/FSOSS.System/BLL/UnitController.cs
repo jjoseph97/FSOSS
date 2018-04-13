@@ -25,15 +25,14 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
-                    var unitList = from x in context.Sites
-                                   from y in context.Units
-                                   where x.site_id == y.site_id
-                                   && y.archived_yn == false
+                    var unitList = from x in context.Units
+                                   where x.site_id == site_id
+                                   && x.archived_yn == false
                                    select new UnitsPOCO()
                                    {
-                                       unitID = y.unit_id,
-                                       unitNumber = y.unit_number,
-                                       dateModified = y.date_modified,
+                                       unitID = x.unit_id,
+                                       unitNumber = x.unit_number,
+                                       dateModified = x.date_modified,
 
 
                                    };
