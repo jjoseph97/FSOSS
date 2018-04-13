@@ -187,6 +187,40 @@
                         <asp:TextBox ID="AddPTBox" class="col-sm-4 my-2" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
                         <asp:Button ID="AddPTButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
                     </div>
+
+                    <%-- pt ods --%>
+                    <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                    <DeleteParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                    </UpdateParameters>
+                </asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                    <DeleteParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
+                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
+                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                    </UpdateParameters>
+                </asp:ObjectDataSource>
+
+                    <%-- pt listview --%>
                     <asp:ListView ID="PTListview" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
@@ -443,16 +477,16 @@
                             </tr>
                         </ItemTemplate>
                         <LayoutTemplate>
-                            <table runat="server">
+                            <table runat="server" style="width: 100%;">
                                 <tr runat="server">
                                     <td runat="server">
                                         <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                            <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
-                                                <th runat="server">Meal</th>
-                                                <th runat="server">Date Modified</th>
-                                                <th runat="server">Modified By</th>
-                                                <th runat="server"></th>
-                                                <th runat="server"></th>
+                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                                <th runat="server" class="col-sm-6 py-2">Meal</th>
+                                                <th runat="server" class="col-sm-4 py-2">Date Modified</th>
+                                                <th runat="server" class="col-sm-4 py-2">Modified By</th>
+                                                <th runat="server" class="col-sm-2 py-2"></th>
+                                                <th runat="server" class="col-sm-2 py-2"></th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
@@ -612,16 +646,16 @@
                             </tr>
                         </ItemTemplate>
                         <LayoutTemplate>
-                            <table runat="server">
+                            <table table runat="server" style="width: 100%;" class="mt-2 mb-2">
                                 <tr runat="server">
                                     <td runat="server">
                                         <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                            <tr runat="server" style="background-color: #E0FFFF; color: #333333;">
-                                                <th runat="server">Age Range</th>
-                                                <th runat="server">Date Modified</th>
-                                                <th runat="server">Modified By</th>
-                                                <th runat="server"></th>
-                                                <th runat="server"></th>
+                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                                <th runat="server" class="col-sm-6 py-2">Age Range</th>
+                                                <th runat="server" class="col-sm-4 py-2">Date Modified</th>
+                                                <th runat="server" class="col-sm-4 py-2">Modified By</th>
+                                                <th runat="server" class="col-sm-2 py-2"></th>
+                                                <th runat="server" class="col-sm-2 py-2"></th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
@@ -658,39 +692,6 @@
                     </asp:ListView>
 
                 </div> <%--end of age range--%>
-
-
-                <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
-                    <DeleteParameters>
-                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                    </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                    </InsertParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                    </UpdateParameters>
-                </asp:ObjectDataSource>
-                <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
-                    <DeleteParameters>
-                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                    </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                    </InsertParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                        <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                        <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                    </UpdateParameters>
-                </asp:ObjectDataSource>
-
             </div>
         </div>
 

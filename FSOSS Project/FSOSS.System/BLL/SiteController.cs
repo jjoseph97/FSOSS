@@ -193,7 +193,11 @@ namespace FSOSS.System.BLL
                         {
                             throw new Exception("This site does not exist.");
                         }
-
+                        if (siteName == "" || siteName == null)
+                        {
+                            throw new Exception("Please enter a site name. Field cannot be empty.");
+                        }
+                        //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
                         else
                         {
                             Site updateSite = context.Sites.Find(siteID);
@@ -209,7 +213,7 @@ namespace FSOSS.System.BLL
                     }
                     else
                     {
-                        throw new Exception("Update failed.");
+                        throw new Exception("Please enter only alphabetical letters.");
                     }
                 }
                 catch (Exception e)
