@@ -32,35 +32,10 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     protected void SearchUnitButton_Click(object sender, EventArgs e)
     {
         UnitsListView.Visible = true;
-        DisplayArchivedButton.Visible = true;
+        ArchivedButton.Visible = true;
         SelectedSiteID.Text = SiteDropDownList.SelectedValue;
     }
 
-
-
-    protected void DisplayActiveButton_Click(object sender, EventArgs e)
-    {
-        //Listview Visible when clicked
-        UnitsListView.Visible = false;
-        ArchivedUnitsListView.Visible = true;
-        ArchivedUnitsListView.DataBind();
-        // Buttons visible when clicked
-        DisplayActiveButton.Visible = true;
-        DisplayArchivedButton.Visible = false;
-
-    }
-
-    protected void DisplayArchivedButton_Click(object sender, EventArgs e)
-    {
-        //Listview Visible when clicked
-        UnitsListView.Visible = true;
-        ArchivedUnitsListView.Visible = false;
-        UnitsListView.DataBind();
-
-        // Buttons visible when clicked
-        DisplayActiveButton.Visible = false;
-        DisplayArchivedButton.Visible = true;
-    }
 
     /// <summary>
     /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
@@ -82,5 +57,28 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
             {
             }, "Success", successMessage);
         }
+    }
+
+    protected void ActiveButton_Click(object sender, EventArgs e)
+    {
+        UnitsListView.Visible = true;
+        ArchivedUnitsListView.Visible = false;
+        UnitsListView.DataBind();
+
+        ArchivedButton.Visible= true;
+        ActiveButton.Visible = false;
+
+
+    }
+
+    protected void ArchivedButton_Click(object sender, EventArgs e)
+    {
+        UnitsListView.Visible = false;
+        ArchivedUnitsListView.Visible = true;
+        ArchivedUnitsListView.DataBind();
+
+        ActiveButton.Visible = true;
+        ArchivedButton.Visible = false;
+
     }
 }

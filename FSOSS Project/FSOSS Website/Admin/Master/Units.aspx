@@ -30,8 +30,8 @@
 
         <div class="card container mb-2">
             <div class="row container mx-auto px-0">
-                <asp:Button ID="DisplayArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="DisplayArchivedButton_Click" Visible="false"></asp:Button>
-                <asp:Button ID="DisplayActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="DisplayActiveButton_Click" Visible="false"></asp:Button>
+                <asp:Button ID="ArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived"  OnClick="ArchivedButton_Click" Visible="false"></asp:Button>
+                <asp:Button ID="ActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active"  OnClick="ActiveButton_Click" Visible="false"></asp:Button>
             </div>
 
 
@@ -198,11 +198,8 @@
                         <td runat="server">
                             <table runat="server" id="itemPlaceholderContainer" style="" border="0">
                                 <tr runat="server" style="">
-                                    <th runat="server"></th>
-                                    <th runat="server">unitID</th>
-                                  
-                                    <th runat="server">Unit Number</th>
-                                    <th runat="server">Date Modified</th>
+                                    <th runat="server" class="col-sm-4 py-2" >Unit Number</th>
+                                    <th runat="server" class="col-sm-4 py-2">Date Modified</th>
                               
                                 </tr>
                                 <tr runat="server" id="itemPlaceholder"></tr>
@@ -261,7 +258,6 @@
             <InsertParameters>
                 <asp:Parameter Name="unitNumber" Type="String"></asp:Parameter>
                 <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                <%--<asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>--%>
                 <asp:ControlParameter ControlID="SelectedSiteID" PropertyName="Text" Name="siteID" Type="Int32"></asp:ControlParameter>
             </InsertParameters>
             <SelectParameters>
