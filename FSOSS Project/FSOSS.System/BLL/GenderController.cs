@@ -240,7 +240,9 @@ namespace FSOSS.System.BLL
                     }
                     //add duplicate check
                     var genderList = from x in context.Genders
-                                              where x.gender_description.ToLower().Equals(genderDescription.ToLower()) && !x.archived_yn
+                                              where x.gender_description.ToLower().Equals(genderDescription.ToLower()) &&
+                                              x.gender_id != genderID &&
+                                              !x.archived_yn
                                               select new GenderPOCO()
                                               {
                                                   genderDescription = x.gender_description
@@ -248,7 +250,8 @@ namespace FSOSS.System.BLL
 
 
                     var GoneGenderList = from x in context.Genders
-                                                  where x.gender_description.ToLower().Equals(genderDescription.ToLower()) && x.archived_yn
+                                                  where x.gender_description.ToLower().Equals(genderDescription.ToLower()) && 
+                                                  x.gender_id != genderID && x.archived_yn
                                                   select new GenderPOCO()
                                                   {
                                                       genderDescription = x.gender_description

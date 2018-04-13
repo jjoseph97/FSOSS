@@ -254,7 +254,8 @@ namespace FSOSS.System.BLL
                     }
                     //add duplicate check
                     var ageList = from x in context.AgeRanges
-                                   where x.age_range_description.ToLower().Equals(ageRangeDescription.ToLower()) && !x.archived_yn
+                                   where x.age_range_description.ToLower().Equals(ageRangeDescription.ToLower()) &&
+                                   x.age_range_id != ageRangeID && !x.archived_yn
                                    select new AgeRangePOCO()
                                    {
                                        ageRangeDescription = x.age_range_description
@@ -262,7 +263,8 @@ namespace FSOSS.System.BLL
 
 
                     var GoneageList = from x in context.AgeRanges
-                                       where x.age_range_description.ToLower().Equals(ageRangeDescription.ToLower()) && x.archived_yn
+                                       where x.age_range_description.ToLower().Equals(ageRangeDescription.ToLower()) &&
+                                       x.age_range_id != ageRangeID && x.archived_yn
                                        select new AgeRangePOCO()
                                        {
                                            ageRangeDescription = x.age_range_description

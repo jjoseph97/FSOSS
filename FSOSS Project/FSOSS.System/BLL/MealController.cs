@@ -255,7 +255,8 @@ namespace FSOSS.System.BLL
                     }
                     //add duplicate check
                     var mealList = from x in context.Meals
-                                              where x.meal_name.ToLower().Equals(mealName.ToLower()) && !x.archived_yn
+                                              where x.meal_name.ToLower().Equals(mealName.ToLower()) &&
+                                              x.meal_id != mealID && !x.archived_yn
                                               select new MealPOCO()
                                               {
                                                   mealName = x.meal_name
@@ -263,7 +264,8 @@ namespace FSOSS.System.BLL
 
 
                     var GoneMealList = from x in context.Meals
-                                                  where x.meal_name.ToLower().Equals(mealName.ToLower()) && x.archived_yn
+                                                  where x.meal_name.ToLower().Equals(mealName.ToLower()) &&
+                                                  x.meal_id != mealID && x.archived_yn
                                                   select new MealPOCO()
                                                   {
                                                       mealName = x.meal_name
