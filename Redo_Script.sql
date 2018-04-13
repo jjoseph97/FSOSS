@@ -345,7 +345,7 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('meet',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('menu',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('mere',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES (‘cows’,1);
+INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('cows',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('mile',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('milk',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('mill',1);
@@ -782,7 +782,7 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('kent',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('kept',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('kick',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES (‘domino’,1);
+INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('domino',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('kind',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('king',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('knee',1);
@@ -1883,7 +1883,7 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('violence',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('volatile',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('warranty',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES (‘breathe’,1);
+INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('breathe',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('weighted',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('whatever',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('whenever',1);
