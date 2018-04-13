@@ -45,7 +45,7 @@
 
 
                 <AlternatingItemTemplate>
-                    <tr style="">
+                    <tr  style="background-color: #bbf2ff; color: #284775;">
 
 
                         <td>
@@ -54,14 +54,16 @@
                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
 
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton" class="btn btn-danger" />
-                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" class="btn btn-info"  />
+                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton" class="btn btn-danger mx-3 my-1" />
+                            </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" class="btn btn-success mx-3 my-1"  />
                         </td>
 
                     </tr>
                 </AlternatingItemTemplate>
                 <EditItemTemplate>
-                    <tr style="">
+                    <tr style="background-color: #fdff94;">
                        
 
                         
@@ -70,8 +72,10 @@
                         <td style="display: none;">
                             <asp:Label Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" Visible="false" /></td>
                          <td>
-                            <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" class="btn btn-success"  />
-                            <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" class="btn btn-warning" />
+                            <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" class="btn btn-success mx-3 my-1"  />
+                             </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" class="btn btn-warning mx-3 my-1" />
                         </td>
 
                     </tr>
@@ -90,14 +94,16 @@
                         <td>
                             <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" class="btn btn-primary" />
-                            <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" class="btn" />
+                            <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" class="btn btn-primary mx-3 my-1" />
+                            </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" class="btn btn-warning mx-3 my-1" />
                         </td>
                     </tr>
                    
                 </InsertItemTemplate>
                 <ItemTemplate>
-                    <tr style="">
+                    <tr style="background-color: #E0FFFF; color: #333333;">
 
 
                         <td>
@@ -105,8 +111,10 @@
                         <td style="display: none;">
                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton"  class="btn btn-danger" />
-                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" class="btn btn-info" />
+                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton"  class="btn btn-danger mx-3 my-1" />
+                            </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" class="btn btn-success mx-3 my-1" />
                         </td>
 
                     </tr>
@@ -120,6 +128,7 @@
                                     <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                         <th runat="server">Unit Number</th>
                                         <th runat="server"></th>
+                                          <th runat="server"></th>
 
 
                                     </tr>
@@ -139,7 +148,7 @@
                     </table>
                 </LayoutTemplate>
                 <SelectedItemTemplate>
-                    <tr style="">
+                    <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
 
 
                         <td>
@@ -147,8 +156,10 @@
                         <td style="display: none;">
                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="Button1" class="btn btn-danger" />
-                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="Button2" class="btn btn-info" />
+                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="Button1" class="btn btn-danger mx-3 my-1" />
+                            </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="Button2" class="btn btn-success mx-3 my-1" />
                         </td>
 
                     </tr>
@@ -161,7 +172,7 @@
         <%-- -----------------Archived UNITS Listview Section------------------%>
         <asp:ListView ID="ArchivedUnitsListView" runat="server" Visible="false" DataKeyNames="unitID" DataSourceID="ArchivedUnitsODS">
             <AlternatingItemTemplate>
-                <tr style="">
+                <tr style="background-color: #bbf2ff; color: #284775;">
                    
                     <td style="display: none;">
                         <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
@@ -171,7 +182,7 @@
                     <td>
                         <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
               <td>
-                        <asp:Button runat="server" CommandName="Delete" Text="Enable" ID="DeleteButton" class="btn btn-success" />
+                        <asp:Button runat="server" CommandName="Delete" Text="Enable" ID="DeleteButton" class="btn btn-success mx-3 my-1" />
                     </td>
                 </tr>
             </AlternatingItemTemplate>
@@ -185,7 +196,7 @@
             </EmptyDataTemplate>
       
             <ItemTemplate>
-                <tr style="">
+                <tr style="background-color: #E0FFFF; color: #333333;">
                     
                     <td style="display: none;">
                         <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
@@ -195,7 +206,7 @@
                     <td>
                         <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                     <td>
-                        <asp:Button runat="server" CommandName="Delete" Text="Enable" ID="DeleteButton" class="btn btn-success"/>
+                        <asp:Button runat="server" CommandName="Delete" Text="Enable" ID="DeleteButton" class="btn btn-success mx-3 my-1"/>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -207,6 +218,8 @@
                                 <tr runat="server" style="background-color: #38dcff; color: #333333;">
                                     <th runat="server" class="col-sm-4 py-2" >Unit Number</th>
                                     <th runat="server" class="col-sm-6 py-2">Date Modified</th>
+                                    <th runat="server" class="col-sm-4 py-2" ></th>
+
                               
                                 </tr>
                                 <tr runat="server" id="itemPlaceholder"></tr>
@@ -225,7 +238,7 @@
                 </table>
             </LayoutTemplate>
             <SelectedItemTemplate>
-                <tr style="">
+                <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
                    
                     <td style="display: none;">
                         <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
@@ -235,7 +248,7 @@
                     <td>
                         <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                   <td>
-                        <asp:Button runat="server" CommandName="Delete" Text="Enable" ID="DeleteButton" class="btn btn-success"/>
+                        <asp:Button runat="server" CommandName="Delete" Text="Enable" ID="DeleteButton" class="btn btn-success mx-3 my-1"/>
                     </td>
                 </tr>
             </SelectedItemTemplate>
