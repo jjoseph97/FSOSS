@@ -11,7 +11,7 @@ public partial class _Default : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Page.Form.DefaultButton = SurveyButton.UniqueID;
+
     }
 
     protected void SurveyButton_Click(object sender, EventArgs e)

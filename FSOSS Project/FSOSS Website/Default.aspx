@@ -11,7 +11,7 @@
                 <p><u><b>Individual responses will be kept anonymous and confidential.</b></u></p>
             </div>
         </div>
-        <div class="row mt-3">
+        <asp:Panel runat="server" CssClass="row mt-3" DefaultButton="SurveyButton">
             <div class="col-sm-12 mb-3 col-md-6 mx-auto">
                 <b>Please enter the word of the day below to take the survey:</b>
             </div>
@@ -24,7 +24,7 @@
             <div class="col-sm-12 col-md-6 mx-auto mb-3">
                 <b>This survey will take approximately 5 minutes of your time.</b>
             </div>
-        </div>
+        </asp:Panel>
         <div class="row">
             <div class="col-sm-12 text-center">
                 <asp:Label ID="Message" runat="server" CssClass="alert alert-danger p-2 rounded" Visible="false" />
