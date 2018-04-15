@@ -11,13 +11,13 @@
             margin: 0 auto;
         }
     </style>
-    <div class="form-signin card bg-light">
+    <asp:Panel runat="server" CssClass="form-signin card bg-light" DefaultButton="LoginButton">
         <div class="card-header h3 text-center mb-2 bg-light">Please Login</div>
         <div class="form-group">
             <asp:Label ID="UsernameLabel" runat="server" AssociatedControlID="UsernameTextbox" CssClass="col-sm-12">Username: </asp:Label>
             <div class="col-sm-12">
                 <asp:TextBox ID="UsernameTextBox" runat="server" CssClass="form-control" AutoComplete="off" Placeholder="Enter username" AutoFocus="true" />
-                <asp:RequiredFieldValidator ID="UsernameRFV"  ControlToValidate="UsernameTextBox" runat="server" />
+                <asp:RequiredFieldValidator ID="UsernameRFV" ControlToValidate="UsernameTextBox" runat="server" />
             </div>
         </div>
         <div class="form-group">
@@ -30,7 +30,7 @@
         <div class="col-sm-12 mt-2 mb-2">
             <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-primary col-sm-12" Text="Log in" OnClick="LoginButton_Click" CausesValidation="false" />
         </div>
-    </div>
+    </asp:Panel>
     <div class="text-center mt-3">
         <div class="col-sm-12">
             <asp:Label ID="Message" runat="server" CssClass="alert alert-danger p-2 rounded" Visible="false" />

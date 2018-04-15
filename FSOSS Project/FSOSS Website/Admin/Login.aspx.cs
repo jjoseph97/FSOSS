@@ -10,8 +10,6 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Page.Form.DefaultButton = LoginButton.UniqueID; // Enables user to press enter button
-
         var fsossnavbar = Master.FindControl("FSOSSNavbar");
         var hamburger = Master.FindControl("hamburger");
         fsossnavbar.Visible = false;
