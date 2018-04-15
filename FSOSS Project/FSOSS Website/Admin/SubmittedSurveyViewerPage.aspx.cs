@@ -60,10 +60,20 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
                 AgeRangeLabel.Text = subSurveyDetailsList.ageRange.ToString();
                 GenderLabel.Text = subSurveyDetailsList.gender.ToString();
                 DateEnteredLabel.Text = subSurveyDetailsList.dateEntered.ToString();
-                ContactRequestLabel.Text = subSurveyDetailsList.contactRequest.ToString();
-                ContactStatusLabel.Text = subSurveyDetailsList.contacted.ToString();
+                ContactRequestLabel.Text = (subSurveyDetailsList.contactRequest == false) ? "No" : "Yes";
+                ContactStatusLabel.Text = (subSurveyDetailsList.contacted == false) ? "Not resolved" : "Resolved";
                 ContactRoomNumberLabel.Text = subSurveyDetailsList.contactRoomNumber.ToString();
                 ContactPhoneNumberLabel.Text = subSurveyDetailsList.contactPhoneNumber.ToString();
+
+                if (ContactRequestLabel.Text == "No") // if the contact request was false on this survey, don't display the empty contact details
+                {
+                    ContactStatLabel.Visible = false;
+                    ContactStatusLabel.Visible = false;
+                    ContactRoomLabel.Visible = false;
+                    ContactRoomNumberLabel.Visible = false;
+                    ContactPhoneLabel.Visible = false;
+                    ContactPhoneNumberLabel.Visible = false;
+                }
 
                 // this is to populated the survey questions and answers on the second part of the page
                 List<ParticipantResponsePOCO> subSuveyAnswerList = ssc.GetSubmittedSurveyAnswers(subSurveyID).ToList();
@@ -81,34 +91,23 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
                 Question1cLabel.Text = "c. " + subSuveyAnswerList[2].question.ToString() + ":";
                 Question1dLabel.Text = "d. " + subSuveyAnswerList[3].question.ToString() + ":";
                 Question1eLabel.Text = "e. " + subSuveyAnswerList[4].question.ToString() + ":";
-                Question2Label.Text = "2. " + subSuveyAnswerList[5].question.ToString() + ":";
-                Question3Label.Text = "3. " + subSuveyAnswerList[6].question.ToString() + ":";
-                Question4Label.Text = "4. " + subSuveyAnswerList[7].question.ToString() + ":";
-                Question5Label.Text = "5. " + subSuveyAnswerList[8].question.ToString() + ":";
+                Question2Label.Text = "2. " + subSuveyAnswerList[5].question.ToString();
+                Question3Label.Text = "3. " + subSuveyAnswerList[6].question.ToString();
+                Question4Label.Text = "4. " + subSuveyAnswerList[7].question.ToString();
+                Question5Label.Text = "5. " + subSuveyAnswerList[8].question.ToString();
             }
         }
     }
 
     /// <summary>
-    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
-    /// as well as info and success messages from the code behind.
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
     {
         // if an exception was thrown, handle with messageusercontrol to display the exception for error
-        if (e.ReturnValue == null)
-        {
-            MessageUserControl.HandleDataBoundException(e);
-        }
-        else // else show the ReturnValue(success message) as a string to display to the user 
-        {
-            string successMessage = e.ReturnValue.ToString();
-            MessageUserControl.TryRun(() =>
-            {
-            }, "Success", successMessage);
-        }
+        MessageUserControl.HandleDataBoundException(e);
     }
 
     /// <summary>

@@ -93,7 +93,7 @@
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="Question5Label" class="col-sm-12 px-0 text-center text-sm-left" runat="server" Style="font-size: large; line-height: 38px;" Text="5."></asp:Label><br />
-                    <asp:Label ID="Response5Label" class="col-sm-12 px-4 text-center text-sm-left border border-dark rounded" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text=""></asp:Label><br />
+                    <asp:Label ID="Response5Label" class="col-sm-12 px-4 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text=""></asp:Label><br />
                 </div>
             </div>
             <div class="row container mx-auto px-0">
