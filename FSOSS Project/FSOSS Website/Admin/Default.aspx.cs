@@ -102,6 +102,13 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 
     protected void RecentReportsButton_Click(object sender, EventArgs e)
     {
+        FilterPOCO filter = new FilterPOCO();
+        filter.startingDate = DateTime.Today.AddDays(-7);
+        filter.endDate = DateTime.Today;
+        filter.siteID = int.Parse(HospitalDDL.SelectedValue);
+        filter.mealID = 0;
+        Session["filter"] = filter;
+        Response.Redirect("~/Admin/ReportPage.aspx");
 
     }
 }
