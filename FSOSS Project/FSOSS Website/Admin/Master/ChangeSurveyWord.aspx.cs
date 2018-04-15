@@ -15,7 +15,8 @@ using FSOSS.System.Data.Entity;
 public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads, the DataSourceID on the SurveyWordListView is set to the ActiveSurveyWordODS Object Data Source.
+    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// Following this, for each page load the search text box is checked if a search was entered or not, and the text field background color is styled appropriately
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -31,12 +32,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         }
         else
         {
-            if (SearchWordTextBox.Text == "") // check if the SearchWordTextBox is empty, then change the back color to white
+            if (SearchWordTextBox.Text == "") // check if the SearchWordTextBox is empty, then change the back color to white indicating the user can enter a search in this field if desired
             {
                 SearchWordTextBox.Attributes.Remove("style");
                 SearchWordTextBox.BackColor = System.Drawing.Color.White;
             }
-            else  // else, check if the SearchWordTextBox is not empty, then change the back color to light gray
+            else  // else, check if the SearchWordTextBox is not empty, then change the back color to light gray indicating the user cannot change it
             {
                 SearchWordTextBox.Attributes.Remove("style");
                 SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
@@ -67,7 +68,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is for when the user clicks the "Search" button. Results in the ListView are returned matching the search string.
+    /// This button on click method is for when the user clicks the "Search" button and the search field background color is set to light gray.
+    /// Survey words in the ListView are returned and now showing matching the search string that was entered.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -77,15 +79,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         MessageUserControl.TryRun(() =>
         {
             Regex validWord = new Regex("^[a-zA-Z]+$");
-            if (searchWord == "")
+            if (searchWord == "") // check if the search is empty and display an error
             {
-                throw new Exception("The search field cannot be empty."); // check if the search is empty
+                throw new Exception("The search field cannot be empty."); 
             }
-            else if (searchWord.Length > 8) // check that the length of the search is a maximum of 8 characters
+            else if (searchWord.Length > 8) // check that the length of the search is a maximum of 8 characters and display an error
             {
                 throw new Exception("The search field can only be a maximum of 8 characters in length.");
             }
-            else if (!validWord.IsMatch(searchWord)) // check that there is only alphabetical letters and no spaces in the search
+            else if (!validWord.IsMatch(searchWord)) // check that there is only alphabetical letters and no spaces in the search and display an error
             {
                 throw new Exception("Please enter only alphabetical letters and no spaces in the search field.");
             }
@@ -100,11 +102,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 {
                     SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
                 }
-                SurveyWordListView.DataBind();
+                SurveyWordListView.DataBind(); // rebind the ListView with the appropraite ODS
 
                 SearchWordTextBox.ReadOnly = true;
-                SearchWordTextBox.Attributes.Remove("style");
-                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray; // set the SearchWordTextBox back color to light gray
+                SearchWordTextBox.Attributes.Remove("style"); // clear the style attribute to remove the existing white background color
+                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray; // set the SearchWordTextBox back color to light gray indicating the user cannot change it
                 SearchWordButton.Visible = false;
                 ClearSearchButton.Visible = true;
             }
@@ -116,7 +118,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is to clear the search and return to a ListView with full results for the user.
+    /// This button on click method is to clear the search field, change the background color to white and return to a ListView with full results for the user.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -131,35 +133,35 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         {
             SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
         }
+        SurveyWordListView.DataBind(); // rebind the ListView with the appropraite ODS
 
-        SurveyWordListView.DataBind();
         SearchWordTextBox.ReadOnly = false;
-        SearchWordTextBox.Attributes.Remove("style");
-        SearchWordTextBox.BackColor = System.Drawing.Color.White; // set the SearchWordTextBox back color to white
+        SearchWordTextBox.Attributes.Remove("style"); // clear the style attribute to remove the existing light gray background color
+        SearchWordTextBox.BackColor = System.Drawing.Color.White; // set the SearchWordTextBox back color to white indicating the user can enter a search in this field if desired
         SearchWordTextBox.Text = "";
         SearchWordButton.Visible = true;
         ClearSearchButton.Visible = false;
     }
 
     /// <summary>
-    /// This button on click method is for adding a new survey word to the database.
+    /// This method is for adding a new survey word to the database when the user clicks on the "Add Word" button.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         string newWord = AddWordTextBox.Text.Trim();
-        int userID = Convert.ToInt32(Session["userID"]);
+        int userID = Convert.ToInt32(Session["userID"]); // get the userID for the user who is currently logged in
 
         MessageUserControl.TryRun(() =>
         {
             PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
 
-            sysmgr.AddWord(newWord, userID);
+            sysmgr.AddWord(newWord, userID); // send the new survey word and userID data to the AddWord method in the PotentialSurveyWordController
             SurveyWordListView.DataBind();
-            AddWordTextBox.Text = "";
+            AddWordTextBox.Text = ""; // set the add word text field back to blank text
           
-        }, "Success", "Successfully added the new survey word: \"" + newWord + "\"");
+        }, "Success", "Successfully added the new survey word: \"" + newWord + "\""); // display a success message if the survey word was added correctly
     }
 
     /// <summary>
@@ -169,7 +171,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void ShowArchivedButton_Click(object sender, EventArgs e)
     {
-        SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
+        SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS"; // show the current archived survey words on the ListView
         SurveyWordListView.DataBind();
         // this is to clear the search when switching from active to archived words
         ClearSearchButton_Click(null, EventArgs.Empty);
@@ -185,11 +187,10 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e"></param>
     protected void ShowActiveButton_Click(object sender, EventArgs e)
     {
-        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
+        SurveyWordListView.DataSourceID = "ActiveSurveyWordODS"; // show the current active survey words on the ListView
         SurveyWordListView.DataBind();
 
-        // this is to clear the search when switching from active to archived words
-        ClearSearchButton_Click(null, EventArgs.Empty);
+        ClearSearchButton_Click(null, EventArgs.Empty); // this is to clear the search when switching from active to archived words
         ShowActiveButton.Visible = false;
         ShowArchivedButton.Visible = true;
     }
@@ -203,124 +204,29 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         if (e.Item.ItemType == ListViewItemType.DataItem)
         {
-            Button disabledBtn = (Button)e.Item.FindControl("DisableButton");
-            Button enabledBtn = (Button)e.Item.FindControl("EnableButton");
-            if (disabledBtn != null || enabledBtn != null)
+            Button disableBtn = (Button)e.Item.FindControl("DisableButton");
+            Button enableBtn = (Button)e.Item.FindControl("EnableButton");
+            if (disableBtn != null || enableBtn != null) // check if the found EnableButton control and DisableButton control is not returned as null
             {
-                if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+                if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS") // if the ListView is populated with active survey words, show the disabled button
                 {
-                    disabledBtn.Visible = true;
-                    enabledBtn.Visible = false;
+                    disableBtn.Visible = true;
+                    enableBtn.Visible = false;
                 }
-                else if (SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS")
+                else if (SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS") // if the ListView is populated with searched active survey words, show the disabled button
                 {
-                    disabledBtn.Visible = true;
-                    enabledBtn.Visible = false;
+                    disableBtn.Visible = true;
+                    enableBtn.Visible = false;
                 }
-                else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+                else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS") // if the ListView is populated with archived survey words, show the disabled button
                 {
-                    disabledBtn.Visible = false;
-                    enabledBtn.Visible = true;
+                    disableBtn.Visible = false;
+                    enableBtn.Visible = true;
                 }
-                else if (SurveyWordListView.DataSourceID == "SearchArchivedSurveyWordODS")
+                else if (SurveyWordListView.DataSourceID == "SearchArchivedSurveyWordODS") // if the ListView is populated with searched archived survey words, show the disabled button
                 {
-                    disabledBtn.Visible = false;
-                    enabledBtn.Visible = true;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// This method is for responding to certain button commands that are returned from the ListView in order to assign the ListView to the correct ODS.
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void SurveyWordListView_ItemCommand(object sender, ListViewCommandEventArgs e)
-    {
-        if (e.CommandName == "Edit")
-        {
-            // check if currently in archived words, or in active words
-            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
-            {
-                // assign the appropriate ODS if a search term has been entered
-                if (SearchWordTextBox.Text == "")
-                {
-                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
-                }
-                else if (SearchWordTextBox.Text != "")
-                {
-                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
-                }
-            }
-            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
-            {
-                // assign the appropriate ODS if a search term has been entered
-                if (SearchWordTextBox.Text == "")
-                {
-                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
-                }
-                else
-                {
-                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
-                }
-            }
-        }
-
-        if (e.CommandName == "Update")
-        {
-            // check if currently in archived words, or in active words
-            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
-            {
-                // assign the appropriate ODS if a search term has been entered
-                if (SearchWordTextBox.Text == "")
-                {
-                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
-                }
-                else if (SearchWordTextBox.Text != "")
-                {
-                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
-                }
-            }
-            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
-            {
-                // assign the appropriate ODS if a search term has been entered
-                if (SearchWordTextBox.Text == "")
-                {
-                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
-                }
-                else
-                {
-                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
-                }
-            }
-        }
-
-        if (e.CommandName == "Delete")
-        {
-            // check if currently in archived words, or in active words
-            if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
-            {
-                // assign the appropriate ODS if a search term has been entered
-                if (SearchWordTextBox.Text == "")
-                {
-                    SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS";
-                }
-                else if (SearchWordTextBox.Text != "")
-                {
-                    SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
-                }
-            }
-            else if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
-            {
-                // assign the appropriate ODS if a search term has been entered
-                if (SearchWordTextBox.Text == "")
-                {
-                    SurveyWordListView.DataSourceID = "ActiveSurveyWordODS";
-                }
-                else
-                {
-                    SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
+                    disableBtn.Visible = false;
+                    enableBtn.Visible = true;
                 }
             }
         }

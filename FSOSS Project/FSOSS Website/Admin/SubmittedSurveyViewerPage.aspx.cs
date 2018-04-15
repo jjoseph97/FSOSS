@@ -10,7 +10,8 @@ using System.Web.UI.WebControls;
 public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads, the query string for the surveyID (sid) is obtained to populate the page with the appropriate submitted survey details. 
+    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// Following that, the query string for the surveyID (sid) is obtained to populate the page with the appropriate submitted survey details. 
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>

@@ -13,8 +13,9 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     public FilterPOCO filter = new FilterPOCO();
 
     /// <summary>
-    /// When the page loads, the filter session data is brought in from the previous page and it checks to see if the filter is null, if 
-    /// the filter is null then the user is redirected back to the previous page to prevent browsing to this page directly with no data
+    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// Following that, the filter session data is brought in from the previous page and the page checks to see if the filter is null. 
+    /// If the filter is null then the user is redirected back to the previous page to prevent browsing to this page directly with no data.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -31,7 +32,7 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
         }
         else if (!IsPostBack)
         { 
-            if (filter == null)
+            if (filter == null) // check and redirect to the previous page if the filter is null
             {
                 Response.Redirect("ViewSurveyFilter.aspx");
             }
@@ -39,16 +40,15 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     }
 
     /// <summary>
-    /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to set the 
-    /// datasource and bind once to avoid error when the page loads.
+    /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to set the datasource and bind once to avoid error when the page loads.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void Page_PreRender(object sender, EventArgs e)
     {
         SubmittedSurveyController sysmgr = new SubmittedSurveyController();
-        List<SubmittedSurveyPOCO> submittedSurveyData = sysmgr.GetSubmittedSurveyList(filter.siteID, filter.startingDate, filter.endDate, filter.mealID, filter.unitID);
-        SubmittedSurveyList.DataSource = submittedSurveyData;
-        SubmittedSurveyList.DataBind();
+        List<SubmittedSurveyPOCO> submittedSurveyData = sysmgr.GetSubmittedSurveyList(filter.siteID, filter.startingDate, filter.endDate, filter.mealID, filter.unitID); // get the list of submitted surveys with the filter data
+        SubmittedSurveyList.DataSource = submittedSurveyData; // set the ListView with the filterd submitted survey list data
+        SubmittedSurveyList.DataBind(); // rebind the ListView
     }
 }
