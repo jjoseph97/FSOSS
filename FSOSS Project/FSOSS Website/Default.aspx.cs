@@ -17,7 +17,7 @@ public partial class _Default : Page
     protected void SurveyButton_Click(object sender, EventArgs e)
     {
         SurveyWordController controller = new SurveyWordController();
-        bool isValid = controller.ValidateAccessWord(WOTDTextBox.Text.ToLower());
+        bool isValid = controller.ValidateAccessWord(WOTDTextBox.Text.Trim().ToLower());
 
         if (!isValid)
         {
@@ -32,7 +32,7 @@ public partial class _Default : Page
         else
         {
             SurveyWordController sysmgr = new SurveyWordController();            
-            Session["siteID"] = sysmgr.GetSite(WOTDTextBox.Text.ToLower()).site_id;
+            Session["siteID"] = sysmgr.GetSite(WOTDTextBox.Text.Trim().ToLower()).site_id;
 
             //RETURN LATEST SURVEY ID
             SurveyVersionController version = new SurveyVersionController();
