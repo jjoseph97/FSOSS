@@ -20,9 +20,6 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
         }
         else
         {
-            // Set Default button for page
-            Page.Form.DefaultButton = CreateButton.UniqueID; // Enables user to press enter button
-
             if (!IsPostBack)
             {
                 FirstNameTextBox.Focus();
