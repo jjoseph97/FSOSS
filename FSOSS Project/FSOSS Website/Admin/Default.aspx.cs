@@ -28,7 +28,6 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
                 HospitalDDL.SelectedValue = "1";
-
                 string value = HospitalDDL.SelectedValue;
                 if (value != null)
                 {
@@ -36,15 +35,13 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     int siteID = Convert.ToInt32(value);
                     int contactCount = ssc.GetContactRequestTotal(siteID);
                     SurveyWordController surveyWordManager = new SurveyWordController();
-                     
                     WOTDLabel.Text =surveyWordManager.GetSurveyWord(siteID); 
                     if (contactCount > 0)
                     {
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
                         PendingRequestNumberLabel.Font.Bold = true;
-                        PendingRequestNumberLabel.Attributes["style"] += " color: #223f88 ";
-                        PendingContactSection.Attributes["class"] += " col-md-12 mx-auto";
-                        PendingContactSection.Attributes["style"] += " background-color: #a6ebf7";
+                        PendingRequestNumberLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#223f88");
+                        PendingContactSection.Attributes["style"] = " background-color: #a6ebf7";
                     }
                     else
                     {
@@ -53,7 +50,6 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     }
                 }
             }
-
             WelcomeMessage.Text = "Welcome, " + Session["username"].ToString();
         }
     }
@@ -65,13 +61,22 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         string value = HospitalDDL.SelectedValue;
         int siteID = Convert.ToInt32(value);
         int contactCount = ssc.GetContactRequestTotal(siteID);
-        PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
+        if (contactCount > 0)
+        {
+            ViewButton.Visible = true;
+            PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
+            PendingRequestNumberLabel.Font.Bold = true;
+            PendingRequestNumberLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#223f88");
+            PendingContactSection.Attributes["style"] = " background-color: #a6ebf7";
+        }
+        else
+        {
+            PendingContactSection.Attributes["style"] = null;
+            PendingRequestNumberLabel.Text = "&nbsp; 0 &nbsp;";
+            ViewButton.Visible = false;
+        }
         SurveyWordController surveyWordManager = new SurveyWordController();
-
         WOTDLabel.Text = surveyWordManager.GetSurveyWord(siteID);
-        //TO ADD update the survey word of the day
-
-
     }
 
     protected void ViewButton_Click(object sender, EventArgs e)
@@ -80,7 +85,6 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         int siteID = Convert.ToInt32(value);
         string url = "~/Admin/ContactListPage.aspx?sid=" + siteID.ToString();
         Response.Redirect(url);
-
     }
 
     protected void RecentSurveysButton_Click(object sender, EventArgs e)

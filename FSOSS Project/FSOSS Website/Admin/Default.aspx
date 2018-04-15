@@ -16,17 +16,22 @@
             <asp:Label ID="WOTDLabel" runat="server" CssClass="h4 mx-auto" Font-Bold="true" ForeColor="#223f88" />
         </div>
 
-        <div id="PendingContactSection" runat="server" class="px-3 mt-3 mx-auto my-3">
+        <div id="PendingContactSection" runat="server" class="px-3 mt-3 mx-auto my-3 col-md-12">
             <div class="form-inline col-md-4 mx-auto my-3">
                 <asp:Label ID="PendingRequestsLabel" runat="server" Text="Pending Contact Requests:" />
                 <asp:Label ID="PendingRequestNumberLabel" runat="server" CssClass="h4" />
-                <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn " OnClick="ViewButton_Click"  />
+                <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn btn-secondary" OnClick="ViewButton_Click" />
             </div>
         </div>
 
-        <div class="form-group mx-auto">
-            <asp:Button ID="RecentSurveysButton" runat="server" Text="View Recent Surveys" CssClass="btn" OnClick="RecentSurveysButton_Click" BackColor="#223F88" Forecolor="white" />
-            <asp:Button ID="RecentReportsButton" runat="server" Text="View Recent Reports" CssClass="btn" OnClick="RecentReportsButton_Click" BackColor="#223F88" Forecolor="white"/>
+        <div class="form-inline mx-auto">
+            <div class="col-md-6 mb-2">
+                <asp:Button ID="RecentSurveysButton" runat="server" Text="View Recent Surveys" CssClass="btn btn-block" OnClick="RecentSurveysButton_Click" BackColor="#223F88" ForeColor="white" />
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <asp:Button ID="RecentReportsButton" runat="server" Text="View Recent Reports" CssClass="btn btn-block" OnClick="RecentReportsButton_Click" BackColor="#223F88" ForeColor="white" />
+            </div>
         </div>
 
 
