@@ -11,9 +11,6 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Set Default button for page
-        Page.Form.DefaultButton = UpdateButton.UniqueID; // Enables user to press enter button
-
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -38,11 +35,18 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                     AdministratorAccountController sysmgr = new AdministratorAccountController();
                     AdministratorAccountPOCO info = sysmgr.GetAdministratorInformation(id);
 
-                    UserNameTextBox.Text = info.username;
-                    FirstNameTextBox.Text = info.firstName;
-                    LastNameTextBox.Text = info.lastName;
-                    SecurityLevelDDL.SelectedValue = info.roleId.ToString();
-                    DeactivateCheckBox.Checked = info.archivedBool;
+                    if (info == null)
+                    {
+                        Response.Redirect("~/Admin/Master/EditUserFilter");
+                    }
+                    else
+                    {
+                        UserNameTextBox.Text = info.username;
+                        FirstNameTextBox.Text = info.firstName;
+                        LastNameTextBox.Text = info.lastName;
+                        SecurityLevelDDL.SelectedValue = info.roleId.ToString();
+                        DeactivateCheckBox.Checked = info.archivedBool;
+                    }
                 }
             }
         }
@@ -83,7 +87,12 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                 {
                     // Update user excluding the password change
                     AdministratorAccountController sysmgr = new AdministratorAccountController();
-                    string updatedUser = sysmgr.UpdateAdministratorAccount(UserNameTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text, DeactivateCheckBox.Checked, int.Parse(SecurityLevelDDL.SelectedItem.Value));
+                    string username = UserNameTextBox.Text.Trim();
+                    string firstname = FirstNameTextBox.Text.Trim();
+                    string lastname = LastNameTextBox.Text.Trim();
+                    bool archive = DeactivateCheckBox.Checked;
+                    int securityId = int.Parse(SecurityLevelDDL.SelectedItem.Value);
+                    string updatedUser = sysmgr.UpdateAdministratorAccount(username, firstname, lastname, archive, securityId);
                     SuccessMessage.Visible = true;
                     SuccessMessage.Text = "Successfully updated: " + updatedUser;
                 }
@@ -97,9 +106,15 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                 {
                     // Update user including the password change
                     AdministratorAccountController sysmgr = new AdministratorAccountController();
-                    string updatedUser = sysmgr.UpdateAdministratorAccount(UserNameTextBox.Text, PasswordTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text, DeactivateCheckBox.Checked, int.Parse(SecurityLevelDDL.SelectedItem.Value));
+                    string username = UserNameTextBox.Text.Trim();
+                    string password = PasswordTextBox.Text;
+                    string firstname = FirstNameTextBox.Text.Trim();
+                    string lastname = LastNameTextBox.Text.Trim();
+                    bool archive = DeactivateCheckBox.Checked;
+                    int securityId = int.Parse(SecurityLevelDDL.SelectedItem.Value);
+                    string updatedUser = sysmgr.UpdateAdministratorAccount(username, password, firstname, lastname, archive, securityId);
                     SuccessMessage.Visible = true;
-                    SuccessMessage.Text = "Successfully updated: " + updatedUser;
+                    SuccessMessage.Text = "Successfully updated: " + updatedUser + "'s password";
                 }
             }
         }

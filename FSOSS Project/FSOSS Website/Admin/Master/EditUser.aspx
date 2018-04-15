@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <asp:Panel runat="server" CssClass="row" DefaultButton="UpdateButton">
         <div class="col-sm-12">
             <div class="card container">
                 <div class="col-sm-8">
@@ -35,8 +35,8 @@
                             <asp:TextBox ID="FirstNameTextBox" runat="server" CssClass="form-control" AutoComplete="off" />
                             <asp:RequiredFieldValidator ErrorMessage="First Name is required" ControlToValidate="FirstNameTextBox" runat="server" 
                                 Display="None" SetFocusOnError="true" />
-                            <asp:RegularExpressionValidator ErrorMessage="First Name must start with a capital letter and will only contain letters" ControlToValidate="FirstNameTextBox" runat="server"
-                                ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true" />
+                            <asp:RegularExpressionValidator ErrorMessage="First Name must start with a capital letter" ControlToValidate="FirstNameTextBox" runat="server"
+                                ValidationExpression="^[A-Z][a-zA-Z-\s\']*$" Display="None" SetFocusOnError="true" />
                             <asp:CustomValidator ErrorMessage="First Name must be less than 50 characters" ControlToValidate="FirstNameTextBox" runat="server"
                                 Display="None" SetFocusOnError="true" OnServerValidate="FirstNameLengthValidator_ServerValidate" />
                         </div>
@@ -48,8 +48,8 @@
                             <asp:TextBox ID="LastNameTextBox" runat="server" CssClass="form-control" AutoComplete="off" />
                             <asp:RequiredFieldValidator ErrorMessage="Last Name is required" ControlToValidate="LastNameTextBox" runat="server" 
                                 Display="None" SetFocusOnError="true" />
-                            <asp:RegularExpressionValidator ErrorMessage="Last Name must start with a capital letter and will only contain letters" ControlToValidate="LastNameTextBox" runat="server" 
-                                ValidationExpression="^[A-Z][a-zA-Z]*[-\s\']{0,1}[a-zA-Z]*$" Display="None" SetFocusOnError="true" />
+                            <asp:RegularExpressionValidator ErrorMessage="Last Name must start with a capital letter" ControlToValidate="LastNameTextBox" runat="server" 
+                                ValidationExpression="^[A-Z][a-zA-Z-\s\']*$" Display="None" SetFocusOnError="true" />
                             <asp:CustomValidator ErrorMessage="Last Name must be less than 50 characters" ControlToValidate="LastNameTextBox" runat="server"
                                 Display="None" SetFocusOnError="true" OnServerValidate="LastNameLengthValidator_ServerValidate"/>
                         </div>
@@ -96,6 +96,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </asp:Panel>
 </asp:Content>
 
