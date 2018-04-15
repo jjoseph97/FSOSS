@@ -92,7 +92,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
     {
         FilterPOCO filter = new FilterPOCO(); // create the filter object for adding the filter details
         filter.startingDate = DateTime.Today.AddDays(-7); // Last 7 days ago
-        filter.endDate = DateTime.Today; // Today
+        filter.endDate = DateTime.Now; // Today
         filter.siteID = int.Parse(HospitalDDL.SelectedValue);
         filter.mealID = 0; // Defaults to "All Meals"
         filter.unitID = 0; // Defaults to "All Units"
@@ -104,7 +104,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
     {
         FilterPOCO filter = new FilterPOCO();
         filter.startingDate = DateTime.Today.AddDays(-7);
-        filter.endDate = DateTime.Today;
+        filter.endDate = DateTime.Now;
         filter.siteID = int.Parse(HospitalDDL.SelectedValue);
         filter.mealID = 0;
         Session["filter"] = filter;
