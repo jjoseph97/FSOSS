@@ -10,9 +10,6 @@ public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Set Default button for page
-        Page.Form.DefaultButton = SearchUserButton.UniqueID; // Enables user to press enter button
-
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -51,7 +48,7 @@ public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
 
             if (AdministratorAccountListView.Items.Any())
             {
-                DisplaySuccessMessage("Successfully searched with the following username \"" + searchWord + "\"");
+                DisplaySuccessMessage("Successfully searched for \"" + searchWord + "\"");
             }
             else
             {
@@ -90,5 +87,14 @@ public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
     {
         AdministratorAccountListView.DataSourceID = "AdministratorAccountODS";
         AdministratorAccountListView.DataBind();
+    }
+
+    protected void ResetButton_Click(object sender, EventArgs e)
+    {
+        SuccessMessage.Visible = false;
+        FailedMessage.Visible = false;
+        SearchUserTextBox.Text = "";
+        BindAdministratorAccountODS();
+
     }
 }

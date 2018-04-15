@@ -14,18 +14,15 @@
         </div>
         <div class="col-sm-12">
             <div class="card container mb-2">
-                <div class="row container mx-auto px-0">
-                    <asp:Label ID="SearchUserLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search User: " />
-                    <asp:TextBox ID="SearchUserTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type user to search for..." AutoComplete="off" />
-                    <asp:Button ID="SearchUserButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchUserButton_Click" />
-                </div>
+                <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="SearchUserButton">
+                    <asp:Label ID="SearchUserLabel" class="col-sm-3 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search User: " />
+                    <asp:TextBox ID="SearchUserTextBox" class="col-sm-6 my-2 form-control" runat="server" placeholder="Search for username, first name or last name..." AutoComplete="off" />
+                    <asp:Button ID="SearchUserButton" class="col-sm-2 offset-sm-1 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchUserButton_Click" />
+                    <asp:Button ID="ResetButton" CssClass="col-sm-2 offset-sm-10 my-2 btn btn-secondary" runat="server" Text="Reset" OnClick="ResetButton_Click" />
+                </asp:Panel>
             </div>
 
             <div class="card container">
-                <%--<div class="row container mx-auto px-0">
-                    <asp:Button ID="ShowDeactiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Deactive" OnClick="ShowDeactiveButton_Click" ></asp:Button>
-                    <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false" ></asp:Button>
-                </div>--%>
                 <asp:ListView ID="AdministratorAccountListView" runat="server" DataSourceID="AdministratorAccountODS">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #FFFFFF; color: #284775;">
@@ -40,7 +37,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' CssClass="btn btn btn-info mx-3 my-1" /></td>
+                                <asp:LinkButton Text="Edit" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' CssClass="btn btn btn-success mx-3 my-1" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EmptyDataTemplate>
@@ -63,7 +60,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("archived") %>' runat="server" ID="archivedLabel" CssClass="px-3" /></td>
                             <td>
-                                <asp:LinkButton Text="View" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' CssClass="btn btn btn-info mx-3 my-1" /></td>
+                                <asp:LinkButton Text="Edit" runat="server" PostBackUrl='<%# "~/Admin/Master/EditUser.aspx?id=" + Eval("id") %>' CssClass="btn btn btn-success mx-3 my-1" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
