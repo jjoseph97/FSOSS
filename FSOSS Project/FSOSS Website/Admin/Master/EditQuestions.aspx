@@ -42,7 +42,7 @@
                         <h1 id="headerText" fontsize="15px" runat="server"></h1>
                         <%--<p>Description:</p>--%>
                         <asp:HiddenField ID="QuestionID" runat="server" />
-                        <asp:TextBox ID="DescriptionTextBox"  Width="100%" TextMode="MultiLine" runat="server" />
+                        <asp:TextBox ID="DescriptionTextBox" CssClass="form-control"  Width="100%" TextMode="MultiLine" runat="server" />
                         <asp:Button ID="QuestionUpdate"  class="col-sm-2 offset-sm-10 my-2 btn btn-success" runat="server" Text="Update" OnClick="QuestionUpdate_Click" />
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                                         <tr runat="server">
                                             <%--<th runat="server">Id</th>--%>
                                             <th runat="server" class="col-sm-8 py-2">Response Options</th>
-                                            <th runat="server" class="col-sm-4 py-2">Edit Responses</th>
+                                            <th runat="server" class="col-sm-1 py-2">Edit Responses</th>
                                             <%--<th runat="server">Value</th>--%>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>

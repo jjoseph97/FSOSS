@@ -52,13 +52,12 @@
                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
                         <td style="display: none;">
                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
-
-                        <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton" class="btn btn-danger mx-3 my-1" />
-                            </td>
                         <td>
                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" class="btn btn-success mx-3 my-1"  />
                         </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton" class="btn btn-danger mx-3 my-1" />
+                            </td>
 
                     </tr>
                 </AlternatingItemTemplate>
@@ -88,16 +87,14 @@
                     </table>
                 </EmptyDataTemplate>
                 <InsertItemTemplate>
-                    <tr style="" >
-
-
+                    <tr  >
                         <td>
                             <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
                         <td>
                             <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" class="btn btn-primary mx-3 my-1" />
                             </td>
                         <td>
-                            <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" class="btn btn-warning mx-3 my-1" />
+                            <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" class="btn fsoss-grey mx-3 my-1" />
                         </td>
                     </tr>
                    
@@ -111,11 +108,12 @@
                         <td style="display: none;">
                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" Visible="false" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton"  class="btn btn-danger mx-3 my-1" />
-                            </td>
-                        <td>
                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" class="btn btn-success mx-3 my-1" />
                         </td>
+                        <td>
+                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="DeleteButton"  class="btn btn-danger mx-3 my-1" />
+                            </td>
+                        
 
                     </tr>
                 </ItemTemplate>
@@ -128,23 +126,21 @@
                                     <tr runat="server">
                                         <th runat="server">Unit Number</th>
                                         <th runat="server"></th>
-                                          <th runat="server"></th>
-
-
+                                        <th runat="server"></th>
                                     </tr>
                                     <tr runat="server" id="itemPlaceholder"></tr>
                                 </table>
                             </td>
                         </tr>
                          <tr runat="server" class="mx-2 my-2">
-                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                        <asp:DataPager runat="server" ID="DataPager2">
-                                            <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            </Fields>
-                                        </asp:DataPager>
-                                    </td>
-                                </tr>
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                     </table>
                 </LayoutTemplate>
                 <SelectedItemTemplate>
@@ -155,12 +151,11 @@
                             <asp:Label Text='<%# Eval("unitNumber") %>' runat="server" ID="unitNumberLabel" /></td>
                         <td style="display: none;">
                             <asp:Label Text='<%# Eval("unitID") %>' runat="server" ID="unitIDLabel" /></td>
-                        <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="Button1" class="btn btn-danger mx-3 my-1" />
-                            </td>
-                        <td>
-                            <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="Button2" class="btn btn-success mx-3 my-1" />
+                        <td> <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="Button2" class="btn btn-success mx-3 my-1" />
                         </td>
+                        <td> <asp:Button runat="server" CommandName="Delete" Text="Disable" ID="Button1" class="btn btn-danger mx-3 my-1" />
+                            </td>
+                        
 
                     </tr>
                 </SelectedItemTemplate>

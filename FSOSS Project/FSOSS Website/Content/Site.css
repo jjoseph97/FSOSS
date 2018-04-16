@@ -52,12 +52,23 @@
     color: black;
 }
 
+    .btn-info:hover {
+        background-color: #87d7e5;
+        border-color: #87d7e5;
+        color: black;
+    }
+
 /*light green - used for editting*/
 .btn-success {
     background-color: #d4edda;
     border-color: #c3e6cb;
     color: black;
 }
+    .btn-success:hover {
+        background-color: #a1e0a1;
+        border-color: #a1e0a1;
+        color: black;
+    }
 
 /*dark blue*/
 .btn-primary {
@@ -72,17 +83,29 @@
         color: white;
     }
 
+/*grey blues - used for listview controls*/
 .btn-secondary {
     background-color: #5D7B9D;
     border-color: #15316b;
     color: white;
 }
+
+    .btn-secondary:hover {
+        background-color: #305399;
+        border-color: #305399;
+        color: white;
+    }
     /*light pink - used for archive/delete functions*/
     .btn-danger {
     background-color: #f8d7da;
     border-color: #f5c6cb;
     color: black;
 }
+        .btn-danger:hover {
+            background-color: #e5a2aa;
+            border-color: #e5a2aa;
+            color: black;
+        }
 
 .listview-pager {
     text-align: center;
@@ -97,7 +120,3 @@
     color: #333333;
 }
 
-table>tr>td{
-    margin-left: 1rem;
-    margin-right: 1rem;
-}

@@ -17,13 +17,13 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="SearchWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Search Word: " />
-                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to search for..." style="background-color: #FFFFFF;" />
+                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type word to search for..." style="background-color: #FFFFFF;" />
                     <asp:Button ID="SearchWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchWordButton_Click" />
                     <asp:Button ID="ClearSearchButton" class="col-sm-2 offset-sm-2 my-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" Visible="false" />
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="AddWordLabel" class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Add Word: " />
-                    <asp:TextBox ID="AddWordTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type word to add..." style="background-color: #FFFFFF;" />
+                    <asp:TextBox ID="AddWordTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type word to add..." style="background-color: #FFFFFF;" />
                     <asp:Button ID="AddWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Word" OnClick="AddWordButton_Click" />
                 </div>
             </div>
@@ -44,10 +44,10 @@
                             <td>
                                 <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
-                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -61,9 +61,9 @@
                             <td>
                                 <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
                         </tr>
                     </EditItemTemplate>
                     <EmptyDataTemplate>
@@ -84,10 +84,10 @@
                             <td>
                                 <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
-                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
+                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>

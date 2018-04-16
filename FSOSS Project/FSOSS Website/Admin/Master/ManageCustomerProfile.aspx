@@ -30,7 +30,7 @@
                     </asp:DropDownList>
                     <%--<asp:Button ID="ViewCustomerProfileButton" class="col-sm-1 offset-sm-2 my-2 btn btn-info" runat="server" Text="View" />--%>
                 </div>
-                <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
+                <asp:Button ID="RevealButton" class="col-sm-2 mt-2 my-2 mx-3 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
 
             </div>
             <div class="card container">
@@ -40,7 +40,7 @@
                 <div id="Genders" runat="server">
                     <div class="row container mx-auto my-2 px-0">
                         <asp:Label ID="AddGenderLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Gender: " />
-                        <asp:TextBox ID="AddGenderBox" class="col-sm-4 my-2" runat="server" placeholder="Type gender to add..." Style="background-color: #FFFFFF;" />
+                        <asp:TextBox ID="AddGenderBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type gender to add..." Style="background-color: #FFFFFF;" />
                         <asp:Button ID="Button1" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Gender" OnClick="AddGenderButton_Click" />
                     </div>
                     
@@ -185,7 +185,7 @@
                 <div id="ParticipantTypes" runat="server">
                     <div class="row container mx-auto px-0">
                         <asp:Label ID="AddPTLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Participant Type: " />
-                        <asp:TextBox ID="AddPTBox" class="col-sm-4 my-2" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
+                        <asp:TextBox ID="AddPTBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
                         <asp:Button ID="AddPTButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
                     </div>
 
@@ -362,7 +362,7 @@
                     <%-- Add Meals --%>
                     <div class="row container mx-auto px-0">
                         <asp:Label ID="AddMealsLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Meal: " />
-                        <asp:TextBox ID="AddMealsTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
+                        <asp:TextBox ID="AddMealsTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
                         <asp:Button ID="AddMealsButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Meal" OnClick="AddMealButton_Click" />
                     </div>
 
@@ -531,7 +531,7 @@
                     <%-- Add Age Range --%>
                     <div class="row container mx-auto px-0">
                         <asp:Label ID="AddAgeRangeLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Age Range: " />
-                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-sm-4 my-2" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
+                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" onkeydown = "return (event.keyCode!=13);"/>
                         <asp:Button ID="AddAgeRangeButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Age Range" OnClick="AddARButton_Click" />
                     </div>
 
