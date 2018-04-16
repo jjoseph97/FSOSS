@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ManageCustomerProfile.aspx.cs" Inherits="Admin_Master_ManageCustomerProfile" %>
+﻿<%@ Page Title="Manager Customer Profile" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ManageCustomerProfile.aspx.cs" Inherits="Admin_Master_ManageCustomerProfile" %>
 
 
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
@@ -22,10 +22,11 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="CustomerProfileLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Select Customer Profile Category:"></asp:Label>
                     <asp:DropDownList ID="CustomerProfileDropDownList" class="col-sm-3 my-2 form-control" runat="server" AppendDataBoundItems="true" OnSelectedIndexChanged="CustomerProfileDDL_SelectedIndexChanged" AutoPostBack="true">
-                        <asp:ListItem Text="Genders" Value="0" Selected="True" />
-                        <asp:ListItem Text="Age Ranges" Value="1" />
-                        <asp:ListItem Text="Participant Types" Value="2" />
+                        <asp:ListItem Text="Age Ranges" Value="0" Selected="True" />
+                        <asp:ListItem Text="Genders" Value="1" />
                         <asp:ListItem Text="Meals" Value="3" />
+                        <asp:ListItem Text="Participant Types" Value="2" />
+                        
                     </asp:DropDownList>
                     <%--<asp:Button ID="ViewCustomerProfileButton" class="col-sm-1 offset-sm-2 my-2 btn btn-info" runat="server" Text="View" />--%>
                 </div>
@@ -78,13 +79,13 @@
                         <AlternatingItemTemplate>
                             <tr style="background-color: #FFFFFF; color: #284775;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -95,9 +96,9 @@
                         <EditItemTemplate>
                             <tr style="background-color: #999999;">
                                 <td style="display: none">
-                                    <asp:TextBox Text='<%# Bind("genderID") %>' runat="server" ID="genderIDTextBox" /></td>
+                                    <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("genderID") %>' runat="server" ID="genderIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("genderDescription") %>' runat="server" onkeydown = "return (event.keyCode!=13)" ID="genderDescriptionTextBox" /></td>
+                                    <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("genderDescription") %>' runat="server" onkeydown = "return (event.keyCode!=13)" ID="genderDescriptionTextBox" /></td>
                                 <td></td>
                                 <td></td>
                                 <td><asp:Button runat="server" CommandName="Update" CssClass="btn btn btn-success mx-3 my-1" Text="Update" ID="UpdateButton" /></td>
@@ -115,13 +116,13 @@
                         <ItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -133,13 +134,13 @@
                             <table runat="server" style="width: 100%;">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                                <th runat="server" class="col-sm-6 py-2">Gender</th>
-                                                <th runat="server" class="col-sm-4 py-2">Date Modified</th>
-                                                <th runat="server" class="col-sm-4 py-2">Modified by</th>
-                                                <th runat="server" class="col-sm-2 py-2">Edit </th>
-                                                <th runat="server" class="col-sm-2 py-2">Archive</th>
+                                        <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                            <tr runat="server">
+                                                <th runat="server" class="col-sm-4 py-2">Gender</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
+                                                <th runat="server" class="col-sm-1 py-2">Edit</th>
+                                                <th runat="server" class="col-sm-1 py-2">Change Availability</th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
@@ -148,27 +149,27 @@
                                 <tr runat="server">
                                     <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF"></td>
                                 </tr>
-                                <tr runat="server" class="mx-2 my-2">
-                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                        <asp:DataPager runat="server" ID="DataPager2">
-                                            <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            </Fields>
-                                        </asp:DataPager>
-                                    </td>
-                                </tr>
+                               <tr runat="server" class="mx-2 my-2">
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
                             <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderDescription") %>' runat="server" ID="genderDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                   <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -226,13 +227,13 @@
                             <tr style="background-color: #E0FFFF; color: #333333;">
 
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
                                 <td class="pl-3">
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
 
                                 <td>
                                     <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
@@ -245,9 +246,9 @@
                             <asp:Panel DefaultButton="UpdateButton" runat="server">
                                 <tr style="">
                                     <td style="display: none">
-                                        <asp:TextBox Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
-                                    <td class="pl-3">
-                                        <asp:TextBox Text='<%# Bind("participantTypeDescription") %>' runat="server" onkeydown = "return (event.keyCode!=13);" ID="participantTypeDescriptionTextBox" MaxLength="25" />
+                                        <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
+                                    <td>
+                                        <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("participantTypeDescription") %>' runat="server" onkeydown = "return (event.keyCode!=13);" ID="participantTypeDescriptionTextBox" MaxLength="25" />
                                     </td>
                                     <td></td>
 
@@ -289,13 +290,13 @@
                             <tr style="background-color: #FFFFFF; color: #333333;">
 
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
                                 <td class="pl-3">
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                     <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -309,27 +310,27 @@
                             <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                                <th runat="server" class="col-sm-6 py-2">Participant Type</th>
-                                                <th runat="server" class="col-sm-4 py-2">Modified On</th>
-                                                <th runat="server" class="col-sm-45 py-2">Last Edited By</th>
-                                                <th runat="server" class="col-sm-3 py-2"></th>
-                                                <th runat="server" class="col-sm-3 py-2"></th>
+                                        <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                            <tr runat="server">
+                                                <th runat="server" class="col-sm-4 py-2">Participant Type</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
+                                                <th runat="server" class="col-sm-1 py-2">Edit</th>
+                                                <th runat="server" class="col-sm-1 py-2">Change Availability</th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr runat="server" class="mx-2 my-2">
-                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                        <asp:DataPager runat="server" ID="DataPager2">
-                                            <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            </Fields>
-                                        </asp:DataPager>
-                                    </td>
-                                </tr>
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
@@ -337,14 +338,14 @@
 
 
                                 <td>
-                                    <asp:Label Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
                                 <td class="pl-3">
-                                    <asp:Label Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" />
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("participantTypeDescription") %>' runat="server" ID="participantTypeDescriptionLabel" />
                                 </td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                     <asp:Button runat="server" CommandName="Edit" Text="Edit" CssClass="btn btn btn-success mx-3 my-1" ID="EditButton" />
                                 </td>
@@ -402,13 +403,13 @@
                         <AlternatingItemTemplate>
                             <tr style="background-color: #FFFFFF; color: #284775;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -419,9 +420,9 @@
                         <EditItemTemplate>
                             <tr style="background-color: #999999;">
                                 <td style="display: none">
-                                    <asp:TextBox Text='<%# Bind("mealID") %>' runat="server" ID="mealIDTextBox" /></td>
+                                    <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("mealID") %>' runat="server" ID="mealIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("mealName") %>' runat="server" ID="mealNameTextBox" /></td>
+                                    <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("mealName") %>' runat="server" ID="mealNameTextBox" /></td>
                                 <td></td>
                                 <td></td>
                                 <td>
@@ -462,13 +463,13 @@
                         <ItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                  <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -480,39 +481,39 @@
                             <table runat="server" style="width: 100%;">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                                <th runat="server" class="col-sm-6 py-2">Meal</th>
-                                                <th runat="server" class="col-sm-4 py-2">Date Modified</th>
-                                                <th runat="server" class="col-sm-4 py-2">Modified By</th>
-                                                <th runat="server" class="col-sm-2 py-2"></th>
-                                                <th runat="server" class="col-sm-2 py-2"></th>
+                                        <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                            <tr runat="server">
+                                                <th runat="server" class="col-sm-4 py-2">Meal</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
+                                                <th runat="server" class="col-sm-1 py-2">Edit</th>
+                                                <th runat="server" class="col-sm-1 py-2">Change Availability</th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
                                     </td>
                                 </tr>
-                                <tr runat="server">
-                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                        <asp:DataPager runat="server" ID="DataPager1">
-                                            <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            </Fields>
-                                        </asp:DataPager>
-                                    </td>
-                                </tr>
+                                <tr runat="server" class="mx-2 my-2">
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
                             <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealName") %>' runat="server" ID="mealNameLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                  <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -571,13 +572,13 @@
                         <AlternatingItemTemplate>
                             <tr style="background-color: #FFFFFF; color: #284775;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                  <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -588,9 +589,9 @@
                         <EditItemTemplate>
                             <tr style="background-color: #999999;">
                                 <td style="display: none">
-                                    <asp:TextBox Text='<%# Bind("ageRangeID") %>' runat="server" ID="ageRangeIDTextBox" /></td>
+                                    <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("ageRangeID") %>' runat="server" ID="ageRangeIDTextBox" /></td>
                                 <td>
-                                    <asp:TextBox Text='<%# Bind("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionTextBox" /></td>
+                                    <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionTextBox" /></td>
                                 <td></td>
                                  <td></td>
                                 <td>
@@ -631,13 +632,13 @@
                         <ItemTemplate>
                             <tr style="background-color: #E0FFFF; color: #333333;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                  <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>
@@ -646,42 +647,42 @@
                             </tr>
                         </ItemTemplate>
                         <LayoutTemplate>
-                            <table table runat="server" style="width: 100%;" class="mt-2 mb-2">
+                            <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                                 <tr runat="server">
                                     <td runat="server">
-                                        <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                            <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                                <th runat="server" class="col-sm-6 py-2">Age Range</th>
-                                                <th runat="server" class="col-sm-4 py-2">Date Modified</th>
-                                                <th runat="server" class="col-sm-4 py-2">Modified By</th>
-                                                <th runat="server" class="col-sm-2 py-2"></th>
-                                                <th runat="server" class="col-sm-2 py-2"></th>
+                                        <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                            <tr runat="server">
+                                                <th runat="server" class="col-sm-4 py-2">Age Range</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
+                                                <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
+                                                <th runat="server" class="col-sm-1 py-2">Edit</th>
+                                                <th runat="server" class="col-sm-1 py-2">Change Availability</th>
                                             </tr>
                                             <tr runat="server" id="itemPlaceholder"></tr>
                                         </table>
                                     </td>
                                 </tr>
-                                <tr runat="server">
-                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                        <asp:DataPager runat="server" ID="DataPager3">
-                                            <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            </Fields>
-                                        </asp:DataPager>
-                                    </td>
-                                </tr>
+                                <tr runat="server" class="mx-2 my-2">
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                             </table>
                         </LayoutTemplate>
                         <SelectedItemTemplate>
                             <tr style="background-color: #E2DED6; font-weight: bold; color: #333333;">
                                 <td style="display: none">
-                                    <asp:Label Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeDescription") %>' runat="server" ID="ageRangeDescriptionLabel" /></td>
                                 <td>
-                                    <asp:Label Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("dateModified") %>' runat="server" ID="dateModifiedLabel" /></td>
                                  <td>
-                                    <asp:Label Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
+                                    <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("username") %>' runat="server" ID="usernameLabel" /></td>
                                 <td>
                                 <asp:Button runat="server" CommandName="Edit" CssClass="btn btn btn-success mx-3 my-1" Text="Edit" ID="EditButton" />
                                 </td>

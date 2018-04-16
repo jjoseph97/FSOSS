@@ -182,39 +182,35 @@ namespace FSOSS.System.BLL
                 try
                 {
                     //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
-                    if (valid.IsMatch(siteName))
+                    if (siteName == "" || siteName == null)
                     {
-                        //Select all the information about a site, where the siteID matches the siteID passed in from the POCO.
-                        var exists = (from x in context.Sites
-                                     where x.site_id == siteID
-                                      select x);
-                        //If exists does not return anything, throw an exception.
-                        if (exists == null)
-                        {
-                            throw new Exception("This site does not exist.");
-                        }
-                        if (siteName == "" || siteName == null)
-                        {
-                            throw new Exception("Please enter a site name. Field cannot be empty.");
-                        }
-                        //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
-                        else
-                        {
-                            Site updateSite = context.Sites.Find(siteID);
-                            updateSite.site_name = siteName.Trim();
-                            updateSite.date_modified = DateTime.Now;
-                            updateSite.administrator_account_id = admin;
-
-                            context.Entry(updateSite).State = EntityState.Modified;
-                            context.SaveChanges();
-                        }
-
-                        
+                        throw new Exception("Please enter a site name. Field cannot be empty.");
                     }
-                    else
+                    if (!(valid.IsMatch(siteName)))
                     {
                         throw new Exception("Please enter only alphabetical letters.");
                     }
+                    //Select all the information about a site, where the siteID matches the siteID passed in from the POCO.
+                    var exists = (from x in context.Sites
+                                  where x.site_id == siteID
+                                  select x);
+                    //If exists does not return anything, throw an exception.
+                    if (exists == null)
+                    {
+                        throw new Exception("This site does not exist.");
+                    }
+                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
+                    else
+                    {
+                        Site updateSite = context.Sites.Find(siteID);
+                        updateSite.site_name = siteName.Trim();
+                        updateSite.date_modified = DateTime.Now;
+                        updateSite.administrator_account_id = admin;
+
+                        context.Entry(updateSite).State = EntityState.Modified;
+                        context.SaveChanges();
+                    }
+
                 }
                 catch (Exception e)
                 {

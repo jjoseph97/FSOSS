@@ -19,7 +19,7 @@
                 <asp:TextBox ID="WOTDTextBox" runat="server" CssClass="form-control col-md-6 mx-auto" placeholder="Enter word of the day here..." AutoFocus="true" AutoComplete="off" />
             </div>
             <div class="col-sm-12 mb-3">
-                <asp:Button ID="SurveyButton" runat="server" CssClass="btn btn-block col-md-6 mx-auto" Text="Begin Survey" OnClick="SurveyButton_Click" BackColor="#223F88" ForeColor="White" />
+                <asp:Button ID="SurveyButton" runat="server" CssClass="btn btn-block btn-primary col-md-6 mx-auto" Text="Begin Survey" OnClick="SurveyButton_Click" />
             </div>
             <div class="col-sm-12 col-md-6 mx-auto mb-3">
                 <b>This survey will take approximately 5 minutes of your time.</b>

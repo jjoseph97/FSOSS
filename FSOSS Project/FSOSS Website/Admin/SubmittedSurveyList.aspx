@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SubmittedSurveyList.aspx.cs" Inherits="Pages_AdministratorPages_SubmittedSurveyList" %>
+﻿<%@ Page Title="View Submitted Surveys" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SubmittedSurveyList.aspx.cs" Inherits="Pages_AdministratorPages_SubmittedSurveyList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
@@ -73,8 +73,8 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                    <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                        <tr runat="server">
                                             <th runat="server" class="col-sm-3 py-2">Hospital</th>
                                             <th runat="server" class="col-sm-1 py-2">Unit Number</th>
                                             <th runat="server" class="col-sm-2 py-2">Participant Type</th>

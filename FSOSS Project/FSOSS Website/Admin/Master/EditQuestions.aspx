@@ -42,7 +42,7 @@
                         <h1 id="headerText" fontsize="15px" runat="server"></h1>
                         <%--<p>Description:</p>--%>
                         <asp:HiddenField ID="QuestionID" runat="server" />
-                        <asp:TextBox ID="DescriptionTextBox" Width="100%" TextMode="MultiLine" runat="server" />
+                        <asp:TextBox ID="DescriptionTextBox"  Width="100%" TextMode="MultiLine" runat="server" />
                         <asp:Button ID="QuestionUpdate"  class="col-sm-2 offset-sm-10 my-2 btn btn-success" runat="server" Text="Update" OnClick="QuestionUpdate_Click" />
                     </div>
                 </div>
@@ -110,8 +110,8 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; width:100%; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; width:100%; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                        <tr runat="server">
                                             <%--<th runat="server">Id</th>--%>
                                             <th runat="server" class="col-sm-8 py-2">Response Options</th>
                                             <th runat="server" class="col-sm-4 py-2">Edit Responses</th>

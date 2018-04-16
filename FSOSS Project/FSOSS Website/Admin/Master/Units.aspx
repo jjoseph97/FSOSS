@@ -124,8 +124,8 @@
                     <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                         <tr runat="server">
                             <td runat="server">
-                                 <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                    <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                 <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style=" border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                    <tr runat="server">
                                         <th runat="server">Unit Number</th>
                                         <th runat="server"></th>
                                           <th runat="server"></th>
@@ -214,8 +214,8 @@
                 <table runat="server">
                     <tr runat="server">
                         <td runat="server">
-                             <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                             <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                <tr runat="server">
                                     <th runat="server" class="col-sm-4 py-2" >Unit Number</th>
                                     <th runat="server" class="col-sm-6 py-2">Date Modified</th>
                                     <th runat="server" class="col-sm-4 py-2" ></th>
@@ -227,14 +227,14 @@
                         </td>
                     </tr>
                      <tr runat="server" class="mx-2 my-2">
-                                    <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                        <asp:DataPager runat="server" ID="DataPager2">
-                                            <Fields>
-                                                <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            </Fields>
-                                        </asp:DataPager>
-                                    </td>
-                                </tr>
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                 </table>
             </LayoutTemplate>
             <SelectedItemTemplate>
