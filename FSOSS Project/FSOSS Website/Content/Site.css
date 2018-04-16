@@ -3,20 +3,101 @@
     position: relative;
 }
 
-.dropdown-submenu a::after {
-    transform: rotate(-90deg);
-    position: absolute;
-    right: 6px;
-    top: .8em;
-}
+    .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+    }
 
-.dropdown-submenu .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-left: .1rem;
-    margin-right: .1rem;
-}
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+    }
 
 .dropdown-item:hover {
     background-color: #a6ebf7;
+}
+
+.dropdown-menu {
+    border-width: 3px;
+    border-color: #a6ebf7;
+}
+
+.btn-outline-primary {
+    border-color: #223F88;
+    color: #223F88;
+}
+
+.btn-outline-primary:hover {
+    border-color: #223F88;
+    background-color: #223F88;
+    color: #fff;
+}
+
+.fsoss-lightblue {
+    background-color: #A6EBF7;
+}
+
+.fsoss-grey {
+    background-color: #F0F0F0;
+}
+
+/*light blue - used for searches or submitting into forms*/
+.btn-info {
+    background-color: #A6EBF7;
+    border-color: #A6EBF7;
+    color: black;
+}
+
+/*light green - used for editting*/
+.btn-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: black;
+}
+
+/*dark blue*/
+.btn-primary {
+    background-color: #244587;
+    border-color: #15316b;
+    color: white;
+}
+
+    .btn-primary:disabled {
+        background-color: #546b7c;
+        border-color: #15316b;
+        color: white;
+    }
+
+.btn-secondary {
+    background-color: #5D7B9D;
+    border-color: #15316b;
+    color: white;
+}
+    /*light pink - used for archive/delete functions*/
+    .btn-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: black;
+}
+
+.listview-pager {
+    text-align: center;
+    background-color: #5D7B9D;
+    border-color: #223F88;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+}
+
+.listview-header {
+    background-color: #7dd6f2;
+    color: #333333;
+}
+
+table>tr>td{
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

@@ -30,7 +30,7 @@
             <div class="card container">
                 <div class="row container mx-auto px-0">
                     <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
-                    <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
+                    <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
                 </div>
                 <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound">
                     <AlternatingItemTemplate>
@@ -44,10 +44,10 @@
                             <td>
                                 <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
+                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
@@ -61,9 +61,9 @@
                             <td>
                                 <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Update" Text="Update" ID="UpdateButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" /></td>
                         </tr>
                     </EditItemTemplate>
                     <EmptyDataTemplate>
@@ -84,30 +84,30 @@
                             <td>
                                 <asp:Label Text='<%# Eval("username") %>' runat="server" CssClass="pl-3" ID="usernameLabel" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
+                                <asp:Button runat="server" CssClass="btn btn btn-danger my-1" CommandName="Delete" Text="Disable" ID="DisableButton" />
+                                <asp:Button runat="server" CssClass="btn btn btn-success my-1" CommandName="Delete" Text="Enable" ID="EnableButton" Visible="false" /></td>
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
-                                            <th runat="server" class="col-sm-2 py-2">Survey Word</th>
-                                            <th runat="server" class="col-sm-4 py-2">Last Modified On</th>
-                                            <th runat="server" class="col-sm-2 py-2">Last Modified By</th>
-                                            <th runat="server" class="col-sm-2 py-2">Edit Word</th>
-                                            <th runat="server" class="col-sm-2 py-2">Change Availability</th>
+                                    <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                        <tr runat="server">
+                                            <th runat="server" class="col-sm-4 py-2">Survey Word</th>
+                                            <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
+                                            <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
+                                            <th runat="server" class="col-sm-1 py-2">Edit Word</th>
+                                            <th runat="server" class="col-sm-1 py-2">Change Availability</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
                                 </td>
                             </tr>
                             <tr runat="server" class="mx-2 my-2">
-                                <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
+                                <td runat="server" class="listview-pager">
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
                                             <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>

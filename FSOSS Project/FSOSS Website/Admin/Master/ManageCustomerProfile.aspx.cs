@@ -32,10 +32,10 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         else if (!IsPostBack)
         {
             seeArchive = false;
-            AgeRanges.Visible = false;
+            AgeRanges.Visible = true;
             Meals.Visible = false;
             ParticipantTypes.Visible = false;
-            Genders.Visible = true;
+            Genders.Visible = false;
         }
         
 
@@ -98,13 +98,13 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         //finding the customer profile choice to display
         String selection = CustomerProfileDropDownList.SelectedValue;
         //selected.InnerText = selection;
-        //1 is Age Range
+        //1 is Gender
         if (selection == "1")
         {
-            AgeRanges.Visible = true;
+            AgeRanges.Visible = false;
             Meals.Visible = false;
             ParticipantTypes.Visible = false;
-            Genders.Visible = false;
+            Genders.Visible = true;
         }
         //2 is Participant Type
         else if (selection == "2")
@@ -122,13 +122,13 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             ParticipantTypes.Visible = false;
             Genders.Visible = false;
         }
-        //0 is Gender, and if the selection is somehow none of those, we still set it to Gender
+        //0 is Age Range, and if the selection is somehow none of those, we still set it to Age Range
         else
         {
-            AgeRanges.Visible = false;
+            AgeRanges.Visible = true;
             Meals.Visible = false;
             ParticipantTypes.Visible = false;
-            Genders.Visible = true;
+            Genders.Visible = false;
         }
     }
 

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 #region
 using FSOSS.System.BLL;
 using FSOSS.System.Data.Entity;
+using FSOSS.System.Data.POCOs;
 #endregion
 
 public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
@@ -35,7 +36,7 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     int siteID = Convert.ToInt32(value);
                     int contactCount = ssc.GetContactRequestTotal(siteID);
                     SurveyWordController surveyWordManager = new SurveyWordController();
-                    WOTDLabel.Text =surveyWordManager.GetSurveyWord(siteID); 
+                    WOTDLabel.Text = surveyWordManager.GetSurveyWord(siteID);
                     if (contactCount > 0)
                     {
                         PendingRequestNumberLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
@@ -89,12 +90,25 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
 
     protected void RecentSurveysButton_Click(object sender, EventArgs e)
     {
-        string url = "~/Admin/SubmittedSurveyList.aspx";
-        Response.Redirect(url);
+        FilterPOCO filter = new FilterPOCO(); // create the filter object for adding the filter details
+        filter.startingDate = DateTime.Today.AddDays(-7); // Last 7 days ago
+        filter.endDate = DateTime.Now; // Today
+        filter.siteID = int.Parse(HospitalDDL.SelectedValue);
+        filter.mealID = 0; // Defaults to "All Meals"
+        filter.unitID = 0; // Defaults to "All Units"
+        Session["filter"] = filter; // create the session to be passed to the SubmittedSurveyList page
+        Response.Redirect("SubmittedSurveyList.aspx"); // now redirect to the SubmittedSurveyList page with the filter details
     }
 
     protected void RecentReportsButton_Click(object sender, EventArgs e)
     {
+        FilterPOCO filter = new FilterPOCO();
+        filter.startingDate = DateTime.Today.AddDays(-7);
+        filter.endDate = DateTime.Now;
+        filter.siteID = int.Parse(HospitalDDL.SelectedValue);
+        filter.mealID = 0;
+        Session["filter"] = filter;
+        Response.Redirect("~/Admin/ReportPage.aspx");
 
     }
 }

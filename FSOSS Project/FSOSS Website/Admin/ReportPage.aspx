@@ -37,7 +37,7 @@
              <li class="nav-item">
                 <a id="question6Tab" href="#question6" class="nav-link" aria-selected="false" role="tab" data-toggle="pill">Portion Size</a> </li>
             <li class="nav-item">
-                <a id="question7Tab" href="#question7" class="nav-link" aria-selected="false" role="tab" data-toggle="pill">Speial Diet</a> </li>
+                <a id="question7Tab" href="#question7" class="nav-link" aria-selected="false" role="tab" data-toggle="pill">Special Diet</a> </li>
             <li class="nav-item">
                 <a id="question8Tab" href="#question8" class="nav-link" aria-selected="false" role="tab" data-toggle="pill">Overall</a>
             </li>

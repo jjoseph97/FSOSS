@@ -95,9 +95,10 @@
                     <asp:Label ID="Question5Label" class="col-sm-12 px-0 text-center text-sm-left" runat="server" Style="font-size: large; line-height: 38px;" Text="5."></asp:Label><br />
                     <asp:Label ID="Response5Label" class="col-sm-12 px-4 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text=""></asp:Label><br />
                 </div>
-            </div>
+
             <div class="row container mx-auto px-0">
-                <a href="javascript:back()" class="col-sm-2 mx-auto my-2 btn btn-info border border-dark">Back to Survey List</a>
+                <a href="javascript:back()" class="col-sm-2 mx-auto my-2 btn btn-info">Back to Survey List</a>
+            </div>
             </div>
             <script>
             function back() { history.go(-1); } </script>

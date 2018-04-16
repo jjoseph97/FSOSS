@@ -60,7 +60,6 @@ namespace FSOSS.System.BLL
             }
             return isValid;
         }
-
         public int GetUserID(string username)
         {
             using (var context = new FSOSSContext())
@@ -72,19 +71,6 @@ namespace FSOSS.System.BLL
                 return result;
             }
         }
-
-        public int GetSecurityID(int userID)
-        {
-            using (var context = new FSOSSContext())
-            {
-                var result = (from x in context.AdministratorRoles
-                              where x.administrator_account_id.Equals(userID)
-                              select x.security_role_id).FirstOrDefault();
-
-                return result;
-            }
-        }
-
         public string AddUser(string username, string password, string firstname, string lastname, int selectedRoleId)
         {
             using (var context = new FSOSSContext())
@@ -114,7 +100,6 @@ namespace FSOSS.System.BLL
                 return newUsername;
             }
         }
-
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<AdministratorAccountPOCO> GetAllUserList()
         {
@@ -134,7 +119,6 @@ namespace FSOSS.System.BLL
                 return result.ToList();
             }
         }
-
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<AdministratorAccountPOCO> GetSearchedUserList(string searchedWord)
         {
@@ -157,7 +141,6 @@ namespace FSOSS.System.BLL
                 return result.ToList();
             }
         }
-
         public AdministratorAccountPOCO GetAdministratorInformation(int administratorID)
         {
             using (var context = new FSOSSContext())
@@ -176,7 +159,6 @@ namespace FSOSS.System.BLL
                 return result;
             }
         }
-        // TODO: Rameses - Ensure RedoScript is updated with new functions
         public string UpdateAdministratorAccount(string username, string password, string firstname, string lastname, bool archive, int selectedRoleId)
         {
             #region DOES NOT WORK

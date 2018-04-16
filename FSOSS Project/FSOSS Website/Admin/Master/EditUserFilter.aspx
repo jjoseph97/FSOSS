@@ -18,7 +18,7 @@
                     <asp:Label ID="SearchUserLabel" class="col-sm-3 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search User: " />
                     <asp:TextBox ID="SearchUserTextBox" class="col-sm-6 my-2 form-control" runat="server" placeholder="Search for username, first name or last name..." AutoComplete="off" />
                     <asp:Button ID="SearchUserButton" class="col-sm-2 offset-sm-1 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchUserButton_Click" />
-                    <asp:Button ID="ResetButton" CssClass="col-sm-2 offset-sm-10 my-2 btn btn-secondary" runat="server" Text="Reset" OnClick="ResetButton_Click" />
+                    <asp:Button ID="ResetButton" CssClass="col-sm-2 offset-sm-10 my-2 btn fsoss-grey" runat="server" Text="Reset" OnClick="ResetButton_Click" />
                 </asp:Panel>
             </div>
 
@@ -67,21 +67,21 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
-                                        <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                    <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style=" border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                        <tr runat="server">
                                             <th runat="server" class="col-sm-4 py-2 px-3">Username</th>
                                             <th runat="server" class="col-sm-4 py-2 px-3">First Name</th>
                                             <th runat="server" class="col-sm-4 py-2 px-3">Last Name</th>
                                             <th runat="server" class="py-2 px-3">Status</th>
-                                            <th runat="server" class="py-2"></th>
+                                            <th runat="server" class="py-2 px-3">Edit</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
                                 </td>
                             </tr>
-                            <tr runat="server" class="mx-2 my-2">
-                                <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
-                                    <asp:DataPager runat="server" ID="DataPager2" PageSize="6">
+                           <tr runat="server" class="mx-2 my-2">
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
                                             <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                         </Fields>

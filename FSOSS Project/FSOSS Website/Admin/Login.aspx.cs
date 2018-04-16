@@ -14,6 +14,10 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
         var hamburger = Master.FindControl("hamburger");
         fsossnavbar.Visible = false;
         hamburger.Visible = false;
+        if (Session["userID"] != null)
+        {
+            Response.Redirect("~/Admin");
+        }
     }
 
     protected void LoginButton_Click(object sender, EventArgs e)

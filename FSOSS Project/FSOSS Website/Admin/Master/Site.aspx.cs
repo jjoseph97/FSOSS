@@ -49,35 +49,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }
     }
 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    //protected void ShowArchivedButton_Click(object sender, EventArgs e)
-    //{
-    //    ListView1.Visible = false;
-    //    ArchivedListView.Visible = true;
-    //    ArchivedListView.DataBind();
-
-    //    ShowActiveButton.Visible = true;
-    //    ShowArchivedButton.Visible = false;
-
-    //}
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    //protected void ShowActiveButton_Click(object sender, EventArgs e)
-    //{
-    //    ListView1.Visible = true;
-    //    ArchivedListView.Visible = false;
-    //    ListView1.DataBind(); 
-
-    //    ShowActiveButton.Visible = false;
-    //    ShowArchivedButton.Visible = true;
-    //}
-
     protected void ToggleView(object sender, EventArgs e)
     {
         if (seeArchive)
