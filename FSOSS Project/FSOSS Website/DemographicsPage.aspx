@@ -3,10 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <%--Customer Profile--%>
     <div class="form-check">
-        <asp:CheckBox ID="CustomerProfileCheckBox" runat="server" CssClass="form-check-input" OnCheckedChanged="CustomerProfileCheckBox_CheckedChanged" AutoPostBack="true" />
-        <asp:Label ID="CustomerProfileCheckBoxLabel" runat="server" AssociatedControlID="CustomerProfileCheckBox" CssClass="form-check-lable" Text="Customer Profile" Font-Bold="true" />
+        <asp:CheckBox ID="CustomerProfileCheckBox" runat="server" CssClass="form-check-input" OnCheckedChanged="CustomerProfileCheckBox_CheckedChanged" 
+            AutoPostBack="true" />
+        <asp:Label ID="CustomerProfileCheckBoxLabel" runat="server" AssociatedControlID="CustomerProfileCheckBox" CssClass="form-check-lable" 
+            Text="Customer Profile" Font-Bold="true" />
         <br />
-        <asp:Label ID="CustomerProfileOptional" runat="server" Text="(This is optional but helps us to understand our customers' needs)" />  
+        <asp:Label ID="CustomerProfileOptional" runat="server" Text="(Please check to create a customer Profile. This is optional but helps us to understand <br/> our customers' needs)" />  
     </div>
 
     <br />
@@ -14,7 +16,8 @@
     <div id="CustomerProfileContent" runat="server">
         <div class="row">
             <asp:Label ID="GenderLabel" class="col-md-2 ml-md-5 my-2" runat="server" />
-            <asp:DropDownList ID="GenderDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="GenderObjectDataSource" DataTextField="genderDescription" 
+            <asp:DropDownList ID="GenderDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="GenderObjectDataSource" 
+                DataTextField="genderDescription" 
                 DataValueField="genderID" />
             <asp:ObjectDataSource runat="server" ID="GenderObjectDataSource" OldValuesParameterFormatString="original_{0}" 
                 SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController"></asp:ObjectDataSource>
@@ -23,7 +26,8 @@
         <br />
         <div class="row">
             <asp:Label ID="AgeRangeLabel" class="col-md-2 ml-md-5 my-2" runat="server" />
-            <asp:DropDownList ID="AgeDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="AgeRangeObjectDataSource" DataTextField="ageRangeDescription" 
+            <asp:DropDownList ID="AgeDDL" CssClass="col-md-4 form-control" runat="server" DataSourceID="AgeRangeObjectDataSource" 
+                DataTextField="ageRangeDescription" 
                 DataValueField="ageRangeID" />
             <asp:ObjectDataSource runat="server" ID="AgeRangeObjectDataSource" OldValuesParameterFormatString="original_{0}" 
                 SelectMethod="GetAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController"></asp:ObjectDataSource>
@@ -37,7 +41,8 @@
     <%--Contact Requests--%>
     <%--Customer Profile--%>
     <div class="form-check">
-        <asp:CheckBox ID="ContactRequestsCheckBox" runat="server" CssClass="form-check-input" OnCheckedChanged="ContactRequestsCheckBox_CheckedChanged" AutoPostBack="true" />
+        <asp:CheckBox ID="ContactRequestsCheckBox" runat="server" CssClass="form-check-input" OnCheckedChanged="ContactRequestsCheckBox_CheckedChanged" 
+            AutoPostBack="true" />
         <asp:Label ID="ContactRequestsCheckBoxLabel" runat="server" AssociatedControlID="ContactRequestsCheckBox" CssClass="form-check-lable"
             Text="If you have any meal or service concerns, please check the box and provide your <br/> phone number and room number so that we can contact you."
             Font-Bold="true" />
