@@ -8,7 +8,7 @@
         <asp:Label ID="CustomerProfileCheckBoxLabel" runat="server" AssociatedControlID="CustomerProfileCheckBox" CssClass="form-check-lable" 
             Text="Customer Profile" Font-Bold="true" />
         <br />
-        <asp:Label ID="CustomerProfileOptional" runat="server" Text="(Please check to create a customer Profile. This is optional but helps us to understand <br/> our customers' needs)" />  
+        <asp:Label ID="CustomerProfileOptional" runat="server" Text="(Please check the box to create a customer Profile. This is optional but helps us to <br/> understand our customers' needs)" />  
     </div>
 
     <br />
