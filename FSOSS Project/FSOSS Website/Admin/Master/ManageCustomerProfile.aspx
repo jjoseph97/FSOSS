@@ -77,7 +77,7 @@
                     <%-- The Gender ListView --%>
                     <asp:ListView ID="GenderListView" runat="server" DataSourceID="GenderODS" DataKeyNames="genderID">
                         <AlternatingItemTemplate>
-                            <tr style="background-color: #FFFFFF; color: #284775;">
+                            <tr class="fsoss-listview-alternate">
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
@@ -94,7 +94,7 @@
                             </tr>
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
-                            <tr style="background-color: #999999;">
+                            <tr class="listview-header">
                                 <td style="display: none">
                                     <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("genderID") %>' runat="server" ID="genderIDTextBox" /></td>
                                 <td>
@@ -114,7 +114,7 @@
                             </table>
                         </EmptyDataTemplate>
                         <ItemTemplate>
-                            <tr style="background-color: #E0FFFF; color: #333333;">
+                            <tr class="fsoss-listview-itemtemplate">
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("genderID") %>' runat="server" ID="genderIDLabel" /></td>
                                 <td>
@@ -224,7 +224,7 @@
                     <%-- pt listview --%>
                     <asp:ListView ID="PTListview" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
                         <AlternatingItemTemplate>
-                            <tr style="background-color: #E0FFFF; color: #333333;">
+                            <tr class="fsoss-listview-alternate">
 
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
@@ -244,7 +244,7 @@
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
                             <asp:Panel DefaultButton="UpdateButton" runat="server">
-                                <tr style="">
+                                <tr class="listview-header">
                                     <td style="display: none">
                                         <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDTextBox" /></td>
                                     <td>
@@ -287,7 +287,7 @@
                             </tr>
                         </InsertItemTemplate>--%>
                         <ItemTemplate>
-                            <tr style="background-color: #FFFFFF; color: #333333;">
+                            <tr class="fsoss-listview-itemtemplate">
 
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Bind("participantTypeID") %>' runat="server" ID="participantTypeIDLabel" /></td>
@@ -401,7 +401,7 @@
                     <%-- The Meals Listview --%>
                     <asp:ListView ID="MealsListView" runat="server" DataSourceID="MealsODS" DataKeyNames="mealID">
                         <AlternatingItemTemplate>
-                            <tr style="background-color: #FFFFFF; color: #284775;">
+                            <tr class="fsoss-listview-alternate">
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
@@ -418,7 +418,7 @@
                             </tr>
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
-                            <tr style="background-color: #999999;">
+                            <tr class="listview-header">
                                 <td style="display: none">
                                     <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("mealID") %>' runat="server" ID="mealIDTextBox" /></td>
                                 <td>
@@ -461,7 +461,7 @@
                             </tr>
                         </InsertItemTemplate>--%>
                         <ItemTemplate>
-                            <tr style="background-color: #E0FFFF; color: #333333;">
+                            <tr class="fsoss-listview-itemtemplate">
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("mealID") %>' runat="server" ID="mealIDLabel" /></td>
                                 <td>
@@ -570,7 +570,7 @@
                     <%-- The Age Range ListView --%>
                     <asp:ListView ID="AgeRangeListView" runat="server" DataSourceID="AgeRangeODS" DataKeyNames="ageRangeID">
                         <AlternatingItemTemplate>
-                            <tr style="background-color: #FFFFFF; color: #284775;">
+                            <tr class="fsoss-listview-alternate">
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>
@@ -587,7 +587,7 @@
                             </tr>
                         </AlternatingItemTemplate>
                         <EditItemTemplate>
-                            <tr style="background-color: #999999;">
+                            <tr class="listview-header">
                                 <td style="display: none">
                                     <asp:TextBox CssClass="mx-3 my-1" Text='<%# Bind("ageRangeID") %>' runat="server" ID="ageRangeIDTextBox" /></td>
                                 <td>
@@ -630,7 +630,7 @@
                             </tr>
                         </InsertItemTemplate>--%>
                         <ItemTemplate>
-                            <tr style="background-color: #E0FFFF; color: #333333;">
+                            <tr class="fsoss-listview-itemtemplate">
                                 <td style="display: none">
                                     <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("ageRangeID") %>' runat="server" ID="ageRangeIDLabel" /></td>
                                 <td>

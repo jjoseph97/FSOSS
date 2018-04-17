@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="EditUserFilter.aspx.cs" Inherits="Admin_Master_EditUserFilter" %>
+﻿<%@ Page Title="Edit User Filter" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="EditUserFilter.aspx.cs" Inherits="Admin_Master_EditUserFilter" %>
 
 <asp:Content ID="EditUserFilter" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
@@ -25,7 +25,7 @@
             <div class="card container">
                 <asp:ListView ID="AdministratorAccountListView" runat="server" DataSourceID="AdministratorAccountODS">
                     <AlternatingItemTemplate>
-                        <tr style="background-color: #FFFFFF; color: #284775;">
+                        <tr class="fsoss-listview-alternate">
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("id") %>' runat="server" ID="idLabel" Visible="false" CssClass="px-3" /></td>
                             <td>
@@ -48,7 +48,7 @@
                         </table>
                     </EmptyDataTemplate>
                     <ItemTemplate>
-                        <tr style="background-color: #E0FFFF; color: #333333;">
+                        <tr class="fsoss-listview-itemtemplate">
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("id") %>' runat="server" ID="idLabel" Visible="false" /></td>
                             <td>

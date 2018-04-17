@@ -11,7 +11,7 @@
             <div class="card container">
                 <asp:ListView ID="SubmittedSurveyList" runat="server" >
                     <AlternatingItemTemplate>
-                        <tr style="background-color: #bbf2ff; color: #284775;">
+                        <tr slass="fsoss-listview-alternate">
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                             <td>
