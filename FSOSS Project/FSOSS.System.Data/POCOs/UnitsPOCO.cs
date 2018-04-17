@@ -15,8 +15,6 @@ namespace FSOSS.System.Data.POCOs
         public DateTime dateModified { get; set; }
         public int administrator_account_id { get; set; }
         public bool archived_yn { get; set; }
-
-
-
+        public string username { get; set; }
     }
 }

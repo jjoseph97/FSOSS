@@ -66,7 +66,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         ArchivedUnitsListView.Visible = false;
         UnitsListView.DataBind();
 
-        ArchivedButton.Visible= true;
+        ArchivedButton.Visible = true;
         ActiveButton.Visible = false;
 
 
@@ -85,7 +85,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     protected void SiteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+
         string value = SiteDropDownList.SelectedValue;
         int site_id = Convert.ToInt32(value);
 

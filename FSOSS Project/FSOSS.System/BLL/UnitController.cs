@@ -31,10 +31,7 @@ namespace FSOSS.System.BLL
                                    select new UnitsPOCO()
                                    {
                                        unitID = x.unit_id,
-                                       unitNumber = x.unit_number,
-                                       dateModified = x.date_modified,
-
-
+                                       unitNumber = x.unit_number
                                    };
 
                     return unitList.ToList();
@@ -67,7 +64,9 @@ namespace FSOSS.System.BLL
                                    {
                                        unitID = y.unit_id,
                                        unitNumber = y.unit_number,
-                                       siteID = y.site_id
+                                       siteID = y.site_id,
+                                       dateModified = y.date_modified,
+                                       username = y.AdministratorAccount.username
                                    };
 
                     return unitList.ToList();
@@ -97,12 +96,14 @@ namespace FSOSS.System.BLL
                     var archivedUnitList = from x in context.Units
                                            where x.archived_yn == true
                                            && !x.unit_number.Contains("Not Applicable")
+                                           && x.site_id == siteID
                                            orderby x.unit_number ascending
                                            select new UnitsPOCO()
                                            {
                                                unitID = x.unit_id,
                                                unitNumber = x.unit_number,
-                                               dateModified = x.date_modified
+                                               dateModified = x.date_modified,
+                                               username = x.AdministratorAccount.username
                                            };
 
                     return archivedUnitList.ToList();
