@@ -264,7 +264,7 @@ namespace FSOSS.System.BLL
                     }
                     else if (GoneGenderList.Count() > 0) //if so, return an error message
                     {
-                        throw new Exception("The participant type \"" + genderDescription.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
+                        throw new Exception("The participant type \"" + genderDescription.ToLower() + "\" already exists and is Archived. Please enter a new  gender.");
                     }
 
                     else
