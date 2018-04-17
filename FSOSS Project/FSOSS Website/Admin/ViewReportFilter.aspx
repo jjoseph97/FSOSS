@@ -5,12 +5,14 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-            $(function () {
-                $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-            });
-            $(function () {
-                $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-            });
+        $(function () {
+            $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true }).val();
+            $("#StartingPeriodInput").datepicker("option", "showAnim", "show");
+        });
+        $(function () {
+            $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true }).val();
+            $("#EndingPeriodInput").datepicker("option", "showAnim", "show");
+        });
     </script>
     <div class="row">
         <div class="col-sm-12">
@@ -55,7 +57,7 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="MealLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Meal:"></asp:Label>
                     <asp:DropDownList ID="MealDropDownList" class="col-sm-4 my-2 form-control" runat="server" AppendDataBoundItems="true">
-                        <asp:ListItem Text="No Meal" Selected="True" Value="0" />
+                        <asp:ListItem Text="All Meals" Selected="True" Value="0" />
                     </asp:DropDownList>
                 </div>
                 <div class="row container mx-auto px-0">

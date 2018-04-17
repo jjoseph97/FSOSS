@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using FSOSS.System.Data.POCOs;
 using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
+using Hangfire;
 #endregion
 namespace FSOSS.System.BLL
 {
     public class SurveyWordController
     {
-        [Hangfire.AutomaticRetry(Attempts = 0)]
         public void GenerateSurveyWordOfTheDay()
         {
             using (var context = new FSOSSContext())
@@ -91,6 +91,10 @@ namespace FSOSS.System.BLL
                     }//End of loop in Site denoting that the site has a new potential survey word.                               
                 }//End of check statement to see if theres enough active potential survey word to choose from the list.
             }//End of Transaction
+            DateTime currentDateTime = DateTime.Now;
+            DateTime timeOffset = new DateTime (currentDateTime.Year, currentDateTime.Month, currentDateTime.Day + 1, 0, 0, 0);
+          
+            BackgroundJob.Schedule(() => GenerateSurveyWordOfTheDay(), timeOffset);
         }
 
         public bool ValidateAccessWord(string enteredWord)

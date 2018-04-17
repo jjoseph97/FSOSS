@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="EditQuestions.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_EditQuestions" %>
+﻿<%@ Page Title="Edit Survey Questions & Responses" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="EditQuestions.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_EditQuestions" %>
 
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 
@@ -51,7 +51,7 @@
                 <asp:HiddenField ID="ResponseID" runat="server" />
                 <asp:ListView ID="QuestionResponses" runat="server" DataSourceID="QResponsesObjectDataSource" >
                     <AlternatingItemTemplate>
-                        <tr style="background-color: #bbf2ff; color: #284775;">
+                        <tr class="fsoss-listview-alternate">
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("ResponseId") %>' runat="server" ID="IdLabel" />
                             </td>
@@ -67,7 +67,7 @@
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
-                        <tr style="background-color: #fdff94;">
+                        <tr class="listview-header">
                             <td style="display:none;">
                                 <asp:TextBox Text='<%# Bind("ResponseId") %>' runat="server" ID="IdTextBox" />
                             </td>
@@ -91,7 +91,7 @@
                         </table>
                     </EmptyDataTemplate>
                     <ItemTemplate>
-                        <tr style="background-color: #E0FFFF; color: #333333;">
+                        <tr class="fsoss-listview-itemtemplate">
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("ResponseId") %>' runat="server" ID="IdLabel" />
                             </td>

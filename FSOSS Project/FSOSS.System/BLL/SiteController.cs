@@ -126,14 +126,17 @@ namespace FSOSS.System.BLL
 
                 try
                 {
-                    //Get a list of site names that are the same as the new site name.This will be to to check if it already exists in the database.
                     var siteList = from x in context.Sites
                                    where x.site_name.ToLower().Equals(newSiteName.ToLower())
                                    select new SitePOCO()
                                    {
                                        siteName = x.site_name
                                    };
-                    //CHECK THE CHARACTER LIMIT
+                    //If the new site name is more than 100 characters long, then display an error message.
+                    if (newSiteName.Length > 100)
+                    {
+                        throw new Exception("The site name can only be 100 characters long.");
+                    }
                     //If the user did not enter anything or if the new site name is null, display an error.
                     if (newSiteName == "" || newSiteName == null)
                     {
@@ -181,14 +184,32 @@ namespace FSOSS.System.BLL
                 string message = ""; 
                 try
                 {
-                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
                     if (siteName == "" || siteName == null)
                     {
                         throw new Exception("Please enter a site name. Field cannot be empty.");
                     }
-                    if (!(valid.IsMatch(siteName)))
+                    //add check for pre-use
+                    var siteList = from x in context.Sites
+                                     where x.site_name.ToLower().Equals(siteName.ToLower()) && !x.archived_yn
+                                     select new SitePOCO()
+                                     {
+                                         siteName = x.site_name
+                                     };
+
+
+                    var GoneSiteList = from x in context.Sites
+                                         where x.site_name.ToLower().Equals(siteName.ToLower()) && x.archived_yn
+                                         select new SitePOCO()
+                                         {
+                                             siteName = x.site_name
+                                         };
+                    if (siteList.Count() > 0) //if so, return an error message
                     {
-                        throw new Exception("Please enter only alphabetical letters.");
+                        throw new Exception("The site \"" + siteName.ToLower() + "\" already exists. Please enter a new site.");
+                    }
+                    else if (GoneSiteList.Count() > 0) //if so, return an error message
+                    {
+                        throw new Exception("The site \"" + siteName.ToLower() + "\" already exists and is Archived. Please enter a new site.");
                     }
                     //Select all the information about a site, where the siteID matches the siteID passed in from the POCO.
                     var exists = (from x in context.Sites
@@ -199,6 +220,18 @@ namespace FSOSS.System.BLL
                     {
                         throw new Exception("This site does not exist.");
                     }
+                    //If the site name is more than 100 characters long, then display an error message.
+                    if (siteName.Length > 100)
+                    {
+                        throw new Exception("The site name can only be 100 characters long.");
+                    }
+                    
+                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
+                    if (!(valid.IsMatch(siteName)))
+                    {
+                        throw new Exception("Please enter only alphabetical letters.");
+                    }
+                   
                     //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
                     else
                     {
@@ -214,7 +247,7 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    message = e.Message;
+                    throw new Exception(e.Message);
                 }
                 return message;
             }//context

@@ -28,8 +28,17 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         {
             Context.Response.StatusCode = 403;
         }
+
+        //if (seeArchive == false)
+        //{
+        //    DeleteButton.Attributes.Remove["style"] = " background-color: #a6ebf7";
+        //}
+        //else
+        //{
+
+        //}
         //set the viewable lists, and set to view active options
-        else if (!IsPostBack)
+        if (!IsPostBack)
         {
             seeArchive = false;
             AgeRanges.Visible = true;

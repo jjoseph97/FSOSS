@@ -27,7 +27,7 @@
             <br />
                 <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
                     <AlternatingItemTemplate>
-                        <tr style="background-color: #bdfeff; color: #284775;">                          
+                        <tr class="fsoss-listview-alternate">                          
                             <td>
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" />
@@ -41,7 +41,7 @@
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
-                        <tr style="background-color: #bdfeff;"> 
+                        <tr class="listview-header"> 
                             <td>
                               <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:TextBox CssClass="mx-3" Text='<%# Bind("siteName") %>' runat="server" ID="siteNameTextBox" /></td>
@@ -61,7 +61,7 @@
                         </table>
                     </EmptyDataTemplate>
                     <ItemTemplate>
-                        <tr style="background-color: #E0FFFF; color: #333333;">
+                        <tr class="fsoss-listview-itemtemplate">
                             <td>
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteID") %>' runat="server" ID="SiteIdLabel" Visible="False" />
                                 <asp:Label CssClass="mx-3 my-1" Text='<%# Eval("siteName") %>' runat="server" ID="siteNameLabel" /></td>
