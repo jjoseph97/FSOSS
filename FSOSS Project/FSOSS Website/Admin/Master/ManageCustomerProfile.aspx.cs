@@ -36,7 +36,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         //else
         //{
 
-        }
+        //}
         //set the viewable lists, and set to view active options
         if (!IsPostBack)
         {
