@@ -21,8 +21,7 @@
             <div class="card container mb-2">
               <div class="row">
                 <asp:Label ID="SearchUnitLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search units: " />
-                <asp:DropDownList ID="SiteDropDownList" class="col-sm-4 my-2" runat="server" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID"></asp:DropDownList>
-                <asp:Button ID="SearchUnitButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info"  runat="server" Text="Search" OnClick="SearchUnitButton_Click" />
+                <asp:DropDownList ID="SiteDropDownList" class="col-sm-4 my-2" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" DataValueField="siteID"></asp:DropDownList>
              </div>
             </div>
 
@@ -40,7 +39,7 @@
 
             <%--------------------  Active Units ListView --------------------------%>
             
-            <asp:ListView ID="UnitsListView" runat="server" Visible="False" DataSourceID="UnitsODS" DataKeyNames="unitID" InsertItemPosition="FirstItem">
+            <asp:ListView ID="UnitsListView" runat="server" DataSourceID="UnitsODS" DataKeyNames="unitID" InsertItemPosition="FirstItem">
 
 
 
@@ -89,7 +88,7 @@
                 <InsertItemTemplate>
                     <tr  >
                         <td>
-                            <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" ID="unitNumberTextBox" /></td>
+                            <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" placeholder="Add a New Unit Number.." Width="300px" ID="unitNumberTextBox" /></td>
                         <td>
                             <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" class="btn btn-primary mx-3 my-1" />
                             </td>

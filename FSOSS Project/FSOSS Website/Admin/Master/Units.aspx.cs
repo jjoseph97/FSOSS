@@ -29,12 +29,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     }
 
-    protected void SearchUnitButton_Click(object sender, EventArgs e)
-    {
-        UnitsListView.Visible = true;
-        ArchivedButton.Visible = true;
-        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
-    }
+    //protected void SearchUnitButton_Click(object sender, EventArgs e)
+    //{
+    //    UnitsListView.Visible = true;
+    //    ArchivedButton.Visible = true;
+    //    SelectedSiteID.Text = SiteDropDownList.SelectedValue;
+    //}
 
 
     /// <summary>
@@ -80,5 +80,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         ActiveButton.Visible = true;
         ArchivedButton.Visible = false;
 
+    }
+
+    protected void SiteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
+        ArchivedButton.Visible = true;
+        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
     }
 }
