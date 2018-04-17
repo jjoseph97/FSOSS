@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Pages_AdministratorPages_MainPage" %>
+﻿<%@ Page Title="Administrator Home Page" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Pages_AdministratorPages_MainPage" %>
 
 <asp:Content ID="AdminMainPage" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="card">
