@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 #region
 using System.Text.RegularExpressions;
 using FSOSS.System.BLL;
+using FSOSS.System.Data.POCOs;
 using FSOSS.System.Data;
 using FSOSS.System.Data.Entity;
 #endregion
@@ -26,7 +27,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         {
             Context.Response.StatusCode = 403;
         }
-
+        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
     }
 
     //protected void SearchUnitButton_Click(object sender, EventArgs e)
@@ -85,7 +86,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     protected void SiteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
         
+        string value = SiteDropDownList.SelectedValue;
+        int site_id = Convert.ToInt32(value);
+
+        UnitsListView.Visible = true;
         ArchivedButton.Visible = true;
-        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
+        ArchivedUnitsListView.DataBind();
+        UnitsListView.DataBind();
     }
 }

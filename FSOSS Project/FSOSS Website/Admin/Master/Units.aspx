@@ -21,7 +21,7 @@
             <div class="card container mb-2">
               <div class="row">
                 <asp:Label ID="SearchUnitLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search units: " />
-                <asp:DropDownList ID="SiteDropDownList" class="col-sm-4 my-2" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" DataValueField="siteID"></asp:DropDownList>
+                <asp:DropDownList ID="SiteDropDownList" class="col-sm-4 my-2" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" AutoPostBack="true" DataValueField="siteID"></asp:DropDownList>
              </div>
             </div>
 
