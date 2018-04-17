@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="row"> 
-          <asp:Label ID="FilterDescription" CssClass="mx-auto h2" class="label label-primary"  runat="server"></asp:Label>
+          <asp:Label ID="FilterDescription" CssClass="mx-auto h2 text-center" class="label label-primary"  runat="server"></asp:Label>
           <asp:Label ID="TotalNumberOfSubmittedSurvey" CssClass="mx-auto h4" class="label label-primary" runat="server"></asp:Label>
           <asp:Label ID="EmptyMessage" CssClass="mx-auto h4" class="label label-primary"  Visible="false" runat="server"></asp:Label>
     </div>

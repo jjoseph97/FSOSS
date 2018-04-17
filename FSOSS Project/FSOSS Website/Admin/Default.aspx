@@ -16,8 +16,8 @@
             <asp:Label ID="WOTDLabel" runat="server" CssClass="h4 mx-auto" Font-Bold="true" ForeColor="#223f88" />
         </div>
 
-        <div id="PendingContactSection" runat="server" class="mt-3 mx-auto my-3 col-md-12">
-            <div class="form-inline col-md-4 mx-auto my-3 px-1">
+        <div id="PendingContactSection" runat="server" class="my-3 col-md-12">
+            <div class="col-sm-12 col-md-8 offset-4 my-3 px-1">
                 <asp:Label ID="PendingRequestsLabel" runat="server" Text="Pending Contact Requests:" />
                 <asp:Label ID="PendingRequestNumberLabel" runat="server" CssClass="h4" />
                 <asp:Button ID="ViewButton" runat="server" Text="View" CssClass="btn btn-secondary" OnClick="ViewButton_Click" />
