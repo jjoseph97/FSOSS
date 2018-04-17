@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ChangeSurveyWord.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord" %>
+﻿<%@ Page Title="Change Survey Word" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ChangeSurveyWord.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord" %>
 
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 
@@ -34,7 +34,7 @@
                 </div>
                 <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound">
                     <AlternatingItemTemplate>
-                        <tr style="background-color: #bbf2ff; color: #284775;">
+                        <tr class="fsoss-listview-alternate">
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("surveyWordID") %>' runat="server" ID="surveyWordIDLabel" Visible="false" /></td>
                             <td>
@@ -51,11 +51,11 @@
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
-                        <tr style="background-color: #fdff94;">
+                        <tr class="listview-header">
                             <td style="display:none;">
                                 <asp:TextBox Text='<%# Bind("surveyWordID") %>' runat="server" ID="surveyWordIDTextBox" Visible="false" /></td>
                             <td>
-                                <asp:TextBox Text='<%# Bind("surveyWord") %>' runat="server" CssClass="pl-3" ID="surveyWordTextBox" /></td>
+                                <asp:TextBox Text='<%# Bind("surveyWord") %>' runat="server" CssClass="mx-3 pl-3" ID="surveyWordTextBox" /></td>
                             <td>
                                 <asp:Label Text='<%# Eval("dateModified") %>' runat="server" CssClass="pl-3" ID="dateModifiedLabel" /></td>
                             <td>
@@ -74,7 +74,7 @@
                         </table>
                     </EmptyDataTemplate>
                     <ItemTemplate>
-                        <tr style="background-color: #E0FFFF; color: #333333;">
+                        <tr class="fsoss-listview-itemtemplate">
                             <td style="display:none;">
                                 <asp:Label Text='<%# Eval("surveyWordID") %>' runat="server" ID="surveyWordIDLabel" Visible="false" /></td>
                             <td>

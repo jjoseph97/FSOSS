@@ -1,27 +1,25 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ContactListPage.aspx.cs" Inherits="Pages_AdministratorPages_ContactListPage" %>
+﻿<%@ Page Title="Contact Requests" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ContactListPage.aspx.cs" Inherits="Pages_AdministratorPages_ContactListPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="card container py-2 h4" style="font-weight: bold;">Contact Requests</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <asp:Label ID="SiteLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
-            <asp:DropDownList ID="SiteDDL" runat="server" class="col-sm-4 my-2" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+    <div class="col-sm-12 card container mb-3">
+        <div class="row">
+            <h1 class="mx-3 py-2 h4" style="font-weight: bold;">Contact Requests</h1>
         </div>
     </div>
     <div>
         <div class="card container">
-            <div class="row container mx-auto px-0">
+            <div class="row">
+                    <asp:Label ID="SiteLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
+                    <asp:DropDownList ID="SiteDDL" runat="server" class="col-sm-4 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+            </div>
+            <div class="row">
 
                 <asp:Label ID="COntactLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests"></asp:Label><br />
                 <asp:Label ID="ContactCountLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server"></asp:Label>
             </div>
             <asp:ListView ID="ContactRequestList" runat="server" DataSourceID="ContactRequestODS" OnItemCommand="GoToSSView">
                 <AlternatingItemTemplate>
-                    <tr style="background-color: #bbf2ff; color: #284775;">
+                    <tr class="fsoss-listview-alternate">
                         <td style="display: none">
                             <asp:Label Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                         <td>
@@ -38,7 +36,7 @@
                         <td>
                             <asp:Label Text='<%# Eval("contactPhoneNumber") %>' CssClass="pl-3" runat="server" ID="contactPhoneNumberLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" class="btn btn btn-info mx-3 my-1" />
+                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" class="btn btn btn-secondary mx-3 my-1" />
                         </td>
                     </tr>
                 </AlternatingItemTemplate>
@@ -51,7 +49,7 @@
                 </EmptyDataTemplate>
 
                 <ItemTemplate>
-                    <tr style="background-color: #FFFFFF; color: #333333;">
+                    <tr class="fsoss-listview-itemtemplate">
                         <td style="display: none">
                             <asp:Label Text='<%# Bind("submittedSurveyID") %>' runat="server" ID="submittedSurveyIDLabel" /></td>
                         <td>
@@ -68,7 +66,7 @@
                         <td>
                             <asp:Label Text='<%# Eval("contactPhoneNumber") %>' CssClass="pl-3" runat="server" ID="contactPhoneNumberLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" class="btn btn btn-info mx-3 my-1" />
+                            <asp:Button runat="server" CommandName="look" Text="View" ID="ViewButton" class="btn btn btn-secondary mx-3 my-1" />
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -76,8 +74,8 @@
                     <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                         <tr runat="server">
                             <td runat="server">
-                                <table runat="server" id="itemPlaceholderContainer" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
-                                    <tr runat="server" style="background-color: #38dcff; color: #333333;">
+                                <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                    <tr runat="server">
                                         <th hidden runat="server">submittedSurveyID</th>
                                         <th runat="server" class="col-sm-2 py-2">Unit Number</th>
                                         <th runat="server" class="col-sm-2 py-2">Participant Type</th>
@@ -92,15 +90,15 @@
                                 </table>
                             </td>
                         </tr>
-                        <tr runat="server">
-                            <td runat="server" style="">
-                                <asp:DataPager runat="server" ID="DataPager1">
-                                    <Fields>
-                                        <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                    </Fields>
-                                </asp:DataPager>
-                            </td>
-                        </tr>
+                        <tr runat="server" class="mx-2 my-2">
+                                <td runat="server" class="listview-pager">
+                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </td>
+                            </tr>
                     </table>
                 </LayoutTemplate>
                 <SelectedItemTemplate>

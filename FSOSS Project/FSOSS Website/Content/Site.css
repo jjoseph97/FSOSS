@@ -43,6 +43,7 @@
 
 .fsoss-grey {
     background-color: #F0F0F0;
+    color: #333333;
 }
 
 /*light blue - used for searches or submitting into forms*/
@@ -83,7 +84,7 @@
         color: white;
     }
 
-/*grey blues - used for listview controls*/
+/*Grey blues - used for listview controls and view buttons*/
 .btn-secondary {
     background-color: #5D7B9D;
     border-color: #15316b;
@@ -95,7 +96,8 @@
         border-color: #305399;
         color: white;
     }
-    /*light pink - used for archive/delete functions*/
+    
+/*light pink - used for archive/delete functions*/
     .btn-danger {
     background-color: #f8d7da;
     border-color: #f5c6cb;
@@ -117,6 +119,16 @@
 
 .listview-header {
     background-color: #7dd6f2;
+    color: #333333;
+}
+
+.fsoss-listview-alternate {
+    background-color: #bbf2ff; 
+    color: #284775;
+}
+
+.fsoss-listview-itemtemplate {
+    background-color: #E0FFFF;
     color: #333333;
 }
 

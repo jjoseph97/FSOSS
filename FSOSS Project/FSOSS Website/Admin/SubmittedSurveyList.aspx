@@ -25,7 +25,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
+                                <asp:Button runat="server" class="btn btn-secondary mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display: none;">
@@ -58,7 +58,7 @@
                             <td>
                                 <asp:Label Text='<%# Eval("dateEntered") %>' runat="server" CssClass="pl-3" ID="dateEnteredLabel" /></td>
                             <td>
-                                <asp:Button runat="server" class="btn btn-info mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
+                                <asp:Button runat="server" class="btn btn-secondary mx-3 my-1" CommandName="View" Text="View" ID="ViewButton" PostBackUrl='<%# "~/Admin/SubmittedSurveyViewerPage.aspx?sid=" + Eval("submittedSurveyID") %>' /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display: none;">
