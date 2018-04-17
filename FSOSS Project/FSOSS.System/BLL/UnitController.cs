@@ -130,7 +130,7 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z]*$");
+                Regex validUnit = new Regex("^[0-9]*[a-zA-Z]*|[a-zA-Z]{1,10}$");
                
                 try
                 {
@@ -144,11 +144,17 @@ namespace FSOSS.System.BLL
                         throw new Exception("Please enter a Unit Number");
                     }
 
+                    if (unitNumber.Length < 2 || unitNumber.Length > 8)
+                    {
+                        throw new Exception("Input must be atleast 2 charaters to 8 chatecters long.");
+                    }
+
                     if (!validUnit.IsMatch(unitNumber))
                     {
-                        throw new Exception(" Insert a Valid Input pattern (1 to 3 digits followed by Alphabets))");
+                        throw new Exception(" Insert a Valid Input pattern. Correct pattern.(1-3)Digits(Unit Aphabets))");
                     }
                    
+               
 
                     var unitExist = from x in context.Units
                                     where x.unit_number.ToUpper() == unitNumber.ToUpper()
@@ -253,7 +259,7 @@ namespace FSOSS.System.BLL
             using (var context = new FSOSSContext())
             {
                
-                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z]*$");
+                Regex validUnit = new Regex("^[0-9]*[a-zA-Z]*|[a-zA-Z]{1,10}$");
                 string message = "";
                 
                 try
