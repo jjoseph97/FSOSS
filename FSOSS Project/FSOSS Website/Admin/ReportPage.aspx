@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1.1.2 "></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 
     <div class="row">
@@ -45,48 +45,51 @@
         </ul>
      <div class="tab-content">
         <div class="tab-pane fade show active" id="question1" role="tabpanel" aria-labelledby="question1Tab">
-                <div style="width:1000px; height:600px">
+                <div style="width:auto; height:auto; margin:auto; display:block">
                     <canvas id="Question1"></canvas>         
                 </div>
         </div>
         <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2Tab">              
-                 <div style="width:1000px; height:600px">
+                <div style="width:auto; height:auto; margin:auto; display:block">
                      <canvas id="Question2"></canvas>
                  </div>
         </div>
         <div class="tab-pane fade" id="question3" role="tabpanel" aria-labelledby="question3Tab">              
-                 <div style="width:1000px; height:600px">
+                <div style="width:auto; height:auto; margin:auto; display:block">
                     <canvas id="Question3"></canvas>
                 </div>
         </div>
         <div class="tab-pane fade" id="question4" role="tabpanel" aria-labelledby="question4Tab">              
-                 <div style="width:1000px; height:600px">
+                <div style="width:auto; height:auto; margin:auto; display:block">
                     <canvas id="Question4"></canvas>
                 </div>
         </div>
         <div class="tab-pane fade" id="question5" role="tabpanel" aria-labelledby="question5Tab">              
-                 <div style="width:1000px; height:600px">
+                <div style="width:auto; height:auto; margin:auto; display:block">
                     <canvas id="Question5"></canvas>
                 </div>
         </div>
         <div class="tab-pane fade" id="question6" role="tabpanel" aria-labelledby="question6Tab">              
-                   <div style="width:1000px; height:600px">
+                  <div style="width:auto; height:auto; margin:auto; display:block">
                      <canvas id="Question6"></canvas>
                    </div>
         </div>
          <div class="tab-pane fade" id="question7" role="tabpanel" aria-labelledby="question7Tab">             
-                   <div style="width:1000px; height:600px">
+                  <div style="width:auto; height:auto; margin:auto; display:block">
                      <canvas id="Question7"></canvas>
                    </div>
         </div>
          <div class="tab-pane fade" id="question8" role="tabpanel" aria-labelledby="question7Tab">             
-                   <div style="width:1000px; height:600px">
+                   <div style="width:auto; height:auto; margin:auto; display:block">
                      <canvas id="Question8"></canvas>
                    </div>
         </div>
     </div>
     </div>
-    <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
+    <div class="row" style="padding-top:50px">
+         <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
+    </div>
+   
    
    
 
@@ -136,7 +139,22 @@
 
                         },
                         options: {
-                            anchor: "center",
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function(inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";                                  
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -175,8 +193,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                  },
                                  backgroundColor: '#C0C0C0',
@@ -246,6 +264,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -283,8 +317,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -344,6 +378,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -381,8 +431,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -440,6 +490,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -477,8 +543,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -538,6 +604,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -575,8 +657,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -636,6 +718,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -673,8 +771,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -736,6 +834,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -773,8 +887,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -834,6 +948,22 @@
 
                         },
                         options: {
+                            plugins: {
+                                datalabels: {
+                                    anchor: "center",
+                                    font: {
+                                        size: 20,
+                                    },
+                                    formatter: function (value, context) {
+                                        var total = 0;
+                                        $.each(valueArray, function (inx, val) {
+                                            total = total + val;
+                                        });
+                                        var percentage = Math.floor(((Number(value) / total) * 100) + 0.5);
+                                        return percentage + "%";
+                                    }
+                                }
+                            },
                             responsive: true,
                             title: {
                                 display: true,
@@ -871,8 +1001,8 @@
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
-                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        return 'Percentage: (' + precentage + '%)';
+                                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + percentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
