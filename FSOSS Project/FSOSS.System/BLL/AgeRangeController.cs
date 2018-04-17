@@ -85,7 +85,7 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <returns>List of archived meals</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<AgeRangePOCO> GetArchivedMealList()
+        public List<AgeRangePOCO> GetArchivedAgeRangeList()
         {
             using (var context = new FSOSSContext())
             {
