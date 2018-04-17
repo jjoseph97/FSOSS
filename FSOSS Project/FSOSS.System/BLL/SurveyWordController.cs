@@ -12,6 +12,7 @@ namespace FSOSS.System.BLL
 {
     public class SurveyWordController
     {
+        [Hangfire.AutomaticRetry(Attempts = 0)]
         public void GenerateSurveyWordOfTheDay()
         {
             using (var context = new FSOSSContext())

@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>--%>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1.1.2 "></script>
+
+
     <div class="row">
         <div class="col-sm-12">
             <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
@@ -135,6 +136,7 @@
 
                         },
                         options: {
+                            anchor: "center",
                             responsive: true,
                             title: {
                                 display: true,
@@ -156,15 +158,26 @@
                             tooltips: {
                                 callbacks: {
                                     label: function (tooltipItem, data) {
-                                        var dataset = data.datasets[tooltipItem.datasetIndex];                                       
-                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-                                             return previousValue + currentValue;
-                                         });
+                                         var dataset = data.datasets[tooltipItem.datasetIndex];                                       
                                          var currentValue = dataset.data[tooltipItem.index];
-                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                         var label = data.labels[tooltipItem.index];
-                                         return 'Answer: '+ label +', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
-                                     }
+                                         return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data){
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];                                       
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: '+ label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                            return previousValue + currentValue;
+                                        });
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                        return 'Percentage: (' + precentage + '%)';
+                                    }
                                  },
                                  backgroundColor: '#C0C0C0',
                                  titleFontSize: 18,
@@ -254,13 +267,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -341,13 +365,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -426,13 +461,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -513,13 +559,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -600,13 +657,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -689,13 +757,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
@@ -776,13 +855,24 @@
                                 callbacks: {
                                     label: function (tooltipItem, data) {
                                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        return 'Total Response: ' + currentValue;
+                                    },
+                                    beforeLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                                        var currentValue = dataset.data[tooltipItem.index];
+                                        var label = data.labels[tooltipItem.index];
+
+                                        return 'Answer: ' + label;
+                                    },
+                                    afterLabel: function (tooltipItem, data) {
+                                        var dataset = data.datasets[tooltipItem.datasetIndex];
                                         var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
                                             return previousValue + currentValue;
                                         });
                                         var currentValue = dataset.data[tooltipItem.index];
                                         var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                                        var label = data.labels[tooltipItem.index];
-                                        return 'Answer: ' + label + ', Total Response: ' + currentValue + ', Percentage: ' + precentage + "%";
+                                        return 'Percentage: (' + precentage + '%)';
                                     }
                                 },
                                 backgroundColor: '#C0C0C0',
