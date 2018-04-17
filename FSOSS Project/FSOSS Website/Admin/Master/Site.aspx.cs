@@ -27,9 +27,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         {
             ListView1.Visible = true;
             ListView1.DataBind();
-
             seeArchive = false;
-
         }
     }
 
@@ -58,14 +56,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             ListView1.DataSourceID = "SiteODS";
             ListView1.DataBind();
             RevealButton.Text = "Show Archived";
-
         }
         else
         {
             seeArchive = true;
             ListView1.DataSourceID = "ArchivedODS";
             ListView1.DataBind();
-
+            RevealButton.Text = "Show Active";
         }
     }
 
