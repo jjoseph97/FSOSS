@@ -28,7 +28,19 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
             Context.Response.StatusCode = 403;
         }
         SelectedSiteID.Text = SiteDropDownList.SelectedValue;
-    }
+        if (SelectedSiteID == null)
+        {
+            throw new Exception("Select an existsing Site");
+        }
+        else
+        {
+            UnitsListView.Visible = true;
+            UnitsListView.DataBind();
+
+            ArchivedButton.Visible = true;
+            ActiveButton.Visible = false;
+        }
+        }
 
     //protected void SearchUnitButton_Click(object sender, EventArgs e)
     //{
