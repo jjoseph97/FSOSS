@@ -68,8 +68,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     {
         Response.Redirect("~/Admin/ViewReportFilter.aspx");
     }
-    public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.4)", "rgba(255, 255, 0, 0.4)", "rgba(0, 153, 0, 0.4)", "rgba(0, 0, 255, 0.4)", "rgba(255, 0, 255, 0.4)" };
-    public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)" };
+    public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.3)", "rgba(255, 255, 0, 0.3)", "rgba(0, 153, 0, 0.3)", "rgba(0, 0, 255, 0.3)", "rgba(255, 0, 255, 0.3)", "rgba(102, 255, 255, 0.3)", "rgba(255, 153, 102, 0.3)" };
+    public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)", "rgba(102, 255, 255, 1)", "rgba(255, 153, 102, 1)" };
     [WebMethod]
     public static string GetQuestionTwoData()
     {
