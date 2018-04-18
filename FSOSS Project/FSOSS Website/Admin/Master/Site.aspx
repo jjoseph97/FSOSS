@@ -4,25 +4,25 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <h1 class="card container py-2 h4" style="font-weight: bold;">Manage Site</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
         </div>
-    <div class="col-sm-12">
+    <div class="col-md-12">
         <div class="card container mb-2">
             <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddSiteButton">
-                <asp:Label ID="AddWordLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Site: " />
-                <asp:TextBox ID="AddSiteTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type word to add..." AutoComplete="off" />
-                <asp:Button ID="AddSiteButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add" OnClick="AddSite_Click" />
+                <asp:Label ID="AddWordLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Site: " />
+                <asp:TextBox ID="AddSiteTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type word to add..." AutoComplete="off" />
+                <asp:Button ID="AddSiteButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add" OnClick="AddSite_Click" />
             </asp:Panel>
         </div>
         <div class="card container">
             <%--site show section--%>
-            <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" />
+            <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" />
             <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
                 <AlternatingItemTemplate>
                     <tr class="fsoss-listview-alternate">

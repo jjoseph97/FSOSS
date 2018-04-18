@@ -5,32 +5,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <h1 class="card container py-2 h4" style="font-weight: bold;">Change Survey Words</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
         </div>
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <div class="card container mb-2">
                 <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="SearchWordButton">
-                    <asp:Label ID="SearchWordLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search Word: " />
-                    <asp:TextBox ID="SearchWordTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type word to search for..." Style="background-color: #FFFFFF;" />
-                    <asp:Button ID="SearchWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchWordButton_Click" />
-                    <asp:Button ID="ClearSearchButton" class="col-sm-2 offset-sm-2 my-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" Visible="false" />
+                    <asp:Label ID="SearchWordLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search Word: " />
+                    <asp:TextBox ID="SearchWordTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type word to search for..." Style="background-color: #FFFFFF;" />
+                    <asp:Button ID="SearchWordButton" class="col-md-2 offset-md-2 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchWordButton_Click" />
+                    <asp:Button ID="ClearSearchButton" class="col-md-2 offset-md-2 my-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" Visible="false" />
                 </asp:Panel>
                 <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddWordButton">
-                    <asp:Label ID="AddWordLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Word: " />
-                    <asp:TextBox ID="AddWordTextBox" class="col-sm-4 my-2 form-control" runat="server" placeholder="Type word to add..." Style="background-color: #FFFFFF;" />
-                    <asp:Button ID="AddWordButton" class="col-sm-2 offset-sm-2 my-2 btn btn-success" runat="server" Text="Add Word" OnClick="AddWordButton_Click" />
+                    <asp:Label ID="AddWordLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Word: " />
+                    <asp:TextBox ID="AddWordTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type word to add..." Style="background-color: #FFFFFF;" />
+                    <asp:Button ID="AddWordButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Word" OnClick="AddWordButton_Click" />
                 </asp:Panel>
             </div>
             <div class="card container">
                 <div class="row container mx-auto px-0">
-                    <asp:Button ID="ShowArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
-                    <asp:Button ID="ShowActiveButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
+                    <asp:Button ID="ShowArchivedButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ShowArchivedButton_Click"></asp:Button>
+                    <asp:Button ID="ShowActiveButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Active" OnClick="ShowActiveButton_Click" Visible="false"></asp:Button>
                 </div>
                 <asp:ListView ID="SurveyWordListView" runat="server" DataSourceID="ActiveSurveyWordODS" DataKeyNames="surveyWordID" OnItemDataBound="SurveyWordListView_ItemDataBound">
                     <AlternatingItemTemplate>

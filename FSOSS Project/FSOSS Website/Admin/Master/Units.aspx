@@ -3,31 +3,31 @@
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <h1 class="card container py-2 h4" style="font-weight: bold;">Manage Units</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
-            <div class="col-sm-12">
+        <div class="col-md-12">
+            <div class="col-md-12">
                 <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
             </div>
             <asp:Label ID="SuccessAlert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
         </div>
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <div class="card container mb-2">
                 <div class="row">
-                    <asp:Label ID="SearchUnitLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search units: " />
-                    <asp:DropDownList ID="SiteDropDownList" class="col-sm-4 my-2 form-control" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" AutoPostBack="true" DataValueField="siteID"></asp:DropDownList>
+                    <asp:Label ID="SearchUnitLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search units: " />
+                    <asp:DropDownList ID="SiteDropDownList" class="col-md-4 my-2 form-control" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" AutoPostBack="true" DataValueField="siteID"></asp:DropDownList>
                 </div>
             </div>
             <asp:Label ID="SelectedSiteID" runat="server" Visible="false" />
         </div>
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <div class="card container mb-2">
-                <asp:Button ID="ArchivedButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ArchivedButton_Click" Visible="false"></asp:Button>
-                <asp:Button ID="ActiveButton" class="col-sm-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ActiveButton_Click" Visible="false"></asp:Button>
+                <asp:Button ID="ArchivedButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ArchivedButton_Click" Visible="false"></asp:Button>
+                <asp:Button ID="ActiveButton" class="col-md-3 col-lg-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ActiveButton_Click" Visible="false"></asp:Button>
 
                 <%----------------------------------------------------------------------%>
                 <%--------------------  Active Units ListView --------------------------%>
@@ -223,10 +223,11 @@
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server">
-                                            <th runat="server" class="col-sm-3 py-2">Unit Number</th>
-                                            <th runat="server" class="col-sm-3">Last Modified On</th>
-                                            <th runat="server" class="col-sm-2">Last Modified By</th>
-                                            <th class="col-sm-1"></th>
+                                            <th runat="server" class="w-25 p-3">Unit Number</th>
+                                            <th runat="server" class="w-25 p-3">Last Modified On</th>
+                                            <th runat="server" class="w-20 p-3">Last Modified By</th>
+                                            <th runat="server" class="w-15 p-3">Insert Unit</th>
+                                            <th runat="server" class="w-15 p-3">Clear</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
