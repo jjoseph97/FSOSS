@@ -18,16 +18,14 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class SubmittedSurveyController
     {
-
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
-        /// The method to obtain the total of contact requests for a given site.
+        /// The method to obtain the total contact requests for a given site.
         /// Updated March 22, 2018. Fixed so it returns the count for the site only.- Chris
         /// Updated April 8, 2018. Fixed to handle bad SiteIDs.
-
         /// </summary>
         /// <param name="siteID">the id of the site for which we want to know the number of contact requests</param>
         /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public int GetContactRequestTotal(int siteID)
         {
             using (var context = new FSOSSContext())
@@ -35,50 +33,22 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var contactCount = 0;
-                    if (context.Sites.Find(siteID) != null)
+                    if (context.Sites.Find(siteID) != null) // if the site was found, get the count of all the contact requests for that site
                     {
                         contactCount = context.SubmittedSurveys.Count(x => x.contact_request == true && x.contacted == false && x.Unit.site_id == siteID);
-
                     }
                     return contactCount;
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Used to check if the given submitted survey ID is a valid submitted survey ID in the database
-        /// </summary>
-        /// <param name="subSurveyID"></param>
-        /// <returns></returns>
-        public bool ValidSurvey(int subSurveyID)
-        {
-            using (var context = new FSOSSContext())
-            {
-                try
-                {
-                    bool valid = true;
-                    if (context.SubmittedSurveys.Find(subSurveyID) == null)
-                    {
-                        valid = false;
-
-                    }
-                    return valid;
-
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
         }
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
-        /// The method to obtain a list of submitted survey contact requests for a  given site
+        /// The method to obtain a list of submitted surveys with contact requests for a given site
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of contact requests</param>
         /// <returns></returns>
@@ -110,28 +80,24 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
-
         }
-
-
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
-        /// The method is used to obtain a list of submitted surveys for a given site
+        /// The method is used to obtain a list of submitted surveys for a given site depending on the filter data passed from the SubmittedSurveyList page
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of submitted surveys</param>
         /// <returns></returns>
         public List<SubmittedSurveyPOCO> GetSubmittedSurveyList(int siteID, DateTime startDate, DateTime endDate, int mealID, int unitID)
         {
-
             using (var context = new FSOSSContext())
             {
                 try
                 {
-                    if (siteID == 0 && mealID != 0)
+                    if (siteID == 0 && mealID != 0) // get a list of submitted surveys for all sites and a specific meal
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
                                                   orderby x.date_entered descending
@@ -153,7 +119,7 @@ namespace FSOSS.System.BLL
                                                   };
                         return submittedSurveyList.ToList();
                     }
-                    else if (siteID != 0 && mealID != 0 && unitID == 0)
+                    else if (siteID != 0 && mealID != 0 && unitID == 0) // get a list of submitted surveys for a specific site, a specific meal and all units
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
                                                   orderby x.date_entered descending
@@ -175,7 +141,7 @@ namespace FSOSS.System.BLL
                                                   };
                         return submittedSurveyList.ToList();
                     }
-                    else if (mealID == 0 && unitID != 0)
+                    else if (mealID == 0 && unitID != 0) // get a list of submitted surveys for all meals and a specific unit
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
                                                   orderby x.date_entered descending
@@ -197,7 +163,7 @@ namespace FSOSS.System.BLL
                                                   };
                         return submittedSurveyList.ToList();
                     }
-                    else
+                    else // get a list of submitted surveys for all sites, all meals, and all units
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
                                                   orderby x.date_entered descending
@@ -222,18 +188,14 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
-
-
-
-
         }
 
         //
         /// <summary>
-        /// This method obtains specific submitted survey results
+        /// This method obtains specific submitted survey results matching the submitted survey ID parameter
         /// </summary>
         /// <param name="subSurveyID"></param>
         /// <returns></returns>
@@ -266,14 +228,40 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
-
         }
 
         /// <summary>
-        /// This method obtains specific submitted survey answers
+        /// Used to check if the given submitted survey ID is a valid submitted survey ID in the database
+        /// </summary>
+        /// <param name="subSurveyID"></param>
+        /// <returns></returns>
+        public bool ValidSurvey(int subSurveyID)
+        {
+            using (var context = new FSOSSContext())
+            {
+                try
+                {
+                    bool valid = true;
+                    if (context.SubmittedSurveys.Find(subSurveyID) == null) // check for the submitted survey ID and if not found, return false
+                    {
+                        valid = false;
+
+                    }
+                    return valid;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// This method obtains specific submitted survey questions and answers for the SubmittedSurveyViewer page
         /// </summary>
         /// <param name="subSurveyID"></param>
         /// <returns></returns>
@@ -295,19 +283,16 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
-
         }
-
-
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         /// <summary>
-        /// The method to register a submitted survey as "contacted"
+        /// The method registers a submitted survey as "contacted"
         /// </summary>
-        /// <param name="submittedSurveyID">The id of the submitted survey that had a contact request, but won't soon</param>
+        /// <param name="submittedSurveyID">The id of the submitted survey that had a contact request</param>
         /// <returns></returns>
         public void ContactSurvey(int submittedSurveyID)
         {
@@ -325,48 +310,60 @@ namespace FSOSS.System.BLL
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
-
-
-
-
-
         }
 
         /// <summary>
-        /// Returns if the participant of the submitted survey 
-        /// wants/wanted contact
+        /// This method returns if the participants submitted survey indicates if they want to be contacted or not.
         /// </summary>
-        /// <param name="submittedSurveyID">the submitted survey id of the survey 
-        /// which we want to know if they want contact</param>
+        /// <param name="submittedSurveyID">the submitted survey id of the survey which we want to know if they want contact</param>
         /// <returns>true, wants contact. false, no contact wanted/needed</returns>
         public bool RequestsContact(int submittedSurveyID)
         {
-
             using (var context = new FSOSSContext())
             {
                 try
                 {
                     SubmittedSurvey ss = context.SubmittedSurveys.Find(submittedSurveyID);
-                    if (ss.contacted == false && ss.contact_request == true)
+                    if (ss.contacted == false && ss.contact_request == true) // if the submitted survey has a contact request and it has not been resolved, return true
                     {
                         return true;
                     }
-                    else
+                    else // else, return false
                     {
                         return false;
                     }
-
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new Exception("Please contact the Administrator with the error message: " + e.Message);
                 }
             }
         }
 
+        /// <summary>
+        /// This is the method used when submitting a survey into the database in both the SubmittedSurvey and ParticipantResponse tables
+        /// </summary>
+        /// <param name="survey_version_id_param"></param>
+        /// <param name="unit_id_param"></param>
+        /// <param name="meal_id_param"></param>
+        /// <param name="participant_type_id_param"></param>
+        /// <param name="age_range_id_param"></param>
+        /// <param name="gender_id_param"></param>
+        /// <param name="contact_request_param"></param>
+        /// <param name="contact_room_number_param"></param>
+        /// <param name="contact_phone_number_param"></param>
+        /// <param name="Q1AResponse_param"></param>
+        /// <param name="Q1BResponse_param"></param>
+        /// <param name="Q1CResponse_param"></param>
+        /// <param name="Q1DResponse_param"></param>
+        /// <param name="Q1EResponse_param"></param>
+        /// <param name="Q2Response_param"></param>
+        /// <param name="Q3Response_param"></param>
+        /// <param name="Q4Response_param"></param>
+        /// <param name="Q5Response_param"></param>
         public void SubmitSurvey(int survey_version_id_param, int unit_id_param, int meal_id_param, int participant_type_id_param, int age_range_id_param,
             int gender_id_param, bool contact_request_param, string contact_room_number_param, string contact_phone_number_param, string Q1AResponse_param,
             string Q1BResponse_param, string Q1CResponse_param, string Q1DResponse_param, string Q1EResponse_param, string Q2Response_param, string Q3Response_param,
