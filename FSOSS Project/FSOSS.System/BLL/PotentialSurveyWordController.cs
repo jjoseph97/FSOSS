@@ -18,7 +18,7 @@ namespace FSOSS.System.BLL
     public class PotentialSurveyWordController
     {
         /// <summary>
-        /// Method used to add a new potential survey word to the list
+        /// Method used to add a new potential survey word to the database
         /// </summary>
         /// <param name="newWord"></param>
         /// <param name="userID"></param>

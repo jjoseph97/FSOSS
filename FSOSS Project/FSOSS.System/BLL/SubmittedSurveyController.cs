@@ -46,12 +46,12 @@ namespace FSOSS.System.BLL
             }
         }
 
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
         /// The method to obtain a list of submitted surveys with contact requests for a given site
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of contact requests</param>
         /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ContactSubmittedSurveyPOCO> GetContactRequestList(int siteID)
         {
 
@@ -85,12 +85,12 @@ namespace FSOSS.System.BLL
             }
         }
 
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
         /// <summary>
         /// The method is used to obtain a list of submitted surveys for a given site depending on the filter data passed from the SubmittedSurveyList page
         /// </summary>
         /// <param name="siteID">The id of the site for which we want to know the list of submitted surveys</param>
         /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<SubmittedSurveyPOCO> GetSubmittedSurveyList(int siteID, DateTime startDate, DateTime endDate, int mealID, int unitID)
         {
             using (var context = new FSOSSContext())
@@ -288,12 +288,12 @@ namespace FSOSS.System.BLL
             }
         }
 
-        [DataObjectMethod(DataObjectMethodType.Update, false)]
         /// <summary>
         /// The method registers a submitted survey as "contacted"
         /// </summary>
         /// <param name="submittedSurveyID">The id of the submitted survey that had a contact request</param>
         /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
         public void ContactSurvey(int submittedSurveyID)
         {
 
