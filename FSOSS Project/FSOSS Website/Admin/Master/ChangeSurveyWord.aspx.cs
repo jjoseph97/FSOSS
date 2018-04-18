@@ -15,8 +15,8 @@ using FSOSS.System.Data.Entity;
 public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
-    /// Following this, for each page load the search text box is checked if a search was entered or not, and the text field background color is styled appropriately
+    /// When the page loads first the page checks if the user is logged in, and is redirected to the login page if not.
+    /// Then the method checks if the user has has proper authentication (Master Administrator rolw) to access this page,
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -29,19 +29,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
-        }
-        else
-        {
-            if (SearchWordTextBox.Text == "") // check if the SearchWordTextBox is empty, then change the back color to white indicating the user can enter a search in this field if desired
-            {
-                SearchWordTextBox.Attributes.Remove("style");
-                SearchWordTextBox.BackColor = System.Drawing.Color.White;
-            }
-            else  // else, check if the SearchWordTextBox is not empty, then change the back color to light gray indicating the user cannot change it
-            {
-                SearchWordTextBox.Attributes.Remove("style");
-                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray;
-            }
         }
     }
 
@@ -68,7 +55,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is for when the user clicks the "Search" button and the search field background color is set to light gray.
+    /// This button on click method is for when the user clicks the "Search" button.
     /// Survey words in the ListView are returned and now showing matching the search string that was entered.
     /// </summary>
     /// <param name="sender"></param>
@@ -103,12 +90,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                     SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
                 }
                 SurveyWordListView.DataBind(); // rebind the ListView with the appropraite ODS
-
-                SearchWordTextBox.ReadOnly = true;
-                SearchWordTextBox.Attributes.Remove("style"); // clear the style attribute to remove the existing white background color
-                SearchWordTextBox.BackColor = System.Drawing.Color.LightGray; // set the SearchWordTextBox back color to light gray indicating the user cannot change it
-                SearchWordButton.Visible = false;
-                ClearSearchButton.Visible = true;
             }
             else // display error message to the user if no results were returned
             {
@@ -118,7 +99,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is to clear the search field, change the background color to white and return to a ListView with full results for the user.
+    /// This button on click method is to clear the search field and return to a ListView with full results for the user.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -135,12 +116,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         }
         SurveyWordListView.DataBind(); // rebind the ListView with the appropraite ODS
 
-        SearchWordTextBox.ReadOnly = false;
-        SearchWordTextBox.Attributes.Remove("style"); // clear the style attribute to remove the existing light gray background color
-        SearchWordTextBox.BackColor = System.Drawing.Color.White; // set the SearchWordTextBox back color to white indicating the user can enter a search in this field if desired
-        SearchWordTextBox.Text = "";
-        SearchWordButton.Visible = true;
-        ClearSearchButton.Visible = false;
+        SearchWordTextBox.Text = ""; // clear the search word textbox
     }
 
     /// <summary>
@@ -177,7 +153,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
         ClearSearchButton_Click(null, EventArgs.Empty);
         ShowActiveButton.Visible = true;
         ShowArchivedButton.Visible = false;
-
     }
 
     /// <summary>
