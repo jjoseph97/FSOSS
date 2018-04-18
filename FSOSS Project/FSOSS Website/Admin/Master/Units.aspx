@@ -113,11 +113,11 @@
                             <td runat="server">
                                 <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                     <tr runat="server">
-                                        <th runat="server" class="col-sm-3 py-2">Unit Number</th>
-                                        <th runat="server" class="col-sm-3">Last Modified On</th>
-                                        <th runat="server" class="col-sm-2">Last Modified By</th>
-                                        <th runat="server" class="col-sm-1"></th>
-                                        <th runat="server" class="col-sm-1"></th>
+                                        <th runat="server" class="w-25 p-3">Unit Number</th>
+                                        <th runat="server" class="w-25 p-3">Last Modified On</th>
+                                        <th runat="server" class="w-20 p-3">Last Modified By</th>
+                                        <th runat="server" class="w-15 p-3">Insert Unit</th>
+                                        <th runat="server" class="w-15 p-3">Clear</th>
                                     </tr>
                                     <tr runat="server" id="itemPlaceholder"></tr>
                                 </table>

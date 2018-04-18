@@ -67,13 +67,13 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server">
-                                            <th runat="server" class="col-sm-4 py-2 px-3">Username</th>
-                                            <th runat="server" class="col-sm-4 py-2 px-3">First Name</th>
-                                            <th runat="server" class="col-sm-4 py-2 px-3">Last Name</th>
-                                            <th runat="server" class="py-2 px-3 text-center">Status</th>
-                                            <th runat="server" class="py-2 px-3 text-center">Edit</th>
+                                            <th runat="server" class="w-30 p-3">Username</th>
+                                            <th runat="server" class="w-25 p-3">First Name</th>
+                                            <th runat="server" class="w-25 p-3">Last Name</th>
+                                            <th runat="server" class="w-10 p-3">Status</th>
+                                            <th runat="server" class="w-10 p-3">Edit</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>

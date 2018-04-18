@@ -22,8 +22,7 @@
         </div>
         <div class="card container">
             <%--site show section--%>
-            <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
-            <br />
+            <asp:Button ID="RevealButton" class="col-sm-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" />
             <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
                 <AlternatingItemTemplate>
                     <tr class="fsoss-listview-alternate">
@@ -87,12 +86,11 @@
                             <td runat="server">
                                 <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                     <tr runat="server">
-                                        <th runat="server" class="col-sm-4 py-2">Site</th>
-                                        <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
-                                        <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
-                                        <th runat="server" class="col-sm-1 py-2">Edit</th>
-                                        <th runat="server" class="col-sm-1 py-2">Change Availability</th>
-
+                                        <th runat="server" class="w-25 p-3">Site</th>
+                                        <th runat="server" class="w-25 p-3">Last Modified On</th>
+                                        <th runat="server" class="w-20 p-3">Last Modified By</th>
+                                        <th runat="server" class="w-15 p-3">Edit Word</th>
+                                        <th runat="server" class="w-15 p-3">Change Availability</th>
                                     </tr>
                                     <tr runat="server" id="itemPlaceholder"></tr>
                                 </table>

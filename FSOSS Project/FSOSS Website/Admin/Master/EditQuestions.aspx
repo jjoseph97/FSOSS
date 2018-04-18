@@ -113,8 +113,8 @@
                                     <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; width:100%; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
                                         <tr runat="server">
                                             <%--<th runat="server">Id</th>--%>
-                                            <th runat="server" class="col-sm-8 py-2">Response Options</th>
-                                            <th runat="server" class="col-sm-1 py-2">Edit Responses</th>
+                                            <th runat="server" class="w-80 p-3">Response Options</th>
+                                            <th runat="server" class="w-20 p-3">Edit Responses</th>
                                             <%--<th runat="server">Value</th>--%>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>

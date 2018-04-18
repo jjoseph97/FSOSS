@@ -99,11 +99,11 @@
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server">
-                                            <th runat="server" class="col-sm-4 py-2">Survey Word</th>
-                                            <th runat="server" class="col-sm-3 py-2">Last Modified On</th>
-                                            <th runat="server" class="col-sm-3 py-2">Last Modified By</th>
-                                            <th runat="server" class="col-sm-1 py-2">Edit Word</th>
-                                            <th runat="server" class="col-sm-1 py-2">Change Availability</th>
+                                            <th runat="server" class="w-20 p-3">Survey Word</th>
+                                            <th runat="server" class="w-25 p-3">Last Modified On</th>
+                                            <th runat="server" class="w-25 p-3">Last Modified By</th>
+                                            <th runat="server" class="w-15 p-3">Edit Word</th>
+                                            <th runat="server" class="w-15 p-3">Change Availability</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -114,21 +114,15 @@
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
                                             <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>
                                                     <div class="my-2 text-white">
-                                                        <b>Page
-                <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
-                                                            of
-                <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
-                                                            (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
-                                                            records)
+                                                        <b>Page <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' /> of
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' /> (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' /> records)
                                                         </b>
                                                     </div>
                                                 </PagerTemplate>
                                             </asp:TemplatePagerField>
-
                                         </Fields>
                                     </asp:DataPager>
                                 </td>

@@ -75,12 +75,12 @@
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server">
-                                            <th runat="server" class="col-sm-3 py-2">Hospital</th>
-                                            <th runat="server" class="col-sm-1 py-2">Unit Number</th>
-                                            <th runat="server" class="col-sm-2 py-2">Participant Type</th>
-                                            <th runat="server" class="col-sm-2 py-2">Meal Name</th>
-                                            <th runat="server" class="col-sm-3 py-2">Date Submitted</th>
-                                            <th runat="server" class="col-sm-1 py-2">View Survey</th>
+                                            <th runat="server" class="w-25 p-3">Hospital</th>
+                                            <th runat="server" class="w-10 p-3">Unit Number</th>
+                                            <th runat="server" class="w-15 p-3">Participant Type</th>
+                                            <th runat="server" class="w-15 p-3">Meal Name</th>
+                                            <th runat="server" class="w-25 p-3">Date Submitted</th>
+                                            <th runat="server" class="w-10 p-3">View Survey</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -90,7 +90,16 @@
                                 <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:TemplatePagerField>
+                                                <PagerTemplate>
+                                                    <div class="my-2 text-white">
+                                                        <b>Page <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' /> of
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' /> (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' /> records)
+                                                        </b>
+                                                    </div>
+                                                </PagerTemplate>
+                                            </asp:TemplatePagerField>
                                         </Fields>
                                     </asp:DataPager>
                                 </td>
