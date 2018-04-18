@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Master_CreateUser : System.Web.UI.Page
 {
+    private string successHeader = "<span><i class='fas fa-check-circle'></i> Success</span><br/ >";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["securityID"] == null) // Redirect user to login if not logged in
@@ -51,7 +53,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
             string newUser = sysmgr.AddUser(concatName.ToLower(), password, firstName, lastName, selectedRoleId);
 
             SuccessMessage.Visible = true;
-            SuccessMessage.Text = "Successfully added: " + newUser;
+            SuccessMessage.Text = successHeader + "Successfully added: " + newUser;
 
             ClearFields();
         }

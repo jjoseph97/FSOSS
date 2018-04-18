@@ -9,8 +9,8 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success p-2" Visible="false" />
-            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 alert alert-danger p-2" Visible="false" />
+            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success" Font-Size="Medium" Visible="false" />
+            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 alert alert-danger" Font-Size="Medium" Visible="false" />
         </div>
         <div class="col-sm-12">
             <div class="card container mb-2">
@@ -67,23 +67,38 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style=" border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
                                         <tr runat="server">
                                             <th runat="server" class="col-sm-4 py-2 px-3">Username</th>
                                             <th runat="server" class="col-sm-4 py-2 px-3">First Name</th>
                                             <th runat="server" class="col-sm-4 py-2 px-3">Last Name</th>
-                                            <th runat="server" class="py-2 px-3">Status</th>
-                                            <th runat="server" class="py-2 px-3">Edit</th>
+                                            <th runat="server" class="py-2 px-3 text-center">Status</th>
+                                            <th runat="server" class="py-2 px-3 text-center">Edit</th>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
                                 </td>
                             </tr>
-                           <tr runat="server" class="mx-2 my-2">
+                            <tr runat="server" class="mx-2 my-2">
                                 <td runat="server" class="listview-pager">
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+
+                                            <asp:TemplatePagerField>
+                                                <PagerTemplate>
+                                                    <div class="my-2 text-white">
+                                                        <b>Page
+                <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
+                                                            of
+                <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
+                                                            (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                            records)
+                                                        </b>
+                                                    </div>
+                                                </PagerTemplate>
+                                            </asp:TemplatePagerField>
+
                                         </Fields>
                                     </asp:DataPager>
                                 </td>
