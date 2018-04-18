@@ -27,10 +27,6 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
-        {
-            Context.Response.StatusCode = 403;
-        }
         else if (!IsPostBack) // this is for loading the dropdown lists on the page with the data from the database
         {
             SiteController siteController = new SiteController();
@@ -81,6 +77,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                 if (endingPeriodInput != "") // check if there was any date entered or selected in the EndingPeriodInput text field 
                 {
                     filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                    if (filter.startingDate > filter.endDate)
+                        throw new Exception("Start Date must be before the End Date.");
                     filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                     filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                     if (UnitDropDownList.Enabled == false) // if the unit drop down list is not enabled (all hospitals is selected) then set the filter.userID to 0
@@ -96,15 +94,15 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                 }
                 else // else, display an error to enter a date for the ending period
                 {
-                    
+
                     throw new Exception("Please select an ending period");
                 }
             }
             else // else, display an error to enter a date for the starting period
             {
-                
+
                 throw new Exception("Please select a starting period");
-                
+
             }
         }, "Success", "Redirecting to the survey list page.");
     }
@@ -115,7 +113,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void HospitalDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-    {  
+    {
         if (HospitalDropDownList.SelectedIndex != 0) // if the site drop down list has changed then retrieve the units from the database and then show and populate the unit drop down list
         {
             UnitLabel.Visible = true;

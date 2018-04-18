@@ -132,3 +132,7 @@
     color: #333333;
 }
 
+#MainContent_ValidationSummary ul {
+    margin-bottom: 0;
+}
+

@@ -36,7 +36,7 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="StartingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Starting Period:"></asp:Label>
                     <div id="StartDatePicker" class="col-sm-4 input-group date px-0 my-2">
-                        <input id="StartingPeriodInput" name="StartingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.startingInputValue %>" />
+                        <input id="StartingPeriodInput" name="StartingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.startingInputValue %>" autocomplete="off" />
                         <span class="input-group-btn border">
                             <label for="StartingPeriodInput" class="btn btn-default p-1 m-0">
                                 <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
@@ -47,7 +47,7 @@
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="EndingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large;" Text="Ending Period:"></asp:Label>
                     <div id="EndDatePicker" class="col-sm-4 input-group date px-0 my-2">
-                        <input id="EndingPeriodInput" name="EndingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.endingInputValue %>" />
+                        <input id="EndingPeriodInput" name="EndingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.endingInputValue %>" autocomplete="off" />
                         <span class="input-group-btn border">
                             <label for="EndingPeriodInput" class="btn btn-default p-1 m-0">
                                 <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>

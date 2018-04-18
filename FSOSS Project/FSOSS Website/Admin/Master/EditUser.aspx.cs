@@ -9,6 +9,9 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Master_EditUser : System.Web.UI.Page
 {
+    private string successHeader = "<span><i class='fas fa-check-circle'></i> Success</span><br/ >";
+    private string failedHeader = "<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["securityID"] == null) // Redirect user to login if not logged in
@@ -58,19 +61,19 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
         {
             SuccessMessage.Visible = false;
             FailedMessage.Visible = true;
-            FailedMessage.Text = "You cannot Deactivate your own account.";
+            FailedMessage.Text = failedHeader + "You cannot Deactivate your own account.";
         }
         else if (UserNameTextBox.Text.Equals("webmaster") && DeactivateCheckBox.Checked)
         {
             SuccessMessage.Visible = false;
             FailedMessage.Visible = true;
-            FailedMessage.Text = "You cannot Deactivate the webmaster account.";
+            FailedMessage.Text = failedHeader + "You cannot Deactivate the webmaster account.";
         }
         else if (UserNameTextBox.Text.Equals("webmaster") && SecurityLevelDDL.SelectedValue.Equals("1"))
         {
             SuccessMessage.Visible = false;
             FailedMessage.Visible = true;
-            FailedMessage.Text = "You cannot set the webmaster account as Standard Administrator.";
+            FailedMessage.Text = failedHeader + "You cannot set the webmaster account as Standard Administrator.";
             SecurityLevelDDL.SelectedValue = "2";
         }
         else
@@ -94,7 +97,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                     int securityId = int.Parse(SecurityLevelDDL.SelectedItem.Value);
                     string updatedUser = sysmgr.UpdateAdministratorAccount(username, firstname, lastname, archive, securityId);
                     SuccessMessage.Visible = true;
-                    SuccessMessage.Text = "Successfully updated: " + updatedUser;
+                    SuccessMessage.Text = successHeader + "Successfully updated: " + updatedUser;
                 }
             }
             else
@@ -114,7 +117,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                     int securityId = int.Parse(SecurityLevelDDL.SelectedItem.Value);
                     string updatedUser = sysmgr.UpdateAdministratorAccount(username, password, firstname, lastname, archive, securityId);
                     SuccessMessage.Visible = true;
-                    SuccessMessage.Text = "Successfully updated: " + updatedUser + "'s password";
+                    SuccessMessage.Text = successHeader + "Successfully updated: " + updatedUser + "'s password";
                 }
             }
         }

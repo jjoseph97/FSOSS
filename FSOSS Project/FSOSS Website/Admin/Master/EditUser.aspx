@@ -9,11 +9,11 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success p-2" />
-            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 alert alert-danger p-2" />
+            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success" Font-Size="Medium" />
+            <asp:Label ID="FailedMessage" runat="server" CssClass="card container h5 alert alert-danger" Font-Size="Medium" />
             <asp:ValidationSummary runat="server" ID="ValidationSummary"
-                HeaderText="Failed to edit the user due to the following:"
-                CssClass="card container h5 alert alert-danger p-2" />
+                HeaderText="<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>Failed to edit the user due to the following:"
+                CssClass="card container h5 alert alert-danger" Font-Size="Medium" />
         </div>
     </div>
 

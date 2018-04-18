@@ -8,6 +8,9 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
 {
+    private string successHeader = "<span><i class='fas fa-check-circle'></i> Success</span><br/ >";
+    private string failedHeader = "<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["securityID"] == null) // Redirect user to login if not logged in
@@ -67,14 +70,14 @@ public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
     {
         FailedMessage.Visible = false;
         SuccessMessage.Visible = true;
-        SuccessMessage.Text = message;
+        SuccessMessage.Text = successHeader + message;
     }
 
     private void DisplayFailedMessage(string message)
     {
         SuccessMessage.Visible = false;
         FailedMessage.Visible = true;
-        FailedMessage.Text = message;
+        FailedMessage.Text = failedHeader + message;
     }
 
     private void ClearMessages()

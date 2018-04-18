@@ -21,10 +21,6 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
-        {
-            Context.Response.StatusCode = 403;
-        }
         else if (!IsPostBack)
         {
             string ssn = Request.QueryString["sid"]; // retreive the surveyID through a query string request passed from the submitted survey list page

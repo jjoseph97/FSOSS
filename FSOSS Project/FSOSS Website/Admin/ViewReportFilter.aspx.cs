@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.Page
 {
+    private string failedHeader = "<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,17 +23,11 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
-        {
-            Context.Response.StatusCode = 403;
-        }
         else if (!IsPostBack)
         {
             MealController mealController = new MealController();
             Alert.Visible = false;
-            ErrorAlert.Visible = false;
             Alert.Text = "";
-            ErrorAlert.Text = "";
             List<MealPOCO> mealList = mealController.GetMealList();
             MealDropDownList.DataSource = mealList;
             MealDropDownList.DataValueField = "mealID";
@@ -50,9 +45,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             }
         }
         Alert.Text = "";
-        ErrorAlert.Text = "";
         Alert.Visible = false;
-        ErrorAlert.Visible = false;  
     }
 
     protected string startingInputValue { get; set; } // this is in order to get and set the starting date input text on page reload
@@ -66,12 +59,12 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         if (startingPeriodInput != "" || DateTime.TryParseExact(startingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
         {
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
-            filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000","yyyy-MM-dd HH:mm:ss:ffffff",null);
-            if(endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
+            filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+            if (endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
             {
                 filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:999999", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                 if (filter.startingDate <= filter.endDate)
-                {                  
+                {
                     filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                     filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                     Session["filter"] = filter;
@@ -79,26 +72,22 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
                 }
                 else
                 {
-                    Alert.Text = String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.endDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
+                    Alert.Text = failedHeader + String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.endDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
                     Alert.Visible = true;
                 }
-               
+
             }
             else
             {
-                Alert.Text = "Please select a valid ending period";
+                Alert.Text = failedHeader + "Please select a valid ending period";
                 Alert.Visible = true;
-            }           
+            }
         }
         else
         {
-            Alert.Text = "Please select a valid starting period";
+            Alert.Text = failedHeader + "Please select a valid starting period";
             Alert.Visible = true;
         }
-     
-     
-     
-        
     }
 
 }
