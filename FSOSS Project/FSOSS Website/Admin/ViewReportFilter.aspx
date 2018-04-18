@@ -5,12 +5,14 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-            $(function () {
-                $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-            });
-            $(function () {
-                $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-            });
+        $(function () {
+            $("#StartingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true }).val();
+            $("#StartingPeriodInput").datepicker("option", "showAnim", "show");
+        });
+        $(function () {
+            $("#EndingPeriodInput").datepicker({ dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true }).val();
+            $("#EndingPeriodInput").datepicker("option", "showAnim", "show");
+        });
     </script>
     <div class="row">
         <div class="col-sm-12">
