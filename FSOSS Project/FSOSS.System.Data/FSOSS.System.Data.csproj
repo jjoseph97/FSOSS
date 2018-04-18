@@ -95,8 +95,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\FinalReportDTO.cs" />
-    <Compile Include="DTO\ReportDTO.cs" />
     <Compile Include="Entity\AdministratorAccount.cs" />
     <Compile Include="Entity\AdministratorRole.cs" />
     <Compile Include="Entity\AgeRange.cs" />
@@ -118,7 +116,6 @@
     <Compile Include="Entity\Unit.cs" />
     <Compile Include="POCOs\AdministratorAccountPOCO.cs" />
     <Compile Include="POCOs\AgeRangePOCO.cs" />
-    <Compile Include="POCOs\AnswerPOCO.cs" />
     <Compile Include="POCOs\ChartPOCO.cs" />
     <Compile Include="POCOs\ContactSubmittedSurveyPOCO.cs" />
     <Compile Include="POCOs\FilterPOCO.cs" />

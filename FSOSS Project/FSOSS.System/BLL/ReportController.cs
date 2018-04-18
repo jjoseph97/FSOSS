@@ -8,7 +8,6 @@ using System.ComponentModel;
 using FSOSS.System.Data.Entity;
 using FSOSS.System.DAL;
 using FSOSS.System.Data.POCOs;
-using FSOSS.System.Data.DTO;
 #endregion
 namespace FSOSS.System.BLL
 {
