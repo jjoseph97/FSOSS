@@ -19,8 +19,6 @@ namespace FSOSS_Website
             {
                 sysmgr.GenerateSurveyWordOfTheDay();
             }
-            // Check if recurring works. Take note this will occur every minute!
-            //RecurringJob.AddOrUpdate(() => sysmgr.GenerateSurveyWordOfTheDay(), Cron.Minutely);
         }
     }
 }
