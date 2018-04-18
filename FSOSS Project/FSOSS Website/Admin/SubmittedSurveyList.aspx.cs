@@ -26,10 +26,6 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
-        {
-            Context.Response.StatusCode = 403;
-        }
         else if (!IsPostBack)
         { 
             if (filter == null) // check and redirect to the previous page if the filter is null
