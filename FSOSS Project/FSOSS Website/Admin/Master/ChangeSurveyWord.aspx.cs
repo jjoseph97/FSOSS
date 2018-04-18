@@ -33,8 +33,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
-    /// as well as info and success messages from the code behind.
+    /// This method is required to use the MessageUserControl on the page in order to handle success messages and thrown exception messages for errors from the controller.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -55,8 +54,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is for when the user clicks the "Search" button.
-    /// Survey words in the ListView are returned and now showing matching the search string that was entered.
+    /// This method is for when the user clicks the "Search" button. Survey words in the ListView are returned and now showing matching the search string that was entered.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -78,10 +76,10 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             {
                 throw new Exception("Please enter only alphabetical letters and no spaces in the search field.");
             }
-            else if (SurveyWordListView.Items.Any()) // check if any results were returned
+            else // now rebind the list view with the correct ODS to filter the survey words to match the searchWord
             {
                 // this check is to determine whether to search for active or archived words depending on the current ODS
-                if(SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
+                if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS")
                 {
                     SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
                 }
@@ -90,12 +88,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                     SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
                 }
                 SurveyWordListView.DataBind(); // rebind the ListView with the appropraite ODS
+
+                if (SurveyWordListView.Items.Any() == false) // check if any results were returned and display error message to the user if no results were returned
+                {
+                    throw new Exception("No results were found. To clear the search results and try again, click on the \"Clear Search\" Button.");
+                }
             }
-            else // display error message to the user if no results were returned
-            {
-                throw new Exception("No results were found.");
-            }
-        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the filtered results, click on the \"Clear Search\" Button.");
+        }, "Success", "Found the following results for \"" + searchWord + "\". To clear the search results, click on the \"Clear Search\" Button.");
     }
 
     /// <summary>

@@ -131,7 +131,7 @@
                     </LayoutTemplate>
                 </asp:ListView>
                 <asp:ObjectDataSource ID="ActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController"
-                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
@@ -143,7 +143,7 @@
                     </UpdateParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="ArchivedSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController"
-                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" InsertMethod="AddWord" OnDeleted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
@@ -155,7 +155,7 @@
                     </UpdateParameters>
                 </asp:ObjectDataSource>
                 <asp:ObjectDataSource ID="SearchActiveSurveyWordODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSearchedActiveSurveyWord" TypeName="FSOSS.System.BLL.PotentialSurveyWordController"
-                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+                    DeleteMethod="ChangeAvailability" UpdateMethod="UpdateWord" OnDeleted="CheckForException" OnUpdated="CheckForException">
                     <DeleteParameters>
                         <asp:Parameter Name="surveyWordID" Type="Int32"></asp:Parameter>
                         <asp:SessionParameter Name="userID" SessionField="userID" Type="Int32"></asp:SessionParameter>
