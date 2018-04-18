@@ -16,6 +16,11 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class AdministratorAccountController
     {
+        /// <summary>
+        /// Checks to see if the user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public bool UserIsActive(string username)
         {
             using (var context = new FSOSSContext())
@@ -25,13 +30,6 @@ namespace FSOSS.System.BLL
                               select x).Count();
 
                 return result.Equals(0) ? false : true;
-            }
-        }
-        public bool UserExists(string username)
-        {
-            using (var context = new FSOSSContext())
-            {
-                return context.AdministratorAccounts.Any(e => e.username.Equals(username));
             }
         }
         public bool VerifyLogin(string username, string password)

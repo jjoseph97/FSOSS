@@ -35,38 +35,30 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
             string password = PasswordTextBox.Text;
 
             AdministratorAccountController sysmgr = new AdministratorAccountController();
-            if (!sysmgr.UserExists(username))
+            if (!sysmgr.UserIsActive(username))
             {
                 Message.Visible = true;
-                Message.Text = "Username does not exist.";
+                Message.Text = "You are currently deactivated. Please contact a Master Administrator.";
             }
             else
             {
-                if (!sysmgr.UserIsActive(username))
+                bool isValid = sysmgr.VerifyLogin(username, password);
+
+                if (isValid)
                 {
-                    Message.Visible = true;
-                    Message.Text = "You are currently deactivated. Please contact a Master Administrator.";
+                    // if valid store userID, username, and securityID in sessions
+                    AdministratorRoleController roleController = new AdministratorRoleController();
+                    Session["username"] = username.ToLower();
+                    int userID = sysmgr.GetUserID(username);
+                    Session["userID"] = userID;
+                    Session["securityID"] = roleController.GetAdministratorRole(userID).security_role_id;
+
+                    Response.Redirect("~/Admin");
                 }
                 else
                 {
-                    bool isValid = sysmgr.VerifyLogin(username, password);
-
-                    if (isValid)
-                    {
-                        // if valid store userID, username, and securityID in sessions
-                        AdministratorRoleController roleController = new AdministratorRoleController();
-                        Session["username"] = username.ToLower();
-                        int userID = sysmgr.GetUserID(username);
-                        Session["userID"] = userID;
-                        Session["securityID"] = roleController.GetAdministratorRole(userID).security_role_id;
-
-                        Response.Redirect("~/Admin");
-                    }
-                    else
-                    {
-                        Message.Visible = true;
-                        Message.Text = "Invalid username or password";
-                    }
+                    Message.Visible = true;
+                    Message.Text = "Invalid username or password";
                 }
             }
         }
