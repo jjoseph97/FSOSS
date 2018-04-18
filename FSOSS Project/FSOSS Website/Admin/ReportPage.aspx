@@ -45,9 +45,25 @@
         </ul>
      <div class="tab-content">
         <div class="tab-pane fade show active" id="question1" role="tabpanel" aria-labelledby="question1Tab">
-                <div style="width:auto; height:auto; margin:auto; display:block">
+                <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                     <canvas id="Question1"></canvas>         
                 </div>
+            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px">
+                <table id="Question1Table">
+                    <thead>
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
+            <div class="row" style="padding-top:25px">
+                 <asp:Label ID="SurveyLabel" CssClass="mx-auto h5" class="label label-primary" runat="server"></asp:Label>
+            </div>
         </div>
         <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2Tab">              
                 <div style="width:auto; height:auto; margin:auto; display:block">
@@ -86,7 +102,7 @@
         </div>
     </div>
     </div>
-    <div class="row" style="padding-top:50px">
+    <div class="row" style="padding-top:25px">
          <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
     </div>
    
@@ -106,15 +122,16 @@
         var chart7 = document.getElementById("Question7").getContext("2d");
         var chart8 = document.getElementById("Question8").getContext("2d");
         $.ajax({          
-            url: 'ReportPage.aspx/GetQuestionTwoData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':1}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
                 var aData = $.parseJSON(response.d);
                 var labelArray = [];
                 var title;
+                var totalSurveys = 0;
                 var colorArray = [];
                 var valueArray = [];
                 var borderArray = [];
@@ -124,7 +141,13 @@
                     colorArray.push(val.Color);
                     borderArray.push(val.BorderColor);
                     title = val.Title;
+                    var markup = "<tr><td>" + val.Value + "</td><td>" + val.Text + "</td></tr>";
+                    $("#Question1Table").append(markup);
                 });
+                $.each(valueArray, function (inx, val) {
+                    totalSurveys = totalSurveys + val;
+                });
+                $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart1, {
                         type: 'pie',
@@ -231,9 +254,9 @@
         });
 
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionThreeData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':2}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
@@ -346,9 +369,9 @@
 
         });
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionFourData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':3}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
@@ -458,9 +481,9 @@
 
         });
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionFiveData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':4}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
@@ -571,9 +594,9 @@
         });
 
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionSixData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':5}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
@@ -685,9 +708,9 @@
         });
 
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionEightData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':6}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
@@ -801,9 +824,9 @@
         });
 
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionNineData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':7}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
@@ -915,9 +938,9 @@
         });
 
         $.ajax({
-            url: 'ReportPage.aspx/GetQuestionTenData',
+            url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
-            data: '{}',
+            data: "{'chartId':8}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {

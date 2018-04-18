@@ -71,205 +71,178 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.3)", "rgba(255, 255, 0, 0.3)", "rgba(0, 153, 0, 0.3)", "rgba(0, 0, 255, 0.3)", "rgba(255, 0, 255, 0.3)", "rgba(102, 255, 255, 0.3)", "rgba(255, 153, 102, 0.3)" };
     public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)", "rgba(102, 255, 255, 1)", "rgba(255, 153, 102, 1)" };
     [WebMethod]
-    public static string GetQuestionTwoData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();      
-        for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
-        {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionTwoValueList[counter].Equals(""))
-            { 
-                response.Text = "No Response";           
-            }
-            else
-            {
-                response.Text = report.QuestionTwoValueList[counter];
-            }
-            response.Value = report.QuestionTwoValueCount[counter];
-            response.Title = report.Question[0];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
-        }
-        return JsonConvert.SerializeObject(responses);
-    }
-
-
-    [WebMethod]
-    public static string GetQuestionThreeData()
+    public static string GetChartData(int chartId)
     {
         List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionThreeValueCount.Count; counter++)
+        if (chartId == 1)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionThreeValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
             {
-                response.Text = "No Response";
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionTwoValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionTwoValueList[counter];
+                }
+                response.Value = report.QuestionTwoValueCount[counter];
+                response.Title = report.Question[0];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
             }
-            else
-            {
-                response.Text = report.QuestionThreeValueList[counter];
-            }
-            response.Value = report.QuestionThreeValueCount[counter];
-            response.Title = report.Question[1];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
         }
-        return JsonConvert.SerializeObject(responses);
-    }
-
-    [WebMethod]
-    public static string GetQuestionFourData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionFourValueCount.Count; counter++)
+        else if (chartId == 2)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionFourValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionThreeValueCount.Count; counter++)
             {
-                response.Text = "No Response";
-
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionThreeValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionThreeValueList[counter];
+                }
+                response.Value = report.QuestionThreeValueCount[counter];
+                response.Title = report.Question[1];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
             }
-            else
-            {
-                response.Text = report.QuestionFourValueList[counter];
-            }
-            response.Value = report.QuestionFourValueCount[counter];
-            response.Title = report.Question[2];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
         }
-        return JsonConvert.SerializeObject(responses);
-    }
-    [WebMethod]
-    public static string GetQuestionFiveData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionFiveValueCount.Count; counter++)
+        else if (chartId == 3)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionFiveValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionFourValueCount.Count; counter++)
             {
-                response.Text = "No Response";
-            }
-            else
-            {
-                response.Text = report.QuestionFiveValueList[counter];
-            }
-            response.Value = report.QuestionFiveValueCount[counter];
-            response.Title = report.Question[3];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
-        }
-        return JsonConvert.SerializeObject(responses);
-    }
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionFourValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
 
-    [WebMethod]
-    public static string GetQuestionSixData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionSixValueCount.Count; counter++)
+                }
+                else
+                {
+                    response.Text = report.QuestionFourValueList[counter];
+                }
+                response.Value = report.QuestionFourValueCount[counter];
+                response.Title = report.Question[2];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
+            }
+        }
+        else if (chartId == 4)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionSixValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionFiveValueCount.Count; counter++)
             {
-                response.Text = "No Response";
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionFiveValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionFiveValueList[counter];
+                }
+                response.Value = report.QuestionFiveValueCount[counter];
+                response.Title = report.Question[3];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
             }
-            else
-            {
-                response.Text = report.QuestionSixValueList[counter];
-            }
-            response.Value = report.QuestionSixValueCount[counter];
-            response.Title = report.Question[4];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
         }
-        return JsonConvert.SerializeObject(responses);
-    }
-
-    [WebMethod]
-    public static string GetQuestionEightData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionEightValueCount.Count; counter++)
+        else if (chartId == 5)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionEightValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionSixValueCount.Count; counter++)
             {
-                response.Text = "No Response";
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionSixValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionSixValueList[counter];
+                }
+                response.Value = report.QuestionSixValueCount[counter];
+                response.Title = report.Question[4];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
             }
-            else
-            {
-                response.Text = report.QuestionEightValueList[counter];
-            }
-            response.Value = report.QuestionEightValueCount[counter];
-            response.Title = report.Question[5];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
         }
-        return JsonConvert.SerializeObject(responses);
-    }
-
-    [WebMethod]
-    public static string GetQuestionNineData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionNineValueCount.Count; counter++)
+        else if (chartId == 6)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionNineValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionEightValueCount.Count; counter++)
             {
-                response.Text = "No Response";
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionEightValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionEightValueList[counter];
+                }
+                response.Value = report.QuestionEightValueCount[counter];
+                response.Title = report.Question[5];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
             }
-            else
-            {
-                response.Text = report.QuestionNineValueList[counter];
-            }
-            response.Value = report.QuestionNineValueCount[counter];
-            response.Title = report.Question[6];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
         }
-        return JsonConvert.SerializeObject(responses);
-    }
-
-    [WebMethod]
-    public static string GetQuestionTenData()
-    {
-        List<ChartPOCO> responses = new List<ChartPOCO>();
-        for (int counter = 0; counter < report.QuestionTenValueCount.Count; counter++)
+        else if (chartId == 7)
         {
-            ChartPOCO response = new ChartPOCO();
-            if (report.QuestionTenValueList[counter].Equals(""))
+            for (int counter = 0; counter < report.QuestionNineValueCount.Count; counter++)
             {
-                response.Text = "No Response";
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionNineValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionNineValueList[counter];
+                }
+                response.Value = report.QuestionNineValueCount[counter];
+                response.Title = report.Question[6];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
             }
-            else
-            {
-                response.Text = report.QuestionTenValueList[counter];
-            }
-            response.Value = report.QuestionTenValueCount[counter];
-            response.Title = report.Question[7];
-            response.Color = COLOR_VALUE[counter];
-            response.BorderColor = BORDER_COLOR_VALUE[counter];
-            responses.Add(response);
-            response = null;
         }
+        else if (chartId == 8)
+        {
+            for (int counter = 0; counter < report.QuestionTenValueCount.Count; counter++)
+            {
+                ChartPOCO response = new ChartPOCO();
+                if (report.QuestionTenValueList[counter].Equals(""))
+                {
+                    response.Text = "No Response";
+                }
+                else
+                {
+                    response.Text = report.QuestionTenValueList[counter];
+                }
+                response.Value = report.QuestionTenValueCount[counter];
+                response.Title = report.Question[7];
+                response.Color = COLOR_VALUE[counter];
+                response.BorderColor = BORDER_COLOR_VALUE[counter];
+                responses.Add(response);
+                response = null;
+            }
+        }           
         return JsonConvert.SerializeObject(responses);
-    }
-
-    
+    }   
 }
