@@ -16,9 +16,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        SuccessAlert.Visible = false;
-        ErrorAlert.Visible = false;
-
+       
         if (Session["securityID"] == null) // Redirect user to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
@@ -27,6 +25,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         {
             Context.Response.StatusCode = 403;
         }
+
+
+        // Catches the initial site ID when the page loads from the SideDropDownList and displays Active units Listview for that site.
         SelectedSiteID.Text = SiteDropDownList.SelectedValue;
         if (SelectedSiteID == null)
         {
@@ -40,14 +41,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
             ArchivedButton.Visible = true;
             ActiveButton.Visible = false;
         }
-        }
+     }
 
-    //protected void SearchUnitButton_Click(object sender, EventArgs e)
-    //{
-    //    UnitsListView.Visible = true;
-    //    ArchivedButton.Visible = true;
-    //    SelectedSiteID.Text = SiteDropDownList.SelectedValue;
-    //}
+   
 
 
     /// <summary>
@@ -72,6 +68,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         }
     }
 
+
+    /// <summary>
+    /// This Method is triggered when the Active Button is clicked.
+    /// Active units of the selected sites will be displayed 
+    /// <summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ActiveButton_Click(object sender, EventArgs e)
     {
         UnitsListView.Visible = true;
@@ -84,6 +87,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     }
 
+    /// <summary>
+    /// This Method is triggered when the Archived Button is clicked. 
+    /// Archived units list of the selected site will be displayed  
+    /// <summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ArchivedButton_Click(object sender, EventArgs e)
     {
         UnitsListView.Visible = false;
@@ -94,7 +103,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         ArchivedButton.Visible = false;
 
     }
-
+    /// <summary>
+    /// This method catches the the value of the site dropdownlist when changed 
+    /// and displays the active units for that site. 
+    /// <summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void SiteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
 
