@@ -85,29 +85,7 @@ namespace FSOSS.System.BLL
 
             }
         }
-        /// <summary>
-        /// This method gets the siteID via site name.
-        /// </summary>
-        /// <param name="sitename"></param>
-        /// <returns>Returns the siteID associated with the site name.</returns>
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public int GetSiteID(string sitename)
-        {
-            using (var context = new FSOSSContext())
-            {
-                try
-                {
-                    var siteID = (from x in context.Sites
-                                  where x.site_name.StartsWith(sitename)
-                                  select x.site_id).FirstOrDefault();
-                    return siteID;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
-            }
-        }
+        
         /// <summary>
         /// This method gets the site name via a siteID.
         /// </summary>
@@ -125,7 +103,7 @@ namespace FSOSS.System.BLL
             }
         }
         /// <summary>
-        /// This method adds a new site to the database. Also adds a "Not Applicable" unit for this site, and assigns a survey word to the site.
+        /// This method adds a new site to the database.
         /// </summary>
         /// <param name="newSiteName"></param>
         /// <param name="admin"></param>
@@ -140,6 +118,7 @@ namespace FSOSS.System.BLL
 
                 try
                 {
+                    //Checks to see if the newSiteName already exists in the database.
                     var siteList = from x in context.Sites
                                    where x.site_name.ToLower().Equals(newSiteName.ToLower())
                                    select new SitePOCO()

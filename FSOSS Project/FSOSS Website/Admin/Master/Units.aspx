@@ -28,9 +28,9 @@
             <asp:Label ID="SelectedSiteID" runat="server" Visible="false" />
         </div>
         <div class="col-md-12">
-            
+
             <div class="card container mb-2">
-            <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 my-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />    
+                <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 my-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
 
                 <%----------------------------------------------------------------------%>
                 <%--------------------  Active Units ListView --------------------------%>
@@ -60,7 +60,10 @@
                     <EditItemTemplate>
                         <tr class="fsoss-header">
                             <td>
-                                <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" CssClass="px-3" ID="unitNumberTextBox" /></td>
+                                <asp:Panel runat="server" DefaultButton="UpdateButton">
+                                    <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" CssClass="px-3" ID="unitNumberTextBox" />
+                                </asp:Panel>
+                            </td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Bind("unitID") %>' runat="server" ID="unitIDTextBox" Visible="false" /></td>
                             <td></td>
@@ -74,14 +77,9 @@
                         </tr>
                     </EditItemTemplate>
                     <EmptyDataTemplate>
-                        <%--<table runat="server">
-                            <tr style="text-align:center">
-                                <td>The selected sites currently has no active Units.</td>
-                            </tr>
-                        </table>--%>
                         <p class="text-center text-bold">The selected sites currently has no active Units.</p>
                     </EmptyDataTemplate>
-                    
+
                     <ItemTemplate>
                         <tr style="background-color: #E0FFFF; color: #333333;">
                             <td>
@@ -118,29 +116,29 @@
                             </td>
                         </tr>
                         <tr runat="server" class="mx-2 my-2">
-                                <td runat="server" class="listview-pager">
-                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
-                                        <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                            <td runat="server" class="listview-pager">
+                                <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                    <Fields>
+                                        <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
 
-                                            <asp:TemplatePagerField>
-                                                <PagerTemplate>
-                                                    <div class="my-2 text-white">
-                                                        <b>Page
+                                        <asp:TemplatePagerField>
+                                            <PagerTemplate>
+                                                <div class="my-2 text-white">
+                                                    <b>Page
                 <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
-                                                            of
+                                                        of
                 <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
-                                                            (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
-                                                            records)
-                                                        </b>
-                                                    </div>
-                                                </PagerTemplate>
-                                            </asp:TemplatePagerField>
+                                                        (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                        records)
+                                                    </b>
+                                                </div>
+                                            </PagerTemplate>
+                                        </asp:TemplatePagerField>
 
-                                        </Fields>
-                                    </asp:DataPager>
-                                </td>
-                            </tr>
+                                    </Fields>
+                                </asp:DataPager>
+                            </td>
+                        </tr>
                     </table>
                     </LayoutTemplate>
                     <SelectedItemTemplate>
@@ -187,11 +185,7 @@
                     </AlternatingItemTemplate>
 
                     <EmptyDataTemplate>
-                        <table runat="server">
-                            <tr  style="text-align:center">
-                                <td>The selected sites currently has no archived Units.</td>
-                            </tr>
-                        </table>
+                        <p class="text-center text-bold">The selected sites currently has no archived Units.</p>
                     </EmptyDataTemplate>
 
                     <ItemTemplate>
@@ -221,7 +215,7 @@
                                             <th runat="server" class="w-25 p-3">Last Modified On</th>
                                             <th runat="server" class="w-20 p-3">Last Modified By</th>
                                             <th runat="server" class="w-15 p-3">Change Availability</th>
-                                           
+
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -283,12 +277,12 @@
         <%-- -----------------Active Units List ODS------------------%>
         <asp:ObjectDataSource ID="UnitsODS" runat="server" DeleteMethod="SwitchUnitSatus" OldValuesParameterFormatString="{0}"
             SelectMethod="GetActiveUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit"
-            OnDeleted="CheckForException" OnUpdated="CheckForException" >
+            OnDeleted="CheckForException" OnUpdated="CheckForException">
             <DeleteParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
                 <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
             </DeleteParameters>
-            
+
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
