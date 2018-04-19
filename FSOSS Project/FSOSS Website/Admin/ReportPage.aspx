@@ -9,8 +9,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
-
     <div class="row">
         <div class="col-sm-12">
             <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
@@ -48,9 +46,27 @@
                 <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                     <canvas id="Question1"></canvas>         
                 </div>
-            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px">
-                <table id="Question1Table">
-                    <thead>
+            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question1Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>          
+        </div>
+        <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2Tab">              
+                <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
+                     <canvas id="Question2"></canvas>
+                 </div>
+                <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question2Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
                        <tr>
                             <th scope="col">Answer</th>
                             <th scope="col">Response Count</th>
@@ -61,47 +77,120 @@
                     </tbody>
                 </table>               
             </div>
-            <div class="row" style="padding-top:25px">
-                 <asp:Label ID="SurveyLabel" CssClass="mx-auto h5" class="label label-primary" runat="server"></asp:Label>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2Tab">              
-                <div style="width:auto; height:auto; margin:auto; display:block">
-                     <canvas id="Question2"></canvas>
-                 </div>
         </div>
         <div class="tab-pane fade" id="question3" role="tabpanel" aria-labelledby="question3Tab">              
-                <div style="width:auto; height:auto; margin:auto; display:block">
+                <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                     <canvas id="Question3"></canvas>
                 </div>
+            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question3Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
         </div>
         <div class="tab-pane fade" id="question4" role="tabpanel" aria-labelledby="question4Tab">              
-                <div style="width:auto; height:auto; margin:auto; display:block">
+                <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                     <canvas id="Question4"></canvas>
                 </div>
+            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question4Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
         </div>
         <div class="tab-pane fade" id="question5" role="tabpanel" aria-labelledby="question5Tab">              
-                <div style="width:auto; height:auto; margin:auto; display:block">
+                <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                     <canvas id="Question5"></canvas>
                 </div>
+            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question5Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
         </div>
         <div class="tab-pane fade" id="question6" role="tabpanel" aria-labelledby="question6Tab">              
-                  <div style="width:auto; height:auto; margin:auto; display:block">
+                  <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                      <canvas id="Question6"></canvas>
                    </div>
+            <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question6Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
         </div>
          <div class="tab-pane fade" id="question7" role="tabpanel" aria-labelledby="question7Tab">             
-                  <div style="width:auto; height:auto; margin:auto; display:block">
+                  <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                      <canvas id="Question7"></canvas>
                    </div>
+             <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question7Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
         </div>
          <div class="tab-pane fade" id="question8" role="tabpanel" aria-labelledby="question7Tab">             
-                   <div style="width:auto; height:auto; margin:auto; display:block">
+                   <div style="width:auto; height:auto; margin:auto; display:block; padding-top:10px">
                      <canvas id="Question8"></canvas>
                    </div>
+             <div class="row" style="padding-top:25px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin:auto; width:auto;" >
+                <table id="Question8Table" class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                       <tr>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Response Count</th>
+                            <th scope="col">Percentage</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>               
+            </div>
         </div>
     </div>
     </div>
+     <div class="row" style="padding-top:25px">
+                 <asp:Label ID="SurveyLabel" CssClass="mx-auto h5" class="label label-primary" runat="server"></asp:Label>
+            </div>
     <div class="row" style="padding-top:25px">
          <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
     </div>
@@ -131,21 +220,21 @@
                 var aData = $.parseJSON(response.d);
                 var labelArray = [];
                 var title;
-                var totalSurveys = 0;
                 var colorArray = [];
                 var valueArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);  
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
-                    borderArray.push(val.BorderColor);
+                    borderArray.push(val.BorderColor);                                     
                     title = val.Title;
-                    var markup = "<tr><td>" + val.Value + "</td><td>" + val.Text + "</td></tr>";
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) +"%" + "</td></tr>";
                     $("#Question1Table").append(markup);
-                });
-                $.each(valueArray, function (inx, val) {
-                    totalSurveys = totalSurveys + val;
                 });
                 $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");
                 if (valueArray.length > 0) {
@@ -266,13 +355,20 @@
                 var colorArray = [];
                 var valueArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
                     borderArray.push(val.BorderColor);
                     title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question2Table").append(markup);
                 });
+                $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart2, {
                         type: 'pie',
@@ -381,13 +477,20 @@
                 var colorArray = [];
                 var valueArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
-                    title =  val.Title;
                     borderArray.push(val.BorderColor);
+                    title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question3Table").append(markup);
                 });
+                $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart3, {
                         type: 'pie',
@@ -493,12 +596,18 @@
                 var colorArray = [];
                 var valueArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
-                    title = val.Title;
                     colorArray.push(val.Color);
                     borderArray.push(val.BorderColor);
+                    title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question4Table").append(markup);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart4, {
@@ -606,12 +715,18 @@
                 var valueArray = [];
                 var colorArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
-                    title = val.Title;
                     colorArray.push(val.Color);
                     borderArray.push(val.BorderColor);
+                    title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question5Table").append(markup);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart5, {
@@ -720,12 +835,18 @@
                 var colorArray = [];
                 var valueArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
                     colorArray.push(val.Color);
                     borderArray.push(val.BorderColor);
                     title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question6Table").append(markup);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart6, {
@@ -836,12 +957,18 @@
                 var valueArray = [];
                 var colorArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
-                    title = val.Title;
                     colorArray.push(val.Color);
                     borderArray.push(val.BorderColor);
+                    title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question7Table").append(markup);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart7, {
@@ -950,12 +1077,18 @@
                 var valueArray = [];
                 var colorArray = [];
                 var borderArray = [];
+                var totalSurveys = 0;
+                $.each(aData, function (inx, val) {
+                    totalSurveys = totalSurveys + Number(val.Value);
+                });
                 $.each(aData, function (inx, val) {
                     labelArray.push(val.Text);
                     valueArray.push(val.Value);
-                    title = val.Title;
-                    borderArray.push(val.BorderColor);
                     colorArray.push(val.Color);
+                    borderArray.push(val.BorderColor);
+                    title = val.Title;
+                    var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                    $("#Question8Table").append(markup);
                 });
                 if (valueArray.length > 0) {
                     var pieChart = new Chart(chart8, {
