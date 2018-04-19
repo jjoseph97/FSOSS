@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="httpValidationException.aspx.cs" Inherits="httpValidationException" %>
+﻿<%@ Page Title="HTML Input Error" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="httpValidationException.aspx.cs" Inherits="httpValidationException" %>
 
 <asp:Content ID="httpValidationException" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="justify-content-center text-center">

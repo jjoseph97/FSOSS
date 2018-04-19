@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="DemographicsPage.aspx.cs" Inherits="Pages_Survey_DemographicsPage" %>
+﻿<%@ Page Title="Demographics" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="DemographicsPage.aspx.cs" Inherits="Pages_Survey_DemographicsPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <%--Customer Profile--%>
