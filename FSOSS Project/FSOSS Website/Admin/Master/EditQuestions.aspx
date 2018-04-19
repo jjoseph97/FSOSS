@@ -8,7 +8,7 @@
              <h1 class="card container py-2 h4" style="font-weight:bold;">Edit Survey Questions & Responses</h1>
         </div>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12 px-0">
             <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
     </div>
     <div class="row">

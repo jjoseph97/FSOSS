@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FSOSS.System.BLL
@@ -214,6 +215,20 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
+                Regex validResponse = new Regex("^[a-zA-Z ?.'/]+$");
+
+                if (text.Length.Equals(0))
+                {
+                    throw new Exception("Question text field can't be empty");
+                }
+                else if (text.Length > 100)
+                {
+                    throw new Exception("Question must be 100 characters or less");
+                }
+                else if (!validResponse.IsMatch(text))
+                {
+                    throw new Exception("Please enter words with no numbers or special characters.");
+                }
                 var result = (from x in context.Questions
                               where x.question_id == questionid
                               select x).FirstOrDefault();

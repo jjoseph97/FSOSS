@@ -14,6 +14,8 @@ using FSOSS.System.Data.Entity;
 
 public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud : System.Web.UI.Page
 {
+    static private bool seeArchive = false;
+
     protected void Page_Load(object sender, EventArgs e)
     {
        
@@ -28,18 +30,21 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
 
         // Catches the initial site ID when the page loads from the SideDropDownList and displays Active units Listview for that site.
-        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
-        if (SelectedSiteID == null)
+        if (!IsPostBack)
         {
-            throw new Exception("Select an existsing Site");
-        }
-        else
-        {
-            UnitsListView.Visible = true;
-            UnitsListView.DataBind();
+            seeArchive = false;
+            SiteDropDownList.DataBind();
+            SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
-            ArchivedButton.Visible = true;
-            ActiveButton.Visible = false;
+            if (SelectedSiteID == null)
+            {
+                throw new Exception("Select an existsing Site");
+            }
+            else
+            {
+                UnitsListView.Visible = true;
+                UnitsListView.DataBind();
+            }
         }
      }
 
@@ -67,42 +72,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
             }, "Success", successMessage);
         }
     }
-
-
-    /// <summary>
-    /// This Method is triggered when the Active Button is clicked.
-    /// Active units of the selected sites will be displayed 
-    /// <summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void ActiveButton_Click(object sender, EventArgs e)
-    {
-        UnitsListView.Visible = true;
-        ArchivedUnitsListView.Visible = false;
-        UnitsListView.DataBind();
-
-        ArchivedButton.Visible = true;
-        ActiveButton.Visible = false;
-
-
-    }
-
-    /// <summary>
-    /// This Method is triggered when the Archived Button is clicked. 
-    /// Archived units list of the selected site will be displayed  
-    /// <summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void ArchivedButton_Click(object sender, EventArgs e)
-    {
-        UnitsListView.Visible = false;
-        ArchivedUnitsListView.Visible = true;
-        ArchivedUnitsListView.DataBind();
-
-        ActiveButton.Visible = true;
-        ArchivedButton.Visible = false;
-
-    }
     /// <summary>
     /// This method catches the the value of the site dropdownlist when changed 
     /// and displays the active units for that site. 
@@ -112,12 +81,47 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     protected void SiteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
 
-        string value = SiteDropDownList.SelectedValue;
-        int site_id = Convert.ToInt32(value);
+        SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
         UnitsListView.Visible = true;
-        ArchivedButton.Visible = true;
         ArchivedUnitsListView.DataBind();
         UnitsListView.DataBind();
+    }
+
+    protected void AddUnitButton_Click(object sender, EventArgs e)
+    {
+        int siteId = int.Parse(SelectedSiteID.Text);
+        int userId = (int)Session["userID"];
+        string unitNumber = AddUnitTextBox.Text.Trim();
+        UnitController sysmgr = new UnitController();
+        MessageUserControl.TryRun(() =>
+        {
+            sysmgr.AddUnit(unitNumber, userId, siteId);
+            UnitsListView.DataBind();
+        }, "Success", "Unit @" + " has been added");
+    }
+
+    protected void ToggleView(object sender, EventArgs e)
+    {
+        if (seeArchive)
+        {
+            seeArchive = false;
+            UnitsListView.Visible = true;
+            UnitsListView.DataBind();
+            ArchivedUnitsListView.Visible = false;
+
+            RevealButton.Text = "Show Archived";
+
+        }
+        else
+        {
+            seeArchive = true;
+            ArchivedUnitsListView.Visible = true;
+            ArchivedUnitsListView.DataBind();
+            UnitsListView.Visible = false;
+
+            RevealButton.Text = "Show Active";
+
+        }
     }
 }

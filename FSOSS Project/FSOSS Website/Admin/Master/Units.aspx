@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Units.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud" %>
+﻿<%@ Page Title="Units Manager" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Units.aspx.cs" Inherits="Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud" %>
 
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
@@ -15,22 +15,30 @@
         </div>
         <div class="col-md-12">
             <div class="card container mb-2">
-                <div class="row">
+                <asp:Panel runat="server" class="row container mx-auto px-0">
                     <asp:Label ID="SearchUnitLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search units: " />
                     <asp:DropDownList ID="SiteDropDownList" class="col-md-4 my-2 form-control" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" AutoPostBack="true" DataValueField="siteID"></asp:DropDownList>
-                </div>
+                </asp:Panel>
+                <asp:Panel runat="server" CssClass="row container mx-auto my-2 px-0" DefaultButton="AddUnitButton">
+                    <asp:Label ID="AddUnitLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Unit: " />
+                    <asp:TextBox ID="AddUnitTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type Unit to add..." />
+                    <asp:Button ID="AddUnitButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Unit" OnClick="AddUnitButton_Click" />
+                </asp:Panel>
             </div>
             <asp:Label ID="SelectedSiteID" runat="server" Visible="false" />
         </div>
         <div class="col-md-12">
+            
             <div class="card container mb-2">
-                <asp:Button ID="ArchivedButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ArchivedButton_Click" Visible="false"></asp:Button>
-                <asp:Button ID="ActiveButton" class="col-md-3 col-lg-2 mt-2 btn btn-info border border-dark" runat="server" Text="Show Active" OnClick="ActiveButton_Click" Visible="false"></asp:Button>
+            <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 my-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />    
 
                 <%----------------------------------------------------------------------%>
                 <%--------------------  Active Units ListView --------------------------%>
                 <%----------------------------------------------------------------------%>
-                <asp:ListView ID="UnitsListView" runat="server" DataSourceID="UnitsODS" DataKeyNames="unitID" InsertItemPosition="FirstItem">
+
+
+
+                <asp:ListView ID="UnitsListView" runat="server" DataSourceID="UnitsODS" DataKeyNames="unitID">
                     <AlternatingItemTemplate>
                         <tr style="background-color: #bbf2ff; color: #284775;">
                             <td>
@@ -66,26 +74,14 @@
                         </tr>
                     </EditItemTemplate>
                     <EmptyDataTemplate>
-                        <table runat="server" style="">
-                            <tr>
-                                <td>No data was returned.</td>
+                        <%--<table runat="server">
+                            <tr style="text-align:center">
+                                <td>The selected sites currently has no active Units.</td>
                             </tr>
-                        </table>
+                        </table>--%>
+                        <p class="text-center text-bold">The selected sites currently has no active Units.</p>
                     </EmptyDataTemplate>
-                    <InsertItemTemplate>
-                        <tr>
-                            <td>
-                                <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" placeholder="Add a New Unit Number.." CssClass="px-3 col-md-12" ID="unitNumberTextBox" /></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" class="btn btn-primary mx-3 my-1" />
-                            </td>
-                            <td>
-                                <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" class="btn fsoss-grey mx-3 my-1" />
-                            </td>
-                        </tr>
-                    </InsertItemTemplate>
+                    
                     <ItemTemplate>
                         <tr style="background-color: #E0FFFF; color: #333333;">
                             <td>
@@ -114,8 +110,8 @@
                                         <th runat="server" class="w-25 p-3">Unit Number</th>
                                         <th runat="server" class="w-25 p-3">Last Modified On</th>
                                         <th runat="server" class="w-20 p-3">Last Modified By</th>
-                                        <th runat="server" class="w-15 p-3">Insert Unit</th>
-                                        <th runat="server" class="w-15 p-3">Clear</th>
+                                        <th runat="server" class="w-15 p-3">Edit</th>
+                                        <th runat="server" class="w-15 p-3">Change Availability</th>
                                     </tr>
                                     <tr runat="server" id="itemPlaceholder"></tr>
                                 </table>
@@ -191,9 +187,9 @@
                     </AlternatingItemTemplate>
 
                     <EmptyDataTemplate>
-                        <table runat="server" style="">
-                            <tr>
-                                <td>No data was returned.</td>
+                        <table runat="server">
+                            <tr  style="text-align:center">
+                                <td>The selected sites currently has no archived Units.</td>
                             </tr>
                         </table>
                     </EmptyDataTemplate>
@@ -224,8 +220,8 @@
                                             <th runat="server" class="w-25 p-3">Unit Number</th>
                                             <th runat="server" class="w-25 p-3">Last Modified On</th>
                                             <th runat="server" class="w-20 p-3">Last Modified By</th>
-                                            <th runat="server" class="w-15 p-3">Insert Unit</th>
-                                            <th runat="server" class="w-15 p-3">Clear</th>
+                                            <th runat="server" class="w-15 p-3">Change Availability</th>
+                                           
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
                                     </table>
@@ -285,18 +281,14 @@
             SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController"></asp:ObjectDataSource>
 
         <%-- -----------------Active Units List ODS------------------%>
-        <asp:ObjectDataSource ID="UnitsODS" runat="server" DeleteMethod="SwitchUnitSatus" InsertMethod="AddUnit" OldValuesParameterFormatString="{0}"
+        <asp:ObjectDataSource ID="UnitsODS" runat="server" DeleteMethod="SwitchUnitSatus" OldValuesParameterFormatString="{0}"
             SelectMethod="GetActiveUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit"
-            OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
+            OnDeleted="CheckForException" OnUpdated="CheckForException">
             <DeleteParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
                 <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
             </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="unitNumber" Type="String"></asp:Parameter>
-                <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
-                <asp:ControlParameter ControlID="SelectedSiteID" PropertyName="Text" Name="siteID" Type="Int32"></asp:ControlParameter>
-            </InsertParameters>
+            
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="site_id" Type="Int32"></asp:ControlParameter>
             </SelectParameters>
