@@ -70,10 +70,16 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     }
     public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.3)", "rgba(255, 255, 0, 0.3)", "rgba(0, 153, 0, 0.3)", "rgba(0, 0, 255, 0.3)", "rgba(255, 0, 255, 0.3)", "rgba(102, 255, 255, 0.3)", "rgba(255, 153, 102, 0.3)" };
     public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)", "rgba(102, 255, 255, 1)", "rgba(255, 153, 102, 1)" };
+
     [WebMethod]
     public static string GetChartData(int chartId)
     {
         List<ChartPOCO> responses = new List<ChartPOCO>();
+        List<String> preferencesForOrderByFirstOption = new List<String> { "Very Good", "Good", "Fair", "Poor", "Don't Know/No Opinion", "No Response" };
+        List<String> preferencesForOrderBySecondOption = new List<String> { "Portion sizes are too small", "Portion sizes are just right", "Portion sizes are too large", "No Response" };
+        List<String> preferencesForOrderByThirdOption = new List<String> { "Always", "Usually", "Occasionally", "Never", "I do not have any specific dietary requirements", "No Response" };
+        List<String> preferencesForOrderByFourthOption = new List<String> { "Very Good", "Good", "Fair", "Never", "Poor", "Very Poor" };
+        IEnumerable<ChartPOCO> sortedResponses = null;
         if (chartId == 1)
         {
             for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
@@ -93,6 +99,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                   item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 2)
@@ -114,6 +122,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                 sortedResponses = responses.OrderBy(
+                  item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 3)
@@ -136,6 +146,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                  item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 4)
@@ -157,6 +169,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                  item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 5)
@@ -178,6 +192,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                  item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 6)
@@ -199,6 +215,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                  item => preferencesForOrderBySecondOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 7)
@@ -220,6 +238,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                  item => preferencesForOrderByThirdOption.IndexOf(item.Text));
             }
         }
         else if (chartId == 8)
@@ -241,8 +261,10 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 response.BorderColor = BORDER_COLOR_VALUE[counter];
                 responses.Add(response);
                 response = null;
+                sortedResponses = responses.OrderBy(
+                 item => preferencesForOrderByFourthOption.IndexOf(item.Text));
             }
-        }           
-        return JsonConvert.SerializeObject(responses);
+        }
+        return JsonConvert.SerializeObject(sortedResponses);
     }   
 }
