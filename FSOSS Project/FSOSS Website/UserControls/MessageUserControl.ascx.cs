@@ -21,6 +21,11 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
     private const string STR_PANEL_success = "alert alert-success";
     #endregion
     #region Event Handlers
+    /// <summary>
+    /// When the page loads, the message panel visibility is turned off
+    /// </summary>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         MessagePanel.Visible = false;
@@ -52,7 +57,11 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
     {
         TryCatch(callback);
     }
-
+    /// <summary>
+    /// Processes a request through a callback delegate within a try/catch block. Distinguished Entity Framework exceptions from general exceptions.
+    /// </summary>
+    /// <param name="callback">A delegate method to call within the try block</param>
+    /// <param name="suppressFeedback">MessagePanel visibility is true if the suppressFeedback parameter that was passed is false; visibilty is false otherwise</param>
     public void TryRun(ProcessRequest callback, bool suppressFeedback)
     {
         TryCatch(callback);

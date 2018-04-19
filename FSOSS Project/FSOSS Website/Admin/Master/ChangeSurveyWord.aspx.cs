@@ -35,8 +35,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This method is required to use the MessageUserControl on the page in order to handle success messages and thrown exception messages for errors from the controller.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
     {
         // if an exception was thrown, handle with messageusercontrol to display the exception for error
@@ -56,8 +56,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This method is for when the user clicks the "Search" button. Survey words in the ListView are returned and now showing matching the search string that was entered.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void SearchWordButton_Click(object sender, EventArgs e)
     {
         string searchWord = SearchWordTextBox.Text.Trim();
@@ -100,8 +100,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This button on click method is to clear the search field and return to a ListView with full results for the user.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ClearSearchButton_Click(object sender, EventArgs e)
     {
         // this check is to determine whether to clear the search for active or archived words depending on the current ODS
@@ -121,8 +121,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This method is for adding a new survey word to the database when the user clicks on the "Add Word" button.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         string newWord = AddWordTextBox.Text.Trim().ToLower();
@@ -142,8 +142,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This button on click method is for showing the current archived survey words that are in the database.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ShowArchivedButton_Click(object sender, EventArgs e)
     {
         SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS"; // show the current archived survey words on the ListView
@@ -157,8 +157,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This button on click method is for showing the current active survey words that are in the database.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ShowActiveButton_Click(object sender, EventArgs e)
     {
         SurveyWordListView.DataSourceID = "ActiveSurveyWordODS"; // show the current active survey words on the ListView
@@ -172,8 +172,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <summary>
     /// This method is in order to change the "Disabled" button to "Enabled", and vice versa depending on the current ODS
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void SurveyWordListView_ItemDataBound(object sender, ListViewItemEventArgs e)
     {
         if (e.Item.ItemType == ListViewItemType.DataItem)
