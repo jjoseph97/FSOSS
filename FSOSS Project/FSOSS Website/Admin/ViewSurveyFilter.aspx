@@ -1,4 +1,4 @@
-﻿<%@ Page Title="View Submitted Surveys" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewSurveyFilter.aspx.cs" Inherits="Admin_Master_ViewSurveyFilter" %>
+﻿<%@ Page Title="Submitted Surveys Filter" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ViewSurveyFilter.aspx.cs" Inherits="Admin_Master_ViewSurveyFilter" %>
 
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 
