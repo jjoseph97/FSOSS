@@ -87,4 +87,24 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
             AddSiteTextBox.Text = "";
         }, "Success", "Successfully added the new site: \"" + siteName + "\"");
     }
+
+    protected void ListView1_ItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListViewItemType.DataItem)
+        {
+            Button disableBtn = (Button)e.Item.FindControl("DeleteButton");
+
+            if (seeArchive)
+            {
+                disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");
+                disableBtn.CssClass = "btn btn btn-success mx-3 my-1";
+            }
+            else
+            {
+                disableBtn.Attributes.Remove("btn btn btn-success mx-3 my-1");
+                disableBtn.CssClass = "btn btn btn-danger mx-3 my-1";
+            }
+
+        }
+    }
 }

@@ -136,7 +136,7 @@ namespace FSOSS.System.BLL
             using (var context = new FSOSSContext())
             {
                 string message = "";
-                Regex validWord = new Regex("^[a-zA-Z ]+$");
+                Regex validWord = new Regex("^[a-zA-Z '.]+$");
 
                 try
                 {
@@ -199,7 +199,7 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                Regex valid = new Regex("^[a-zA-Z ]+$");
+                Regex valid = new Regex("^[a-zA-Z '.]+$");
                 string message = ""; 
                 try
                 {

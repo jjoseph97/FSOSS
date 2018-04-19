@@ -249,4 +249,25 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     }
 
 
-   }
+
+    protected void ListView_ItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListViewItemType.DataItem)
+        {
+            Button disableBtn = (Button)e.Item.FindControl("DeleteButton");
+
+            if (seeArchive)
+            {
+                disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");
+                disableBtn.CssClass = "btn btn btn-success mx-3 my-1";
+            }
+            else
+            {
+                disableBtn.Attributes.Remove("btn btn btn-success mx-3 my-1");
+                disableBtn.CssClass = "btn btn btn-danger mx-3 my-1";
+            }
+
+        }
+    }
+}
+

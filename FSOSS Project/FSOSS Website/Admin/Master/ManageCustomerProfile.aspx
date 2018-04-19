@@ -75,7 +75,7 @@
                     </asp:ObjectDataSource>
 
                     <%-- The Gender ListView --%>
-                    <asp:ListView ID="GenderListView" runat="server" DataSourceID="GenderODS" DataKeyNames="genderID">
+                    <asp:ListView ID="GenderListView" runat="server" DataSourceID="GenderODS" DataKeyNames="genderID" OnItemDataBound="ListView_ItemDataBound">
                         <AlternatingItemTemplate>
                             <tr class="fsoss-listview-alternate">
                                 <td style="display: none">
@@ -231,7 +231,7 @@
                 </asp:ObjectDataSource>
 
                     <%-- pt listview --%>
-                    <asp:ListView ID="PTListview" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID">
+                    <asp:ListView ID="PTListview" runat="server" DataSourceID="PTODS" DataKeyNames="participantTypeID" OnItemDataBound="ListView_ItemDataBound">
                         <AlternatingItemTemplate>
                             <tr class="fsoss-listview-alternate">
 
@@ -417,7 +417,7 @@
                     </asp:ObjectDataSource>
 
                     <%-- The Meals Listview --%>
-                    <asp:ListView ID="MealsListView" runat="server" DataSourceID="MealsODS" DataKeyNames="mealID">
+                    <asp:ListView ID="MealsListView" runat="server" DataSourceID="MealsODS" DataKeyNames="mealID" OnItemDataBound="ListView_ItemDataBound">
                         <AlternatingItemTemplate>
                             <tr class="fsoss-listview-alternate">
                                 <td style="display: none">
@@ -595,7 +595,7 @@
                     </asp:ObjectDataSource>
 
                     <%-- The Age Range ListView --%>
-                    <asp:ListView ID="AgeRangeListView" runat="server" DataSourceID="AgeRangeODS" DataKeyNames="ageRangeID">
+                    <asp:ListView ID="AgeRangeListView" runat="server" DataSourceID="AgeRangeODS" DataKeyNames="ageRangeID" OnItemDataBound="ListView_ItemDataBound">
                         <AlternatingItemTemplate>
                             <tr class="fsoss-listview-alternate">
                                 <td style="display: none">

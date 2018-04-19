@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="card container py-2 h4" style="font-weight: bold;">Manage Site</h1>
+            <h1 class="card container py-2 h4" style="font-weight: bold;">Manage Sites</h1>
         </div>
     </div>
     <div class="row">
@@ -23,7 +23,7 @@
         <div class="card container">
             <%--site show section--%>
             <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" />
-            <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID">
+            <asp:ListView ID="ListView1" runat="server" DataSourceID="SiteODS" DataKeyNames="siteID" OnItemDataBound="ListView1_ItemDataBound">
                 <AlternatingItemTemplate>
                     <tr class="fsoss-listview-alternate">
                         <td>
@@ -39,7 +39,7 @@
                         <td>
                             <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Edit" Text="Edit" ID="EditButton" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton" /></td>
+                            <asp:Button runat="server" CommandName="Delete" CssClass="btn btn btn-danger mx-3 my-1" Text='<%# seeArchive==false?"Disable":"Enable" %>' ID="DeleteButton"/></td>
                     </tr>
                 </AlternatingItemTemplate>
                 <EditItemTemplate>
