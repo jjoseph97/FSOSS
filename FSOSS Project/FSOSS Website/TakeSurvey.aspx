@@ -3,26 +3,23 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="card container py-2 page-header">Food Satisfaction Online Survey</h1><br />
+            <h1 class="card container py-2 page-header mb-0">Food Satisfaction Online Survey</h1><br />
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <asp:Label ID="SiteName" runat="server"></asp:Label>
+    <div class="row mb-4">
+        <div class="col-sm-6 text-left">
+            <asp:Label class="col-md-3 my-2 pl-4 text-danger h5" runat="server">All fields with * are required.</asp:Label>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <asp:Label class="col-md-3 my-2" runat="server"><span class="card container h5 alert alert-danger">All fields with * are required.</span></asp:Label>
+        <div class="col-md-6 text-right">
+            <asp:Label ID="SiteName" CssClass="h5" runat="server"></asp:Label>
         </div>
     </div>
 
     <div class="col-md-12">
 
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">*</span>Unit Number:</asp:Label>
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">* </span>Unit Number:</asp:Label>
             <asp:DropDownList ID="UnitDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="UnitsObjectDataSource" DataTextField="unitNumber" 
                 DataValueField="unitID" AppendDataBoundItems="true">
                 <asp:ListItem Value="" Text="Select a Unit"/>
@@ -38,7 +35,7 @@
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">*</span>Participant Type:</asp:Label> 
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">* </span>Participant Type:</asp:Label> 
             <asp:DropDownList ID="ParticipantTypeDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="ParticipantTypeObjectDataSource" 
                 DataTextField="participantTypeDescription" DataValueField="participantTypeID"  AppendDataBoundItems="true">
                 <asp:ListItem Value="" Text="Select a Participant Type"/>
@@ -50,7 +47,7 @@
         </div>
         <br />
         <div class="row">
-            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">*</span>Meal Type:</asp:Label> 
+            <asp:Label class="col-md-3 my-2" runat="server"><span class="text-danger pl-2">* </span>Meal Type:</asp:Label> 
             <asp:DropDownList ID="MealTypeDropDownList" CssClass="col-md-3 form-control" runat="server" DataSourceID="MealTypeObjectDataSource" DataTextField="mealName" 
                 DataValueField="mealID" AppendDataBoundItems="true">
                 <asp:ListItem Value="" Text="Select a Meal Type"/>
@@ -170,7 +167,7 @@
         <%-- Question #4--%>
         <div class="row">
             <div class="col-md-12">
-                <span class="text-danger pl-2">*</span><asp:Label ID="Q4" runat="server" Font-Bold="true" />
+                <span class="text-danger">* </span><asp:Label ID="Q4" runat="server" Font-Bold="true" />
             </div>
             <br />
             <div class="col-md-12 form-inline">
