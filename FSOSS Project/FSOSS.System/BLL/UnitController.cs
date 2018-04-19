@@ -127,12 +127,12 @@ namespace FSOSS.System.BLL
         /// <param String="unitNumber" , int= admin , int= siteID ></param>
         /// <returns>returns confirmation from the Site</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string AddUnit(string unitNumber, int admin , int siteID)
+        public string AddUnit(string unitNumber, int admin, int siteID)
         {
             using (var context = new FSOSSContext())
             {
-                Regex validUnit = new Regex("^[0-9]*[a-zA-Z]*|[a-zA-Z]{1,10}$");
-               
+                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z/s]{1,47}|[a-zA-Z/s]{1,50}$");
+
                 try
                 {
                     if (admin == 0)
@@ -145,29 +145,47 @@ namespace FSOSS.System.BLL
                         throw new Exception("Please enter a Unit Number");
                     }
 
-                    if (unitNumber.Length < 2 || unitNumber.Length > 8)
+                    if (unitNumber.Length < 2 || unitNumber.Length > 50)
                     {
-                        throw new Exception("Input must be atleast 2 charaters to 8 chatecters long.");
+                        throw new Exception("Input must be between 2 charaters to 50 chatecters long.");
                     }
 
                     if (!validUnit.IsMatch(unitNumber))
                     {
-                        throw new Exception(" Insert a Valid Input pattern. Correct pattern.(1-3)Digits(Unit Aphabets))");
+                        throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)");
                     }
-                   
-               
 
+
+                    //check active units
                     var unitExist = from x in context.Units
                                     where x.unit_number.ToUpper() == unitNumber.ToUpper()
+                                    && x.site_id == siteID
+                                    && x.archived_yn == false
                                     select new UnitsPOCO()
                                     {
                                         unitNumber = x.unit_number,
-                                     
-                                    };
 
-                    if (unitExist.Count() > 0) //if so, return an error message
+                                    };
+                    //check Archived units
+                    var unitExistsInArchived = from x in context.Units
+                                               where x.unit_number.ToUpper() == unitNumber.ToUpper()
+                                               && x.site_id == siteID
+                                               && x.archived_yn == true
+                                               select new UnitsPOCO()
+                                               {
+                                                   unitNumber = x.unit_number,
+
+                                               };
+
+                    if (unitExist.Count() > 0) //if new unit exists in active so, return an error message
                     {
                         throw new Exception("The unit \"" + unitNumber.ToUpper() + "\" already exists. Please enter a new Unit.");
+                    }
+
+                    if (unitExistsInArchived.Count() > 0)//if new unit exists in archived so, return an error message
+
+                    {
+                        throw new Exception("The unit \"" + unitNumber.ToUpper() + "\" exists in archived. Check in archived in order to activate unit. ");
                     }
 
                     else
@@ -176,7 +194,7 @@ namespace FSOSS.System.BLL
                         {
                             unit_number = unitNumber.Trim(),
                             administrator_account_id = admin,
-                            site_id=siteID,
+                            site_id = siteID,
                             date_modified = DateTime.Now,
                             archived_yn = false
                         };
@@ -201,7 +219,7 @@ namespace FSOSS.System.BLL
         /// <returns>return confirmation message</returns>
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-      
+
 
         public string SwitchUnitSatus(int unitID, int admin)
         {
@@ -217,22 +235,22 @@ namespace FSOSS.System.BLL
                     // Check if the unit exists
 
                     Unit unit = context.Units.Find(unitID);
- 
-                        if (unit.archived_yn == false)
-                        {
-                            unit.archived_yn = true;
-                            message = "disabled.";
 
-                        }
-                        else 
-                        {
-                            unit.archived_yn = false;
-                            message = "enabled";
+                    if (unit.archived_yn == false)
+                    {
+                        unit.archived_yn = true;
+                        message = "disabled.";
+
+                    }
+                    else
+                    {
+                        unit.archived_yn = false;
+                        message = "enabled";
                     }
                     unit.administrator_account_id = admin;
                     unit.date_modified = DateTime.Now;
                     context.Entry(unit).Property(y => y.archived_yn).IsModified = true;
-                    //context.Entry(unit).Property(y => y.administrator_account_id).IsModified = true;
+                    context.Entry(unit).Property(y => y.administrator_account_id).IsModified = true;
                     context.Entry(unit).Property(y => y.date_modified).IsModified = true;
                     context.SaveChanges();
 
@@ -244,9 +262,9 @@ namespace FSOSS.System.BLL
                 {
                     throw new Exception("Something went wrong. See " + e.Message);
                 }
-                
+
             }
-        }
+        } //end of SwitchUnitSatus(disbaling/enabling) unit
 
         /// <summary>
         /// Method use to Update unit from the list that is use in the Site
@@ -259,59 +277,88 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-               
-                Regex validUnit = new Regex("^[0-9]*[a-zA-Z]*|[a-zA-Z]{1,10}$");
+
+                Regex validUnit = new Regex("^[0-9]{1,3}[a-zA-Z/s]{1,47}|[a-zA-Z/s]{1,50}$");
                 string message = "";
-                
+
                 try
                 {
                     if (admin == 0)
                     {
                         throw new Exception("Can't let you do that. You're not logged in.");
                     }
-
-                    if (validUnit.IsMatch(unitNumber))
+                    if (unitNumber == "" || unitNumber == null)
                     {
-
-                        var unitExists = (from x in context.Units
-                                          where x.unit_id == unitID
-                                          select x);
-
-
-                        if (unitExists==null)
-                        {
-                            throw new Exception("This unit is not open.");
-                        }
-
-
-                        else
-                        {
-                            
-                            Unit unitToUpdate = context.Units.Find(unitID);
-                            unitToUpdate.administrator_account_id = admin;
-                            unitToUpdate.unit_number = unitNumber;
-                            unitToUpdate.date_modified = DateTime.Now;
-                            context.Entry(unitToUpdate).State = EntityState.Modified;
-                            
-                            context.SaveChanges();
-                        }
+                        throw new Exception("Please enter a Unit Number");
                     }
+
+                    if (unitNumber.Length < 2 || unitNumber.Length > 50)
+                    {
+                        throw new Exception("Input must be between 2 charaters to 50 chatecters long.");
+                    }
+
+                    if (!validUnit.IsMatch(unitNumber))
+                    {
+                        throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)");
+                    }
+
+
+
+                    //check active units
+                    var unitExist = from x in context.Units
+                                    where x.unit_number.ToUpper() == unitNumber.ToUpper()
+                                    && x.archived_yn == false
+                                    select new UnitsPOCO()
+                                    {
+                                        unitNumber = x.unit_number,
+
+                                    };
+                    //check Archived units
+                    var unitExistsInArchived = from x in context.Units
+                                               where x.unit_number.ToUpper() == unitNumber.ToUpper()
+                                               && x.archived_yn == true
+                                               select new UnitsPOCO()
+                                               {
+                                                   unitNumber = x.unit_number,
+
+                                               };
+                    if (unitExist.Count() > 0) //if new unit exists in active so, return an error message
+                    {
+                        throw new Exception("The unit \"" + unitNumber.ToUpper() + "\" already exists. Please enter a new Unit.");
+                    }
+
+                    if (unitExistsInArchived.Count() > 0)//if new unit exists in archived so, return an error message
+
+                    {
+                        throw new Exception("The unit \"" + unitNumber.ToUpper() + "\" exists in archived. Check in archived in order to activate unit. ");
+                    }
+
+
                     else
                     {
-                        throw new Exception("Unit is currently use. Update failed.");
+
+                        Unit unitToUpdate = context.Units.Find(unitID);
+                        unitToUpdate.administrator_account_id = admin;
+                        unitToUpdate.unit_number = unitNumber;
+                        unitToUpdate.date_modified = DateTime.Now;
+                        context.Entry(unitToUpdate).State = EntityState.Modified;
+
+                        context.SaveChanges();
+                        message = " Unit " + unitNumber + " updated.";
                     }
+
                 }
                 catch (Exception e)
                 {
-                    message = e.Message;
+                    throw new Exception(e.Message);
                 }
                 return message;
             }
-        }
+        }//end of update Unit
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string NewSite_NewUnit (string newSiteName, int employee) 
-            // add Not Applicable Unit to the new site.
+        public string NewSite_NewUnit(string newSiteName, int employee)
+        // add Not Applicable Unit to the new site.
         {
             using (var context = new FSOSSContext())
             {
@@ -321,7 +368,7 @@ namespace FSOSS.System.BLL
                 {
                     //grab the new site id,
                     int siteId = (from x in context.Sites
-                                  where x.site_name.Equals(newSiteName) && 
+                                  where x.site_name.Equals(newSiteName) &&
                                   x.archived_yn == false
                                   select x.site_id).FirstOrDefault();
 
