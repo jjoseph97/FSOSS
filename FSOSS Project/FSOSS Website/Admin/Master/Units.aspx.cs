@@ -46,7 +46,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
             {
                 UnitsListView.Visible = true;
                 UnitsListView.DataBind();
-              
             }
         }
      }
