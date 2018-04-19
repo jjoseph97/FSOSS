@@ -307,7 +307,7 @@ VALUES (1, 'spring', Now());
 INSERT INTO POTENTIAL_SURVEY_WORD(ADMINISTRATOR_ACCOUNT_ID, SURVEY_ACCESS_WORD, DATE_MODIFIED)
 VALUES (1, 'circle', Now());
 
---additional 1588 generated words
+--additional ~1580 generated words
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('mystery',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('enough',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('concept',1);
@@ -603,7 +603,6 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('blue',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('boat',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('body',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('bomb',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('bond',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('bone',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('book',1);
@@ -1151,7 +1150,7 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('world',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('worth',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('would',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('wound',1);
+INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('eels',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('write',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('wrote',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('yield',1);
@@ -1415,7 +1414,6 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('abstract',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('academic',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('accepted',1);
-INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('accident',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('accuracy',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('accurate',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('achieved',1);
@@ -1894,6 +1892,8 @@ INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) V
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('woodland',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('workshop',1);
 INSERT INTO potential_survey_word(survey_access_word,administrator_account_id) VALUES ('yourself',1);
+
+
 
 
 
