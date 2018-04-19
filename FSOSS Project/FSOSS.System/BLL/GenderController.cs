@@ -45,7 +45,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Method use to get list of genders
+        /// Method used to get list of genders
         /// </summary>
         /// <returns>List of genders</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
@@ -79,9 +79,9 @@ namespace FSOSS.System.BLL
 
         //added March 29- Chris
         /// <summary>
-        /// Method use to get the list of participant types
+        /// Method use to get the list of archived genders
         /// </summary>
-        /// <returns>List of participant types</returns>
+        /// <returns>List of archived genders</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<GenderPOCO> GetArchivedGenderList()
         {
@@ -111,8 +111,12 @@ namespace FSOSS.System.BLL
             }
         }
 
-
-
+        /// <summary>
+        /// Method used to add a new gender to the database
+        /// </summary>
+        /// <param name="genderDescriptionNew"></param>
+        /// <param name="admin"></param>
+        /// <returns>returns confirmation</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public string AddGender(string genderDescriptionNew, int admin)
         {
@@ -121,38 +125,38 @@ namespace FSOSS.System.BLL
 
                 try
                 {
+                    //If the user was not logged in
                     if (admin == 0)
                     {
                         throw new Exception("Can't let you do that. You're not logged in.");
                     }
+                    //If the user tries to enter a null or empty string, then display an error message.
                     if (genderDescriptionNew == "" || genderDescriptionNew == null)
                     {
                         throw new Exception("Please enter a gender.");
                     }
-                    //add check for pre-use
+                    //Add check for pre-use by checking if the new gender already exists in the database. If it does, then display an error message.
                     var genderList = from x in context.Genders
                                               where x.gender_description.ToLower().Equals(genderDescriptionNew.ToLower()) && !x.archived_yn
                                               select new GenderPOCO()
                                               {
                                                   genderDescription = x.gender_description
                                               };
-
-
                     var GoneGenderList = from x in context.Genders
                                                   where x.gender_description.ToLower().Equals(genderDescriptionNew.ToLower()) && x.archived_yn
                                                   select new GenderPOCO()
                                                   {
                                                       genderDescription = x.gender_description
                                                   };
-                    if (genderList.Count() > 0) //if so, return an error message
+                    if (genderList.Count() > 0) 
                     {
                         throw new Exception("The gender \"" + genderDescriptionNew.ToLower() + "\" already exists. Please enter a new gender.");
                     }
-                    else if (GoneGenderList.Count() > 0) //if so, return an error message
+                    else if (GoneGenderList.Count() > 0) 
                     {
                         throw new Exception("The gender \"" + genderDescriptionNew.ToLower() + "\" already exists and is Archived. Please enter a new participant type.");
                     }
-
+                    //Add the new Gender into the database
                     else
                     {
                         Gender gndr = new Gender();
@@ -175,7 +179,12 @@ namespace FSOSS.System.BLL
             }
         }
 
-
+        /// <summary>
+        /// Method used to update the archived_yn boolean to archive a gender or make it active
+        /// </summary>
+        /// <param name="genderID"></param>
+        /// <param name="admin"></param>
+        /// <returns>Returns a confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
         public string ArchiveGender(int genderID, int admin)
         {
@@ -189,7 +198,7 @@ namespace FSOSS.System.BLL
                         throw new Exception("Can't let you do that. You're not logged in.");
                     }
 
-                    //throw new Exception("tried to delete ptid="+ participantTypeID);
+                    //If the gender is disabled, enable it; otherwise, disable the gender.
                     Gender gndr = context.Genders.Find(genderID);
                     if (gndr.archived_yn)
                     {
@@ -221,10 +230,12 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// 
+        /// Updates the genderDescription.
         /// </summary>
-        /// <param name="ptDesc"></param>
-        /// <param name="ptID"></param>
+        /// <param name="genderID"></param>
+        /// <param name="genderDescription"></param>
+        /// <param name="admin"></param>
+        /// <returns>Returns a confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public string UpdateGender(int genderID, string genderDescription, int admin)
         {
@@ -236,11 +247,12 @@ namespace FSOSS.System.BLL
                     {
                         throw new Exception("Can't let you do that. You're not logged in.");
                     }
+                    //If the gender description is an empty string or is null, then display an error message.
                     if (genderDescription == "" || genderDescription == null)
                     {
                         throw new Exception("Please enter a Participant Type Description");
                     }
-                    //add duplicate check
+                    //Check for duplicates
                     var genderList = from x in context.Genders
                                               where x.gender_description.ToLower().Equals(genderDescription.ToLower()) &&
                                               x.gender_id != genderID &&
@@ -258,15 +270,15 @@ namespace FSOSS.System.BLL
                                                   {
                                                       genderDescription = x.gender_description
                                                   };
-                    if (genderList.Count() > 0) //if so, return an error message
+                    if (genderList.Count() > 0) //If duplicates exist, return an error message.
                     {
                         throw new Exception("The participant type \"" + genderDescription.ToLower() + "\" already exists. Please enter a new participant type.");
                     }
-                    else if (GoneGenderList.Count() > 0) //if so, return an error message
+                    else if (GoneGenderList.Count() > 0) //If duplicates exist, return an error message.
                     {
                         throw new Exception("The participant type \"" + genderDescription.ToLower() + "\" already exists and is Archived. Please enter a new  gender.");
                     }
-
+                    //Update the gender description, date modified, and administrator account id
                     else
                     {
 

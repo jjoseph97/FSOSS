@@ -47,6 +47,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }
     }
 
+    //Changes the ODS to display either the SiteODS or ArchivedODS
     protected void ToggleView(object sender, EventArgs e)
     {
         if (seeArchive)
@@ -66,6 +67,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }
     }
 
+    //When the Add Site button is clicked, it adds a new entry to the database.
     protected void AddSite_Click(object sender, EventArgs e)
     {
         SiteController sysmgr = new SiteController();

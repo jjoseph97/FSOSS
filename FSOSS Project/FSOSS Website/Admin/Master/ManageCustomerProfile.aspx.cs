@@ -29,14 +29,6 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             Context.Response.StatusCode = 403;
         }
 
-        //if (seeArchive == false)
-        //{
-        //    DeleteButton.Attributes.Remove["style"] = " background-color: #a6ebf7";
-        //}
-        //else
-        //{
-
-        //}
         //set the viewable lists, and set to view active options
         if (!IsPostBack)
         {
@@ -46,7 +38,6 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             ParticipantTypes.Visible = false;
             Genders.Visible = false;
         }
-        
 
     }
 
@@ -166,6 +157,12 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         }, "Success", "Successfully added the new participant type: \"" + ptDesc + "\"");
     }
 
+    /// <summary>
+    /// This button on click method is for adding a new Gender to the database.
+    /// Added April 12. Modification of Gender's Add method.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void AddGenderButton_Click(object sender, EventArgs e)
     {
         //finding the customer profile choice to display
@@ -183,6 +180,12 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         }, "Success", "Successfully added the new gender: \"" + addItem + "\"");
     }
 
+    /// <summary>
+    /// This button on click method is for adding a new Meal to the database.
+    /// Added April 13. Modification of Meal's Add method.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void AddMealButton_Click(object sender, EventArgs e)
     {
         //finding the customer profile choice to display
@@ -200,6 +203,12 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         }, "Success", "Successfully added the new meal: \"" + addItem + "\"");
     }
 
+    /// <summary>
+    /// This button on click method is for adding a new Age Range to the database.
+    /// Added April 13. Modification of Age Range's Add method.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void AddARButton_Click(object sender, EventArgs e)
     {
         //finding the customer profile choice to display

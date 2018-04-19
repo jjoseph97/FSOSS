@@ -17,8 +17,10 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class SiteController
     {
-        
-        //This method obtains a list of all the sites that are not closed.
+        /// <summary>
+        /// This method obtains a list of all the sites that are not closed.
+        /// </summary>
+        /// <returns>List of active sites</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<SitePOCO> GetSiteList()
         {
@@ -48,8 +50,10 @@ namespace FSOSS.System.BLL
                 }
             }
         }
-
-        //This method obtains a list of all the sites that are closed.
+        /// <summary>
+        /// This method obtains a list of all the sites that are closed.
+        /// </summary>
+        /// <returns>List of archived sites</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<SitePOCO> GetArchived()
         {
@@ -81,8 +85,11 @@ namespace FSOSS.System.BLL
 
             }
         }
-        
-        // This method gets the siteID via site name.
+        /// <summary>
+        /// This method gets the siteID via site name.
+        /// </summary>
+        /// <param name="sitename"></param>
+        /// <returns>Returns the siteID associated with the site name.</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public int GetSiteID(string sitename)
         {
@@ -101,8 +108,11 @@ namespace FSOSS.System.BLL
                 }
             }
         }
-
-        // This method gets the site name via a siteID.
+        /// <summary>
+        /// This method gets the site name via a siteID.
+        /// </summary>
+        /// <param name="siteID"></param>
+        /// <returns>Returns the site name associated with the siteID.</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string DisplaySiteName (int siteID)
         {
@@ -114,8 +124,12 @@ namespace FSOSS.System.BLL
                 return siteName;
             }
         }
-
-        //This method adds a new site to the database.
+        /// <summary>
+        /// This method adds a new site to the database. Also adds a "Not Applicable" unit for this site, and assigns a survey word to the site.
+        /// </summary>
+        /// <param name="newSiteName"></param>
+        /// <param name="admin"></param>
+        /// <returns>Returns a confirmation message.</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public string AddSite(string newSiteName, int admin)
         {
@@ -173,8 +187,13 @@ namespace FSOSS.System.BLL
             } //end of using var context
                 
         } // end of Addsite
-
-        //This method updates the site name of a site that exists in the database.
+        /// <summary>
+        /// This method updates the site name of a site that exists in the database.
+        /// </summary>
+        /// <param name="siteID"
+        /// <param name="siteName"></param>
+        /// <param name="admin"></param>
+        /// <returns>Returns a confirmation message.</returns>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public string UpdateSite(int siteID, string siteName, int admin) 
         {
@@ -184,21 +203,27 @@ namespace FSOSS.System.BLL
                 string message = ""; 
                 try
                 {
+                    //If this new site name is an empty string or null, then display an error message.
                     if (siteName == "" || siteName == null)
                     {
                         throw new Exception("Please enter a site name. Field cannot be empty.");
                     }
-                    //add check for pre-use
+                    //If the new site name is more than 100 characters long, then display an error message.
+                    if (siteName.Length > 100)
+                    {
+                        throw new Exception("The site name can only be 100 characters long.");
+                    }
+                    //Check if the name already exists in the database.
                     var siteList = from x in context.Sites
-                                     where x.site_name.ToLower().Equals(siteName.ToLower()) && !x.archived_yn
+                                     where x.site_name.ToLower().Equals(siteName.ToLower()) && 
+                                     !x.archived_yn
                                      select new SitePOCO()
                                      {
                                          siteName = x.site_name
                                      };
-
-
                     var GoneSiteList = from x in context.Sites
-                                         where x.site_name.ToLower().Equals(siteName.ToLower()) && x.archived_yn
+                                         where x.site_name.ToLower().Equals(siteName.ToLower()) && 
+                                         x.archived_yn
                                          select new SitePOCO()
                                          {
                                              siteName = x.site_name
@@ -253,14 +278,20 @@ namespace FSOSS.System.BLL
             }//context
         }//update site
 
+        /// <summary>
+        /// Toggles the archived_yn boolean to indicate if the site is archived or not.
+        /// </summary>
+        /// <param name="siteName"></param>
+        /// <param name="admin"></param>
+        /// <returns>Returns a confirmation message.</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
         public string ArchiveSite(int siteID, int admin)
         {
             using (var context = new FSOSSContext())
             {
-                string message = "";
                 try
                 {
+                    //If the admin is 0, then display an error message.
                     if (admin == 0)
                     {
                         throw new Exception("Can't let you do that. You're not logged in.");
@@ -277,12 +308,28 @@ namespace FSOSS.System.BLL
                                               dateModified = DateTime.Now
 
                                           }).FirstOrDefault();
-
+                    //Select all the active sites
+                    List<Site> lastSite = (from x in context.Sites
+                                           where x.archived_yn == false
+                                           select x).ToList();
+                    if (searchSite == null)
+                    {
+                        throw new Exception("This site does not exist.");
+                    }
+                    
+                    //If the site is archived, activate it and update the date modified. If the site is not archived, archive it and update the date modified.
                         Site site = context.Sites.Find(siteID);
                         if (site.archived_yn == false)
                         {
-                            site.archived_yn = true;
-                            site.date_modified = DateTime.Now;
+                            //If the user is attempting to disable the last active site in the system, throw an error.
+                            if (lastSite.Count() == 1)
+                            {
+                                 throw new Exception("Cannot disable site. There needs to be at least one active site.");
+                            }
+                            else { 
+                                site.archived_yn = true;
+                                site.date_modified = DateTime.Now;
+                            }
                         }
                         else
                         {
@@ -291,13 +338,13 @@ namespace FSOSS.System.BLL
                         };
                         context.Entry(site).State = EntityState.Modified;
                         context.SaveChanges();
+                        return "Site successfully updated.";
 
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Something went wrong. See " + e.Message);
+                    throw new Exception(e.Message);
                 }
-                return message;
             }
         }
     }
