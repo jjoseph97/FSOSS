@@ -58,7 +58,7 @@
                         </tr>
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
-                        <tr style="background-color: #fdff94;">
+                        <tr class="fsoss-header">
                             <td>
                                 <asp:TextBox Text='<%# Bind("unitNumber") %>' runat="server" CssClass="px-3" ID="unitNumberTextBox" /></td>
                             <td style="display: none;">
@@ -283,7 +283,7 @@
         <%-- -----------------Active Units List ODS------------------%>
         <asp:ObjectDataSource ID="UnitsODS" runat="server" DeleteMethod="SwitchUnitSatus" OldValuesParameterFormatString="{0}"
             SelectMethod="GetActiveUnitList" TypeName="FSOSS.System.BLL.UnitController" UpdateMethod="UpdateUnit"
-            OnDeleted="CheckForException" OnUpdated="CheckForException">
+            OnDeleted="CheckForException" OnUpdated="CheckForException" >
             <DeleteParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
                 <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>

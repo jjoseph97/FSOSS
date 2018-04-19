@@ -34,6 +34,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         {
             seeArchive = false;
             SiteDropDownList.DataBind();
+            
+
             SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
             if (SelectedSiteID == null)
@@ -44,6 +46,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
             {
                 UnitsListView.Visible = true;
                 UnitsListView.DataBind();
+              
             }
         }
      }
@@ -87,6 +90,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         ArchivedUnitsListView.DataBind();
         UnitsListView.DataBind();
     }
+    /// <summary>
+    /// This button on click method is for adding a new unit to the selected site in the database. 
+    /// <summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
 
     protected void AddUnitButton_Click(object sender, EventArgs e)
     {
@@ -98,7 +106,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         {
             sysmgr.AddUnit(unitNumber, userId, siteId);
             UnitsListView.DataBind();
-        }, "Success", "Unit @" + " has been added");
+            AddUnitTextBox.Text = "";
+
+        }, "Success", "Successfully added the new unit: \"" + unitNumber + "\"");
     }
 
     protected void ToggleView(object sender, EventArgs e)
