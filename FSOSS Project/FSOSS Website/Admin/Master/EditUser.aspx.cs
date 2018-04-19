@@ -25,7 +25,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
         else
         {
             if (String.IsNullOrEmpty(Request.QueryString["id"]))
-                Response.Redirect("~/Admin/Master/EditUserFilter");
+                Response.Redirect("~/Admin/Master/EditUserSearch");
             else
             {
                 SuccessMessage.Visible = false;
@@ -40,7 +40,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
 
                     if (info == null)
                     {
-                        Response.Redirect("~/Admin/Master/EditUserFilter");
+                        Response.Redirect("~/Admin/Master/EditUserSearch");
                     }
                     else
                     {

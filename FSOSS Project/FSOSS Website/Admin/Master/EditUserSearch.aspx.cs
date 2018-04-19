@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
+public partial class Admin_Master_EditUserSearch : System.Web.UI.Page
 {
     private string successHeader = "<span><i class='fas fa-check-circle'></i> Success</span><br/ >";
     private string failedHeader = "<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>";
@@ -92,7 +92,7 @@ public partial class Admin_Master_EditUserFilter : System.Web.UI.Page
         AdministratorAccountListView.DataBind();
     }
 
-    protected void ResetButton_Click(object sender, EventArgs e)
+    protected void ClearSearchButton_Click(object sender, EventArgs e)
     {
         SuccessMessage.Visible = false;
         FailedMessage.Visible = false;

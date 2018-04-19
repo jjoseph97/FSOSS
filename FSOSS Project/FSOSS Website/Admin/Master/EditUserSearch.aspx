@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Edit User Filter" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="EditUserFilter.aspx.cs" Inherits="Admin_Master_EditUserFilter" %>
+﻿<%@ Page Title="Edit User Search" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="EditUserSearch.aspx.cs" Inherits="Admin_Master_EditUserSearch" %>
 
-<asp:Content ID="EditUserFilter" ContentPlaceHolderID="MainContent" runat="Server">
+<asp:Content ID="EditUserSearch" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="card container py-2 h4 font-weight-bold">Edit User Filter</h1>
+            <h1 class="card container py-2 h4 font-weight-bold">Edit User Search</h1>
         </div>
     </div>
 
@@ -18,7 +18,7 @@
                     <asp:Label ID="SearchUserLabel" class="col-sm-3 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search User: " />
                     <asp:TextBox ID="SearchUserTextBox" class="col-sm-6 my-2 form-control" runat="server" placeholder="Search for username, first name or last name..." AutoComplete="off" />
                     <asp:Button ID="SearchUserButton" class="col-sm-2 offset-sm-1 my-2 btn btn-info" runat="server" Text="Search" OnClick="SearchUserButton_Click" />
-                    <asp:Button ID="ResetButton" CssClass="col-sm-2 offset-sm-10 my-2 btn fsoss-grey" runat="server" Text="Reset" OnClick="ResetButton_Click" />
+                    <asp:Button ID="ClearSearchButton" CssClass="col-sm-2 offset-sm-10 my-2 btn btn-light border border-info" runat="server" Text="Clear Search" OnClick="ClearSearchButton_Click" />
                 </asp:Panel>
             </div>
 
