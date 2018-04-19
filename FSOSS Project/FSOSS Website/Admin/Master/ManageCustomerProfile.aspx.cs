@@ -256,17 +256,19 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         {
             Button disableBtn = (Button)e.Item.FindControl("DeleteButton");
 
-            if (seeArchive)
+            if (disableBtn != null)
             {
-                disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");
-                disableBtn.CssClass = "btn btn btn-success mx-3 my-1";
+                if (seeArchive)
+                {
+                    disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");
+                    disableBtn.CssClass = "btn btn btn-success mx-3 my-1";
+                }
+                else
+                {
+                    disableBtn.Attributes.Remove("btn btn btn-success mx-3 my-1");
+                    disableBtn.CssClass = "btn btn btn-danger mx-3 my-1";
+                }
             }
-            else
-            {
-                disableBtn.Attributes.Remove("btn btn btn-success mx-3 my-1");
-                disableBtn.CssClass = "btn btn btn-danger mx-3 my-1";
-            }
-
         }
     }
 }

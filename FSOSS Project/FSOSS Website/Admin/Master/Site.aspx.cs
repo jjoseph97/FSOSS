@@ -93,18 +93,19 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         if (e.Item.ItemType == ListViewItemType.DataItem)
         {
             Button disableBtn = (Button)e.Item.FindControl("DeleteButton");
-
-            if (seeArchive)
-            {
-                disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");
-                disableBtn.CssClass = "btn btn btn-success mx-3 my-1";
+            if(disableBtn != null)
+            { 
+                if (seeArchive)
+                {
+                    disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");
+                    disableBtn.CssClass = "btn btn btn-success mx-3 my-1";
+                }
+                else
+                {
+                    disableBtn.Attributes.Remove("btn btn btn-success mx-3 my-1");
+                    disableBtn.CssClass = "btn btn btn-danger mx-3 my-1";
+                }
             }
-            else
-            {
-                disableBtn.Attributes.Remove("btn btn btn-success mx-3 my-1");
-                disableBtn.CssClass = "btn btn btn-danger mx-3 my-1";
-            }
-
         }
     }
 }
