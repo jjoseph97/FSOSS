@@ -86,6 +86,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
         UnitsListView.Visible = true;
+        ToggleView(null, e);
         ArchivedUnitsListView.DataBind();
         UnitsListView.DataBind();
     }
