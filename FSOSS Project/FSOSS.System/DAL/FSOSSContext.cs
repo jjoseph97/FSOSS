@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 #region
 using System.Data.Entity;
 using FSOSS.System.Data.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
 #endregion
 
 namespace FSOSS.System.DAL
