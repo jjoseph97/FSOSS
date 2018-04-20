@@ -16,7 +16,7 @@
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
                     <asp:Label class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Select a Question to Edit"></asp:Label>
-                    <asp:DropDownList ID="QuestionDDL" CssClass="col-sm-3 form-control my-2" runat="server">
+                    <asp:DropDownList ID="QuestionDDL" OnSelectedIndexChanged="QuestionDDL_SelectedIndexChanged" AutoPostBack="true" CssClass="col-sm-3 form-control my-2" runat="server">
                         <asp:ListItem Value="">Select...</asp:ListItem>
                         <asp:ListItem Value="1">Question 1</asp:ListItem>
                         <asp:ListItem Value="2">Question 1A</asp:ListItem>
@@ -29,8 +29,7 @@
                         <asp:ListItem Value="10">Question 4</asp:ListItem>
                         <asp:ListItem Value="11">Question 5</asp:ListItem>
                     </asp:DropDownList><br />
-                    <asp:Button ID="ViewButton" class="col-sm-2 offset-sm-3 my-2 btn btn-info" runat="server" Text="View" OnClick="ViewButton_Click" />
-                    <div class="col-sm-12">
+                     <div class="col-sm-12">
                         <asp:Label ID="Message" runat="server" />
                     </div>
                 </div>

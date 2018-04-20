@@ -215,7 +215,7 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                Regex validResponse = new Regex("^[a-zA-Z ?.'/]+$");
+                Regex validResponse = new Regex("^[a-zA-Z ?.'/,!]+$");
 
                 if (text.Length.Equals(0))
                 {
