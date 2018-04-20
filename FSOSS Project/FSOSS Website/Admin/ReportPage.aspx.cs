@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 // All the imported non-auto generated namespaces and classes that are use for this page stored in a specific region for better organization
 #region
 // Namespaces and classes imported in order to use POCO clases
 using FSOSS.System.Data.POCOs;
-// Namespaces and classes imported in order to use Controller clases
+// Namespaces and classes imported in order to use FSOSS Controller clases
 using FSOSS.System.BLL;
 // Namespaces and classes imported in order to use JSON Class and JSON Objects
 using Newtonsoft.Json;
@@ -67,13 +65,13 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Check if meal variable is null. 
                 if (meal == null)
                 {
-                    //if meal variable is null change the FilterDescription Label Text to the described markup.
+                    // If meal variable is null change the FilterDescription Label Text to the described markup.
                     FilterDescription.Text = "Report from " + siteName + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") +
                     " with no meal filter.";
                 }
                 else
                 {
-                    //if meal variable is not null change the FilterDescription Label Text to the described markup.
+                    // If meal variable is not null change the FilterDescription Label Text to the described markup.
                     FilterDescription.Text = "Report from " + siteName + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") +
                     " with a meal filter of " + meal.meal_name + ".";
                 }
@@ -109,31 +107,39 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)", "rgba(102, 255, 255, 1)", "rgba(255, 153, 102, 1)" };
 
     /// <summary>
-    /// This method is use as a Web Service use for displaying charts on the Report Page  
+    /// This method is use as a Web Service use for displaying charts on the Report Page. 
     /// </summary>
-    /// <param name="chartId"></param>
-    /// <returns></returns>
+    /// <param name="chartId">Parameter use to identify which chart is accessing the web method and to identify which value to be process and retrieve</param>
+    /// <returns>Return a Serialize JSON Object to be use for ChartJS</returns>
     [WebMethod] // This attribute allows XML Web service created using ASP.NET to be the callable from remote Web Clients.
     public static string GetChartData(int chartId)
     {
+        // Instantiate Report POCO, Chart POCO, Chart POCO List, Preferred Response Order List, Sorted Response Variable, and Report Controller variables
         FinalReportPOCO report = new FinalReportPOCO();
         List<ChartPOCO> responses = new List<ChartPOCO>();
+        ChartPOCO response = new ChartPOCO();
+        // List of Preferred Response Order based on the Question Responses answers
         List<String> preferencesForOrderByFirstOption = new List<String> { "Very Good", "Good", "Fair", "Poor", "Don't Know/No Opinion", "No Response" };
         List<String> preferencesForOrderBySecondOption = new List<String> { "Portion sizes are too small", "Portion sizes are just right", "Portion sizes are too large", "No Response" };
         List<String> preferencesForOrderByThirdOption = new List<String> { "Always", "Usually", "Occasionally", "Never", "I do not have any specific dietary requirements", "No Response" };
         List<String> preferencesForOrderByFourthOption = new List<String> { "Very Good", "Good", "Fair", "Never", "Poor", "Very Poor" };
         IEnumerable<ChartPOCO> sortedResponses = null;
         ReportController reportMgr = new ReportController();
+        // Get the Filter to be use as a parameter to get the data for report. 
         FilterPOCO filter = (FilterPOCO)(HttpContext.Current.Session["filter"]);
         // Initialize report by calling GenerateOverAllReport method from Report Controller which return a FinalReportPOCO object.
         report = reportMgr.GenerateOverAllReport(filter.startingDate, filter.endDate, filter.siteID, filter.mealID);
+        // Check if the the retrieve report has atleast 1 survey submitted.
         if (report.SubmittedSurveyList.Count > 0)
         {
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart1 for Question 1A.
             if (chartId == 1)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionTwoValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -142,21 +148,28 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionTwoValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionTwoValueCount[counter];
                     response.Title = report.Question[0];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
+                    // Clear the ChartPOCO Object
                     response = null;
-                    sortedResponses = responses.OrderBy(
-                       item => preferencesForOrderByFirstOption.IndexOf(item.Text));
+                                
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.     
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart2 for Question 1B.
             else if (chartId == 2)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionThreeValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionThreeValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -165,21 +178,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionThreeValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionThreeValueCount[counter];
                     response.Title = report.Question[1];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
-                    response = null;
-                    sortedResponses = responses.OrderBy(
-                     item => preferencesForOrderByFirstOption.IndexOf(item.Text));
+                    // Clear the ChartPOCO Object
+                    response = null;               
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.  
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart3 for Question 1C.
             else if (chartId == 3)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionFourValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionFourValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -189,21 +208,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionFourValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionFourValueCount[counter];
                     response.Title = report.Question[2];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
-                    response = null;
-                    sortedResponses = responses.OrderBy(
-                      item => preferencesForOrderByFirstOption.IndexOf(item.Text));
+                    // Clear the ChartPOCO Object
+                    response = null;                    
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart4 for Question 1D.
             else if (chartId == 4)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionFiveValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionFiveValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -212,21 +237,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionFiveValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionFiveValueCount[counter];
                     response.Title = report.Question[3];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
+                    // Clear the ChartPOCO Object
                     response = null;
-                    sortedResponses = responses.OrderBy(
-                      item => preferencesForOrderByFirstOption.IndexOf(item.Text));
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart5 for Question 1E.
             else if (chartId == 5)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionSixValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionSixValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -235,21 +266,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionSixValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionSixValueCount[counter];
                     response.Title = report.Question[4];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
-                    response = null;
-                    sortedResponses = responses.OrderBy(
-                      item => preferencesForOrderByFirstOption.IndexOf(item.Text));
+                    // Clear the ChartPOCO Object
+                    response = null;                   
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart6 for Question 2.
             else if (chartId == 6)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionEightValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionEightValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -258,21 +295,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionEightValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionEightValueCount[counter];
                     response.Title = report.Question[5];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
-                    response = null;
-                    sortedResponses = responses.OrderBy(
-                      item => preferencesForOrderBySecondOption.IndexOf(item.Text));
+                    // Clear the ChartPOCO Object
+                    response = null;                
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
+                sortedResponses = responses.OrderBy(item => preferencesForOrderBySecondOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart7 for Question 3.
             else if (chartId == 7)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionNineValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionNineValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -281,21 +324,27 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionNineValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionNineValueCount[counter];
                     response.Title = report.Question[6];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
-                    response = null;
-                    sortedResponses = responses.OrderBy(
-                      item => preferencesForOrderByThirdOption.IndexOf(item.Text));
+                    // Clear the ChartPOCO Object
+                    response = null;                   
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByThirdOption.IndexOf(item.Text));
             }
+            // Check to see if what ajax call is accessing the data and process the desired value to be retrieves.
+            // Retrieves data for Chart8 for Question 4.
             else if (chartId == 8)
             {
+                // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionTenValueCount.Count; counter++)
                 {
-                    ChartPOCO response = new ChartPOCO();
+                    // Check and handle if the retrieve string is empty
                     if (report.QuestionTenValueList[counter].Equals(""))
                     {
                         response.Text = "No Response";
@@ -304,17 +353,22 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     {
                         response.Text = report.QuestionTenValueList[counter];
                     }
+                    // Set the Chart POCO attributes based on the current Object being looped in.
                     response.Value = report.QuestionTenValueCount[counter];
                     response.Title = report.Question[7];
                     response.Color = COLOR_VALUE[counter];
                     response.BorderColor = BORDER_COLOR_VALUE[counter];
+                    // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
-                    response = null;
-                    sortedResponses = responses.OrderBy(
-                     item => preferencesForOrderByFourthOption.IndexOf(item.Text));
+                    // Clear the ChartPOCO Object
+                    response = null;                 
                 }
+                // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
+                sortedResponses = responses.OrderBy(item => preferencesForOrderByFourthOption.IndexOf(item.Text));
             }
         }
+        // Convert sortedResponses variable of type IEnumerable to Serialze JSON Ojject using JsonConvert.SerializeObject method.
+        // Return sortedResponses of type JSON Object
         return JsonConvert.SerializeObject(sortedResponses);
     }   
 }

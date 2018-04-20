@@ -60,28 +60,39 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         {
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
             filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-            if (endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
+            if(filter.startingDate < DateTime.Now)
             {
-                filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:999999", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                if (filter.startingDate <= filter.endDate)
+                if (endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
                 {
-                    filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
-                    filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                    Session["filter"] = filter;
-                    Response.Redirect("~/Admin/ReportPage.aspx");
+                    filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:999999", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                    if (filter.startingDate <= filter.endDate)
+                    {
+                        this.startingInputValue = startingPeriodInput;
+                        this.endingInputValue = endingPeriodInput;
+                        filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
+                        filter.mealID = int.Parse(MealDropDownList.SelectedValue);
+                        Alert.Visible = false;
+                        Session["filter"] = filter;
+                        Response.Redirect("~/Admin/ReportPage.aspx");
+                    }
+                    else
+                    {
+                        Alert.Text = failedHeader + String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.endDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
+                        Alert.Visible = true;
+                    }
+
                 }
                 else
                 {
-                    Alert.Text = failedHeader + String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.endDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
+                    Alert.Text = failedHeader + "Please select a valid ending period";
                     Alert.Visible = true;
                 }
-
             }
             else
             {
-                Alert.Text = failedHeader + "Please select a valid ending period";
+                Alert.Text = failedHeader + String.Format("Start date of report cannot be above the Current date {0}. Start date {1}",DateTime.Now.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
                 Alert.Visible = true;
-            }
+            }          
         }
         else
         {

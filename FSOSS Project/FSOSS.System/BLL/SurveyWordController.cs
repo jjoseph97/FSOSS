@@ -30,6 +30,7 @@ namespace FSOSS.System.BLL
                 // Check if theres enough active Potential Survey Word on the list
                 if (siteList.Count > potentialSurveyWordList.Count())
                 {
+                    // Throw an exception if there are not enough survey word on the pool to be use on the list
                     throw new Exception("Please add more potential survey word. Not enough potential survey word available to be assign on the hospitals.");
                 }
                 else
@@ -85,16 +86,21 @@ namespace FSOSS.System.BLL
                             site_id = site.site_id,
                             survey_word_id = surveyWordToAdd.survey_word_id
                         };
+                        // Load newSurveyWord to be saved
                         context.SurveyWords.Add(newSurveyWord);
+                        // Save the new added Survey Word
                         context.SaveChanges();
                         newSurveyWord = null;
-                    }//End of loop in Site denoting that the site has a new potential survey word.                               
-                }//End of check statement to see if theres enough active potential survey word to choose from the list.
-            }//End of Transaction
-            DateTime currentDateTime = DateTime.Now;
-            DateTime timeOffset = new DateTime (currentDateTime.Year, currentDateTime.Month, currentDateTime.Day + 1, 0, 0, 0);
-          
-            BackgroundJob.Schedule(() => GenerateSurveyWordOfTheDay(), timeOffset);
+                    }                               
+                }
+                // Initialze current Date and Time
+                DateTime currentDateTime = DateTime.Now;
+                // Set timeOffset to be use to setup date and time for the next scheduled job.
+                // Current setup will be set to fire at 12:00 midnight after one day 
+                DateTime timeOffset = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day + 1, 0, 0, 0);
+                // Setup new job schedule that will fire GenerateSurveyWordOfTheDay after the given offset
+                BackgroundJob.Schedule(() => GenerateSurveyWordOfTheDay(), timeOffset);
+            }
         }
 
         public bool ValidateAccessWord(string enteredWord)
