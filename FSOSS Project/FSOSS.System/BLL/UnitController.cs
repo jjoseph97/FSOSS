@@ -76,7 +76,9 @@ namespace FSOSS.System.BLL
                     throw new Exception(e.Message);
                 }
             }
-        }
+        } // end of GetActiveUnitList
+
+
 
         /// <summary>
         /// Method use to get the list of Archived Units of a Site
@@ -116,7 +118,7 @@ namespace FSOSS.System.BLL
                 }
 
             }
-        }
+        }//end of GetArchivedUnits
 
 
 
@@ -135,22 +137,22 @@ namespace FSOSS.System.BLL
 
                 try
                 {
-                    if (admin == 0)
+                    if (admin == 0) //check to see if admin is logged in 
                     {
                         throw new Exception("Can't let you do that. You're not logged in.");
                     }
 
-                    if (unitNumber == "" || unitNumber == null)
+                    if (unitNumber == "" || unitNumber == null) // check to see if add unit number text box is empty
                     {
                         throw new Exception("Please enter a Unit Number");
                     }
 
-                    if (unitNumber.Length < 2 || unitNumber.Length > 50)
+                    if (unitNumber.Length < 2 || unitNumber.Length > 50) // check to see the minimum and maximum length of inserted characters. 
                     {
                         throw new Exception("Input must be between 2 charaters to 50 chatecters long.");
                     }
 
-                    if (!validUnit.IsMatch(unitNumber))
+                    if (!validUnit.IsMatch(unitNumber)) // check to see if the updated number is entered is consistent with the valid pattern set. 
                     {
                         throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)");
                     }
@@ -210,7 +212,8 @@ namespace FSOSS.System.BLL
                     throw new Exception(e.Message);
                 }
             }
-        }
+        }//end of AddUnit
+
 
         /// <summary>
         /// Method use to disable or enable Unit from the list that is use in a site
@@ -266,6 +269,8 @@ namespace FSOSS.System.BLL
             }
         } //end of SwitchUnitSatus(disbaling/enabling) unit
 
+
+
         /// <summary>
         /// Method use to Update unit from the list that is use in the Site
         /// </summary>
@@ -283,21 +288,21 @@ namespace FSOSS.System.BLL
 
                 try
                 {
-                    if (admin == 0)
+                    if (admin == 0) //check to see if admin is logged in 
                     {
                         throw new Exception("Can't let you do that. You're not logged in.");
                     }
-                    if (unitNumber == "" || unitNumber == null)
+                    if (unitNumber == "" || unitNumber == null) // check to see if unit number text box is empty
                     {
                         throw new Exception("Please enter a Unit Number");
                     }
 
-                    if (unitNumber.Length < 2 || unitNumber.Length > 50)
+                    if (unitNumber.Length < 2 || unitNumber.Length > 50) // check to see the minimum and maximum length of inserted characters. 
                     {
                         throw new Exception("Input must be between 2 charaters to 50 chatecters long.");
                     }
 
-                    if (!validUnit.IsMatch(unitNumber))
+                    if (!validUnit.IsMatch(unitNumber))// check to see if the updated number is entered is consistent with the valid pattern set. 
                     {
                         throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)");
                     }
