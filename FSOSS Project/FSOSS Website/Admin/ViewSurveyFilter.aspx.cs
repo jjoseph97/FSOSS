@@ -62,30 +62,37 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             if (startingPeriodInput != "") // check if there was any date entered or selected in the StartingPeriodInput text field
             {
                 filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                if (endingPeriodInput != "") // check if there was any date entered or selected in the EndingPeriodInput text field 
+                if (filter.startingDate <= DateTime.Now) // check that the starting date is on or before todays date
                 {
-                    filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                    if (filter.startingDate > filter.endDate)
+                    if (endingPeriodInput != "") // check if there was any date entered or selected in the EndingPeriodInput text field 
                     {
-                        throw new Exception("Start Date must be before the End Date.");
+                        filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                        if (filter.startingDate > filter.endDate)
+                        {
+                            throw new Exception("Starting date must be before the End Date.");
+                        }
+                        filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
+                        filter.mealID = int.Parse(MealDropDownList.SelectedValue);
+                        if (UnitDropDownList.Enabled == false) // if the unit drop down list is not enabled (all hospitals is selected) then set the filter.userID to 0
+                        {
+                            filter.unitID = 0;
+                        }
+                        else // else, get the selected value of the unit drop down list and populate the filter.userID with that value
+                        {
+                            filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
+                        }
+                        Session["filter"] = filter; // create the session to be passed to the SubmittedSurveyList page
+                        Response.Redirect("SubmittedSurveyList.aspx"); // now redirect to the SubmittedSurveyList page with the filter details
                     }
-                    filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
-                    filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                    if (UnitDropDownList.Enabled == false) // if the unit drop down list is not enabled (all hospitals is selected) then set the filter.userID to 0
+                    else // else, display an error to enter a date for the ending period
                     {
-                        filter.unitID = 0;
-                    }
-                    else // else, get the selected value of the unit drop down list and populate the filter.userID with that value
-                    {
-                        filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
-                    }
-                    Session["filter"] = filter; // create the session to be passed to the SubmittedSurveyList page
-                    Response.Redirect("SubmittedSurveyList.aspx"); // now redirect to the SubmittedSurveyList page with the filter details
-                }
-                else // else, display an error to enter a date for the ending period
-                {
 
-                    throw new Exception("Please select an ending period");
+                        throw new Exception("Please select an ending period");
+                    }
+                }
+                else // if the start date is set after today's date display an error to the user
+                {
+                    throw new Exception("Starting date cannot be after today's date.");
                 }
             }
             else // else, display an error to enter a date for the starting period
