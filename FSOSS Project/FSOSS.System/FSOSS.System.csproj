@@ -102,10 +102,8 @@
     <Compile Include="BLL\MealController.cs" />
     <Compile Include="BLL\ParticipantController.cs" />
     <Compile Include="BLL\PotentialSurveyWordController.cs" />
-    <Compile Include="BLL\QuestionFormatController.cs" />
     <Compile Include="BLL\QuestionSelectionController.cs" />
     <Compile Include="BLL\QuestionTextController.cs" />
-    <Compile Include="BLL\QuestionTopicController.cs" />
     <Compile Include="BLL\ReportController.cs" />
     <Compile Include="BLL\SecurityRoleController.cs" />
     <Compile Include="BLL\SiteController.cs" />
