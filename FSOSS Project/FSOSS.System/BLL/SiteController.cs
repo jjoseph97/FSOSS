@@ -224,19 +224,11 @@ namespace FSOSS.System.BLL
                     {
                         throw new Exception("This site does not exist.");
                     }
-                    //If the site name is more than 100 characters long, then display an error message.
-                    if (siteName.Length > 100)
-                    {
-                        throw new Exception("The site name can only be 100 characters long.");
-                    }
-                    
-                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
+                     //If the user enters in characters that are not approved by the Regex (defined by valid), then display an error message.
                     if (!(valid.IsMatch(siteName)))
                     {
                         throw new Exception("Please enter only alphabetical letters.");
                     }
-                   
-                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
                     else
                     {
                         Site updateSite = context.Sites.Find(siteID);

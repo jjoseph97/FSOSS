@@ -109,7 +109,7 @@
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <p class="text-center">No Genders data were found.</p>
+                            <p class="text-center text-bold">No Genders were found.</p>
                         </EmptyDataTemplate>
                         <ItemTemplate>
                             <tr class="fsoss-listview-itemtemplate">
@@ -270,7 +270,7 @@
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <p class="text-center">No Participant Types data were found.</p>
+                            <p class="text-center text-bold">No Participant Types were found.</p>
                         </EmptyDataTemplate>
                         <ItemTemplate>
                             <tr class="fsoss-listview-itemtemplate">
@@ -429,7 +429,7 @@
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <p class="text-center">No Meals data were found.</p>
+                            <p class="text-center text-bold">No Meals were found.</p>
                         </EmptyDataTemplate>
                         <ItemTemplate>
                             <tr class="fsoss-listview-itemtemplate">
@@ -589,7 +589,7 @@
                             </tr>
                         </EditItemTemplate>
                         <EmptyDataTemplate>
-                            <p class="text-center">No Age Ranges data were found.</p>
+                            <p class="text-center text-bold">No Age Ranges were found.</p>
                         </EmptyDataTemplate>
                         <ItemTemplate>
                             <tr class="fsoss-listview-itemtemplate">

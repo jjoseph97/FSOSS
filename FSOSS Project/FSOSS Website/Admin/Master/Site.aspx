@@ -59,11 +59,7 @@
                     </tr>
                 </EditItemTemplate>
                 <EmptyDataTemplate>
-                    <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
-                        <tr>
-                            <td>No data was returned.</td>
-                        </tr>
-                    </table>
+                    <p class="text-center text-bold">No sites were found.</p>
                 </EmptyDataTemplate>
                 <ItemTemplate>
                     <tr class="fsoss-listview-itemtemplate">
