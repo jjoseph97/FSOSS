@@ -119,6 +119,28 @@ namespace FSOSS.System.BLL
                                                   };
                         return submittedSurveyList.ToList();
                     }
+                    else if (siteID != 0 && mealID == 0 && unitID == 0) // get a list of submitted surveys for a specific site, all meals and all units
+                    {
+                        var submittedSurveyList = from x in context.SubmittedSurveys
+                                                  orderby x.date_entered descending
+                                                  where x.Unit.site_id == siteID && x.date_entered >= startDate && x.date_entered <= endDate
+                                                  select new SubmittedSurveyPOCO()
+                                                  {
+                                                      site = x.Unit.Site.site_name,
+                                                      submittedSurveyID = x.submitted_survey_id,
+                                                      unitNumber = x.Unit.unit_number,
+                                                      mealName = x.Meal.meal_name,
+                                                      participantType = x.ParticipantType.participant_description,
+                                                      ageRange = x.AgeRange.age_range_description,
+                                                      gender = x.Gender.gender_description,
+                                                      dateEntered = x.date_entered,
+                                                      contactRequest = x.contact_request,
+                                                      contacted = x.contacted,
+                                                      contactRoomNumber = x.contact_room_number,
+                                                      contactPhoneNumber = x.contact_phone_number
+                                                  };
+                        return submittedSurveyList.ToList();
+                    }
                     else if (siteID != 0 && mealID != 0 && unitID == 0) // get a list of submitted surveys for a specific site, a specific meal and all units
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
@@ -141,11 +163,33 @@ namespace FSOSS.System.BLL
                                                   };
                         return submittedSurveyList.ToList();
                     }
-                    else if (mealID == 0 && unitID != 0) // get a list of submitted surveys for all meals and a specific unit
+                    else if (siteID != 0 && mealID == 0 && unitID != 0) // get a list of submitted surveys for a specific site, all meals and a specific unit
                     {
                         var submittedSurveyList = from x in context.SubmittedSurveys
                                                   orderby x.date_entered descending
                                                   where x.date_entered >= startDate && x.date_entered <= endDate && x.unit_id == unitID
+                                                  select new SubmittedSurveyPOCO()
+                                                  {
+                                                      site = x.Unit.Site.site_name,
+                                                      submittedSurveyID = x.submitted_survey_id,
+                                                      unitNumber = x.Unit.unit_number,
+                                                      mealName = x.Meal.meal_name,
+                                                      participantType = x.ParticipantType.participant_description,
+                                                      ageRange = x.AgeRange.age_range_description,
+                                                      gender = x.Gender.gender_description,
+                                                      dateEntered = x.date_entered,
+                                                      contactRequest = x.contact_request,
+                                                      contacted = x.contacted,
+                                                      contactRoomNumber = x.contact_room_number,
+                                                      contactPhoneNumber = x.contact_phone_number
+                                                  };
+                        return submittedSurveyList.ToList();
+                    }
+                    else if (siteID != 0 && mealID != 0 && unitID != 0) // get a list of submitted surveys for a specific site, specific meal and a specific unit
+                    {
+                        var submittedSurveyList = from x in context.SubmittedSurveys
+                                                  orderby x.date_entered descending
+                                                  where x.date_entered >= startDate && x.date_entered <= endDate && x.unit_id == unitID && x.meal_id == mealID
                                                   select new SubmittedSurveyPOCO()
                                                   {
                                                       site = x.Unit.Site.site_name,
