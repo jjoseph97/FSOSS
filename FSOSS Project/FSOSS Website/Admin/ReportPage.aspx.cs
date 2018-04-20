@@ -15,11 +15,14 @@ using FSOSS.System.Data.Entity;
 
 public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
 {
-    public static FinalReportPOCO report = new FinalReportPOCO();
-
-
+    /// <summary>
+    /// Default Web Page Method use to check requirements 
+    /// </summary>
+    /// <param name="sender">default parameter for Page_Load event</param>
+    /// <param name="e">default parameter for Page_Load event</param>
     protected void Page_Load(object sender, EventArgs e)
     {
+        FinalReportPOCO report = new FinalReportPOCO();
         Alert.Visible = false;
         FilterPOCO filter = (FilterPOCO)(Session["filter"]);
         if(filter == null)
@@ -48,13 +51,16 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
             if(meal == null)
             {
                 mealFilter = "none";
+                FilterDescription.Text = "Report from " + siteName + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") +
+                " with no meal filter.";
             }
             else
             {
                 mealFilter = meal.meal_name;
-            }
-            FilterDescription.Text = "Report from " + siteName + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") + 
+                FilterDescription.Text = "Report from " + siteName + " from " + filter.startingDate.ToString("MMMM-dd-yyyy") + " to " + filter.endDate.ToString("MMMM-dd-yyyy") +
                 " with a meal filter of " + mealFilter + ".";
+            }
+
             TotalNumberOfSubmittedSurvey.Text = "Total number of submitted survey with the given criteria: "+report.SubmittedSurveyList.Count().ToString() + " surveys submitted.";
             if(report.QuestionTenValueCount.Count < 1)
             {
@@ -74,6 +80,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     [WebMethod]
     public static string GetChartData(int chartId)
     {
+        FinalReportPOCO report = new FinalReportPOCO();
         List<ChartPOCO> responses = new List<ChartPOCO>();
         List<String> preferencesForOrderByFirstOption = new List<String> { "Very Good", "Good", "Fair", "Poor", "Don't Know/No Opinion", "No Response" };
         List<String> preferencesForOrderBySecondOption = new List<String> { "Portion sizes are too small", "Portion sizes are just right", "Portion sizes are too large", "No Response" };
