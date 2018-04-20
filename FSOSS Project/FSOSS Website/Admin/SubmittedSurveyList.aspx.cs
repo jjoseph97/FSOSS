@@ -10,10 +10,10 @@ using System.Web.UI.WebControls;
 public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.UI.Page
 {
     // This is for the filter session data that is passed from the previous page, in order to populate the ListView
-    public FilterPOCO filter = new FilterPOCO();
+    private FilterPOCO filter = new FilterPOCO();
 
     /// <summary>
-    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// When the page loads, first this method checks if the user has proper authentication to access this page, and is redirected to login if not.
     /// Following that, the filter session data is brought in from the previous page and the page checks to see if the filter is null. 
     /// If the filter is null then the user is redirected back to the previous page to prevent browsing to this page directly with no data.
     /// </summary>
@@ -36,7 +36,7 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     }
 
     /// <summary>
-    /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to set the datasource and bind once to avoid error when the page loads.
+    /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to set the datasource and bind once to avoid error with the list view paging.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -44,7 +44,7 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     {
         SubmittedSurveyController sysmgr = new SubmittedSurveyController();
         List<SubmittedSurveyPOCO> submittedSurveyData = sysmgr.GetSubmittedSurveyList(filter.siteID, filter.startingDate, filter.endDate, filter.mealID, filter.unitID); // get the list of submitted surveys with the filter data
-        SubmittedSurveyList.DataSource = submittedSurveyData; // set the ListView with the filterd submitted survey list data
-        SubmittedSurveyList.DataBind(); // rebind the ListView
+        SubmittedSurveyListView.DataSource = submittedSurveyData; // set the ListView with the filterd submitted survey list data
+        SubmittedSurveyListView.DataBind(); // rebind the ListView
     }
 }

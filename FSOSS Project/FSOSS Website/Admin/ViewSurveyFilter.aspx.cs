@@ -48,18 +48,6 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     protected string endingInputValue { get; set; } // this is in order to get and set the end date input text on page reload
 
     /// <summary>
-    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
-    /// as well as info and success messages from the code behind.
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
-    {
-        // if an exception was thrown, handle with messageusercontrol to display the exception for error
-        MessageUserControl.HandleDataBoundException(e);
-    }
-
-    /// <summary>
     /// This method is used when the user clicks on the "View" button to view the individual survey for that particular row in the listview
     /// </summary>
     /// <param name="sender"></param>
@@ -78,7 +66,9 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                 {
                     filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                     if (filter.startingDate > filter.endDate)
+                    {
                         throw new Exception("Start Date must be before the End Date.");
+                    }
                     filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                     filter.mealID = int.Parse(MealDropDownList.SelectedValue);
                     if (UnitDropDownList.Enabled == false) // if the unit drop down list is not enabled (all hospitals is selected) then set the filter.userID to 0

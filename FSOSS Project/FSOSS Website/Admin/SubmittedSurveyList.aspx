@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card container">
-                <asp:ListView ID="SubmittedSurveyList" runat="server" >
+                <asp:ListView ID="SubmittedSurveyListView" runat="server" >
                     <AlternatingItemTemplate>
                         <tr class="fsoss-listview-alternate">
                             <td style="display: none;">
