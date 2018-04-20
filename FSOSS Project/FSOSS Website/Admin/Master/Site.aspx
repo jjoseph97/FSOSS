@@ -101,21 +101,20 @@
                                 <asp:DataPager runat="server" ID="SurveyListDataPager">
                                     <Fields>
                                         <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-
-                                        <asp:TemplatePagerField>
-                                            <PagerTemplate>
-                                                <div class="my-2 text-white">
-                                                    <b>Page
-                <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
-                                                        of
-                <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
-                                                        (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
-                                                        records)
-                                                    </b>
-                                                </div>
-                                            </PagerTemplate>
-                                        </asp:TemplatePagerField>
-
+                                            <asp:TemplatePagerField>
+                                                <PagerTemplate>
+                                                    <div class="my-2 text-white">
+                                                        <b>Page 
+                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
+                                                            of
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
+                                                            (
+                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                            records)
+                                                        </b>
+                                                    </div>
+                                                </PagerTemplate>
+                                            </asp:TemplatePagerField>
                                     </Fields>
                                 </asp:DataPager>
                             </td>

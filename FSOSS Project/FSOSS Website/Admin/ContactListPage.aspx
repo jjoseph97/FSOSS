@@ -41,13 +41,8 @@
                     </tr>
                 </AlternatingItemTemplate>
                 <EmptyDataTemplate>
-                    <table runat="server" style="">
-                        <tr>
-                            <td>There are no more Contact Requests for this site.</td>
-                        </tr>
-                    </table>
+                    <p class="text-center">There are no more Contact Requests for this site.</p>
                 </EmptyDataTemplate>
-
                 <ItemTemplate>
                     <tr class="fsoss-listview-itemtemplate">
                         <td style="display: none">
@@ -60,7 +55,6 @@
                             <asp:Label Text='<%# Eval("mealName") %>' runat="server" CssClass="pl-3" ID="Label2" /></td>
                         <td>
                             <asp:Label Text='<%# Eval("dateEntered") %>' CssClass="pl-3" runat="server" ID="dateEnteredLabel" /></td>
-
                         <td>
                             <asp:Label Text='<%# Eval("contactRoomNumber") %>' CssClass="pl-3" runat="server" ID="contactRoomNumberLabel" /></td>
                         <td>
@@ -95,6 +89,20 @@
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
                                             <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:TemplatePagerField>
+                                                <PagerTemplate>
+                                                    <div class="my-2 text-white">
+                                                        <b>Page 
+                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
+                                                            of
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
+                                                            (
+                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                            records)
+                                                        </b>
+                                                    </div>
+                                                </PagerTemplate>
+                                            </asp:TemplatePagerField>
                                         </Fields>
                                     </asp:DataPager>
                                 </td>

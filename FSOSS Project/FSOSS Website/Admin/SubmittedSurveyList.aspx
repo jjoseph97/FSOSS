@@ -37,11 +37,7 @@
                         </tr>
                     </AlternatingItemTemplate>
                     <EmptyDataTemplate>
-                        <table runat="server" style="background-color: #FFFFFF; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
-                            <tr>
-                                <td>No Submitted Surveys Found.</td>
-                            </tr>
-                        </table>
+                        <p class="text-center">No submitted surveys were found.</p>
                     </EmptyDataTemplate>
                     <ItemTemplate>
                         <tr class="fsoss-listview-itemtemplate">
@@ -94,8 +90,13 @@
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>
                                                     <div class="my-2 text-white">
-                                                        <b>Page <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' /> of
-                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' /> (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' /> records)
+                                                        <b>Page 
+                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
+                                                            of
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
+                                                            (
+                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                            records)
                                                         </b>
                                                     </div>
                                                 </PagerTemplate>
