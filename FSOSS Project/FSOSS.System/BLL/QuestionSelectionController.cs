@@ -13,8 +13,10 @@ namespace FSOSS.System.BLL
     [DataObject]
     public class QuestionSelectionController
     {
-        //TakeSurvey.aspx and TakeSurvey.aspx.cs
-        //method used to get the response string value for Question 1A
+        /// <summary>
+        /// Method used to get the response string value for Question 1A where question_id in the database is 2.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1AReponse()
         {
@@ -32,7 +34,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the response string value for Question 1B
+        /// <summary>
+        /// Method used to get the response string value for Question 1B where question_id in the database is 3.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1BReponse()
         {
@@ -50,7 +55,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the response string value Question 1C
+        /// <summary>
+        /// Method used to get the response string value for Question 1C where question_id in the database is 4.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1CReponse()
         {
@@ -68,7 +76,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the response string value for Question 1D
+        /// <summary>
+        /// Method used to get the response string value for Question 1D where question_id in the database is 5. 
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1DReponse()
         {
@@ -86,7 +97,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the response string value for Question 1E
+        /// <summary>
+        /// Method used to get the response string value for Question 1E where question_id in the database is 6.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion1EReponse()
         {
@@ -103,8 +117,11 @@ namespace FSOSS.System.BLL
                 return result.ToList();
             }
         }
-
-        //method used to get the response string value for Question 2
+        
+        /// <summary>
+        /// Method used to get the response string value for Question 2 where question_id in the database is 8.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion2Reponse()
         {
@@ -122,7 +139,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the response string value for Question 3
+        /// <summary>
+        /// Method used to get the response string value for Question 3 where question_id in the database is 9.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion3Reponse()
         {
@@ -139,8 +159,11 @@ namespace FSOSS.System.BLL
                 return result.ToList();
             }
         }
-
-        //method used to get the response string value for Question 4
+        
+        /// <summary>
+        /// Method used to get the response string value for Question 4 where question_id in the database is 10.
+        /// </summary>
+        /// <returns>returns a list from the ResponsePOCO with the text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestion4Reponse()
         {
@@ -158,8 +181,11 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Edit Survey Questions Page
-        //Method used to display current survey responses
+        /// <summary>
+        /// Method used to display current survey responses
+        /// </summary>
+        /// <param name="questionid"></param>
+        /// <returns>returns a list from the ResponsePOCO with the responseid, text and value</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ResponsePOCO> GetQuestionResponses(int questionid)
         {
@@ -178,7 +204,15 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Update survey responses to return new string 
+        /// <summary>
+        /// Method used to update current survey responses 
+        /// </summary>
+        /// <param name="questionid"></param>
+        /// <param name="ResponseId"></param>
+        /// <param name="text"></param>
+        /// <param name="value"></param>
+        /// <param name="strQuestion"></param>
+        /// <returns>returns a confirmation that a response is updated</returns> 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public string UpdateQuestionResponses(int questionid, int ResponseId, string text, string value, string strQuestion)
         {
@@ -187,22 +221,24 @@ namespace FSOSS.System.BLL
             {
                 Regex validResponse = new Regex("^[a-zA-Z ?.'/]+$");
 
-                if (text.Length.Equals(0))
+                if (text.Length.Equals(0)) //if no response is entered, display an error
                 {
                     throw new Exception("Edit field can't be empty");
                 }
-                else if (text.Length > 100)
+                else if (text.Length > 100) //if response is not the correct length (100 characters or less), display an error
                 {
                     throw new Exception("Response must be 100 characters or less");
                 }
-                else if (!validResponse.IsMatch(text))
+                else if (!validResponse.IsMatch(text)) //if the response entered is not valid (special characters or numbers entered), display an error
                 {
                     throw new Exception("Please enter words with no numbers or special characters.");
                 }
+                //select a question selection (response) where question_id = questionid and question_selection_id = responseid 
                 var result = (from x in context.QuestionSelections
                              where x.question_id == questionid && x.question_selection_id == ResponseId
                              select x).FirstOrDefault();
 
+                //new response text and value is assigned
                 result.question_selection_text = text;
                 result.question_selection_value = text;
 
