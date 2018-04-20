@@ -68,9 +68,7 @@
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="UnitLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Filter by Unit:" Visible="false"></asp:Label>
-                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-4 my-2 form-control" runat="server" AppendDataBoundItems="true" Visible="false" Enabled="false">
-                        <asp:ListItem Text="All Units" Value="0" Selected="True" />
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-4 my-2 form-control" runat="server" Visible="false" Enabled="false" />
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Button ID="ViewButton" class="offset-sm-5 col-sm-2 btn btn-info mb-2" runat="server" Text="View" OnClick="ViewButton_Click" />

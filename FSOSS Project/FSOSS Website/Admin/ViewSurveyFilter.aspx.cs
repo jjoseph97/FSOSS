@@ -126,6 +126,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             UnitDropDownList.DataValueField = "unitID";
             UnitDropDownList.DataTextField = "unitNumber";
             UnitDropDownList.DataBind();
+            UnitDropDownList.Items.Insert(0, new ListItem("All Units", "0", true)); // adds dropdown item "All Units"
+            UnitDropDownList.Items.Remove(UnitDropDownList.Items.FindByText("Not Applicable")); // removes the dropdown item "Not Applicable"
         }
         else // else, if no hospital has been selected (all hospitals) hide the unit drop down and do not populate the datasource
         {
