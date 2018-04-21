@@ -17,7 +17,6 @@
         <div class="col-sm-12">
             <div class="card container pt-2">
                 <div class="row container mx-auto px-0">
-                    <asp:Label ID="SubSurveyIDLabel" runat="server" Text="" Style="display: none"></asp:Label>
                     <div class="col-sm-4 px-0">
                         <asp:Label ID="SiteLabel" class="col-sm-4 px-0 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site:"></asp:Label>
                         <asp:Label runat="server" ID="SiteNameLabel" Text="" /><br />

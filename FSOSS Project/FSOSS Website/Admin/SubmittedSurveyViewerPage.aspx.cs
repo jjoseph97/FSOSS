@@ -24,8 +24,7 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
         else if (!IsPostBack)
         {
             string ssn = Request.QueryString["sid"]; // retreive the surveyID through a query string request passed from the submitted survey list page
-            int subSurveyID;
-            Int32.TryParse(ssn, out subSurveyID);
+            int subSurveyID = Convert.ToInt32(ssn);
 
             SubmittedSurveyController ssc = new SubmittedSurveyController();
             // if the query string is null, the survey id is not a number or is not a valid number (too big or references a non-existant submitted survey), 
@@ -36,8 +35,6 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
             }
             else // else, the submitted survey details are shown on the page
             {
-                SubSurveyIDLabel.Text = ssn;
-
                 if (ssc.RequestsContact(subSurveyID))  // the "Resolve" button will be shown if the user wishes to be contacted and the issue has not been resolved yet
                 {
                     ContactResolve.Visible = true;
@@ -105,7 +102,6 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
         string ssn = Request.QueryString["sid"]; // get the survey ID from the URL query string
         MessageUserControl.TryRun(() =>
         {
-            SubSurveyIDLabel.Text = ssn;
             int surveyID = Convert.ToInt32(ssn);
             SubmittedSurveyController ssc = new SubmittedSurveyController();
             ssc.ContactSurvey(surveyID); // send the survey ID to the ContactSurvey method on the SubmittedSurveyController
