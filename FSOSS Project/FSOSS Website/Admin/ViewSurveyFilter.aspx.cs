@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// When the page loads first the page checks if the admin has proper authentication to access this page, and is redirected to login if not.
     /// Following that, the drop down lists on the page are populated with the appropriate information from the database.
     /// </summary>
     /// <param name="sender"></param>
@@ -23,7 +23,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
         this.startingInputValue = startingPeriodInput;
         this.endingInputValue = endingPeriodInput;
 
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirect admin to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
@@ -48,7 +48,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     protected string endingInputValue { get; set; } // this is in order to get and set the end date input text on page reload
 
     /// <summary>
-    /// This method is used when the user clicks on the "View" button to view the individual survey for that particular row in the listview
+    /// This method is used when the admin clicks on the "View" button to view the individual survey for that particular row in the listview
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -77,7 +77,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                         {
                             filter.unitID = 0;
                         }
-                        else // else, get the selected value of the unit drop down list and populate the filter.userID with that value
+                        else // else, get the selected value of the unit drop down list and populate the filter.adminID with that value
                         {
                             filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
                         }
@@ -90,7 +90,7 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                         throw new Exception("Please select an ending period");
                     }
                 }
-                else // if the start date is set after today's date display an error to the user
+                else // if the start date is set after today's date display an error to the admin
                 {
                     throw new Exception("Starting date cannot be after today's date.");
                 }

@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads first the page checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// When the page loads first the page checks if the admin has proper authentication to access this page, and is redirected to login if not.
     /// Following that, the query string for the surveyID (sid) is obtained to populate the page with the appropriate submitted survey details. 
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirect admin to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
@@ -28,14 +28,14 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
 
             SubmittedSurveyController ssc = new SubmittedSurveyController();
             // if the query string is null, the survey id is not a number or is not a valid number (too big or references a non-existant submitted survey), 
-            // then the user is taken back to the view survey filter page
+            // then the admin is taken back to the view survey filter page
             if (ssn == null || !ssc.ValidSurvey(subSurveyID))
             {
                 Response.Redirect("ViewSurveyFilter.aspx");
             }
             else // else, the submitted survey details are shown on the page
             {
-                if (ssc.RequestsContact(subSurveyID))  // the "Resolve" button will be shown if the user wishes to be contacted and the issue has not been resolved yet
+                if (ssc.RequestsContact(subSurveyID))  // the "Resolve" button will be shown if the admin wishes to be contacted and the issue has not been resolved yet
                 {
                     ContactResolve.Visible = true;
                 }
