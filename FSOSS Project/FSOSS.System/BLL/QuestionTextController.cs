@@ -16,8 +16,10 @@ namespace FSOSS.System.BLL
     public class QuestionTextController
     {
 
-        //TakeSurvey.aspx & TakeSurvey.aspx.cs
-        //method used to get the string value for Question 1
+        /// <summary>
+        /// Method used to get the string value for Question 1 where question_id in the database is 1 
+        /// </summary>
+        /// <returns>returns the string value for Question 1</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1()
         {
@@ -31,7 +33,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question1A
+        /// <summary>
+        /// Method used to get the string value for Question 1A where question_id in the database is 2
+        /// </summary>
+        /// <returns>returns the string value for Question 1A</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1A()
         {
@@ -45,7 +50,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question1B
+        /// <summary>
+        /// Method used to get the string value for Question 1B where question_id in the database is 3
+        /// </summary>
+        /// <returns>returns the string value for Question 1B</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1B()
         {
@@ -59,7 +67,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question1C
+        /// <summary>
+        /// Method used to get the string value for Question 1C where question_id in the database is 4 
+        /// </summary>
+        /// <returns>returns the string value for Question 1C</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1C()
         {
@@ -73,7 +84,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question1D
+        /// <summary>
+        /// Method used to get the string value for Question 1D where question_id in the database is 5
+        /// </summary>
+        /// <returns>returns the string value for Question 1D</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1D()
         {
@@ -87,7 +101,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question1E
+        /// <summary>
+        /// Method used to get the string value for Question 1E where question_id in the database is 6
+        /// </summary>
+        /// <returns>returns the string value for Question 1E</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion1E()
         {
@@ -101,7 +118,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question2
+        /// <summary>
+        /// Method used to get the string value for Question 2 where question_id in the database is 8 
+        /// </summary>
+        /// <returns>returns the string value for Question 2</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion2()
         {
@@ -115,7 +135,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question3
+        /// <summary>
+        /// Method used to get the string value for Question 3 where question_id in the database is 9
+        /// </summary>
+        /// <returns>returns the string value for Question 3</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion3()
         {
@@ -129,7 +152,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question4
+        /// <summary>
+        /// Method used to get the string value for Question 4 where question_id in the databse is 10
+        /// </summary>
+        /// <returns>returns the string value for Question 4</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion4()
         {
@@ -143,7 +169,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method used to get the string value for Question5
+        /// <summary>
+        /// Method used to get the string value for Question 5 where question_id in the database is 11 
+        /// </summary>
+        /// <returns>returns the string value for Question 5</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestion5()
         {
@@ -157,8 +186,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //Customer Profile
-        //method to return the string for Gender  
+        /// <summary>
+        /// Method used to return the string value for Gender where question_id in the database is 12
+        /// </summary>
+        /// <returns>returns the string value for Gender</returns> 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionGender()
         {
@@ -172,7 +203,10 @@ namespace FSOSS.System.BLL
             }
         }
 
-        //method to return the string for Age Range
+        /// <summary>
+        /// Method used to return the string value for Age Range where question_id in the database is 13
+        /// </summary>
+        /// <returns>returns the string value for Age Range</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionAgeRange()
         {
@@ -185,31 +219,31 @@ namespace FSOSS.System.BLL
                 return result;
             }
         }
-
+        /// <summary>
+        /// Method used to get the current question string value 
+        /// </summary>
+        /// <param name="question_id"></param>
+        /// <returns>returns the string for each question</returns>
         //Edit Survey Questions Page
         //Method used to get current question string
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionText(int question_id)
         {
-            string questiontext;
-            using (var connection = new NpgsqlConnection())
+            using (var context = new FSOSSContext())
             {
-               
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["FSOSSConnectionString"].ToString();
-                connection.Open();
-                var cmd = new NpgsqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT QUESTION_TEXT" +
-                                    " FROM QUESTION" +
-                                    " WHERE QUESTION_ID = @1";
-                cmd.Parameters.AddWithValue("1", question_id);
-                questiontext = cmd.ExecuteScalar().ToString();
-                connection.Close();
+
+                var result = (from x in context.Questions
+                              where x.question_id.Equals(question_id)
+                              select x.question_text).FirstOrDefault();
+                return result;
             }
-            return questiontext;
         }
 
-        //Update survey questions to return new string
+        /// <summary>
+        /// Method used to update the survey questions to return a new string 
+        /// </summary>
+        /// <param name="questionid"></param>
+        /// <param name="text"></param>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public void UpdateQuestionsText(int questionid, string text)
         {
@@ -217,15 +251,15 @@ namespace FSOSS.System.BLL
             {
                 Regex validResponse = new Regex("^[a-zA-Z ?.'/]+$");
 
-                if (text.Length.Equals(0))
+                if (text.Length.Equals(0)) // if no question entered into field, display an error
                 {
                     throw new Exception("Question text field can't be empty");
                 }
-                else if (text.Length > 100)
+                else if (text.Length > 100) // if question is not the correct length (100 characters or less), display an error 
                 {
                     throw new Exception("Question must be 100 characters or less");
                 }
-                else if (!validResponse.IsMatch(text))
+                else if (!validResponse.IsMatch(text)) // if the response entered is not valid (numbers and special characters are entered)
                 {
                     throw new Exception("Please enter words with no numbers or special characters.");
                 }
