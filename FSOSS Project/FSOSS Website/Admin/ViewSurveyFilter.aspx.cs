@@ -48,18 +48,6 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     protected string endingInputValue { get; set; } // this is in order to get and set the end date input text on page reload
 
     /// <summary>
-    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
-    /// as well as info and success messages from the code behind.
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
-    {
-        // if an exception was thrown, handle with messageusercontrol to display the exception for error
-        MessageUserControl.HandleDataBoundException(e);
-    }
-
-    /// <summary>
     /// This method is used when the user clicks on the "View" button to view the individual survey for that particular row in the listview
     /// </summary>
     /// <param name="sender"></param>
@@ -74,28 +62,37 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             if (startingPeriodInput != "") // check if there was any date entered or selected in the StartingPeriodInput text field
             {
                 filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                if (endingPeriodInput != "") // check if there was any date entered or selected in the EndingPeriodInput text field 
+                if (filter.startingDate <= DateTime.Now) // check that the starting date is on or before todays date
                 {
-                    filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-                    if (filter.startingDate > filter.endDate)
-                        throw new Exception("Start Date must be before the End Date.");
-                    filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
-                    filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                    if (UnitDropDownList.Enabled == false) // if the unit drop down list is not enabled (all hospitals is selected) then set the filter.userID to 0
+                    if (endingPeriodInput != "") // check if there was any date entered or selected in the EndingPeriodInput text field 
                     {
-                        filter.unitID = 0;
+                        filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+                        if (filter.startingDate > filter.endDate)
+                        {
+                            throw new Exception("Starting date must be before the end date.");
+                        }
+                        filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
+                        filter.mealID = int.Parse(MealDropDownList.SelectedValue);
+                        if (UnitDropDownList.Enabled == false) // if the UnitDropDownList is not enabled (all hospitals is selected in the HospitalDropDownList) then set the filter.unitID to 0
+                        {
+                            filter.unitID = 0;
+                        }
+                        else // else, get the selected value of the unit drop down list and populate the filter.userID with that value
+                        {
+                            filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
+                        }
+                        Session["filter"] = filter; // create the session to be passed to the SubmittedSurveyList page
+                        Response.Redirect("SubmittedSurveyList.aspx"); // now redirect to the SubmittedSurveyList page with the filter details
                     }
-                    else // else, get the selected value of the unit drop down list and populate the filter.userID with that value
+                    else // else, display an error to enter a date for the ending period
                     {
-                        filter.unitID = int.Parse(UnitDropDownList.SelectedValue);
-                    }
-                    Session["filter"] = filter; // create the session to be passed to the SubmittedSurveyList page
-                    Response.Redirect("SubmittedSurveyList.aspx"); // now redirect to the SubmittedSurveyList page with the filter details
-                }
-                else // else, display an error to enter a date for the ending period
-                {
 
-                    throw new Exception("Please select an ending period");
+                        throw new Exception("Please select an ending period");
+                    }
+                }
+                else // if the start date is set after today's date display an error to the user
+                {
+                    throw new Exception("Starting date cannot be after today's date.");
                 }
             }
             else // else, display an error to enter a date for the starting period
@@ -126,6 +123,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
             UnitDropDownList.DataValueField = "unitID";
             UnitDropDownList.DataTextField = "unitNumber";
             UnitDropDownList.DataBind();
+            UnitDropDownList.Items.Insert(0, new ListItem("All Units", "0", true)); // adds dropdown item "All Units"
+            UnitDropDownList.Items.Remove(UnitDropDownList.Items.FindByText("Not Applicable")); // removes the dropdown item "Not Applicable"
         }
         else // else, if no hospital has been selected (all hospitals) hide the unit drop down and do not populate the datasource
         {

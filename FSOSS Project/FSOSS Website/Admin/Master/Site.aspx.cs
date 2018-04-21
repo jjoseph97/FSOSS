@@ -12,6 +12,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
 {
     static public bool seeArchive = false;
 
+    /// <summary>
+    /// when the page loads, if it is the first time loading the page, the ListView1 is visible and the seeArchive boolean is set to false
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["securityID"] == null) // Redirect user to login if not logged in
@@ -31,6 +36,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }
     }
 
+    /// <summary>
+    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller
+    /// as well as info and success messages from the code behind.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
     {
         // if an exception was thrown, handle with messageusercontrol to display the exception for error
@@ -47,7 +58,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }
     }
 
-    //Changes the ODS to display either the SiteODS or ArchivedODS
+    /// <summary>
+    /// when the view active/archive is clicked, this changes the chosen ods for all listviews to the other ods.
+    /// if the archived ods is being used, then the active ods is set, and vice-versa.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ToggleView(object sender, EventArgs e)
     {
         if (seeArchive)
@@ -67,7 +83,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }
     }
 
-    //When the Add Site button is clicked, it adds a new entry to the database.
+    /// <summary>
+    /// An on-click method that adds a site to the database, adds assigns a new survey word to the site, and adds a "Not Applicable" unit associated with the new site.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void AddSite_Click(object sender, EventArgs e)
     {
         SiteController sysmgr = new SiteController();
@@ -88,6 +108,11 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         }, "Success", "Successfully added the new site: \"" + siteName + "\"");
     }
 
+    /// <summary>
+    /// This method changes the class of the DeleteButton so that when the listview is displaying active sites, the DeleteButton will have the class "btn-danger". If the listview is displaying archived sites, the DeleteButton will have the class "btn-success".
+    /// </summary>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ListView1_ItemDataBound(object sender, ListViewItemEventArgs e)
     {
         if (e.Item.ItemType == ListViewItemType.DataItem)

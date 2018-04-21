@@ -86,7 +86,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
         UnitsListView.Visible = true;
-        ToggleView(null, e);
+        ToggleView(null, EventArgs.Empty);
         ArchivedUnitsListView.DataBind();
         UnitsListView.DataBind();
     }
@@ -111,6 +111,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         }, "Success", "Successfully added the new unit: \"" + unitNumber + "\"");
     }
 
+    /// <summary>
+    /// when the view active/archive is clicked, this changes the chosen ods for all listviews to the other ods.
+    /// if the archived ods is being used, then the active ods is set, and vice-versa.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ToggleView(object sender, EventArgs e)
     {
         if (seeArchive)

@@ -140,7 +140,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is for showing the current archived survey words that are in the database.
+    /// This method occurs when the user clicks on the ShowArchivedButton and is for showing the current archived survey words in the SurveyWordListView.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -148,14 +148,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         SurveyWordListView.DataSourceID = "ArchivedSurveyWordODS"; // show the current archived survey words on the ListView
         SurveyWordListView.DataBind();
-        // this is to clear the search when switching from active to archived words
-        ClearSearchButton_Click(null, EventArgs.Empty);
+        ClearSearchButton_Click(null, EventArgs.Empty); // this is to clear the search when switching from active to archived words
         ShowActiveButton.Visible = true;
         ShowArchivedButton.Visible = false;
     }
 
     /// <summary>
-    /// This button on click method is for showing the current active survey words that are in the database.
+    /// This method occurs when the user clicks on the ShowActiveButton and is for showing the current active survey words in the SurveyWordListView.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -163,7 +162,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     {
         SurveyWordListView.DataSourceID = "ActiveSurveyWordODS"; // show the current active survey words on the ListView
         SurveyWordListView.DataBind();
-
         ClearSearchButton_Click(null, EventArgs.Empty); // this is to clear the search when switching from active to archived words
         ShowActiveButton.Visible = false;
         ShowArchivedButton.Visible = true;
@@ -176,28 +174,18 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e">Contains the event data.</param>
     protected void SurveyWordListView_ItemDataBound(object sender, ListViewItemEventArgs e)
     {
-        if (e.Item.ItemType == ListViewItemType.DataItem)
+        if (e.Item.ItemType == ListViewItemType.DataItem) // used to determine the type of item that the ListViewItem object represents
         {
             Button disableBtn = (Button)e.Item.FindControl("DisableButton");
             Button enableBtn = (Button)e.Item.FindControl("EnableButton");
             if (disableBtn != null || enableBtn != null) // check if the found EnableButton control and DisableButton control is not returned as null
             {
-                if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS") // if the ListView is populated with active survey words, show the disabled button
+                if (SurveyWordListView.DataSourceID == "ActiveSurveyWordODS" || SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS") // if the ListView is populated with active or searched active survey words, show the disable button
                 {
                     disableBtn.Visible = true;
                     enableBtn.Visible = false;
                 }
-                else if (SurveyWordListView.DataSourceID == "SearchActiveSurveyWordODS") // if the ListView is populated with searched active survey words, show the disabled button
-                {
-                    disableBtn.Visible = true;
-                    enableBtn.Visible = false;
-                }
-                else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS") // if the ListView is populated with archived survey words, show the disabled button
-                {
-                    disableBtn.Visible = false;
-                    enableBtn.Visible = true;
-                }
-                else if (SurveyWordListView.DataSourceID == "SearchArchivedSurveyWordODS") // if the ListView is populated with searched archived survey words, show the disabled button
+                else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS" || SurveyWordListView.DataSourceID == "SearchArchivedSurveyWordODS") // if the ListView is populated with archived or searched archived survey words, show the enable button
                 {
                     disableBtn.Visible = false;
                     enableBtn.Visible = true;

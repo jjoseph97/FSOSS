@@ -249,7 +249,11 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     }
 
 
-
+    /// <summary>
+    /// This method changes the class of the DeleteButton so that when the listview is displaying active sites, the DeleteButton will have the class "btn-danger". If the listview is displaying archived sites, the DeleteButton will have the class "btn-success"
+    /// </summary>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ListView_ItemDataBound(object sender, ListViewItemEventArgs e)
     {
         if (e.Item.ItemType == ListViewItemType.DataItem)

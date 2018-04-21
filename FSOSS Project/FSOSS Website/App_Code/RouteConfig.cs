@@ -11,6 +11,7 @@ namespace FSOSS_Website
         public static void RegisterRoutes(RouteCollection routes)
         {
             var settings = new FriendlyUrlSettings();
+            // Set RedirectMode to Off to allow AJAX calls from client side
             settings.AutoRedirectMode = RedirectMode.Off;
             routes.EnableFriendlyUrls(settings);
         }

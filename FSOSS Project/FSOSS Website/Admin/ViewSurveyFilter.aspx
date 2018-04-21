@@ -38,7 +38,7 @@
                     <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="ViewButton">
                         <asp:Label ID="StartingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Starting Period:"></asp:Label>
                         <div id="StartDatePicker" class="col-sm-4 input-group date px-0 my-2">
-                            <input id="StartingPeriodInput" name="StartingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.startingInputValue %>" autocomplete="off" />
+                            <input id="StartingPeriodInput" name="StartingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.startingInputValue %>" autocomplete="off" readonly style="background-color: #FFFFFF;" />
                             <span class="input-group-btn border">
                                 <label for="StartingPeriodInput" class="btn btn-default p-1 m-0">
                                     <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
@@ -51,7 +51,7 @@
                     <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="ViewButton">
                         <asp:Label ID="EndingPeriodLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Ending Period:"></asp:Label>
                         <div id="EndDatePicker" class="col-sm-4 input-group date px-0 my-2">
-                            <input id="EndingPeriodInput" name="EndingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.endingInputValue %>" autocomplete="off" />
+                            <input id="EndingPeriodInput" name="EndingPeriodInput" type="text" class="col-11 col-md-11 form-control" placeholder="YYYY-MM-DD" value="<%= this.endingInputValue %>" autocomplete="off" readonly style="background-color: #FFFFFF;" />
                             <span class="input-group-btn border">
                                 <label for="EndingPeriodInput" class="btn btn-default p-1 m-0">
                                     <i class="fas fa-calendar-alt" style="font-size: 30px;"></i>
@@ -68,9 +68,7 @@
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Label ID="UnitLabel" class="col-sm-4 my-2 text-center text-sm-left" runat="server" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Filter by Unit:" Visible="false"></asp:Label>
-                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-4 my-2 form-control" runat="server" AppendDataBoundItems="true" Visible="false" Enabled="false">
-                        <asp:ListItem Text="All Units" Value="0" Selected="True" />
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="UnitDropDownList" class="col-sm-4 my-2 form-control" runat="server" Visible="false" Enabled="false" />
                 </div>
                 <div class="row container mx-auto px-0">
                     <asp:Button ID="ViewButton" class="offset-sm-5 col-sm-2 btn btn-info mb-2" runat="server" Text="View" OnClick="ViewButton_Click" />

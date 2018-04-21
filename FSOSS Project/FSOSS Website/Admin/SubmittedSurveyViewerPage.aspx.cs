@@ -96,17 +96,6 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     }
 
     /// <summary>
-    /// This method is required to use the MessageUserControl on the page in order to handle thrown exception messages for errors from the controller.
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
-    {
-        // if an exception was thrown, handle with messageusercontrol to display the exception for error
-        MessageUserControl.HandleDataBoundException(e);
-    }
-
-    /// <summary>
     /// This method is used to resolve an individual submitted survey that has a unresolved contact request attached to it.
     /// </summary>
     /// <param name="sender"></param>

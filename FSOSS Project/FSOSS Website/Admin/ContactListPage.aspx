@@ -8,14 +8,11 @@
     </div>
     <div>
         <div class="card container">
-            <div class="row">
-                    <asp:Label ID="SiteLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
-                    <asp:DropDownList ID="SiteDDL" runat="server" class="col-sm-4 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
-            </div>
-            <div class="row">
-
-                <asp:Label ID="COntactLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests"></asp:Label><br />
-                <asp:Label ID="ContactCountLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server"></asp:Label>
+            <div class="row col-md-12">
+                <asp:Label ID="SiteLabel" runat="server" class="col-md-2 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
+                <asp:DropDownList ID="SiteDDL" runat="server" class="col-md-4 offset-md-1 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+                <asp:Label ID="COntactLabel" runat="server" class="col-6 col-lg-3 offset-lg-1 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests:"></asp:Label><br />
+                <asp:Label ID="ContactCountLabel" class="col-6 col-lg-1 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px; color: #223f88;" runat="server"></asp:Label>
             </div>
             <asp:ListView ID="ContactRequestList" runat="server" DataSourceID="ContactRequestODS" OnItemCommand="GoToSSView">
                 <AlternatingItemTemplate>
@@ -41,13 +38,8 @@
                     </tr>
                 </AlternatingItemTemplate>
                 <EmptyDataTemplate>
-                    <table runat="server" style="">
-                        <tr>
-                            <td>There are no more Contact Requests for this site.</td>
-                        </tr>
-                    </table>
+                    <p class="text-center">There are no more Contact Requests for this site.</p>
                 </EmptyDataTemplate>
-
                 <ItemTemplate>
                     <tr class="fsoss-listview-itemtemplate">
                         <td style="display: none">
@@ -60,7 +52,6 @@
                             <asp:Label Text='<%# Eval("mealName") %>' runat="server" CssClass="pl-3" ID="Label2" /></td>
                         <td>
                             <asp:Label Text='<%# Eval("dateEntered") %>' CssClass="pl-3" runat="server" ID="dateEnteredLabel" /></td>
-
                         <td>
                             <asp:Label Text='<%# Eval("contactRoomNumber") %>' CssClass="pl-3" runat="server" ID="contactRoomNumberLabel" /></td>
                         <td>
@@ -95,6 +86,20 @@
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
                                             <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:TemplatePagerField>
+                                                <PagerTemplate>
+                                                    <div class="my-2 text-white">
+                                                        <b>Page 
+                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
+                                                            of
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
+                                                            (
+                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                            records)
+                                                        </b>
+                                                    </div>
+                                                </PagerTemplate>
+                                            </asp:TemplatePagerField>
                                         </Fields>
                                     </asp:DataPager>
                                 </td>

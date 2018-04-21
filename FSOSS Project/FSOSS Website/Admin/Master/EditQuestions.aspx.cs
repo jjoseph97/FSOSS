@@ -96,4 +96,46 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
             }, "Success", successMessage);
         }
     }
+
+
+    /// <summary>
+    /// changes the viewable question for editing.
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void QuestionDDL_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            int selectedQuestion = int.Parse(QuestionDDL.SelectedValue);
+            string description;
+            QuestionTextController sysmgr = new QuestionTextController();
+
+            description = sysmgr.GetQuestionText(selectedQuestion);
+            if (String.IsNullOrEmpty(description))
+            {
+                editQuestion.Visible = false;
+                editResponse.Visible = false;
+            }
+
+            else
+            {
+                editQuestion.Visible = true;
+                editResponse.Visible = true;
+                Message.Visible = false;
+                QuestionID.Value = QuestionDDL.SelectedItem.Value; // this is the ID for Question ID on the Question Table (use for update)
+                headerText.InnerText = QuestionDDL.SelectedItem.Text;
+                DescriptionTextBox.Text = description;
+            }
+
+
+        }
+        catch
+        {
+            editQuestion.Visible = false;
+            editResponse.Visible = false;
+            Message.Visible = true;
+        }
+    }
 }

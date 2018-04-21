@@ -187,10 +187,10 @@
             </div>
         </div>
     </div>
-    </div>
-     <div class="row" style="padding-top:25px">
+             <div class="row" style="padding-top:25px">
                  <asp:Label ID="SurveyLabel" CssClass="mx-auto h5" class="label label-primary" runat="server"></asp:Label>
             </div>
+    </div>
     <div class="row" style="padding-top:25px">
          <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
     </div>
@@ -224,6 +224,7 @@
                 var valueArray = [];
                 var borderArray = [];
                 var totalSurveys = 0;
+                if (aData.length > 0) {
                 $.each(aData, function (inx, val) {
                     totalSurveys = totalSurveys + Number(val.Value);  
                 });
@@ -236,8 +237,7 @@
                     var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) +"%" + "</td></tr>";
                     $("#Question1Table").append(markup);
                 });
-                $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");
-                if (valueArray.length > 0) {
+                $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");              
                     var pieChart = new Chart(chart1, {
                         type: 'pie',
                         data: {
