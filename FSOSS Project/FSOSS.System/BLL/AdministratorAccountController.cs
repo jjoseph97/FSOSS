@@ -227,7 +227,7 @@ namespace FSOSS.System.BLL
         /// <param name="archive"></param>
         /// <param name="selectedRoleId"></param>
         /// <returns>returns the username for confirmation</returns>
-        public string UpdateAdministratorAccount(string username, string password, string firstname, string lastname, bool archive, int selectedRoleId)
+        public string UpdateAdministratorAccount(string username, string password, string firstname, string lastname, bool archive, int securityId)
         {
             // Make a connection to the database to use stored procedures
             using (var connection = new NpgsqlConnection())
@@ -247,7 +247,7 @@ namespace FSOSS.System.BLL
                 cmd.Parameters.AddWithValue("firstname_param", firstname);
                 cmd.Parameters.AddWithValue("lastname_param", lastname);
                 cmd.Parameters.AddWithValue("archived_yn_param", archive);
-                cmd.Parameters.AddWithValue("securityid_param", selectedRoleId);
+                cmd.Parameters.AddWithValue("securityid_param", securityId);
                 // Execute the query
                 string updatedUser = cmd.ExecuteScalar().ToString();
                 // Close the connection
@@ -264,7 +264,7 @@ namespace FSOSS.System.BLL
         /// <param name="archive"></param>
         /// <param name="selectedRoleId"></param>
         /// <returns>returns the username for confirmation</returns>
-        public string UpdateAdministratorAccount(string username, string firstname, string lastname, bool archive, int selectedRoleId)
+        public string UpdateAdministratorAccount(string username, string firstname, string lastname, bool archive, int securityId)
         {
             // Make a connection to the database to use stored procedures
             using (var connection = new NpgsqlConnection())
@@ -283,7 +283,7 @@ namespace FSOSS.System.BLL
                 cmd.Parameters.AddWithValue("firstname_param", firstname);
                 cmd.Parameters.AddWithValue("lastname_param", lastname);
                 cmd.Parameters.AddWithValue("archived_yn_param", archive);
-                cmd.Parameters.AddWithValue("securityid_param", selectedRoleId);
+                cmd.Parameters.AddWithValue("securityid_param", securityId);
                 // Execute the query
                 string updatedUser = cmd.ExecuteScalar().ToString();
                 // Close the connection
