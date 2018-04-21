@@ -101,8 +101,8 @@
                         </table>
                     </LayoutTemplate>
                 </asp:ListView>
-                <asp:ObjectDataSource runat="server" ID="AdministratorAccountODS" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllUserList" TypeName="FSOSS.System.BLL.AdministratorAccountController"></asp:ObjectDataSource>
-                <asp:ObjectDataSource runat="server" ID="SearchedAdministratorAccountODS" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSearchedUserList" TypeName="FSOSS.System.BLL.AdministratorAccountController">
+                <asp:ObjectDataSource runat="server" ID="AdministratorAccountODS" OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllAdministratorAccountList" TypeName="FSOSS.System.BLL.AdministratorAccountController"></asp:ObjectDataSource>
+                <asp:ObjectDataSource runat="server" ID="SearchedAdministratorAccountODS" OldValuesParameterFormatString="original_{0}" SelectMethod="GetSearchedAdministratorAccountList" TypeName="FSOSS.System.BLL.AdministratorAccountController">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="SearchUserTextBox" PropertyName="Text" Name="searchedWord" Type="String"></asp:ControlParameter>
                     </SelectParameters>

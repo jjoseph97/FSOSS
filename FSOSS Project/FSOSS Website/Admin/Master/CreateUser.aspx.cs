@@ -50,7 +50,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
             string concatName = FirstNameTextBox.Text[0] + lastName.Replace("-", "").Replace(" ", "").Replace("'", "");
 
             AdministratorAccountController sysmgr = new AdministratorAccountController();
-            string newUser = sysmgr.AddUser(concatName.ToLower(), password, firstName, lastName, selectedRoleId);
+            string newUser = sysmgr.AddAdministratorAccount(concatName.ToLower(), password, firstName, lastName, selectedRoleId);
 
             SuccessMessage.Visible = true;
             SuccessMessage.Text = successHeader + "Successfully added: " + newUser;
