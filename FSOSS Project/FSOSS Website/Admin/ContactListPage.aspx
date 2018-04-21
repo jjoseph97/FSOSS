@@ -75,7 +75,6 @@
                                         <th runat="server" class="w-10 py-2 pl-3">Room Number</th>
                                         <th runat="server" class="w-15 py-2 pl-3">Phone Number</th>
                                         <th runat="server" class="w-15 py-2 pl-3">View Survey</th>
-
                                     </tr>
                                     <tr runat="server" id="itemPlaceholder"></tr>
                                 </table>
@@ -85,7 +84,7 @@
                                 <td runat="server" class="listview-pager">
                                     <asp:DataPager runat="server" ID="SurveyListDataPager">
                                         <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>
                                                     <div class="my-2 text-white">

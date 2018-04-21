@@ -94,56 +94,71 @@ namespace FSOSS.System.BLL
                     surveyWord = surveyWord.ToLower().Trim(); // trim the spaces and covert the updated survey word to lowercase
                     Regex validWord = new Regex("^[a-zA-Z]+$");
 
-                    if (surveyWord == "" || surveyWord == null) // if no survey word was entered, display an error
+                    // gets a list of survey words where the surveyWord is matching an existing word
+                    var potentialSurveyWordList = from x in context.PotentialSurveyWords
+                                                  where x.survey_access_word.ToLower().Equals(surveyWord)
+                                                  select new PotentialSurveyWordPOCO()
+                                                  {
+                                                      surveyWord = x.survey_access_word
+                                                  };
+
+                    if (potentialSurveyWordList.Count() > 0) // if a survey word was found display an error that the word already exists
                     {
-                        throw new Exception("Edit field cannot be blank. You must enter a word between 4 to 8 characters in length.");
-                    }
-                    else if (!validWord.IsMatch(surveyWord)) // if the survey word entered is not valid (no special characters, spaces, or numbers), display an error
-                    {
-                        throw new Exception("Please enter only alphabetical letters and no spaces.");
-                    }
-                    else if (surveyWord.Length < 4 || surveyWord.Length > 8) // if the survey word is not the correct length (between 4 and 8 characters), display an error
-                    {
-                        throw new Exception("Updated survey word must be between 4 to 8 characters in length.");
+                        throw new Exception("The word \"" + surveyWord + "\" already exists. Please update to a different word.");
                     }
                     else
                     {
-                        bool inUse = false;
-
-                        // gets a list of survey word IDs and the date that the words are in use 
-                        var surveyWordList = (from x in context.SurveyWords
-                                                select new SurveyWordPOCO
-                                                {
-                                                    dateUsed = x.date_used,
-                                                    surveyWordID = x.survey_word_id
-                                                }).ToList();
-
-
-                        foreach (SurveyWordPOCO item in surveyWordList) // loop through the survey word list and match the survey word ID and the date used to todays date
+                        if (surveyWord == "" || surveyWord == null) // if no survey word was entered, display an error
                         {
-                            if (item.surveyWordID == surveyWordID && item.dateUsed.Day == DateTime.Today.Day)
-                            {
-                                inUse = true; // toggle inUse to true if the survey word is in use today
-                                break;
-                            }
+                            throw new Exception("Edit field cannot be blank. You must enter a word between 4 to 8 characters in length.");
                         }
-
-                        if (validWord.IsMatch(surveyWord) && inUse == false) // if the survey word is not in use today, then update the survey word, the modified date and user ID from the user that is logged in to the potential survey word table in the database
+                        else if (!validWord.IsMatch(surveyWord)) // if the survey word entered is not valid (no special characters, spaces, or numbers), display an error
                         {
-                            var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                            wordToUpdate.administrator_account_id = userID;
-                            wordToUpdate.survey_access_word = surveyWord.Trim();
-                            wordToUpdate.date_modified = DateTime.Now;
-                            context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
-                            context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
-                            context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
-                            context.SaveChanges();
-
-                            message = "The survey word has been updated to \"" + surveyWord + "\"."; // update message to display a success message
+                            throw new Exception("Please enter only alphabetical letters and no spaces.");
+                        }
+                        else if (surveyWord.Length < 4 || surveyWord.Length > 8) // if the survey word is not the correct length (between 4 and 8 characters), display an error
+                        {
+                            throw new Exception("Updated survey word must be between 4 to 8 characters in length.");
                         }
                         else
                         {
-                            throw new Exception("Unable to update the selected word. Word is currently in use.");
+                            bool inUse = false;
+
+                            // gets a list of survey word IDs and the date that the words are in use 
+                            var surveyWordList = (from x in context.SurveyWords
+                                                  select new SurveyWordPOCO
+                                                  {
+                                                      dateUsed = x.date_used,
+                                                      surveyWordID = x.survey_word_id
+                                                  }).ToList();
+
+
+                            foreach (SurveyWordPOCO item in surveyWordList) // loop through the survey word list and match the survey word ID and the date used to todays date
+                            {
+                                if (item.surveyWordID == surveyWordID && item.dateUsed.Day == DateTime.Today.Day)
+                                {
+                                    inUse = true; // toggle inUse to true if the survey word is in use today
+                                    break;
+                                }
+                            }
+
+                            if (validWord.IsMatch(surveyWord) && inUse == false) // if the survey word is not in use today, then update the survey word, the modified date and user ID from the user that is logged in to the potential survey word table in the database
+                            {
+                                var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
+                                wordToUpdate.administrator_account_id = userID;
+                                wordToUpdate.survey_access_word = surveyWord.Trim();
+                                wordToUpdate.date_modified = DateTime.Now;
+                                context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
+                                context.Entry(wordToUpdate).Property(y => y.survey_access_word).IsModified = true;
+                                context.Entry(wordToUpdate).Property(y => y.date_modified).IsModified = true;
+                                context.SaveChanges();
+
+                                message = "The survey word has been updated to \"" + surveyWord + "\"."; // update message to display a success message
+                            }
+                            else
+                            {
+                                throw new Exception("Unable to update the selected word. Word is currently in use.");
+                            }
                         }
                     }
                 }
