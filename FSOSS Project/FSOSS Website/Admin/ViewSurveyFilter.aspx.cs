@@ -69,11 +69,11 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
                         filter.endDate = DateTime.ParseExact(endingPeriodInput + " 23:59:59:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
                         if (filter.startingDate > filter.endDate)
                         {
-                            throw new Exception("Starting date must be before the End Date.");
+                            throw new Exception("Starting date must be before the end date.");
                         }
                         filter.siteID = int.Parse(HospitalDropDownList.SelectedValue);
                         filter.mealID = int.Parse(MealDropDownList.SelectedValue);
-                        if (UnitDropDownList.Enabled == false) // if the unit drop down list is not enabled (all hospitals is selected) then set the filter.userID to 0
+                        if (UnitDropDownList.Enabled == false) // if the UnitDropDownList is not enabled (all hospitals is selected in the HospitalDropDownList) then set the filter.unitID to 0
                         {
                             filter.unitID = 0;
                         }
