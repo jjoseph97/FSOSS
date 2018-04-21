@@ -103,10 +103,16 @@ namespace FSOSS.System.BLL
             }
         }
 
+        /// <summary>
+        /// Method is used to validate access word
+        /// </summary>
+        /// <param name="enteredWord"></param>
+        /// <returns>returns a boolean value</returns>
         public bool ValidateAccessWord(string enteredWord)
         {
             using (var context = new FSOSSContext())
             {
+                // return true if entered word exists and is in use for the current day; else return false
                 return context.SurveyWords.Any(x => x.PotentialSurveyWord.survey_access_word.Equals(enteredWord) && x.date_used.Day == DateTime.Now.Day);
             }
         }
