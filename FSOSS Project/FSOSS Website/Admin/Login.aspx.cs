@@ -35,7 +35,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
             string password = PasswordTextBox.Text;
 
             AdministratorAccountController sysmgr = new AdministratorAccountController();
-            if (!sysmgr.UserIsActive(username))
+            if (!sysmgr.AdministratorAccountIsActive(username))
             {
                 Message.Visible = true;
                 Message.Text = "You are currently deactivated. Please contact a Master Administrator.";
@@ -49,7 +49,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
                     // if valid store userID, username, and securityID in sessions
                     AdministratorRoleController roleController = new AdministratorRoleController();
                     Session["username"] = username.ToLower();
-                    int userID = sysmgr.GetUserID(username);
+                    int userID = sysmgr.GetAdministratorAccountID(username);
                     Session["userID"] = userID;
                     Session["securityID"] = roleController.GetAdministratorRole(userID).security_role_id;
 

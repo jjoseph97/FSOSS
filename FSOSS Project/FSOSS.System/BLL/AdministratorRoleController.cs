@@ -11,6 +11,11 @@ namespace FSOSS.System.BLL
 {
     public class AdministratorRoleController
     {
+        /// <summary>
+        /// Method is used to retrieve the Administrator Role class based on the Administrator Account ID
+        /// </summary>
+        /// <param name="accountID"></param>
+        /// <returns>returns the Administrator Role class</returns>
         public AdministratorRole GetAdministratorRole(int accountID)
         {
             using (var context = new FSOSSContext())
