@@ -15,14 +15,14 @@ using FSOSS.System.Data.Entity;
 public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSurveyWord : System.Web.UI.Page
 {
     /// <summary>
-    /// When the page loads first the page checks if the user is logged in, and is redirected to the login page if not.
-    /// Then the method checks if the user has has proper authentication (Master Administrator rolw) to access this page,
+    /// When the page loads first the page checks if the admin is logged in, and is redirected to the login page if not.
+    /// Then the method checks if the admin has has proper authentication (Master Administrator role) to access this page,
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirect the admin to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
@@ -39,12 +39,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     /// <param name="e">Contains the event data.</param>
     protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
     {
-        // if an exception was thrown, handle with messageusercontrol to display the exception for error
+        // if an exception was thrown, handle with MessageUserControl to display the exception for error
         if (e.ReturnValue == null)
         {
             MessageUserControl.HandleDataBoundException(e);
         }
-        else // else show the ReturnValue(success message) as a string to display to the user 
+        else // else show the ReturnValue(success message) as a string to display to the admin 
         {
             string successMessage = e.ReturnValue.ToString();
             MessageUserControl.TryRun(() =>
@@ -54,7 +54,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This method is for when the user clicks the "Search" button. Survey words in the ListView are returned and now showing matching the search string that was entered.
+    /// This method is for when the admin clicks the "Search" button. Survey words in the ListView are returned and now showing matching the search string that was entered.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -89,7 +89,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 }
                 SurveyWordListView.DataBind(); // rebind the ListView with the appropraite ODS
 
-                if (SurveyWordListView.Items.Any() == false) // check if any results were returned and display error message to the user if no results were returned
+                if (SurveyWordListView.Items.Any() == false) // check if any results were returned and display error message to the admin if no results were returned
                 {
                     throw new Exception("No results were found. To clear the search results and try again, click on the \"Clear Search\" Button.");
                 }
@@ -98,7 +98,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This button on click method is to clear the search field and return to a ListView with full results for the user.
+    /// This button on click method is to clear the search field and return to a ListView with full results for the admin.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -119,20 +119,20 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This method is for adding a new survey word to the database when the user clicks on the "Add Word" button.
+    /// This method is for adding a new survey word to the database when the admin clicks on the "Add Word" button.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         string newWord = AddWordTextBox.Text.Trim().ToLower();
-        int userID = Convert.ToInt32(Session["adminID"]); // get the userID for the user who is currently logged in
+        int adminID = Convert.ToInt32(Session["adminID"]); // get the adminID for the admin who is currently logged in
 
         MessageUserControl.TryRun(() =>
         {
             PotentialSurveyWordController sysmgr = new PotentialSurveyWordController();
 
-            sysmgr.AddWord(newWord, userID); // send the new survey word and userID data to the AddWord method in the PotentialSurveyWordController
+            sysmgr.AddWord(newWord, adminID); // send the new survey word and adminID data to the AddWord method in the PotentialSurveyWordController
             SurveyWordListView.DataBind();
             AddWordTextBox.Text = ""; // set the add word text field back to blank text
           
@@ -140,7 +140,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This method occurs when the user clicks on the ShowArchivedButton and is for showing the current archived survey words in the SurveyWordListView.
+    /// This method occurs when the admin clicks on the ShowArchivedButton and is for showing the current archived survey words in the SurveyWordListView.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -154,7 +154,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     }
 
     /// <summary>
-    /// This method occurs when the user clicks on the ShowActiveButton and is for showing the current active survey words in the SurveyWordListView.
+    /// This method occurs when the admin clicks on the ShowActiveButton and is for showing the current active survey words in the SurveyWordListView.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>

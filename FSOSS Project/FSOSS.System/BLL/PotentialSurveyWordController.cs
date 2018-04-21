@@ -21,10 +21,10 @@ namespace FSOSS.System.BLL
         /// Method used to add a new potential survey word to the database
         /// </summary>
         /// <param name="newWord"></param>
-        /// <param name="userID"></param>
+        /// <param name="adminID"></param>
         /// <returns>returns confirmation from the list</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void AddWord(string newWord, int userID)
+        public void AddWord(string newWord, int adminID)
         {
             using (var context = new FSOSSContext())
             {
@@ -58,10 +58,10 @@ namespace FSOSS.System.BLL
                         {
                             throw new Exception("New survey word must be between 4 to 8 characters characters in length.");
                         }
-                        else // else, add the new survey word, the current date and user ID from the user that is logged in to the potential survey word table in the database
+                        else // else, add the new survey word, the current date and admin ID from the admin that is logged in to the potential survey word table in the database
                         {
                             PotentialSurveyWord potentialSurveyWord = new PotentialSurveyWord();
-                            potentialSurveyWord.administrator_account_id = userID;
+                            potentialSurveyWord.administrator_account_id = adminID;
                             potentialSurveyWord.survey_access_word = newWord.Trim();
                             potentialSurveyWord.date_modified = DateTime.Now;
                             context.PotentialSurveyWords.Add(potentialSurveyWord);
@@ -69,7 +69,7 @@ namespace FSOSS.System.BLL
                         }
                     }
                 }
-                catch (Exception e) // catch the error and display it on the page with message user control
+                catch (Exception e) // catch the error and display it on the page with MessageUserControl
                 {
                     throw new Exception(e.Message);
                 }
@@ -81,10 +81,10 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="surveyWord"></param>
         /// <param name="surveyWordID"></param>
-        /// <param name="userID"></param>
+        /// <param name="adminID"></param>
         /// <returns>returns confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public string UpdateWord(string surveyWord, int surveyWordID, int userID)
+        public string UpdateWord(string surveyWord, int surveyWordID, int adminID)
         {
             using (var context = new FSOSSContext())
             {
@@ -145,7 +145,7 @@ namespace FSOSS.System.BLL
                             if (validWord.IsMatch(surveyWord) && inUse == false) // if the survey word is not in use today, then update the survey word, the modified date and user ID from the user that is logged in to the potential survey word table in the database
                             {
                                 var wordToUpdate = context.PotentialSurveyWords.Find(surveyWordID);
-                                wordToUpdate.administrator_account_id = userID;
+                                wordToUpdate.administrator_account_id = adminID;
                                 wordToUpdate.survey_access_word = surveyWord.Trim();
                                 wordToUpdate.date_modified = DateTime.Now;
                                 context.Entry(wordToUpdate).Property(y => y.administrator_account_id).IsModified = true;
@@ -162,7 +162,7 @@ namespace FSOSS.System.BLL
                         }
                     }
                 }
-                catch (Exception e) // catch the error and display it on the page with message user control
+                catch (Exception e) // catch the error and display it on the page with MessageUserControl
                 {
                     throw new Exception(e.Message);
                 }
@@ -174,10 +174,10 @@ namespace FSOSS.System.BLL
         /// Method used to disable or enable words from the list that is used in the potential access words
         /// </summary>
         /// <param name="surveyWordID"></param>
-        /// <param name="userID"></param>
+        /// <param name="adminID"></param>
         /// <returns>return confirmation message</returns>
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public string ChangeAvailability(int surveyWordID, int userID)
+        public string ChangeAvailability(int surveyWordID, int adminID)
         {
             using (var context = new FSOSSContext())
             {
@@ -211,8 +211,8 @@ namespace FSOSS.System.BLL
                             potentialSurveyWord.archived_yn = true;
                             message = "Successfully disabled the survey word.";
                         }
-                        // now update the survey word to either enabled or disabled, the modified date and user ID from the user that is logged in to the potential survey word table in the database
-                        potentialSurveyWord.administrator_account_id = userID;
+                        // now update the survey word to either enabled or disabled, the modified date and admin ID from the admin that is logged in to the potential survey word table in the database
+                        potentialSurveyWord.administrator_account_id = adminID;
                         potentialSurveyWord.date_modified = DateTime.Now;
                         context.Entry(potentialSurveyWord).Property(y => y.administrator_account_id).IsModified = true;
                         context.Entry(potentialSurveyWord).Property(y => y.archived_yn).IsModified = true;
@@ -224,7 +224,7 @@ namespace FSOSS.System.BLL
                         throw new Exception("Unable to changed availability of the selected word. Word is currently in use.");
                     }
                 }
-                catch (Exception e) // catch the error and display it on the page with message user control
+                catch (Exception e) // catch the error and display it on the page with MessageUserControl
                 {
                     throw new Exception(e.Message);
                 }
@@ -233,7 +233,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Used to get the active survey words for when the user enters a search term to filter the list of words on the ChangeSurveyWord page
+        /// Used to get the active survey words for when the admin enters a search term to filter the list of words on the ChangeSurveyWord page
         /// </summary>
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>
@@ -266,7 +266,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Used to get the archived survey words for when the user enters a search term to filter the list of words on the ChangeSurveyWord page
+        /// Used to get the archived survey words for when the admin enters a search term to filter the list of words on the ChangeSurveyWord page
         /// </summary>
         /// <param name="surveyWord"></param>
         /// <returns>potentialSurveyWordList</returns>

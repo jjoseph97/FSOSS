@@ -13,16 +13,16 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     private FilterPOCO filter = new FilterPOCO();
 
     /// <summary>
-    /// When the page loads, first this method checks if the user has proper authentication to access this page, and is redirected to login if not.
+    /// When the page loads, first this method checks if the admin has proper authentication to access this page, and is redirected to login if not.
     /// Following that, the filter session data is brought in from the previous page and the page checks to see if the filter is null. 
-    /// If the filter is null then the user is redirected back to the previous page to prevent browsing to this page directly with no data.
+    /// If the filter is null then the admin is redirected back to the previous page to prevent browsing to this page directly with no data.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
         filter = (FilterPOCO)(Session["filter"]);
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirect admin to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
