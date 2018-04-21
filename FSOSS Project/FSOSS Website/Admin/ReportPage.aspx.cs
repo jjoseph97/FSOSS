@@ -117,7 +117,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         // Instantiate Report POCO, Chart POCO, Chart POCO List, Preferred Response Order List, Sorted Response Variable, and Report Controller variables
         FinalReportPOCO report = new FinalReportPOCO();
         List<ChartPOCO> responses = new List<ChartPOCO>();
-        ChartPOCO response = new ChartPOCO();
+        ChartPOCO response = null;
         // List of Preferred Response Order based on the Question Responses answers
         List<String> preferencesForOrderByFirstOption = new List<String> { "Very Good", "Good", "Fair", "Poor", "Don't Know/No Opinion", "No Response" };
         List<String> preferencesForOrderBySecondOption = new List<String> { "Portion sizes are too small", "Portion sizes are just right", "Portion sizes are too large", "No Response" };
@@ -139,6 +139,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionTwoValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionTwoValueList[counter].Equals(""))
                     {
@@ -169,6 +171,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionThreeValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionThreeValueList[counter].Equals(""))
                     {
@@ -198,6 +202,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionFourValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionFourValueList[counter].Equals(""))
                     {
@@ -228,6 +234,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionFiveValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionFiveValueList[counter].Equals(""))
                     {
@@ -257,6 +265,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionSixValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionSixValueList[counter].Equals(""))
                     {
@@ -286,6 +296,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionEightValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionEightValueList[counter].Equals(""))
                     {
@@ -315,6 +327,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionNineValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionNineValueList[counter].Equals(""))
                     {
@@ -344,6 +358,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                 // Loop to the specific List from report POCO based on the chart.
                 for (int counter = 0; counter < report.QuestionTenValueCount.Count; counter++)
                 {
+                    //Instantiate new ChartPOCO
+                    response = new ChartPOCO();
                     // Check and handle if the retrieve string is empty
                     if (report.QuestionTenValueList[counter].Equals(""))
                     {
