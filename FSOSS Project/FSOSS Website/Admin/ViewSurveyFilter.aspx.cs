@@ -13,8 +13,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     /// When the page loads first the page checks if the admin has proper authentication to access this page, and is redirected to login if not.
     /// Following that, the drop down lists on the page are populated with the appropriate information from the database.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         // this is for the client side input values to be retained after the page loads when a validation error is triggered (so the text is not lost)
@@ -50,8 +50,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     /// <summary>
     /// This method is used when the admin clicks on the "View" button to view the individual survey for that particular row in the listview
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         MessageUserControl.TryRun(() =>
@@ -107,8 +107,8 @@ public partial class Admin_Master_ViewSurveyFilter : System.Web.UI.Page
     /// <summary>
     /// This method is for showing and populating or hiding the units DDL depending on if all hospitals or a particular hospital is selected
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void HospitalDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (HospitalDropDownList.SelectedIndex != 0) // if the site drop down list has changed then retrieve the units from the database and then show and populate the unit drop down list

@@ -13,8 +13,8 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     /// When the page loads first the page checks if the admin has proper authentication to access this page, and is redirected to login if not.
     /// Following that, the query string for the surveyID (sid) is obtained to populate the page with the appropriate submitted survey details. 
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["securityID"] == null) // Redirect admin to login if not logged in
@@ -95,8 +95,8 @@ public partial class Admin_SubmittedSurveyViewerPage : System.Web.UI.Page
     /// <summary>
     /// This method is used to resolve an individual submitted survey that has a unresolved contact request attached to it.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ResolveButton_Click(object sender, EventArgs e)
     {
         string ssn = Request.QueryString["sid"]; // get the survey ID from the URL query string

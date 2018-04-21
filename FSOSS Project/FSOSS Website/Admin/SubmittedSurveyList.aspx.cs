@@ -17,8 +17,8 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     /// Following that, the filter session data is brought in from the previous page and the page checks to see if the filter is null. 
     /// If the filter is null then the admin is redirected back to the previous page to prevent browsing to this page directly with no data.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         filter = (FilterPOCO)(Session["filter"]);
@@ -38,8 +38,8 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     /// <summary>
     /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to set the datasource and bind once to avoid error with the list view paging.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_PreRender(object sender, EventArgs e)
     {
         SubmittedSurveyController sysmgr = new SubmittedSurveyController();
