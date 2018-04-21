@@ -14,7 +14,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
         var hamburger = Master.FindControl("hamburger");
         fsossnavbar.Visible = false;
         hamburger.Visible = false;
-        if (Session["userID"] != null)
+        if (Session["adminID"] != null)
         {
             Response.Redirect("~/Admin");
         }
@@ -50,7 +50,7 @@ public partial class Pages_AdministratorPages_Login : System.Web.UI.Page
                     AdministratorRoleController roleController = new AdministratorRoleController();
                     Session["username"] = username.ToLower();
                     int userID = sysmgr.GetAdministratorAccountID(username);
-                    Session["userID"] = userID;
+                    Session["adminID"] = userID;
                     Session["securityID"] = roleController.GetAdministratorRole(userID).security_role_id;
 
                     Response.Redirect("~/Admin");

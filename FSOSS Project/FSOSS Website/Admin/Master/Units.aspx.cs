@@ -99,7 +99,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     protected void AddUnitButton_Click(object sender, EventArgs e)
     {
         int siteId = int.Parse(SelectedSiteID.Text);
-        int userId = (int)Session["userID"];
+        int userId = (int)Session["adminID"];
         string unitNumber = AddUnitTextBox.Text.Trim();
         UnitController sysmgr = new UnitController();
         MessageUserControl.TryRun(() =>

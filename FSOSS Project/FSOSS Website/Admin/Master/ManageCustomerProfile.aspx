@@ -44,16 +44,16 @@
                     <asp:ObjectDataSource ID="GenderODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController" DeleteMethod="ArchiveGender" InsertMethod="AddGender" UpdateMethod="UpdateGender" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="genderID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="genderDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="genderID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="genderDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
 
@@ -61,12 +61,12 @@
                     <asp:ObjectDataSource ID="ArchivedGenderODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedGenderList" TypeName="FSOSS.System.BLL.GenderController" DeleteMethod="ArchiveGender" UpdateMethod="UpdateGender" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="genderID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="genderID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="genderDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
 
@@ -203,31 +203,31 @@
                     <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
                     <asp:ObjectDataSource ID="ArchivedPTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="participantTypeID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="participantTypeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
 
@@ -363,31 +363,31 @@
                     <asp:ObjectDataSource ID="MealsODS" runat="server" DeleteMethod="ArchiveMeal" OldValuesParameterFormatString="{0}" SelectMethod="GetMealList" TypeName="FSOSS.System.BLL.MealController" UpdateMethod="UpdateParticipantType" InsertMethod="AddMeal" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
                     <asp:ObjectDataSource ID="ArchivedMealsODS" runat="server" DeleteMethod="ArchiveMeal" InsertMethod="AddMeal" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedMealList" TypeName="FSOSS.System.BLL.MealController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="mealID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="mealName" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
 
@@ -523,31 +523,31 @@
                     <asp:ObjectDataSource ID="AgeRangeODS" runat="server" DeleteMethod="ArchiveAgeRange" InsertMethod="AddAgeRange" OldValuesParameterFormatString="{0}" SelectMethod="GetAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController" UpdateMethod="UpdateAgeRange" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
                     <asp:ObjectDataSource ID="ArchivedAgeRangeODS" runat="server" DeleteMethod="ArchiveAgeRange" InsertMethod="AddAgeRange" OldValuesParameterFormatString="{0}" SelectMethod="GetArchivedAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController" UpdateMethod="UpdateAgeRange" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
                         <DeleteParameters>
                             <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="ageRangeID" Type="Int32"></asp:Parameter>
                             <asp:Parameter Name="ageRangeDescription" Type="String"></asp:Parameter>
-                            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
                         </UpdateParameters>
                     </asp:ObjectDataSource>
 

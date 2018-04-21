@@ -126,7 +126,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
     protected void AddWordButton_Click(object sender, EventArgs e)
     {
         string newWord = AddWordTextBox.Text.Trim().ToLower();
-        int userID = Convert.ToInt32(Session["userID"]); // get the userID for the user who is currently logged in
+        int userID = Convert.ToInt32(Session["adminID"]); // get the userID for the user who is currently logged in
 
         MessageUserControl.TryRun(() =>
         {

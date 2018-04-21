@@ -95,7 +95,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         UnitController unControl = new UnitController();
 
         string siteName = AddSiteTextBox.Text.Trim();
-        int employee = int.Parse(Session["userid"].ToString());
+        int employee = int.Parse(Session["adminID"].ToString());
 
         MessageUserControl.TryRun(() =>
         {

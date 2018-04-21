@@ -57,7 +57,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
     // TODO: Rameses - clean up this method
     protected void UpdateButton_Click(object sender, EventArgs e)
     {
-        if (Convert.ToInt32(Request.QueryString["id"]).Equals(Convert.ToInt32(Session["userID"])) && DeactivateCheckBox.Checked)
+        if (Convert.ToInt32(Request.QueryString["id"]).Equals(Convert.ToInt32(Session["adminID"])) && DeactivateCheckBox.Checked)
         {
             SuccessMessage.Visible = false;
             FailedMessage.Visible = true;

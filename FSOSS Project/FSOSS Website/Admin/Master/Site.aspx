@@ -142,31 +142,31 @@
     <asp:ObjectDataSource ID="SiteODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetSiteList" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" DeleteMethod="ArchiveSite" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" InsertMethod="AddSite">
         <DeleteParameters>
             <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
-            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
         </DeleteParameters>
         <InsertParameters>
             <asp:Parameter Name="newSiteName" Type="String"></asp:Parameter>
-            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
         </InsertParameters>
         <UpdateParameters>
             <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
             <asp:Parameter Name="siteName" Type="String"></asp:Parameter>
-            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
         </UpdateParameters>
     </asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ArchivedODS" runat="server" DeleteMethod="ArchiveSite" OldValuesParameterFormatString="{0}" SelectMethod="GetArchived" TypeName="FSOSS.System.BLL.SiteController" UpdateMethod="UpdateSite" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" InsertMethod="AddSite">
         <DeleteParameters>
             <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
-            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
         </DeleteParameters>
         <InsertParameters>
             <asp:Parameter Name="newSiteName" Type="String"></asp:Parameter>
-            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
         </InsertParameters>
         <UpdateParameters>
             <asp:Parameter Name="siteID" Type="Int32"></asp:Parameter>
             <asp:Parameter Name="siteName" Type="String"></asp:Parameter>
-            <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+            <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
         </UpdateParameters>
     </asp:ObjectDataSource>
 

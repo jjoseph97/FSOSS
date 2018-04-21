@@ -66,7 +66,7 @@ public partial class SiteMaster : MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        LoginButton.Text = Session["userID"] != null ? "Log out" : "Log in";
+        LoginButton.Text = Session["adminID"] != null ? "Log out" : "Log in";
         
         if (!HttpContext.Current.Request.RawUrl.StartsWith("/Admin") && !HttpContext.Current.Request.RawUrl.StartsWith("/admin"))
         {

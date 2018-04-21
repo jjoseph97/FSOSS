@@ -144,7 +144,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     protected void AddPTButton_Click(object sender, EventArgs e)
     {
         string ptDesc = AddPTBox.Text.Trim();
-        int userID = Convert.ToInt32(Session["userID"]);
+        int userID = Convert.ToInt32(Session["adminID"]);
 
         MessageUserControl.TryRun(() =>
         {
@@ -167,7 +167,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     {
         //finding the customer profile choice to display
         string addItem = AddGenderBox.Text.Trim();
-        int userID = Convert.ToInt32(Session["userID"]);
+        int userID = Convert.ToInt32(Session["adminID"]);
 
         MessageUserControl.TryRun(() =>
         {
@@ -190,7 +190,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     {
         //finding the customer profile choice to display
         string addItem = AddMealsTextBox.Text.Trim();
-        int userID = Convert.ToInt32(Session["userID"]);
+        int userID = Convert.ToInt32(Session["adminID"]);
 
         MessageUserControl.TryRun(() =>
         {
@@ -213,7 +213,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
     {
         //finding the customer profile choice to display
         string addItem = AddAgeRangeTextBox.Text.Trim();
-        int userID = Convert.ToInt32(Session["userID"]);
+        int userID = Convert.ToInt32(Session["adminID"]);
 
         MessageUserControl.TryRun(() =>
         {

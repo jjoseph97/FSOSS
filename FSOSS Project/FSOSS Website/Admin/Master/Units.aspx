@@ -278,7 +278,7 @@
             OnDeleted="CheckForException" OnUpdated="CheckForException">
             <DeleteParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
-                <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
             </DeleteParameters>
 
             <SelectParameters>
@@ -287,7 +287,7 @@
             <UpdateParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
                 <asp:Parameter Name="unitNumber" Type="String"></asp:Parameter>
-                <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
             </UpdateParameters>
         </asp:ObjectDataSource>
 
@@ -297,7 +297,7 @@
             OnDeleted="CheckForException">
             <DeleteParameters>
                 <asp:Parameter Name="unitID" Type="Int32"></asp:Parameter>
-                <asp:SessionParameter SessionField="userID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
+                <asp:SessionParameter SessionField="adminID" Name="admin" Type="Int32" DefaultValue="0"></asp:SessionParameter>
             </DeleteParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="SiteDropDownList" PropertyName="SelectedValue" Name="siteID" Type="Int32"></asp:ControlParameter>
