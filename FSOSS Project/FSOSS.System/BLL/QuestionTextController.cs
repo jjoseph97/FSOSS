@@ -224,8 +224,6 @@ namespace FSOSS.System.BLL
         /// </summary>
         /// <param name="question_id"></param>
         /// <returns>returns the string for each question</returns>
-        //Edit Survey Questions Page
-        //Method used to get current question string
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public string GetQuestionText(int question_id)
         {
@@ -249,7 +247,7 @@ namespace FSOSS.System.BLL
         {
             using (var context = new FSOSSContext())
             {
-                Regex validResponse = new Regex("^[a-zA-Z ?.'/,!]+$");
+                Regex validResponse = new Regex("^[a-zA-Z ?.'/]+$");
 
                 if (text.Length.Equals(0)) // if no question entered into field, display an error
                 {
@@ -259,7 +257,7 @@ namespace FSOSS.System.BLL
                 {
                     throw new Exception("Question must be 100 characters or less");
                 }
-                else if (!validResponse.IsMatch(text)) // if the response entered is not valid (numbers and special characters are entered)
+                else if (!validResponse.IsMatch(text)) // if the response entered is not valid (numbers and special characters are entered), display an error
                 {
                     throw new Exception("Please enter words with no numbers or special characters.");
                 }
