@@ -8,14 +8,11 @@
     </div>
     <div>
         <div class="card container">
-            <div class="row">
-                    <asp:Label ID="SiteLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
-                    <asp:DropDownList ID="SiteDDL" runat="server" class="col-sm-4 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
-            </div>
-            <div class="row">
-
-                <asp:Label ID="COntactLabel" runat="server" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests"></asp:Label><br />
-                <asp:Label ID="ContactCountLabel" class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server"></asp:Label>
+            <div class="row col-md-12">
+                <asp:Label ID="SiteLabel" runat="server" class="col-md-2 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
+                <asp:DropDownList ID="SiteDDL" runat="server" class="col-md-4 offset-md-1 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+                <asp:Label ID="COntactLabel" runat="server" class="col-6 col-lg-3 offset-lg-1 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests:"></asp:Label><br />
+                <asp:Label ID="ContactCountLabel" class="col-6 col-lg-1 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px; color: #223f88;" runat="server"></asp:Label>
             </div>
             <asp:ListView ID="ContactRequestList" runat="server" DataSourceID="ContactRequestODS" OnItemCommand="GoToSSView">
                 <AlternatingItemTemplate>
