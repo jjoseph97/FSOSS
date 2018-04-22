@@ -77,8 +77,8 @@
                                 <asp:TextBox Text='<%# Bind("Value") %>' runat="server" ID="ValueTextBox" />
                             </td>
                             <td>
-                                <asp:Button runat="server" CssClass="btn btn btn-success mx-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" Visible="true" />
-                                <asp:Button runat="server" CssClass="btn btn btn-danger mx-3 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                                <asp:Button runat="server" CssClass="btn btn btn-success col-12 col-lg-5 ml-lg-3 my-1" CommandName="Update" Text="Update" ID="UpdateButton" Visible="true" />
+                                <asp:Button runat="server" CssClass="btn btn btn-danger col-12 col-lg-5 ml-lg-1 my-1" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
                             </td>
                         </tr>
                     </EditItemTemplate>
@@ -108,8 +108,8 @@
                                     <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; width:100%; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
                                         <tr runat="server">
                                             <%--<th runat="server">Id</th>--%>
-                                            <th runat="server" class="w-80 p-3">Response Options</th>
-                                            <th runat="server" class="w-20 p-3">Edit Responses</th>
+                                            <th runat="server" class="w-75 p-3">Response Options</th>
+                                            <th runat="server" class="w-25 p-3">Edit Responses</th>
                                             <%--<th runat="server">Value</th>--%>
                                         </tr>
                                         <tr runat="server" id="itemPlaceholder"></tr>
