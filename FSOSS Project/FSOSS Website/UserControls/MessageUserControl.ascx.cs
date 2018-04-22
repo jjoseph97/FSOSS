@@ -53,14 +53,6 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
     /// Processes a request through a callback delegate within a try/catch block. Distinguished Entity Framework exceptions from general exceptions.
     /// </summary>
     /// <param name="callback">A delegate method to call within the try block</param>
-    public void TryRun(ProcessRequest callback)
-    {
-        TryCatch(callback);
-    }
-    /// <summary>
-    /// Processes a request through a callback delegate within a try/catch block. Distinguished Entity Framework exceptions from general exceptions.
-    /// </summary>
-    /// <param name="callback">A delegate method to call within the try block</param>
     /// <param name="title">Title for the panel</param>
     /// <param name="successMessage">Text to display as the message if the callback processes without an exception</param>
     public void TryRun(ProcessRequest callback, string title, string successMessage)

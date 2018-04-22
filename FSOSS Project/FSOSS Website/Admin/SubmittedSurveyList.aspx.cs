@@ -13,9 +13,9 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     private FilterPOCO filter = new FilterPOCO();
 
     /// <summary>
-    /// When the page loads, first this method checks if the admin has proper authentication to access this page, and is redirected to login if not.
-    /// Following that, the filter session data is brought in from the previous page and the page checks to see if the filter is null. 
-    /// If the filter is null then the admin is redirected back to the previous page to prevent browsing to this page directly with no data.
+    /// When the page loads, first the filter session data is brought in from the previous page and assigned to the FilterPOCO filter object.
+    /// Then this method checks if the admin logged in to access this page, and is redirected to login if not.
+    /// If the filter is null then the admin is redirected back to the previous page to prevent browsing to this page directly with no filter data.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
@@ -36,7 +36,7 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
     }
 
     /// <summary>
-    /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to set the datasource and bind once to avoid error with the list view paging.
+    /// This method is to pull the data from filter and populate the ListView. The reason for Page_PreRender is to guarantee that all page controls are loaded and ready for rendering to avoid error with the list view paging.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
