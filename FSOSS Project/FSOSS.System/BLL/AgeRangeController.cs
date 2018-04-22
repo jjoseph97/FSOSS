@@ -57,7 +57,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var ageRangeList = from x in context.AgeRanges
-                                       where !x.archived_yn
+                                       where !x.archived_yn && !x.age_range_description.Contains("Prefer not to answer")
                                        orderby x.age_range_description ascending
                                        select new AgeRangePOCO()
                                    {
@@ -92,7 +92,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var ageList = from x in context.AgeRanges
-                                   where x.archived_yn
+                                   where x.archived_yn && !x.age_range_description.Contains("Prefer not to answer")
                                   orderby x.age_range_description ascending
                                   select new AgeRangePOCO()
                                    {

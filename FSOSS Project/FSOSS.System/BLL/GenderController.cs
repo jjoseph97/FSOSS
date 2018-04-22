@@ -56,7 +56,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var genderList = from x in context.Genders
-                                     where !x.archived_yn
+                                     where !x.archived_yn && !x.gender_description.Contains("Prefer not to answer")
                                      orderby x.gender_description ascending
                                      select new GenderPOCO()
                                        {
@@ -90,7 +90,7 @@ namespace FSOSS.System.BLL
                 try
                 {
                     var genderList = from x in context.Genders
-                                     where x.archived_yn
+                                     where x.archived_yn && !x.gender_description.Contains("Prefer not to answer")
                                      orderby x.gender_description ascending
                                      select new GenderPOCO()
                                               {
