@@ -51,40 +51,40 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">Administrator
                             </a>
-                            <ul class="dropdown-menu text-left" style="width: 60%; margin:auto" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu text-left w-50 mx-auto" aria-labelledby="navbarDropdownMenuLink">
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">User</a>
+                                    <a class="dropdown-item dropdown-toggle px-2" href="#">User Manager</a>
                                     <ul class="dropdown-menu text-center">
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/CreateUser.aspx">New User</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/CreateUser.aspx">New User</a>
                                         </li>
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/EditUserSearch.aspx">Edit User</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/EditUserSearch.aspx">Edit User</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Survey</a>
+                                    <a class="dropdown-item dropdown-toggle px-2" href="#">Survey Manager</a>
                                     <ul class="dropdown-menu text-center">
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
                                         </li>
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions & Responses</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/EditQuestions.aspx">Edit Survey Questions & Responses</a>
                                         </li>
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/ManageCustomerProfile.aspx">Manage Customer Profile</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/ManageCustomerProfile.aspx">Manage Customer Profile</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Sites</a>
+                                    <a class="dropdown-item dropdown-toggle px-2" href="#">Site Manager</a>
                                     <ul class="dropdown-menu text-center">
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/Site.aspx">Manage Sites</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/Site.aspx">Manage Sites</a>
                                         </li>
                                         <li>
-                                            <a runat="server" class="dropdown-item" href="~/Admin/Master/Units.aspx">Manage Units</a>
+                                            <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/Units.aspx">Manage Units</a>
                                         </li>
                                     </ul>
                                 </li>
