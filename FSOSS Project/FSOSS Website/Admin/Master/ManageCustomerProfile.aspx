@@ -10,11 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
-            </div>
-            <asp:Label ID="Alert" class="alert alert-success mb-2 card" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="ErrorAlert" class="alert alert-danger mb-2 card" runat="server" Visible="false"></asp:Label>
+            <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
         </div>
         <div class="col-md-12">
             <div class="card container mb-2">
@@ -26,19 +22,33 @@
                         <asp:ListItem Text="Meals" Value="3" />
                         <asp:ListItem Text="Participant Types" Value="2" />
                     </asp:DropDownList>
-                </div>
-                <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 my-2 mx-3 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
-
-            </div>
-            <div class="card container">
-                <%--site show section--%>
-                <%--The gender list--%>
-                <div id="Genders" runat="server">
-                    <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddGenderButton">
+                    <asp:Panel ID="AddGender" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddGenderButton">
                         <asp:Label ID="AddGenderLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Gender: " />
                         <asp:TextBox ID="AddGenderBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type gender to add..." Style="background-color: #FFFFFF;" />
                         <asp:Button ID="AddGenderButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Gender" OnClick="AddGenderButton_Click" />
                     </asp:Panel>
+                    <asp:Panel ID="AddPT" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddPTButton">
+                        <asp:Label ID="AddPTLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Participant Type: " />
+                        <asp:TextBox ID="AddPTBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" />
+                        <asp:Button ID="AddPTButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
+                    </asp:Panel>
+                    <asp:Panel ID="AddMeal" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddMealsButton">
+                        <asp:Label ID="AddMealsLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Meal: " />
+                        <asp:TextBox ID="AddMealsTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" />
+                        <asp:Button ID="AddMealsButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Meal" OnClick="AddMealButton_Click" />
+                    </asp:Panel>
+                    <asp:Panel ID="AddAgeRange" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddAgeRangeButton">
+                        <asp:Label ID="AddAgeRangeLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Age Range: " />
+                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" />
+                        <asp:Button ID="AddAgeRangeButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Age Range" OnClick="AddARButton_Click" />
+                    </asp:Panel>
+                </div>
+            </div>
+            <div class="card container">
+                <%--site show section--%>
+                <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
+                <%--The gender list--%>
+                <div id="Genders" runat="server">
 
                     <%-- ODS for Active Genders  --%>
                     <asp:ObjectDataSource ID="GenderODS" runat="server" OldValuesParameterFormatString="{0}" SelectMethod="GetGenderList" TypeName="FSOSS.System.BLL.GenderController" DeleteMethod="ArchiveGender" InsertMethod="AddGender" UpdateMethod="UpdateGender" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
@@ -193,11 +203,6 @@
 
                 <%-- The participant type list--%>
                 <div id="ParticipantTypes" runat="server">
-                    <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddPTButton">
-                        <asp:Label ID="AddPTLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Participant Type: " />
-                        <asp:TextBox ID="AddPTBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" />
-                        <asp:Button ID="AddPTButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
-                    </asp:Panel>
 
                     <%-- pt ods --%>
                     <asp:ObjectDataSource ID="PTODS" runat="server" DeleteMethod="ArchiveParticipantType" InsertMethod="AddParticipantType" OldValuesParameterFormatString="{0}" SelectMethod="GetParticipantTypeList" TypeName="FSOSS.System.BLL.ParticipantController" UpdateMethod="UpdateParticipantType" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
@@ -353,11 +358,6 @@
                 <%--the meal list--%>
                 <div id="Meals" runat="server">
                     <%-- Add Meals --%>
-                    <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddMealsButton">
-                        <asp:Label ID="AddMealsLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Meal: " />
-                        <asp:TextBox ID="AddMealsTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" />
-                        <asp:Button ID="AddMealsButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Meal" OnClick="AddMealButton_Click" />
-                    </asp:Panel>
 
                     <%-- ODS Section --%>
                     <asp:ObjectDataSource ID="MealsODS" runat="server" DeleteMethod="ArchiveMeal" OldValuesParameterFormatString="{0}" SelectMethod="GetMealList" TypeName="FSOSS.System.BLL.MealController" UpdateMethod="UpdateParticipantType" InsertMethod="AddMeal" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
@@ -513,11 +513,6 @@
                 <%--the age range list--%>
                 <div id="AgeRanges" runat="server">
                     <%-- Add Age Range --%>
-                    <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddAgeRangeButton">
-                        <asp:Label ID="AddAgeRangeLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Age Range: " />
-                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" />
-                        <asp:Button ID="AddAgeRangeButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Age Range" OnClick="AddARButton_Click" />
-                    </asp:Panel>
 
                     <%-- ODS Section --%>
                     <asp:ObjectDataSource ID="AgeRangeODS" runat="server" DeleteMethod="ArchiveAgeRange" InsertMethod="AddAgeRange" OldValuesParameterFormatString="{0}" SelectMethod="GetAgeRangeList" TypeName="FSOSS.System.BLL.AgeRangeController" UpdateMethod="UpdateAgeRange" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException">
