@@ -28,7 +28,7 @@
         <div class="col-md-12">
 
             <div class="card container mb-2">
-                <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 my-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
+                <asp:Button ID="RevealButton" class="col-md-3 col-lg-2 mt-2 btn btn-secondary border border-info" runat="server" Text="Show Archived" OnClick="ToggleView" /><br />
 
                 <%----------------------------------------------------------------------%>
                 <%--------------------  Active Units ListView --------------------------%>
