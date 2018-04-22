@@ -9,9 +9,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
-            </div>
+            <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
         </div>
         <div class="col-md-12">
             <div class="card container mb-2">

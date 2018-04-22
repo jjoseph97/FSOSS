@@ -34,9 +34,13 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         {
             seeArchive = false;
             AgeRanges.Visible = true;
+            AddAgeRange.Visible = true;
             Meals.Visible = false;
+            AddMeal.Visible = false;
             ParticipantTypes.Visible = false;
+            AddPT.Visible = false;
             Genders.Visible = false;
+            AddGender.Visible = false;
         }
 
     }
@@ -102,33 +106,49 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         if (selection == "1")
         {
             AgeRanges.Visible = false;
+            AddAgeRange.Visible = false;
             Meals.Visible = false;
+            AddMeal.Visible = false;
             ParticipantTypes.Visible = false;
+            AddPT.Visible = false;
             Genders.Visible = true;
+            AddGender.Visible = true;
         }
         //2 is Participant Type
         else if (selection == "2")
         {
             AgeRanges.Visible = false;
+            AddAgeRange.Visible = false;
             Meals.Visible = false;
+            AddMeal.Visible = false;
             ParticipantTypes.Visible = true;
+            AddPT.Visible = true;
             Genders.Visible = false;
+            AddGender.Visible = false;
         }
         //3 is Meal
         else if (selection == "3")
         {
             AgeRanges.Visible = false;
+            AddAgeRange.Visible = false;
             Meals.Visible = true;
+            AddMeal.Visible = true;
             ParticipantTypes.Visible = false;
+            AddPT.Visible = false;
             Genders.Visible = false;
+            AddGender.Visible = false;
         }
         //0 is Age Range, and if the selection is somehow none of those, we still set it to Age Range
         else
         {
             AgeRanges.Visible = true;
+            AddAgeRange.Visible = true;
             Meals.Visible = false;
+            AddMeal.Visible = false;
             ParticipantTypes.Visible = false;
+            AddPT.Visible = false;
             Genders.Visible = false;
+            AddGender.Visible = false;
         }
     }
 
