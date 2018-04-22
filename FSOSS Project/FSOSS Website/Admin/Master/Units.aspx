@@ -72,7 +72,7 @@
                                 <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" class="btn btn-success mx-3 my-1" />
                             </td>
                             <td>
-                                <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" class="btn btn-warning mx-3 my-1" />
+                                <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" class="btn btn-danger mx-3 my-1" />
                             </td>
                         </tr>
                     </EditItemTemplate>
@@ -228,11 +228,12 @@
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>
                                                     <div class="my-2 text-white">
-                                                        <b>Page
-                <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
+                                                        <b>Page 
+                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
                                                             of
-                <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
-                                                            (<asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
+                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
+                                                            (
+                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
                                                             records)
                                                         </b>
                                                     </div>
