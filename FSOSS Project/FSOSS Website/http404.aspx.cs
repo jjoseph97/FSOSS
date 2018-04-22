@@ -7,6 +7,11 @@ using System.Web.UI.WebControls;
 
 public partial class http404 : System.Web.UI.Page
 {
+    /// <summary>
+    /// /// This method is used during the start of the web page. The method will hide all navigation links.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
         Master.FindControl("FSOSSNavbar").Visible = false;

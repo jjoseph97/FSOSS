@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-#region
 using FSOSS.System.DAL;
 using FSOSS.System.Data.Entity;
-#endregion
+
 namespace FSOSS.System.BLL
 {
     public class AdministratorRoleController

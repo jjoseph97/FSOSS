@@ -1,15 +1,10 @@
 ﻿using FSOSS.System.BLL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Admin_Master_CreateUser : System.Web.UI.Page
 {
-    private string successHeader = "<span><i class='fas fa-check-circle'></i> Success</span><br/ >";
-
     /// <summary>
     /// When the page loads first the page checks if the user is logged in, and is redirected to the login page if not.
     /// Then the method checks if the user has has proper authentication (Master Administrator role) to access this page.
@@ -18,7 +13,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirect Administrator to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
@@ -40,7 +35,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
         }
     }
     /// <summary>
-    /// This method is used when the individual clicks the Create button.
+    /// This method is used when the Administrator clicks the Create button.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -73,6 +68,7 @@ public partial class Admin_Master_CreateUser : System.Web.UI.Page
 
             // Display the success message
             SuccessMessage.Visible = true;
+            string successHeader = "<span><i class='fas fa-check-circle'></i> Success</span><br/ >";
             SuccessMessage.Text = successHeader + "Successfully added: " + newUser;
 
             // Clear all the text box fields
