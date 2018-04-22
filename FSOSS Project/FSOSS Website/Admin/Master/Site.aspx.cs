@@ -19,7 +19,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        if (Session["securityID"] == null) // Redirects to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
@@ -30,7 +30,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
 
         if (!IsPostBack)
         {
-            ListView1.Visible = true;
             ListView1.DataBind();
             seeArchive = false;
         }
@@ -49,7 +48,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         {
             MessageUserControl.HandleDataBoundException(e);
         }
-        else // else show the ReturnValue(success message) as a string to display to the user 
+        else // else show the ReturnValue(success message) as a string to display on the webpage
         {
             string successMessage = e.ReturnValue.ToString();
             MessageUserControl.TryRun(() =>
@@ -95,13 +94,13 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         UnitController unControl = new UnitController();
 
         string siteName = AddSiteTextBox.Text.Trim();
-        int employee = int.Parse(Session["adminID"].ToString());
+        int admin = int.Parse(Session["adminID"].ToString());
 
         MessageUserControl.TryRun(() =>
         {
-            sysmgr.AddSite(siteName, employee); // adds the site to the database
+            sysmgr.AddSite(siteName, admin); // adds the site to the database
             swControl.NewSite_NewWord(siteName); // assigns a survey word to the site
-            unControl.NewSite_NewUnit(siteName, employee); // adds the Not Applicable Unit option to the site
+            unControl.NewSite_NewUnit(siteName, admin); // adds the Not Applicable Unit option to the site
 
             ListView1.DataBind();
             AddSiteTextBox.Text = "";

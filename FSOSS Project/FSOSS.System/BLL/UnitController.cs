@@ -361,9 +361,14 @@ namespace FSOSS.System.BLL
             }
         }//end of update Unit
 
+        /// <summary>
+        /// Add a new unit with the value "Not Applicable" to a new site.
+        /// </summary>
+        /// <param string= newSiteName ></param>
+        /// <param int= admin ></param>
+        /// <returns>Returns a confirmation</returns>
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public string NewSite_NewUnit(string newSiteName, int employee)
-        // add Not Applicable Unit to the new site.
+        public string NewSite_NewUnit(string newSiteName, int admin)
         {
             using (var context = new FSOSSContext())
             {
@@ -371,16 +376,16 @@ namespace FSOSS.System.BLL
 
                 try
                 {
-                    //grab the new site id,
+                    //Grab the new site id, using the newSiteName
                     int siteId = (from x in context.Sites
                                   where x.site_name.Equals(newSiteName) &&
                                   x.archived_yn == false
                                   select x.site_id).FirstOrDefault();
 
-                    //add the new unit where unit number is NA
+                    //Add a new Unit with the unit_number "Not Applicable"
                     Unit newSite = new Unit()
                     {
-                        administrator_account_id = employee,
+                        administrator_account_id = admin,
                         site_id = siteId,
                         date_modified = DateTime.Now,
                         unit_number = "Not Applicable",

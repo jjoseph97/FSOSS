@@ -18,12 +18,12 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
 
     protected void Page_Load(object sender, EventArgs e)
     {
-       
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+
+        if (Session["securityID"] == null) // Redirects to login if not logged in
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if (Session["securityID"].ToString() != "2" && Session["securityID"].ToString() != "1") // Return HTTP Code 403
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
         }

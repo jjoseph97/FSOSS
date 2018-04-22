@@ -130,12 +130,12 @@ namespace FSOSS.System.BLL
                     {
                         throw new Exception("The site name can only be 100 characters long.");
                     }
-                    //If the user did not enter anything or if the new site name is null, display an error.
+                    //If the newSiteName is an empty string or if the new site name is null, display an error.
                     if (newSiteName == "" || newSiteName == null)
                     {
                         throw new Exception("Please enter a site name. Field cannot be empty.");
                     }
-                    //If the user enters in characters that are not approved by the Regex (defined by validWord), then display an error message.
+                    //If characters not approved by the Regex (defined by validWord) are entered, then display an error message.
                     else if (!validWord.IsMatch(newSiteName))
                     {
                         throw new Exception("Please enter only alphabetical letters.");
@@ -224,7 +224,7 @@ namespace FSOSS.System.BLL
                     {
                         throw new Exception("This site does not exist.");
                     }
-                     //If the user enters in characters that are not approved by the Regex (defined by valid), then display an error message.
+                     //If characters not approved by the Regex (defined by valid) are entered, then display an error message.
                     if (!(valid.IsMatch(siteName)))
                     {
                         throw new Exception("Please enter only alphabetical letters.");
@@ -292,7 +292,7 @@ namespace FSOSS.System.BLL
                         Site site = context.Sites.Find(siteID);
                         if (site.archived_yn == false)
                         {
-                            //If the user is attempting to disable the last active site in the system, throw an error.
+                            //If the admin is attempting to disable the last active site in the system, throw an error.
                             if (lastSite.Count() == 1)
                             {
                                  throw new Exception("Cannot disable site. There needs to be at least one active site.");

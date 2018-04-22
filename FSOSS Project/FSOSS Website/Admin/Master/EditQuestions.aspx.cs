@@ -10,6 +10,15 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["securityID"] == null) // Redirects to login if not logged in
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
+        {
+            Context.Response.StatusCode = 403;
+        }
+
         editQuestion.Visible = false;
         editResponse.Visible = false;
         if (QuestionDDL.SelectedValue != "")
