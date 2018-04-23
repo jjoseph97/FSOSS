@@ -31,28 +31,37 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
                 // Hide all messages
                 SuccessMessage.Visible = false;
                 FailedMessage.Visible = false;
-                // Assign query string
-                int id = int.Parse(Request.QueryString["id"].ToString());
-
-                if (!IsPostBack)
+                int id;
+                // Try to parse the query string to an integer
+                if (int.TryParse(Request.QueryString["id"].ToString(), out id))
                 {
-                    AdministratorAccountController sysmgr = new AdministratorAccountController();
-                    // Get Administrator Account Information passing in the ID
-                    AdministratorAccountPOCO info = sysmgr.GetAdministratorInformation(id);
+                    // Assign query string
+                    id = int.Parse(Request.QueryString["id"].ToString());
+                    if (!IsPostBack)
+                    {
+                        AdministratorAccountController sysmgr = new AdministratorAccountController();
+                        // Get Administrator Account Information passing in the ID
+                        AdministratorAccountPOCO info = sysmgr.GetAdministratorInformation(id);
 
-                    if (info == null)
-                    {
-                        Response.Redirect("~/Admin/Master/EditUserSearch");
+                        if (info == null)
+                        {
+                            Response.Redirect("~/Admin/Master/EditUserSearch");
+                        }
+                        else
+                        {
+                            // Populate user information fields
+                            UserNameTextBox.Text = info.username;
+                            FirstNameTextBox.Text = info.firstName;
+                            LastNameTextBox.Text = info.lastName;
+                            SecurityLevelDDL.SelectedValue = info.roleId.ToString();
+                            DeactivateCheckBox.Checked = info.archivedBool;
+                        }
                     }
-                    else
-                    {
-                        // Populate user information fields
-                        UserNameTextBox.Text = info.username;
-                        FirstNameTextBox.Text = info.firstName;
-                        LastNameTextBox.Text = info.lastName;
-                        SecurityLevelDDL.SelectedValue = info.roleId.ToString();
-                        DeactivateCheckBox.Checked = info.archivedBool;
-                    }
+                }
+                // If the query string cannot be converted to an integer; redirect the Administrator to the EditUserSearch web page
+                else
+                {
+                    Response.Redirect("~/Admin/Master/EditUserSearch");
                 }
             }
         }
