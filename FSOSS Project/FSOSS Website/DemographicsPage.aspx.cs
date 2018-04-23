@@ -9,80 +9,111 @@ using System.Web.UI.WebControls;
 
 public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
 {
+    /// <summary>
+    /// The method loads during the start of the page
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["takingSurvey"] == null ||
-            (Session["Unit"] == null
-            && Session["MealType"] == null
-            && Session["ParticipantType"] == null
-            && Session["Q4"] == null))
+        if (Session["takingSurvey"] == null ||      // if participant doesn't take a survey
+            (Session["Unit"] == null                // doesn't choose an option for unit number
+            && Session["MealType"] == null          // doesn't choose an option for meal type 
+            && Session["ParticipantType"] == null   // doesn't choose an option for participant type  
+            && Session["Q4"] == null))              // doesn't choose an option for Question 4
         {
+            // abandon the session and redirect the participant to the survey access page 
             Session.Abandon();
             Response.Redirect("~/");
         }
 
         if (!IsPostBack)
         {
-            QuestionTextController sysmgr = new QuestionTextController();
-            GenderLabel.Text = sysmgr.GetQuestionGender();
-            AgeRangeLabel.Text = sysmgr.GetQuestionAgeRange();
+            QuestionTextController sysmgr = new QuestionTextController(); // this allows access to the question text controller 
+            GenderLabel.Text = sysmgr.GetQuestionGender();  // populates the gender drop-down
+            AgeRangeLabel.Text = sysmgr.GetQuestionAgeRange();  // populates the age range drop-down
 
+            //if there is a session for the customer profile check box, assign the session to the session value 
             if (Session["CustomerProfileCheckBox"] != null)
+                //coverts the session customer profile check box to a boolean 
                 CustomerProfileCheckBox.Checked = Convert.ToBoolean(Session["CustomerProfileCheckBox"]);
 
+            //if customer profile check box is checked 
             if (CustomerProfileCheckBox.Checked)
             {
+                //dislay the gender and age range drop-downs 
                 CustomerProfileContent.Visible = true;
                 AgeDDL.SelectedValue = Session["AgeDDL"].ToString();
                 GenderDDL.SelectedValue = Session["GenderDDL"].ToString();
             }
             else
+                //else don't display the the gender and age range drop-downs  
                 CustomerProfileContent.Visible = false;
 
+            //if there is a session for the contact requests check box, assign the session to the session value 
             if (Session["ContactRequestsCheckBox"] != null)
                 ContactRequestsCheckBox.Checked = Convert.ToBoolean(Session["ContactRequestsCheckBox"]);
 
+            //if contact requests check box is checked 
             if (ContactRequestsCheckBox.Checked)
             {
+                //display the phone number and room number text boxes
                 ContactRequestsContent.Visible = true;
                 PhoneTextBox.Text = Session["PhoneTextBox"].ToString();
                 RoomTextBox.Text = Session["RoomTextBox"].ToString();
             }
             else
+                //else don't display the phone number and room number text boxes.
                 ContactRequestsContent.Visible = false;
         }
     }
 
+    /// <summary>
+    /// The method toggles the customer profile check box
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void CustomerProfileCheckBox_CheckedChanged(object sender, EventArgs e)
     {
+        //if check box is checked 
         if (CustomerProfileCheckBox.Checked)
         {
+            //display the customer profile div 
             CustomerProfileContent.Visible = true;
         }
         else
+            //don't display customer profile div 
             CustomerProfileContent.Visible = false;
     }
 
+    /// <summary>
+    /// The method toggles the contact request check box 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ContactRequestsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
+        //if check box is checked
         if (ContactRequestsCheckBox.Checked)
         {
+            //display contact requests div
             ContactRequestsContent.Visible = true;
         }
         else
+            //don't display contact requests div 
             ContactRequestsContent.Visible = false;
     }
 
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
-        int surveyVersionId = Convert.ToInt32(Session["survey_version_id"]); //TODO - create a method to capture Current Survey ID
+        int surveyVersionId = Convert.ToInt32(Session["survey_version_id"]);
         int unitId = int.Parse(Session["Unit"].ToString());
         int mealId = int.Parse(Session["MealType"].ToString());
         int participantTypeId = int.Parse(Session["ParticipantType"].ToString());
         int ageRangeId;
         int genderId;
-        bool customerProfileCheckBox = CustomerProfileCheckBox.Checked; // TODO - store checkbox booleans in case of return
-        bool contactRequest = ContactRequestsCheckBox.Checked; // TODO - store checkbox booleans in case of return
+        bool customerProfileCheckBox = CustomerProfileCheckBox.Checked; 
+        bool contactRequest = ContactRequestsCheckBox.Checked; 
         string contactRoomNumber = "";
         string contactPhoneNumber = "";
         string q1AResponse = Session["Q1A"].ToString();
@@ -179,24 +210,28 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
                 Response.Redirect("~/Thankyou");
             }
         }
-
-
-        
-
-
     }
 
+    /// <summary>
+    /// This method saves the chosen values into a session when the participant clicks the back button 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void BackButton_Click(object sender, EventArgs e)
     {
-        // TODO - Store user values into Session[]
-        Session["CustomerProfileCheckBox"] = CustomerProfileCheckBox.Checked;
+        Session["CustomerProfileCheckBox"] = CustomerProfileCheckBox.Checked; //the method captures the checkbox value if checked for the customer profile into a session
+        
+        // the method captures and saves the chosen options for gender and age range into a session  
         Session["GenderDDL"] = GenderDDL.SelectedValue;
         Session["AgeDDL"] = AgeDDL.SelectedValue;
 
-        Session["ContactRequestsCheckBox"] = ContactRequestsCheckBox.Checked;
+        Session["ContactRequestsCheckBox"] = ContactRequestsCheckBox.Checked; //the method captures the check box if checked for contact requests into a session
+        
+        //the method captures and saves the entered phone number and room number into a session 
         Session["PhoneTextBox"] = PhoneTextBox.Text;
         Session["RoomTextBox"] = RoomTextBox.Text;
 
+        //redirects the participant to the take survey page
         Response.Redirect("~/TakeSurvey");
     }
 }
