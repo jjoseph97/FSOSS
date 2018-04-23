@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Administrator Home Page" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Pages_AdministratorPages_MainPage" %>
 
 <asp:Content ID="AdminMainPage" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="row">
+    <div class="row border rounded">
         <div class="col-sm-12 col-md-8 mx-auto mt-3 px-0">
             <asp:Label ID="WelcomeMessage" runat="server" CssClass="h2 offset-md-3" />
         </div>
