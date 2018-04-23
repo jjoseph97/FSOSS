@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 public partial class Thankyou : System.Web.UI.Page
 {
     /// <summary>
-    /// This methods loads during the start of the page.
+    /// This method loads during the start of the page.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
