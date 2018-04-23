@@ -77,26 +77,26 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
                     }
                     else
                     {
-                        Alert.Text = failedHeader + String.Format("Start date of report cannot be above the end date. Start date {0} : End date {1} ", filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.endDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
+                        Alert.Text = failedHeader + String.Format("Starting date must be before the end date.");
                         Alert.Visible = true;
                     }
 
                 }
                 else
                 {
-                    Alert.Text = failedHeader + "Please select a valid ending period";
+                    Alert.Text = failedHeader + "Please select an ending period";
                     Alert.Visible = true;
                 }
             }
             else
             {
-                Alert.Text = failedHeader + String.Format("Start date of report cannot be above the Current date {0}. Start date {1}", DateTime.Now.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
+                Alert.Text = failedHeader + String.Format("Starting date cannot be after today's date.");
                 Alert.Visible = true;
             }
         }
         else
         {
-            Alert.Text = failedHeader + "Please select a valid starting period";
+            Alert.Text = failedHeader + "Please select a starting period";
             Alert.Visible = true;
         }
     }
