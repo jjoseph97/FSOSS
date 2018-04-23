@@ -24,22 +24,22 @@
                     </asp:DropDownList>
                     <asp:Panel ID="AddGender" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddGenderButton">
                         <asp:Label ID="AddGenderLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Gender: " />
-                        <asp:TextBox ID="AddGenderBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type gender to add..." Style="background-color: #FFFFFF;" />
+                        <asp:TextBox ID="AddGenderBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type gender to add..." Style="background-color: #FFFFFF;" MaxLength="100" />
                         <asp:Button ID="AddGenderButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Gender" OnClick="AddGenderButton_Click" />
                     </asp:Panel>
                     <asp:Panel ID="AddPT" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddPTButton">
                         <asp:Label ID="AddPTLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Participant Type: " />
-                        <asp:TextBox ID="AddPTBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" />
+                        <asp:TextBox ID="AddPTBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type participant type to add..." Style="background-color: #FFFFFF;" MaxLength="100" />
                         <asp:Button ID="AddPTButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Participant Type" OnClick="AddPTButton_Click" />
                     </asp:Panel>
                     <asp:Panel ID="AddMeal" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddMealsButton">
                         <asp:Label ID="AddMealsLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Meal: " />
-                        <asp:TextBox ID="AddMealsTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" />
+                        <asp:TextBox ID="AddMealsTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type meals to add..." Style="background-color: #FFFFFF;" MaxLength="100" />
                         <asp:Button ID="AddMealsButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Meal" OnClick="AddMealButton_Click" />
                     </asp:Panel>
                     <asp:Panel ID="AddAgeRange" runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddAgeRangeButton">
                         <asp:Label ID="AddAgeRangeLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Age Range: " />
-                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" />
+                        <asp:TextBox ID="AddAgeRangeTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type age range to add..." Style="background-color: #FFFFFF;" MaxLength="100" />
                         <asp:Button ID="AddAgeRangeButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Age Range" OnClick="AddARButton_Click" />
                     </asp:Panel>
                 </div>

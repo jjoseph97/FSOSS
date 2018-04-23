@@ -16,7 +16,7 @@
             <div class="card container mb-2">
                 <asp:Panel runat="server" CssClass="row container mx-auto px-0" DefaultButton="AddSiteButton">
                     <asp:Label ID="AddWordLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Site: " />
-                    <asp:TextBox ID="AddSiteTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type word to add..." AutoComplete="off" />
+                    <asp:TextBox ID="AddSiteTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type word to add..." AutoComplete="off" MaxLength="100" />
                     <asp:Button ID="AddSiteButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add" OnClick="AddSite_Click" />
                 </asp:Panel>
             </div>
