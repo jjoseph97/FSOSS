@@ -219,13 +219,15 @@ public partial class Pages_Survey_DemographicsPage : System.Web.UI.Page
     /// <param name="e"></param>
     protected void BackButton_Click(object sender, EventArgs e)
     {
-        Session["CustomerProfileCheckBox"] = CustomerProfileCheckBox.Checked; //the method captures the checkbox value if checked for the customer profile into a session
+        //the method captures the checkbox value if checked for the customer profile into a session
+        Session["CustomerProfileCheckBox"] = CustomerProfileCheckBox.Checked; 
         
-        // the method captures and saves the chosen options for gender and age range into a session  
+        //the method captures and saves the chosen options for gender and age range into a session  
         Session["GenderDDL"] = GenderDDL.SelectedValue;
         Session["AgeDDL"] = AgeDDL.SelectedValue;
 
-        Session["ContactRequestsCheckBox"] = ContactRequestsCheckBox.Checked; //the method captures the check box if checked for contact requests into a session
+        //the method captures the check box if checked for contact requests and stores it into a session
+        Session["ContactRequestsCheckBox"] = ContactRequestsCheckBox.Checked; 
         
         //the method captures and saves the entered phone number and room number into a session 
         Session["PhoneTextBox"] = PhoneTextBox.Text;
