@@ -97,6 +97,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     /// <param name="e">default parameter of type EventArgs created for Return_Click</param>
     protected void Return_Click(object sender, EventArgs e)
     {
+        // Clear the filter
+        Session["filter"] = null;
         //Redirect the user to ViewReportFilter page.
         Response.Redirect("~/Admin/ViewReportFilter.aspx");
     }

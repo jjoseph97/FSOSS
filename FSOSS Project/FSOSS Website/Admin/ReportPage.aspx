@@ -216,7 +216,7 @@
         </div>
     </div>
     <div class="row" style="padding-top: 25px">
-        <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to View Reports Filter" OnClick="Return_Click" />
+        <asp:Button ID="Return" class="btn btn-primary btn-md btn-block" runat="server" Text="Back to Reports Filter" OnClick="Return_Click" />
     </div>
 
 
