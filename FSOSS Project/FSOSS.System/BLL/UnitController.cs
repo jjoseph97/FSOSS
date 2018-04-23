@@ -55,6 +55,7 @@ namespace FSOSS.System.BLL
             {
                 try
                 {
+                    
                     var unitList = from y in context.Units
                                    where y.site_id == site_id
                                    && y.archived_yn == false
@@ -154,7 +155,7 @@ namespace FSOSS.System.BLL
 
                     if (!validUnit.IsMatch(unitNumber)) // check to see if the updated number is entered is consistent with the valid pattern set. 
                     {
-                        throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)");
+                        throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only) without special characters.");
                     }
 
 
@@ -304,7 +305,7 @@ namespace FSOSS.System.BLL
 
                     if (!validUnit.IsMatch(unitNumber))// check to see if the updated number is entered is consistent with the valid pattern set. 
                     {
-                        throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)");
+                        throw new Exception("Invalid input pattern. Correct pattern (up to 3 digits followed by upto 47 alphabets) OR (up to 50 alphabets long only)without special characters.");
                     }
 
 
