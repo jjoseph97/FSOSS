@@ -2,7 +2,7 @@
 
 <asp:Content ID="AdminMainPage" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="card">
-        <div class="col-sm-12 col-md-8 mx-auto mt-3 px-0" >
+        <div class="col-sm-12 col-md-8 mx-auto mt-3 px-0">
             <asp:Label ID="WelcomeMessage" runat="server" CssClass="h2 offset-md-3" />
         </div>
 

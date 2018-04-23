@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card container">
-                <asp:ListView ID="SubmittedSurveyListView" runat="server" >
+                <asp:ListView ID="SubmittedSurveyListView" runat="server">
                     <AlternatingItemTemplate>
                         <tr class="fsoss-listview-alternate">
                             <td style="display: none;">
@@ -30,7 +30,7 @@
                                 <asp:Label Text='<%# Eval("contactRequest") %>' runat="server" ID="contactStatusLabel" /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contacted") %>' runat="server" ID="Label3" /></td>
-                           <td style="display: none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactRoomNumber") %>' runat="server" ID="contactRoomNumberLabel" /></td>
                             <td style="display: none;">
                                 <asp:Label Text='<%# Eval("contactPhoneNumber") %>' runat="server" ID="contactPhoneNumberLabel" /></td>
@@ -69,7 +69,7 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer"  class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
+                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server">
                                             <th runat="server" class="w-25 p-3">Hospital</th>
                                             <th runat="server" class="w-10 p-3">Unit Number</th>
@@ -89,15 +89,10 @@
                                             <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>
-                                                    <div class="my-2 text-white">
-                                                        <b>Page 
-                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
-                                                            of
-                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
-                                                            (
-                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
-                                                            records)
-                                                        </b>
+                                                    <div class="my-2 text-white font-weight-bold">
+                                                        <asp:Label runat="server" ID="CurrentPageLabel">Page <%# ( Container.StartRowIndex / Container.PageSize) + 1 %> of</asp:Label>
+                                                        <asp:Label runat="server" ID="TotalPagesLabel"><%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %></asp:Label>
+                                                        <asp:Label runat="server" ID="TotalItemsLabel">(<%# Container.TotalRowCount %> records)</asp:Label>
                                                     </div>
                                                 </PagerTemplate>
                                             </asp:TemplatePagerField>

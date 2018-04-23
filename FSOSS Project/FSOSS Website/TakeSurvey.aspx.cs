@@ -52,12 +52,12 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
                 MealTypeDropDownList.SelectedItem.Selected = true;
             }
 
-            if (Session["Q1A"] != null )
+            if (Session["Q1A"] != null)
             {
                 Q1AResponse.SelectedValue = Session["Q1A"].ToString();
                 Q1AResponse.SelectedItem.Selected = true;
             }
-            if (Session["Q1B"] != null )
+            if (Session["Q1B"] != null)
             {
                 Q1BResponse.SelectedValue = Session["Q1B"].ToString();
                 Q1BResponse.SelectedItem.Selected = true;
@@ -118,8 +118,8 @@ public partial class Pages_Survey_TakeSurvey : System.Web.UI.Page
         Session["Q4"] = Q4Response.SelectedValue;
         Session["Q5"] = Question5.Text;
         Response.Redirect("~/DemographicsPage.aspx", false);
-        
-        
+
+
     }
-    
+
 }

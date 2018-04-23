@@ -5,17 +5,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
         <div class="col-md-12">
-             <h1 class="card container py-2 h4" style="font-weight:bold;">Edit Survey Questions & Responses</h1>
+            <h1 class="card container py-2 h4" style="font-weight: bold;">Edit Survey Questions & Responses</h1>
         </div>
     </div>
     <div class="col-sm-12 px-0">
-            <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
+        <uc1:MessageUserControl runat="server" class="alert alert-danger mb-2 card" ID="MessageUserControl" />
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card container mb-2">
                 <div class="row container mx-auto px-0">
-                    <asp:Label class="col-sm-4 my-2 text-center text-sm-left" style="font-weight:bold;font-size:large; line-height:38px;" runat="server" Text="Select a Question to Edit"></asp:Label>
+                    <asp:Label class="col-sm-4 my-2 text-center text-sm-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Select a Question to Edit"></asp:Label>
                     <asp:DropDownList ID="QuestionDDL" OnSelectedIndexChanged="QuestionDDL_SelectedIndexChanged" AutoPostBack="true" CssClass="col-sm-3 form-control my-2" runat="server">
                         <asp:ListItem Value="">Select...</asp:ListItem>
                         <asp:ListItem Value="1">Question 1</asp:ListItem>
@@ -29,7 +29,7 @@
                         <asp:ListItem Value="10">Question 4</asp:ListItem>
                         <asp:ListItem Value="11">Question 5</asp:ListItem>
                     </asp:DropDownList><br />
-                     <div class="col-sm-12">
+                    <div class="col-sm-12">
                         <asp:Label ID="Message" runat="server" />
                     </div>
                 </div>
@@ -41,23 +41,23 @@
                         <h1 id="headerText" fontsize="15px" runat="server"></h1>
                         <%--<p>Description:</p>--%>
                         <asp:HiddenField ID="QuestionID" runat="server" />
-                        <asp:TextBox ID="DescriptionTextBox" CssClass="form-control"  Width="100%" TextMode="MultiLine" runat="server" />
-                        <asp:Button ID="QuestionUpdate"  class="col-sm-2 offset-sm-10 my-2 btn btn-success" runat="server" Text="Update" OnClick="QuestionUpdate_Click" />
+                        <asp:TextBox ID="DescriptionTextBox" CssClass="form-control" Width="100%" TextMode="MultiLine" runat="server" />
+                        <asp:Button ID="QuestionUpdate" class="col-sm-2 offset-sm-10 my-2 btn btn-success" runat="server" Text="Update" OnClick="QuestionUpdate_Click" />
                     </div>
                 </div>
             </div>
             <div id="editResponse" runat="server" class="card container my-2">
                 <asp:HiddenField ID="ResponseID" runat="server" />
-                <asp:ListView ID="QuestionResponses" runat="server" DataSourceID="QResponsesObjectDataSource" >
+                <asp:ListView ID="QuestionResponses" runat="server" DataSourceID="QResponsesObjectDataSource">
                     <AlternatingItemTemplate>
                         <tr class="fsoss-listview-alternate">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("ResponseId") %>' runat="server" ID="IdLabel" />
                             </td>
                             <td>
                                 <asp:Label Text='<%# Eval("Text") %>' runat="server" CssClass="pl-3" ID="TextLabel" />
                             </td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("Value") %>' runat="server" ID="ValueLabel" />
                             </td>
                             <td>
@@ -67,13 +67,13 @@
                     </AlternatingItemTemplate>
                     <EditItemTemplate>
                         <tr class="listview-header">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:TextBox Text='<%# Bind("ResponseId") %>' runat="server" ID="IdTextBox" />
                             </td>
                             <td>
                                 <asp:TextBox Text='<%# Bind("Text") %>' runat="server" CssClass="pl-3 col-12" ID="TextTextBox" />
                             </td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:TextBox Text='<%# Bind("Value") %>' runat="server" ID="ValueTextBox" />
                             </td>
                             <td>
@@ -87,13 +87,13 @@
                     </EmptyDataTemplate>
                     <ItemTemplate>
                         <tr class="fsoss-listview-itemtemplate">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("ResponseId") %>' runat="server" ID="IdLabel" />
                             </td>
                             <td>
                                 <asp:Label Text='<%# Eval("Text") %>' runat="server" CssClass="pl-3" ID="TextLabel" />
                             </td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("Value") %>' runat="server" ID="ValueLabel" />
                             </td>
                             <td>
@@ -105,7 +105,7 @@
                         <table runat="server" style="width: 100%;" class="mt-2 mb-2">
                             <tr runat="server">
                                 <td runat="server">
-                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; width:100%; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
+                                    <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; width: 100%; font-family: Verdana, Arial, Helvetica, sans-serif;" border="1">
                                         <tr runat="server">
                                             <%--<th runat="server">Id</th>--%>
                                             <th runat="server" class="w-75 p-3">Response Options</th>
@@ -120,13 +120,13 @@
                     </LayoutTemplate>
                     <SelectedItemTemplate>
                         <tr style="background-color: #008A8C; font-weight: bold; color: #FFFFFF;">
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("ResponseId") %>' runat="server" ID="IdLabel" />
                             </td>
                             <td>
                                 <asp:Label Text='<%# Eval("Text") %>' runat="server" ID="TextLabel" />
                             </td>
-                            <td style="display:none;">
+                            <td style="display: none;">
                                 <asp:Label Text='<%# Eval("Value") %>' runat="server" ID="ValueLabel" />
                             </td>
                             <td>
@@ -153,6 +153,6 @@
                 </asp:ObjectDataSource>
             </div>
         </div>
-     </div>
+    </div>
 </asp:Content>
 

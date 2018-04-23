@@ -10,7 +10,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
 {
     static public bool seeArchive = false;
 
-    
+
     /// <summary>
     /// when the page loads, if it is the first time loading the page, the gender list is set to viewable, and 
     ///only active options are visible.
@@ -24,7 +24,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-        else if ((int)Session["securityID"] != 2 ) // Return HTTP Code 403
+        else if ((int)Session["securityID"] != 2) // Return HTTP Code 403
         {
             Context.Response.StatusCode = 403;
         }
@@ -69,7 +69,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             AgeRangeListView.DataBind();
 
             RevealButton.Text = "Show Archived";
-           
+
         }
         else
         {
@@ -87,7 +87,7 @@ public partial class Admin_Master_ManageCustomerProfile : System.Web.UI.Page
             AgeRangeListView.DataBind();
 
             RevealButton.Text = "Show Active";
-            
+
         }
     }
 

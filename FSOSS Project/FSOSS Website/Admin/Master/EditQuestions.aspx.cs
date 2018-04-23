@@ -70,7 +70,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_EditQuest
 
     protected void QuestionUpdate_Click(object sender, EventArgs e)
     {
-        
+
         string newQuestion = DescriptionTextBox.Text.Trim();
         int questionID = Convert.ToInt32(QuestionDDL.SelectedValue);
 

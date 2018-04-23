@@ -60,7 +60,7 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         {
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
             filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
-            if(filter.startingDate < DateTime.Now)
+            if (filter.startingDate < DateTime.Now)
             {
                 if (endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
                 {
@@ -90,9 +90,9 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
             }
             else
             {
-                Alert.Text = failedHeader + String.Format("Start date of report cannot be above the Current date {0}. Start date {1}",DateTime.Now.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
+                Alert.Text = failedHeader + String.Format("Start date of report cannot be above the Current date {0}. Start date {1}", DateTime.Now.ToString("MMMM-dd-yyyy HH:mm:ss"), filter.startingDate.ToString("MMMM-dd-yyyy HH:mm:ss"));
                 Alert.Visible = true;
-            }          
+            }
         }
         else
         {

@@ -27,7 +27,7 @@ public partial class Pages_AdministratorPages_SubmittedSurveyList : System.Web.U
             Response.Redirect("~/Admin/Login.aspx");
         }
         else if (!IsPostBack)
-        { 
+        {
             if (filter == null) // check and redirect to the previous page if the filter is null
             {
                 Response.Redirect("ViewSurveyFilter.aspx");

@@ -47,12 +47,12 @@ public partial class Pages_AdministratorPages_ContactListPage : System.Web.UI.Pa
                 string value = SiteDDL.SelectedValue;
                 bool good;
                 int siteID;
-                good= Int32.TryParse(value, out siteID);
+                good = Int32.TryParse(value, out siteID);
                 //update label to display the desired value
                 if (value != null && good)
                 {
                     //PendingRequestNumberLabel.Text = value;
-                    
+
                     int contactCount = ssc.GetContactRequestTotal(siteID);
                     ContactCountLabel.Text = "&nbsp;" + contactCount.ToString() + " &nbsp;";
                 }

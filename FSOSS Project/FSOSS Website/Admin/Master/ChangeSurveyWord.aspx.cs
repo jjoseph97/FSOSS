@@ -66,7 +66,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             Regex validWord = new Regex("^[a-zA-Z]+$");
             if (searchWord == "") // check if the search is empty and display an error
             {
-                throw new Exception("The search field cannot be empty."); 
+                throw new Exception("The search field cannot be empty.");
             }
             else if (searchWord.Length > 8) // check that the length of the search is a maximum of 8 characters and display an error
             {
@@ -83,7 +83,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
                 {
                     SurveyWordListView.DataSourceID = "SearchActiveSurveyWordODS";
                 }
-                else if(SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
+                else if (SurveyWordListView.DataSourceID == "ArchivedSurveyWordODS")
                 {
                     SurveyWordListView.DataSourceID = "SearchArchivedSurveyWordODS";
                 }
@@ -135,7 +135,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_ChangeSur
             sysmgr.AddWord(newWord, adminID); // send the new survey word and adminID data to the AddWord method in the PotentialSurveyWordController
             SurveyWordListView.DataBind();
             AddWordTextBox.Text = ""; // set the add word text field back to blank text
-          
+
         }, "Success", "Successfully added the new survey word: \"" + newWord + "\""); // display a success message if the survey word was added correctly
     }
 

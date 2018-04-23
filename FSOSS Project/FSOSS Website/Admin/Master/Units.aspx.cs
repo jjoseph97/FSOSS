@@ -34,7 +34,7 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
         {
             seeArchive = false;
             SiteDropDownList.DataBind();
-            
+
 
             SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
@@ -48,9 +48,9 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
                 UnitsListView.DataBind();
             }
         }
-     }
+    }
 
-   
+
 
 
     /// <summary>
@@ -82,7 +82,6 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_UnitsCrud
     /// <param name="e"></param>
     protected void SiteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
-
         SelectedSiteID.Text = SiteDropDownList.SelectedValue;
 
         UnitsListView.Visible = true;

@@ -10,7 +10,7 @@
         <div class="card container">
             <div class="row col-md-12">
                 <asp:Label ID="SiteLabel" runat="server" class="col-md-2 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Site: "></asp:Label>
-                <asp:DropDownList ID="SiteDDL" runat="server" class="col-md-4 offset-md-1 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+                <asp:DropDownList ID="SiteDDL" runat="server" class="col-md-4 offset-md-1 my-2 form-control" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" OnSelectedIndexChanged="SiteDDL_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                 <asp:Label ID="COntactLabel" runat="server" class="col-6 col-lg-3 offset-lg-1 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" Text="Contact Requests:"></asp:Label><br />
                 <asp:Label ID="ContactCountLabel" class="col-6 col-lg-1 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px; color: #223f88;" runat="server"></asp:Label>
             </div>
@@ -81,28 +81,23 @@
                             </td>
                         </tr>
                         <tr runat="server" class="mx-2 my-2">
-                                <td runat="server" class="listview-pager">
-                                    <asp:DataPager runat="server" ID="SurveyListDataPager">
-                                        <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
-                                            <asp:TemplatePagerField>
-                                                <PagerTemplate>
-                                                    <div class="my-2 text-white">
-                                                        <b>Page 
-                                                            <asp:Label runat="server" ID="CurrentPageLabel" Text='<%# ( Container.StartRowIndex / Container.PageSize) + 1 %>' />
-                                                            of
-                                                            <asp:Label runat="server" ID="TotalPagesLabel" Text='<%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %>' />
-                                                            (
-                                                            <asp:Label runat="server" ID="TotalItemsLabel" Text='<%# Container.TotalRowCount %>' />
-                                                            records)
-                                                        </b>
-                                                    </div>
-                                                </PagerTemplate>
-                                            </asp:TemplatePagerField>
-                                        </Fields>
-                                    </asp:DataPager>
-                                </td>
-                            </tr>
+                            <td runat="server" class="listview-pager">
+                                <asp:DataPager runat="server" ID="SurveyListDataPager">
+                                    <Fields>
+                                        <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-primary text-light border border-dark mt-2" ShowFirstPageButton="True" ShowLastPageButton="True"></asp:NextPreviousPagerField>
+                                        <asp:TemplatePagerField>
+                                            <PagerTemplate>
+                                                <div class="my-2 text-white font-weight-bold">
+                                                    <asp:Label runat="server" ID="CurrentPageLabel">Page <%# ( Container.StartRowIndex / Container.PageSize) + 1 %> of</asp:Label>
+                                                    <asp:Label runat="server" ID="TotalPagesLabel"><%# Math.Ceiling( ((double)Container.TotalRowCount) / Container.PageSize) %></asp:Label>
+                                                    <asp:Label runat="server" ID="TotalItemsLabel">(<%# Container.TotalRowCount %> records)</asp:Label>
+                                                </div>
+                                            </PagerTemplate>
+                                        </asp:TemplatePagerField>
+                                    </Fields>
+                                </asp:DataPager>
+                            </td>
+                        </tr>
                     </table>
                 </LayoutTemplate>
                 <SelectedItemTemplate>

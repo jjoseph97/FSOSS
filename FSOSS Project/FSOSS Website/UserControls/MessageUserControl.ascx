@@ -8,9 +8,9 @@
     <div class="panel-body">
         <asp:Label ID="MessageLabel" runat="server" />
         <asp:Repeater ID="MessageDetailsRepeater" runat="server" EnableViewState="false">
-            <itemtemplate>
+            <ItemTemplate>
                 <asp:Label runat="server"><%# Eval("Error") %></asp:Label>
-            </itemtemplate>
+            </ItemTemplate>
         </asp:Repeater>
     </div>
 </asp:Panel>

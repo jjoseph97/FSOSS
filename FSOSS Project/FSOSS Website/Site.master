@@ -6,7 +6,8 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="format-detection" content="telephone=no"/>  <%-- this meta tag is used in order to prevent all hyperlinks on phone numbers --%>
+    <meta name="format-detection" content="telephone=no" />
+    <%-- this meta tag is used in order to prevent all hyperlinks on phone numbers --%>
     <title><%: Page.Title %> - Food Satisfaction Online Survey System</title>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -39,7 +40,7 @@
         </asp:ScriptManager>
         <div class="navbar navbar-expand-lg mb-2 navbar-light bg-light">
             <div class="container">
-                <asp:LinkButton ID="LogoLink" CssClass="navbar-brand" runat="server" OnClick="LogoLink_Click" CausesValidation="false" >
+                <asp:LinkButton ID="LogoLink" CssClass="navbar-brand" runat="server" OnClick="LogoLink_Click" CausesValidation="false">
                     <img runat="server" src="~/Content/images/ch-logo-transparent.png" class="img-fluid" alt="Covenant Health Logo" />
                 </asp:LinkButton>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#FSOSSNavbar" aria-controls="FSOSSNavbar" aria-expanded="false" aria-label="Toggle navigation" runat="server" id="hamburger">
@@ -51,9 +52,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">Administrator
                             </a>
-                            <ul class="dropdown-menu text-left w-50 mx-auto" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu text-left w-40 mx-auto" aria-labelledby="navbarDropdownMenuLink">
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle px-2" href="#">User Manager</a>
+                                    <a class="dropdown-item dropdown-toggle px-3" href="#">User Manager</a>
                                     <ul class="dropdown-menu text-center">
                                         <li>
                                             <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/CreateUser.aspx">New User</a>
@@ -64,7 +65,7 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle px-2" href="#">Survey Manager</a>
+                                    <a class="dropdown-item dropdown-toggle px-3" href="#">Survey Manager</a>
                                     <ul class="dropdown-menu text-center">
                                         <li>
                                             <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/ChangeSurveyWord.aspx">Change Survey Word</a>
@@ -78,7 +79,7 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle px-2" href="#">Site Manager</a>
+                                    <a class="dropdown-item dropdown-toggle px-3" href="#">Site Manager</a>
                                     <ul class="dropdown-menu text-center">
                                         <li>
                                             <a runat="server" class="dropdown-item px-2" href="~/Admin/Master/Site.aspx">Manage Sites</a>

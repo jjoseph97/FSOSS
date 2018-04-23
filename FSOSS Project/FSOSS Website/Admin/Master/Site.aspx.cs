@@ -117,8 +117,8 @@ public partial class Pages_AdministratorPages_MasterAdministratorPages_Site : Sy
         if (e.Item.ItemType == ListViewItemType.DataItem)
         {
             Button disableBtn = (Button)e.Item.FindControl("DeleteButton");
-            if(disableBtn != null)
-            { 
+            if (disableBtn != null)
+            {
                 if (seeArchive)
                 {
                     disableBtn.Attributes.Remove("btn btn btn-danger mx-3 my-1");

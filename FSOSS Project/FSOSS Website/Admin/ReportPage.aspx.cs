@@ -88,7 +88,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     EmptyMessage.Text = "No Submitted Survey Found. Please check your filter";
                 }
             }
-        }     
+        }
     }
     /// <summary>
     /// Method use to navigate the user to ViewReportFilter page.
@@ -102,7 +102,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     }
 
     // Static readonly string array use for assigning chart segment color.
-    public static readonly string[] COLOR_VALUE = {"rgba(255, 0, 0, 0.3)", "rgba(255, 255, 0, 0.3)", "rgba(0, 153, 0, 0.3)", "rgba(0, 0, 255, 0.3)", "rgba(255, 0, 255, 0.3)", "rgba(102, 255, 255, 0.3)", "rgba(255, 153, 102, 0.3)" };
+    public static readonly string[] COLOR_VALUE = { "rgba(255, 0, 0, 0.3)", "rgba(255, 255, 0, 0.3)", "rgba(0, 153, 0, 0.3)", "rgba(0, 0, 255, 0.3)", "rgba(255, 0, 255, 0.3)", "rgba(102, 255, 255, 0.3)", "rgba(255, 153, 102, 0.3)" };
     // Static readonly string array use for assigning chart segment border color.
     public static readonly string[] BORDER_COLOR_VALUE = { "rgba(255, 0, 0, 1)", "rgba(255, 255, 0, 1)", "rgba(0, 153, 0, 1)", "rgba(0, 0, 255, 1)", "rgba(255, 0, 255, 1)", "rgba(102, 255, 255, 1)", "rgba(255, 153, 102, 1)" };
 
@@ -159,7 +159,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     responses.Add(response);
                     // Clear the ChartPOCO Object
                     response = null;
-                                
+
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.     
                 sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
@@ -190,7 +190,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
                     // Clear the ChartPOCO Object
-                    response = null;               
+                    response = null;
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.  
                 sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
@@ -222,7 +222,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
                     // Clear the ChartPOCO Object
-                    response = null;                    
+                    response = null;
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
                 sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
@@ -284,7 +284,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
                     // Clear the ChartPOCO Object
-                    response = null;                   
+                    response = null;
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
                 sortedResponses = responses.OrderBy(item => preferencesForOrderByFirstOption.IndexOf(item.Text));
@@ -315,7 +315,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
                     // Clear the ChartPOCO Object
-                    response = null;                
+                    response = null;
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
                 sortedResponses = responses.OrderBy(item => preferencesForOrderBySecondOption.IndexOf(item.Text));
@@ -346,7 +346,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
                     // Clear the ChartPOCO Object
-                    response = null;                   
+                    response = null;
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
                 sortedResponses = responses.OrderBy(item => preferencesForOrderByThirdOption.IndexOf(item.Text));
@@ -377,7 +377,7 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
                     // Add the ChartPOCO Object to the ChartPOCO List 
                     responses.Add(response);
                     // Clear the ChartPOCO Object
-                    response = null;                 
+                    response = null;
                 }
                 // Sort the responses based on the preferred option declared and assigned it to the sortedResponse variable of IEnumerable type.
                 sortedResponses = responses.OrderBy(item => preferencesForOrderByFourthOption.IndexOf(item.Text));
@@ -386,5 +386,5 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
         // Convert sortedResponses variable of type IEnumerable to Serialze JSON Ojject using JsonConvert.SerializeObject method.
         // Return sortedResponses of type JSON Object
         return JsonConvert.SerializeObject(sortedResponses);
-    }   
+    }
 }

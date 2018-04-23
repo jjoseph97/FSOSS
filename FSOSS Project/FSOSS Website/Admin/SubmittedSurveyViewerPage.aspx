@@ -100,7 +100,7 @@
                 </div>
             </div>
             <script>
-                function back() { history.go(-1); } 
+                function back() { history.go(-1); }
             </script>
         </div>
     </div>
