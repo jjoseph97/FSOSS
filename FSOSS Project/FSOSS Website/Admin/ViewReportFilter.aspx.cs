@@ -9,8 +9,15 @@ using System.Web.UI.WebControls;
 
 public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.Page
 {
+    // Markup use for displaying error glyph and message
     private string failedHeader = "<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>";
 
+    /// <summary>
+    /// Default Web Page Method use to initialize pages and check if the user is logged in.
+    /// Initialize drop down lists alert labels
+    /// </summary>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         // this is for the client side input values to be retained after the page loads when a validation error is triggered (so the text is not lost)
@@ -18,45 +25,51 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
         string endingPeriodInput = Request.Form["EndingPeriodInput"];
         this.startingInputValue = startingPeriodInput;
         this.endingInputValue = endingPeriodInput;
-
-        if (Session["securityID"] == null) // Redirect user to login if not logged in
+        // Redirect user to login if not logged in
+        if (Session["securityID"] == null) 
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
         else if (!IsPostBack)
         {
+            // Initialize Meal Controller, Meal List, Site Controller, and SitePOCO List variable
             MealController mealController = new MealController();
+            List<MealPOCO> mealList = mealController.GetMealList();
+            SiteController siteController = new SiteController();
+            List<SitePOCO> siteList = siteController.GetSiteList();
+            // Initialize Alert Label
             Alert.Visible = false;
             Alert.Text = "";
-            List<MealPOCO> mealList = mealController.GetMealList();
+            // Iniitalize and setup Meal Drop down list
             MealDropDownList.DataSource = mealList;
             MealDropDownList.DataValueField = "mealID";
             MealDropDownList.DataTextField = "mealName";
             MealDropDownList.DataBind();
-            SiteController siteController = new SiteController();
-            List<SitePOCO> siteList = siteController.GetSiteList();
+            // Iniitalize and setup Site/Hospital Drop down list
             HospitalDropDownList.DataSource = siteList;
             HospitalDropDownList.DataValueField = "siteID";
             HospitalDropDownList.DataTextField = "siteName";
-            HospitalDropDownList.DataBind();
-            if (Session["securityID"] == null)
-            {
-                Response.Redirect("~/Admin/Login.aspx");
-            }
+            HospitalDropDownList.DataBind();         
         }
+        // Initialize Alert Label
         Alert.Text = "";
         Alert.Visible = false;
     }
+    // this is in order to get and set the starting date input text on page reload
+    protected string startingInputValue { get; set; }
+    // this is in order to get and set the end date input text on page reload
+    protected string endingInputValue { get; set; }
 
-    protected string startingInputValue { get; set; } // this is in order to get and set the starting date input text on page reload
-    protected string endingInputValue { get; set; } // this is in order to get and set the end date input text on page reload
-
+    /// <summary>
+    /// Validate the filter passed 
+    /// </summary>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void ViewButton_Click(object sender, EventArgs e)
     {
         FilterPOCO filter = new FilterPOCO();
-        DateTime dateToParse;
         string startingPeriodInput = String.Format("{0}", Request.Form["StartingPeriodInput"]);
-        if (startingPeriodInput != "" || DateTime.TryParseExact(startingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))
+        if (startingPeriodInput != "" || DateTime.TryParseExact(startingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out DateTime dateToParse))
         {
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
             filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);

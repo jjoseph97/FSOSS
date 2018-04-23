@@ -20,11 +20,11 @@ namespace FSOSS.System.Data.POCOs
         public List<int> QuestionFiveValueCount { get; set; }
         public List<string> QuestionSixValueList { get; set; }
         public List<int> QuestionSixValueCount { get; set; }
+        public List<string> QuestionEightValueList { get; set; }
+        public List<int> QuestionEightValueCount { get; set; }
         public List<string> QuestionNineValueList { get; set; }
         public List<int> QuestionNineValueCount { get; set; }
         public List<string> QuestionTenValueList { get; set; }
         public List<int> QuestionTenValueCount { get; set; }
-        public List<string> QuestionEightValueList = new List<string>();
-        public List<int> QuestionEightValueCount = new List<int>();
     }
 }

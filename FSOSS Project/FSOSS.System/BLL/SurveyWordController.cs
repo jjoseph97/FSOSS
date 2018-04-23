@@ -13,8 +13,14 @@ namespace FSOSS.System.BLL
 {
     public class SurveyWordController
     {
+        /// <summary>
+        /// Method use to generate random survey word of the day from the list of potential survey words. 
+        /// Perform validation and checks to ensure that the surveyword of the day doesn't repeat. 
+        /// Remove few old survey words once all the words are being used. 
+        /// </summary>
         public void GenerateSurveyWordOfTheDay()
         {
+            // Start of Transaction
             using (var context = new FSOSSContext())
             {
                 //Get the list of survey word in the database
@@ -41,6 +47,7 @@ namespace FSOSS.System.BLL
                         List<SurveyWord> newSurveyListForCheck = null;
                         do
                         {
+                            // Get the fresh list of survey words
                             newSurveyListForCheck = (from x in context.SurveyWords
                                                                   select x).ToList();
                             
@@ -68,6 +75,7 @@ namespace FSOSS.System.BLL
                         //Loop that will run until a random word is choosen that doesn't exists on the current Survey Word Table
                         do
                         {
+                            // Get a fresh list of survey words
                             List<SurveyWord> newSurveyWordList = (from x in context.SurveyWords
                                                                   select x).ToList();
                             //Generate Random Number
@@ -79,7 +87,7 @@ namespace FSOSS.System.BLL
                             //If the Word doesn't exists after the loop on Survey Word List. Exit on the loop else start the process all over again.
                         } while (wordIsUsed == true);
 
-                        //Add SurveyWord after the check
+                        //Add SurveyWord after the validation
                         SurveyWord newSurveyWord = new SurveyWord()
                         {
                             date_used = DateTime.Now,
@@ -90,6 +98,7 @@ namespace FSOSS.System.BLL
                         context.SurveyWords.Add(newSurveyWord);
                         // Save the new added Survey Word
                         context.SaveChanges();
+                        // clear the survey word
                         newSurveyWord = null;
                     }                               
                 }
@@ -107,22 +116,30 @@ namespace FSOSS.System.BLL
         /// Method is used to validate access word
         /// </summary>
         /// <param name="enteredWord"></param>
-        /// <returns>returns a boolean value</returns>
+        /// <returns>Returns a boolean value that denotes if the word is in use for the current day</returns>
         public bool ValidateAccessWord(string enteredWord)
         {
+            // Start of Transaction
             using (var context = new FSOSSContext())
             {
-                // return true if entered word exists and is in use for the current day; else return false
+                // Return true if entered word exists and is in use for the current day; else return false
                 return context.SurveyWords.Any(x => x.PotentialSurveyWord.survey_access_word.Equals(enteredWord) && x.date_used.Day == DateTime.Now.Day);
             }
         }
 
+        /// <summary>
+        /// Get the Site object based on the survey word entered
+        /// </summary>
+        /// <param name="surveyWordEntered">Survey word entered by the participant</param>
+        /// <returns>Return a Site object </returns>
         public Site GetSite(string surveyWordEntered)
         {
+            //Start of Transaction
             using (var context = new FSOSSContext())
             {
                 try
                 {
+                    // Get the survey word to check
                     SurveyWord surveyWordToCheck = (from x in context.SurveyWords
                                                     where x.PotentialSurveyWord.survey_access_word.Equals(surveyWordEntered)
                                                     select x).FirstOrDefault();

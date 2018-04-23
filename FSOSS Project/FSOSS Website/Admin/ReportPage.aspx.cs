@@ -21,8 +21,8 @@ public partial class Pages_AdministratorPages_ReportPage : System.Web.UI.Page
     /// <summary>
     /// Default Web Page Method use to initialize pages and check if the user is logged in and if it passes the required filters for generating reports.
     /// </summary>
-    /// <param name="sender">default parameter of type object created for Page_Load</param>
-    /// <param name="e">default parameter of type EventArgs created for Page_Load</param>
+    /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
+    /// <param name="e">Contains the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
         // Set the visibility for Alert Message Label to hidden.
