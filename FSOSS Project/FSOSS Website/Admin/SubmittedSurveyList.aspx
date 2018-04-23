@@ -71,8 +71,8 @@
                                 <td runat="server">
                                     <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                         <tr runat="server">
-                                            <th runat="server" class="w-25 p-3">Hospital</th>
-                                            <th runat="server" class="w-10 p-3">Unit Number</th>
+                                            <th runat="server" class="w-20 p-3">Hospital</th>
+                                            <th runat="server" class="w-15 p-3">Unit Number</th>
                                             <th runat="server" class="w-15 p-3">Participant Type</th>
                                             <th runat="server" class="w-15 p-3">Meal Name</th>
                                             <th runat="server" class="w-25 p-3">Date Submitted</th>

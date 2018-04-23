@@ -17,7 +17,7 @@
                     <asp:Label ID="SearchUnitLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Search units: " />
                     <asp:DropDownList ID="SiteDropDownList" class="col-md-4 my-2 form-control" runat="server" DataSourceID="SiteODS" DataTextField="siteName" OnSelectedIndexChanged="SiteDropDownList_SelectedIndexChanged" AutoPostBack="true" DataValueField="siteID"></asp:DropDownList>
                 </asp:Panel>
-                <asp:Panel runat="server" CssClass="row container mx-auto my-2 px-0" DefaultButton="AddUnitButton">
+                <asp:Panel runat="server" CssClass="row container mx-auto mb-2 px-0" DefaultButton="AddUnitButton">
                     <asp:Label ID="AddUnitLabel" class="col-md-4 my-2 text-center text-md-left" Style="font-weight: bold; font-size: large; line-height: 38px;" runat="server" Text="Add Unit: " />
                     <asp:TextBox ID="AddUnitTextBox" class="col-md-4 my-2 form-control" runat="server" placeholder="Type Unit to add..." />
                     <asp:Button ID="AddUnitButton" class="col-md-2 offset-md-2 my-2 btn btn-success" runat="server" Text="Add Unit" OnClick="AddUnitButton_Click" />

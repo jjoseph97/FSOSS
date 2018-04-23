@@ -68,11 +68,11 @@
                                 <table runat="server" id="itemPlaceholderContainer" class="listview-header" style="border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px; font-family: Verdana, Arial, Helvetica, sans-serif; width: 100%;" border="1">
                                     <tr runat="server">
                                         <th hidden runat="server">submittedSurveyID</th>
-                                        <th runat="server" class="w-10 py-2 pl-3">Unit Number</th>
+                                        <th runat="server" class="w-15 py-2 pl-3">Unit Number</th>
                                         <th runat="server" class="w-15 py-2 pl-3">Participant Type</th>
                                         <th runat="server" class="w-15 py-2 pl-3">Meal Name</th>
                                         <th runat="server" class="w-25 py-2 pl-3">Date Submitted</th>
-                                        <th runat="server" class="w-10 py-2 pl-3">Room Number</th>
+                                        <th runat="server" class="w-5 py-2 pl-3">Room Number</th>
                                         <th runat="server" class="w-15 py-2 pl-3">Phone Number</th>
                                         <th runat="server" class="w-15 py-2 pl-3">View Survey</th>
                                     </tr>
