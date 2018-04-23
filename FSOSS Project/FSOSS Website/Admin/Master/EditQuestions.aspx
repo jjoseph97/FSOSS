@@ -41,7 +41,7 @@
                         <h1 id="headerText" fontsize="15px" runat="server"></h1>
                         <%--<p>Description:</p>--%>
                         <asp:HiddenField ID="QuestionID" runat="server" />
-                        <asp:TextBox ID="DescriptionTextBox" CssClass="form-control" Width="100%" TextMode="MultiLine" runat="server" />
+                        <asp:TextBox ID="DescriptionTextBox" CssClass="form-control" Width="100%" TextMode="MultiLine" runat="server" AutoComplete="off" />
                         <asp:Button ID="QuestionUpdate" class="col-sm-2 offset-sm-10 my-2 btn btn-success" runat="server" Text="Update" OnClick="QuestionUpdate_Click" />
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                 <asp:TextBox Text='<%# Bind("ResponseId") %>' runat="server" ID="IdTextBox" />
                             </td>
                             <td>
-                                <asp:TextBox Text='<%# Bind("Text") %>' runat="server" CssClass="pl-3 col-12" ID="TextTextBox" />
+                                <asp:TextBox Text='<%# Bind("Text") %>' runat="server" CssClass="pl-3 col-12" ID="TextTextBox" AutoComplete="off" />
                             </td>
                             <td style="display: none;">
                                 <asp:TextBox Text='<%# Bind("Value") %>' runat="server" ID="ValueTextBox" />
