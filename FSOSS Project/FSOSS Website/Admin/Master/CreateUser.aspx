@@ -3,22 +3,22 @@
 <asp:Content ID="CreateUser" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="card container py-2 h4 font-weight-bold">Create New User</h1>
+            <h1 class="row border rounded container py-2 h4 font-weight-bold">Create New User</h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <asp:Label ID="SuccessMessage" runat="server" CssClass="card container h5 alert alert-success" Font-Size="Medium" />
+            <asp:Label ID="SuccessMessage" runat="server" CssClass="row border rounded container h5 alert alert-success" Font-Size="Medium" />
             <asp:ValidationSummary runat="server" ID="ValidationSummary"
                 HeaderText="<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>Failed to create the user due to the following:"
-                CssClass="card container h5 alert alert-danger" Font-Size="Medium" />
+                CssClass="row border rounded container h5 alert alert-danger" Font-Size="Medium" />
         </div>
     </div>
 
     <asp:Panel runat="server" CssClass="row" DefaultButton="CreateButton">
         <div class="col-sm-12">
-            <div class="card container">
+            <div class="row border rounded container">
                 <div class="col-sm-8">
 
                     <div class="form-group mt-3 row">
@@ -76,10 +76,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group row float-md-right">
-                        <div class="col-sm-12">
-                            <asp:Button ID="CreateButton" runat="server" CssClass="btn btn-info btn-block" Text="Create User" OnClick="CreateButton_Click" CausesValidation="false" />
-                        </div>
+                    <div class="form-group float-md-right">
+                        <asp:Button ID="CreateButton" runat="server" CssClass="btn btn-info " Text="Create User" OnClick="CreateButton_Click" CausesValidation="false" />
                     </div>
 
                 </div>
