@@ -67,11 +67,17 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
         // If the query string equals the currently logged in Administrator ID and the Administrator wants to deactive their own account
         // Alert the Administrator with a message
         if (Convert.ToInt32(Request.QueryString["id"]).Equals(Convert.ToInt32(Session["adminID"])) && DeactivateCheckBox.Checked)
+        {
             DisplayFailedMessage("You cannot Deactivate your own account.");
+            DeactivateCheckBox.Checked = false;
+        }
         // Else if an Administrator tries to deactivate the webmaster
         // Alert the Administrator with a message
         else if (UserNameTextBox.Text.Equals("webmaster") && DeactivateCheckBox.Checked)
+        {
             DisplayFailedMessage("You cannot Deactivate the webmaster account.");
+            DeactivateCheckBox.Checked = false;
+        }
         // Else if the Administrator tries to change the webmaster's security level
         // Alert the Administrator with a message
         else if (UserNameTextBox.Text.Equals("webmaster") && SecurityLevelDDL.SelectedValue.Equals("1"))
@@ -147,7 +153,7 @@ public partial class Admin_Master_EditUser : System.Web.UI.Page
     {
         string failedHeader = "<span><i class='fas fa-exclamation-triangle'></i> Processing Error</span><br/>";
         SuccessMessage.Visible = false;
-        FailedMessage.Visible = false;
+        FailedMessage.Visible = true;
         FailedMessage.Text = failedHeader + message;
     }
     /// <summary>
