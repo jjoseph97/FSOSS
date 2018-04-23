@@ -61,18 +61,24 @@ public partial class Pages_AdministratorPages_ViewReportFilter : System.Web.UI.P
     protected string endingInputValue { get; set; }
 
     /// <summary>
-    /// Validate the filter passed 
+    /// Validate if the are correct filter parameters are passed and redirect the administartor to the report page if all the filter is valid.
     /// </summary>
     /// <param name="sender">Contains a reference to the control/object that raised the event.</param>
     /// <param name="e">Contains the event data.</param>
     protected void ViewButton_Click(object sender, EventArgs e)
     {
+        // Initialize filter POCO
         FilterPOCO filter = new FilterPOCO();
+        // Get the value from the StartingPerioud calendar input
         string startingPeriodInput = String.Format("{0}", Request.Form["StartingPeriodInput"]);
+        // Check if the starting period is empty or the starting perioud is not a valid date and time format
         if (startingPeriodInput != "" || DateTime.TryParseExact(startingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out DateTime dateToParse))
         {
+            //  Get the value from the EndingPeriod calendar input
             string endingPeriodInput = Request.Form["EndingPeriodInput"];
+            // Set the filter startingDate
             filter.startingDate = DateTime.ParseExact(startingPeriodInput + " 00:00:00:000000", "yyyy-MM-dd HH:mm:ss:ffffff", null);
+            // check if the filter date is greate
             if (filter.startingDate < DateTime.Now)
             {
                 if (endingPeriodInput != "" || DateTime.TryParseExact(endingPeriodInput, "yyyy-MM-dd HH:mm:ss:ffffff", null, System.Globalization.DateTimeStyles.None, out dateToParse))

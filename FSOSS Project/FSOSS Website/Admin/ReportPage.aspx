@@ -1,13 +1,16 @@
 ﻿<%@ Page Title="Report" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ReportPage.aspx.cs" Inherits="Pages_AdministratorPages_ReportPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+    <%-- Plugins use for displaying chart using ChartJS. For more details, visit https://www.chartjs.org/ --%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <%-- Plugins use to implement jquery for displaying chart. For more details, visit https://code.jquery.com/ --%>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <%-- Plugin use to  display percentage inside the chart. For more details, visit https://chartjs-plugin-datalabels.netlify.com/ --%>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <div class="row">
         <div class="col-sm-12">
@@ -102,7 +105,7 @@
                     </table>
                 </div>
                  <div class="row">
-                    <asp:Label ID="Label2" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
+                    <asp:Label ID="GenericInformationLabel3" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
                 </div>
             </div>
             <div class="tab-pane fade" id="question4" role="tabpanel" aria-labelledby="question4Tab">
@@ -123,7 +126,7 @@
                     </table>
                 </div>
                  <div class="row">
-                    <asp:Label ID="GenericInformationLabel3" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
+                    <asp:Label ID="GenericInformationLabel4" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
                 </div>
             </div>
             <div class="tab-pane fade" id="question5" role="tabpanel" aria-labelledby="question5Tab">
@@ -144,7 +147,7 @@
                     </table>
                 </div>
                  <div class="row">
-                    <asp:Label ID="GenericInformationLabel4" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
+                    <asp:Label ID="GenericInformationLabel5" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
                 </div>
             </div>
             <div class="tab-pane fade" id="question6" role="tabpanel" aria-labelledby="question6Tab">
@@ -165,7 +168,7 @@
                     </table>
                 </div>
                  <div class="row">
-                    <asp:Label ID="GenericInformationLabel5" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
+                    <asp:Label ID="GenericInformationLabel6" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
                 </div>
             </div>
             <div class="tab-pane fade" id="question7" role="tabpanel" aria-labelledby="question7Tab">
@@ -186,7 +189,7 @@
                     </table>
                 </div>
                  <div class="row">
-                    <asp:Label ID="GenericInformationLabel6" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
+                    <asp:Label ID="GenericInformationLabel7" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
                 </div>
             </div>
             <div class="tab-pane fade" id="question8" role="tabpanel" aria-labelledby="question7Tab">
@@ -206,9 +209,6 @@
                         </tbody>
                     </table>
                 </div>
-                 <div class="row">
-                    <asp:Label ID="GenericInformationLabel7" runat="server" Text="** No response means that the participant did not select any option from the choice"></asp:Label>
-                </div>
             </div>
         </div>
         <div class="row" style="padding-top: 25px">
@@ -224,8 +224,9 @@
 
 
     <script type="text/javascript">
-
+        // Setup onload method for javascript
         $(document).ready(function () {
+            //Initialize all chart canvases
             var chart1 = document.getElementById("Question1").getContext("2d");
             var chart2 = document.getElementById("Question2").getContext("2d");
             var chart3 = document.getElementById("Question3").getContext("2d");
@@ -234,13 +235,23 @@
             var chart6 = document.getElementById("Question6").getContext("2d");
             var chart7 = document.getElementById("Question7").getContext("2d");
             var chart8 = document.getElementById("Question8").getContext("2d");
+            // Loading JSON Data with JQuery for Question 1 The variety of food in your daily meals
             $.ajax({
+                // URL containing the webmethod that returns the JSON Object
                 url: 'ReportPage.aspx/GetChartData',
+                // Type of call 
                 type: 'POST',
+                // Parameter indicating what chartId to be display
                 data: "{'chartId':1}",
+                // Setup the content type of the method
                 contentType: 'application/json; charset=utf-8',
+                // Initialize the returning data type
                 dataType: 'json',
+                // If call is success
                 success: function (response) {
+                    // Initialize required variables for displaying chart
+                    var aData = []
+                    // Parse the JSON Data and set it to an object list
                     var aData = $.parseJSON(response.d);
                     var labelArray = [];
                     var title;
@@ -248,21 +259,30 @@
                     var valueArray = [];
                     var borderArray = [];
                     var totalSurveys = 0;
-                    if (aData.length > 0) {
+                    // Check if there is any survey submitted with the given parameter
+                    if (!$.isEmptyObject(aData)) {
+                        // Loop through the list to get the total number of survey submitted
                         $.each(aData, function (inx, val) {
                             totalSurveys = totalSurveys + Number(val.Value);
                         });
+                        // Loop through the json object
                         $.each(aData, function (inx, val) {
+                            // parse the value and assigned to the list 
                             labelArray.push(val.Text);
                             valueArray.push(val.Value);
                             colorArray.push(val.Color);
                             borderArray.push(val.BorderColor);
                             title = val.Title;
+                            // Setup markup for table
                             var markup = "<tr><td>" + val.Text + "</td><td>" + val.Value + "</td><td>" + Math.floor(((Number(val.Value) / totalSurveys) * 100) + 0.5) + "%" + "</td></tr>";
+                            // append the martkup to the table
                             $("#Question1Table").append(markup);
                         });
+                        // Display the total survey count in the survey label
                         $('#<%= SurveyLabel.ClientID %>').text("Total Surveys: " + totalSurveys + " submitted surveys");
-                var pieChart = new Chart(chart1, {
+                    // Initialize chart to display
+                        var pieChart = new Chart(chart1, { 
+                    // Setup mapped the data to be display in chart
                     type: 'pie',
                     data: {
                         labels: labelArray,
@@ -274,6 +294,7 @@
                         }],
 
                     },
+                    // Setup options for to customize chart displays
                     options: {
                         plugins: {
                             datalabels: {
@@ -309,6 +330,7 @@
                             animateScale: true,
                             animateRotate: true
                         },
+                        // Setup tooltip to display the total response, anser, and percentage on the hover segment
                         tooltips: {
                             callbacks: {
                                 label: function (tooltipItem, data) {
@@ -343,6 +365,7 @@
                     }
                 });
                 }
+                // Hide the chart container div if there is no submitted survey to display
                 else {
                     var chartToHide = document.getElementById("chartContainers");
                     chartToHide.style.display = "block";
@@ -350,13 +373,14 @@
                 }
 
 
-            },
+                },
+            // Display the error in console
             failure: function (response) {
                 alert(response.d);
                 console.log(response.d);
             },
 
-
+            // Instantiate xhr, errorType and the exception to be display in console if an error occur
             error: function (xhr, errorType, exception) {
                 var responseText;
                 responseText = jQuery.parseJSON(xhr.responseText);
@@ -364,8 +388,10 @@
             }
 
         });
+            // Loading JSON Data with JQuery for Question 2 The taste of your meals
+            // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
+            $.ajax({
 
-        $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
             data: "{'chartId':2}",
@@ -486,7 +512,9 @@
                 console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
             }
 
-        });
+            });
+        // Loading JSON Data with JQuery for Question 3 The temperature of your hot food
+        // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
         $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
@@ -605,7 +633,9 @@
                 console.log(responseText.ExceptionType + responseText.StackTrace + responseText.Message + errorType + exception);
             }
 
-        });
+            });
+        // Loading JSON Data with JQuery for Question 4 The overall appearance of your meal
+        // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
         $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
@@ -724,7 +754,8 @@
             }
 
         });
-
+        // Loading JSON Data with JQuery for Question 5 The helpfulness of the staff who deliver your meals
+        // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
         $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
@@ -844,7 +875,8 @@
             }
 
         });
-
+        // Loading JSON Data with JQuery for Question 6 How satisfied are you with the portion of your size meals?
+        // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
         $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
@@ -966,7 +998,8 @@
             }
 
         });
-
+        // Loading JSON Data with JQuery for Question 7 Do your meals take into account with your specific dietary requirements
+        // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
         $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',
@@ -1086,7 +1119,8 @@
             }
 
         });
-
+        // Loading JSON Data with JQuery for Question 8 Overall how would you rate your meal experience
+        // The logic is identical to displaying Question 1 chart with the only difference of chartId parameter
         $.ajax({
             url: 'ReportPage.aspx/GetChartData',
             type: 'POST',

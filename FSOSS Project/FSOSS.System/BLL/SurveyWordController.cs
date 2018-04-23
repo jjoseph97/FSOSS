@@ -128,7 +128,7 @@ namespace FSOSS.System.BLL
         }
 
         /// <summary>
-        /// Get the Site object based on the survey word entered
+        /// Method use to get the Site object based on the survey word entered
         /// </summary>
         /// <param name="surveyWordEntered">Survey word entered by the participant</param>
         /// <returns>Return a Site object </returns>
@@ -143,6 +143,7 @@ namespace FSOSS.System.BLL
                     SurveyWord surveyWordToCheck = (from x in context.SurveyWords
                                                     where x.PotentialSurveyWord.survey_access_word.Equals(surveyWordEntered)
                                                     select x).FirstOrDefault();
+                    // Get the selected site associated with the survey word
                     Site selectedSite = (from x in context.Sites
                                          where x.site_id == surveyWordToCheck.site_id
                                          select x).FirstOrDefault();
@@ -155,9 +156,14 @@ namespace FSOSS.System.BLL
                 }
             }
         }
-
+        /// <summary>
+        /// Method use to get the survey word text 
+        /// </summary>
+        /// <param name="siteID">Site Id to identify what survey word to display</param>
+        /// <returns>Return the survey word text</returns>
         public string GetSurveyWord(int siteID)
         {
+            // Start of Transaction
             using (var context = new FSOSSContext())
             {
                string currentSurveyWord = (from x in context.SurveyWords
@@ -167,9 +173,13 @@ namespace FSOSS.System.BLL
                 return currentSurveyWord;
             }         
         }
-
+        /// <summary>
+        /// Method use to assign a new survey word if a new Site is created 
+        /// </summary>
+        /// <param name="siteName"> Site Name of the new site created</param>
         public void NewSite_NewWord(string siteName)
         {
+            // Start of Transaction
             using (var context = new FSOSSContext())
             {
                 //grab the new site id,

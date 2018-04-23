@@ -12,7 +12,7 @@ using FSOSS.System.BLL;
 using Newtonsoft.Json;
 // Namespaces and classes imported in order to WebMethod Class
 using System.Web.Services;
-// Namespaces and classes imported in order to use Entity Class
+// Namespaces and classes imported in order to use FSOSS Entity Class
 using FSOSS.System.Data.Entity;
 #endregion
 

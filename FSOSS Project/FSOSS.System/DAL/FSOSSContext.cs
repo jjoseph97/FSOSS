@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+// All the imported non-auto generated namespaces and classes that are use for this page stored in a specific region for better organization
 #region
+// Namespaces and classes imported in order to use Entity Framework Entity Classes
 using System.Data.Entity;
+// Namespaces and classes imported in order to use FSOSS Entity Classes
 using FSOSS.System.Data.Entity;
 #endregion
 
 namespace FSOSS.System.DAL
 {
+    // FSOSSContext Class inheriting DBContext class
     public class FSOSSContext : DbContext
     {
+        // Assign connection string to FSOSSContext to get access to database tables
         public FSOSSContext() : base("FSOSSConnectionString") { }
-        // Latest Update March 4, 2018. Ren
+        // Setup DbSets in order to perform CRUD functionality
         public virtual DbSet<ParticipantType> ParticipantTypes { get; set; }
         public virtual DbSet<PotentialSurveyWord> PotentialSurveyWords { get; set; }
         public virtual DbSet<AdministratorAccount> AdministratorAccounts { get; set; }

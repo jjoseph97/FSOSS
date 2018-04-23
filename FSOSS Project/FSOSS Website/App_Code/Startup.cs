@@ -24,12 +24,12 @@ namespace FSOSS_Website
             // Initialze Hangfire Dashboard to display all the information about background jobs. 
             app.UseHangfireDashboard();
             // Initialize Survey Word Controller
-            SurveyWordController sysmgr = new SurveyWordController();
+            SurveyWordController surveyMgr = new SurveyWordController();
             // Check if there is atleast 1 survey word assigned to the default hospital. (Misericordia)
             // If the return string is empty, force a call for GenerateSurveyWordOfTheDay method in Survey Word Controller to setup current survey word of the day to all hospitals;
-            if (string.IsNullOrEmpty(sysmgr.GetSurveyWord(1)))
+            if (string.IsNullOrEmpty(surveyMgr.GetSurveyWord(1)))
             {
-                sysmgr.GenerateSurveyWordOfTheDay();
+                surveyMgr.GenerateSurveyWordOfTheDay();
             }
         }
     }
