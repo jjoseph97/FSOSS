@@ -14,8 +14,10 @@ using FSOSS.System.BLL;
 [assembly: OwinStartupAttribute(typeof(FSOSS_Website.Startup))]
 namespace FSOSS_Website
 {
-    public partial class Startup {
-        public void Configuration(IAppBuilder app) {
+    public partial class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
             ConfigureAuth(app);
             // Initialize Hangfire; create connection to hangfire and postgre database and implement hangfire to create necessary tables and object required to run hangfire
             app.UseHangfireServer(new BackgroundJobServerOptions(), new PostgreSqlStorage("User ID = postgres; Password = Password1; Host = localhost; Port = 5432; Database = FSOSSDatabase; Pooling = false;"));
@@ -25,12 +27,11 @@ namespace FSOSS_Website
             app.UseHangfireDashboard();
             // Initialize Survey Word Controller
             SurveyWordController surveyMgr = new SurveyWordController();
-            // Check if there is atleast 1 survey word assigned to the default hospital. (Misericordia)
-            // If the return string is empty, force a call for GenerateSurveyWordOfTheDay method in Survey Word Controller to setup current survey word of the day to all hospitals;
-            if (string.IsNullOrEmpty(surveyMgr.GetSurveyWord(1)))
-            {
+            // Check if there is at least 1 survey word assigned to the any hospital.
+            // If the return count is zero (0), execute GenerateSurveyWordOfTheDay method in Survey Word Controller to setup current survey word of the day to all hospitals;
+            int count = surveyMgr.GetSurveyWordCount();
+            if (count == 0)
                 surveyMgr.GenerateSurveyWordOfTheDay();
-            }
         }
     }
 }

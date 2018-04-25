@@ -19,12 +19,14 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         }
         else
         {
-            if (!Page.IsPostBack)
+            if ((int)Session["securityID"] != 2) // If not a Master Administrator
+            {
+                GenereteWordButton.Visible = false; // Hide the button to generate a survey word
+            }
+            if (!IsPostBack)
             {
                 SubmittedSurveyController ssc = new SubmittedSurveyController();
                 HospitalDDL.DataBind();
-                // Default the dropdown list to Misericordia Hospital
-                HospitalDDL.SelectedValue = "1";
                 string value = HospitalDDL.SelectedValue;
                 if (value != null)
                 {
@@ -52,9 +54,9 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
                     }
                 }
             }
-            // Display a welcome message with the Administrator's username
-            WelcomeMessage.Text = "Welcome, " + Session["username"].ToString();
         }
+        // Display a welcome message with the Administrator's username
+        WelcomeMessage.Text = "Welcome, " + Session["username"].ToString();
     }
     /// <summary>
     /// This method is used when the Administrator changes the selected index on the dropdown list
@@ -132,5 +134,27 @@ public partial class Pages_AdministratorPages_MainPage : System.Web.UI.Page
         Session["filter"] = filter; // Create the session to be passed to the SubmittedSurveyList page
         Response.Redirect("~/Admin/ReportPage.aspx"); // Redirect to the ReportPage with the filter details
 
+    }
+
+    /// <summary>
+    /// This method is used when the Administrator clicks the Generate Word button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void GenereteWordButton_Click(object sender, EventArgs e)
+    {
+        // Assign the selected site
+        int selectedSite = int.Parse(HospitalDDL.SelectedValue);
+
+        // Generate a Survey Word for the day
+        SurveyWordController surveyWord = new SurveyWordController();
+        surveyWord.ManuallyGeneratedSurveyWord(selectedSite);
+
+        // Get the survey word of the day for the selected site
+        SurveyWordController surveyWordManager = new SurveyWordController();
+        WOTDLabel.Text = surveyWordManager.GetSurveyWord(selectedSite);
+
+        // Update the web page
+        UpdateWOTDSection.Update();
     }
 }

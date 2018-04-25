@@ -11,10 +11,15 @@
             <asp:DropDownList ID="HospitalDDL" runat="server" CssClass="form-control col-11 col-md-3 px-0" OnSelectedIndexChanged="HospitalDDL_SelectedIndexChanged" AutoPostBack="true" DataSourceID="SiteODS" DataTextField="siteName" DataValueField="siteID" />
         </div>
 
-        <div class="col-sm-12 col-md-8 offset-md-4 px-0">
-            <asp:Label Text="The word of the day is:" runat="server" />
-            <asp:Label ID="WOTDLabel" runat="server" CssClass="h4 pl-2 mx-auto" Font-Bold="true" ForeColor="#223f88" />
-        </div>
+        <asp:Panel ID="WOTDSection" runat="server" CssClass="col-sm-12 col-md-4 offset-md-4 px-0">
+            <asp:UpdatePanel ID="UpdateWOTDSection" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:Label Text="Survey word:" runat="server" />
+                    <asp:Label ID="WOTDLabel" runat="server" CssClass="h4 pl-1 mx-auto" Font-Bold="true" ForeColor="#223f88" />
+                    <asp:Button ID="GenereteWordButton" runat="server" Text="Generate Word" CssClass="btn btn-secondary float-right" OnClick="GenereteWordButton_Click" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </asp:Panel>
 
         <div id="PendingContactSection" runat="server" class="my-3 col-md-12 px-0">
             <div class="col-sm-12 col-md-8 offset-md-4 my-3 px-0">
