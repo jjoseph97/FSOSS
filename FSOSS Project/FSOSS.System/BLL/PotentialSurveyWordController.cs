@@ -221,7 +221,7 @@ namespace FSOSS.System.BLL
                     }
                     else
                     {
-                        throw new Exception("Unable to changed availability of the selected word. Word is currently in use.");
+                        throw new Exception("Unable to change availability of the selected word. Word is currently in use.");
                     }
                 }
                 catch (Exception e) // catch the error and display it on the page with MessageUserControl

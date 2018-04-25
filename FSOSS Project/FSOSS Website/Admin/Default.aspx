@@ -16,7 +16,7 @@
                 <ContentTemplate>
                     <asp:Label Text="Survey word:" runat="server" />
                     <asp:Label ID="WOTDLabel" runat="server" CssClass="h4 pl-1 mx-auto" Font-Bold="true" ForeColor="#223f88" />
-                    <asp:Button ID="GenereteWordButton" runat="server" Text="Generate Word" CssClass="btn btn-secondary float-right" OnClick="GenereteWordButton_Click" />
+                    <asp:Button ID="GenereteWordButton" runat="server" Text="Generate Word" CssClass="btn btn-secondary float-right" OnClick="GenereteWordButton_Click" OnClientClick="return confirm('Are you sure you would like to generate a new survey word of the day for this site?')" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </asp:Panel>
