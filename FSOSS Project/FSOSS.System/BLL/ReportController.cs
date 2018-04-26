@@ -86,35 +86,7 @@ namespace FSOSS.System.BLL
                 // Loop through the loop and retrieve only questions with a response 
                 foreach (Question question in questions)
                 {
-                    if (question.question_id == 2)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 3)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 4)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 5)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 6)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 8)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 9)
-                    {
-                        Questions.Add(question.question_text);
-                    }
-                    else if (question.question_id == 10)
+                    if (question.questionselections.Count != 0)
                     {
                         Questions.Add(question.question_text);
                     }

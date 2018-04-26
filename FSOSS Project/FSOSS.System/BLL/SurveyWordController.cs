@@ -230,7 +230,6 @@ namespace FSOSS.System.BLL
 
         /// <summary>
         /// Method used to get a count of all survey words being used.
-        /// This is primarily used for Startup.cs.
         /// </summary>
         /// <returns></returns>
         public int GetSurveyWordCount()
